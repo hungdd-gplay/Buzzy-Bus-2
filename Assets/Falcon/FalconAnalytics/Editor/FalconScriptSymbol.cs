@@ -15,6 +15,8 @@ namespace Falcon.FalconCore.Editor.Views
             string a = PlayerSettings.GetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android);
 #elif UNITY_IOS
             string a = PlayerSettings.GetScriptingDefineSymbolsForGroup(BuildTargetGroup.iOS);
+#else
+            string a = ""; // Standalone/Editor (Buzzy: biên dịch + tự chơi trên Windows)
 #endif
             if (a.Length != 0 && !a.EndsWith(";")) a += ";";
             //remove all

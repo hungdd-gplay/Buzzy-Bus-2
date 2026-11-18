@@ -1,0 +1,48 @@
+# Game profile — Buzzy Bus (clone)
+
+Skill `gplay-game` đọc file này trước.
+
+## Định danh
+- Tên / package id: tạm "Buzzy Bus" / `com.DefaultCompany.ProjectBase` (đổi ở M1 T01; tên cuối + package id chưa quyết, cần thay trước phát hành)
+- Unity: 6000.3.10f1 (đã cài) · Spine: không dùng
+- Clone từ: base GPlay trong repo (giữ: Singleton, popup BaseBox/BoxController, GameFlow, GamePlayController, pool, SoundManager, Localization, GPlayerPrefs; bỏ: Bird Sort — 7102 level, 01_BirdSort, cụm meta cũ)
+
+## Code
+- Namespace: `Buzzy.Core` (luật), `Buzzy.Game` (Unity), `Buzzy.Game.EditorTools`
+- Thư mục code game: `Assets/02_Gameplay/Deploy/{Model,View,Controller,Editor}` · framework: `Assets/01_Base`
+- Scene: `Assets/02_Gameplay/Res/Scenes/` (script build cố định đường dẫn: tạo ở M1)
+- Menu tool: `Tools/Buzzy Bus/...`
+
+## Cơ chế
+- Luật lõi (tóm tắt từ `.game/research/teardown.md`): chạm cụm pixel một màu → pixel lộ (lớp ngoài + gần xe nhất) bay tới xe cùng màu ở ô bến, tới hết số chỗ; xe đủ rời, xe kế xuống; cột hết xe → rào; hết pixel thắng; bế tắc thua.
+- Hình + luồng màn: `.game/research/visual-spec.md` · ảnh chuẩn: `...\scratchpad\ref\golden\game_start.png` (Lv.2, 324x720)
+
+| Cơ chế | Runtime | Importer | File dữ liệu |
+|---|---|---|---|
+| Lõi chạm-bay-xe | `Model/Core` | LevelImporter | `Levels/level_*.json` |
+| Frozen, Mystery, Walls, Spawner, Key + Locked | M3 | M3 | trường trong level JSON |
+| Booster (VIP, Sky Grab, Magic Wand, Bus Claw) | M3 | — | `BoosterConfig.json` |
+
+## Level
+- Nguồn: `C:\Users\PC\Contacts\Downloads\Buzzy Bus Resource\Buzzy Bus\Levels\level_001..300.json` · Database: `LevelDatabase` (tạo ở M1) · menu Refresh: `Tools/Buzzy Bus/Import Levels`
+- Lưới (Width+1)x(Height+1), toạ độ pixel 0..Width / 0..Height bao gồm.
+- Level chuẩn để dựng + so: Lv.2 (`.game/research/ref-level.md`).
+
+## Text / âm thanh
+- Âm thanh: `Full_APK_Export/Audio` (23 wav) · Font: `LilitaOne-Regular` (Curated/Fonts) · localization: base GPlay (Resources/Localization*.txt)
+
+## Bí mật (agent không đọc)
+- `.keystore`, `.jks`, `google-services.json`, `GoogleService-Info.plist`, `ApiKey.txt`. Lưu ý: keystore + Firebase của Bird Sort đang trong git (người dùng chọn giữ nguyên).
+
+## Lệnh
+- Test logic thuần: `C:/Users/PC/.dotnet/dotnet.exe test CoreTests`
+- Compile Unity batchmode: `UNITY_EXE="C:/Program Files/Unity/Hub/Editor/6000.3.10f1/Editor/Unity.exe" python <plugin>/scripts/unity_run.py compile`
+- Validator: `tools/solve_levels.py` (M2) · Tự chơi + ảnh: `unity_run.py playtest --levels N --out <tmp>`, Unity đóng, có GPU
+- Art tạm / bên thứ ba phải thay trước phát hành: toàn bộ mesh / sprite / shader / audio / level từ APK gốc (tên, logo cũng thế)
+
+## Quảng cáo / analytics
+- SDK: MAX, AppsFlyer, Adjust, Firebase, PlayFab, Facebook, GoogleMobileAds, UMP (có sẵn, dùng stub ở bản đầu)
+
+## Bài học riêng dự án
+- Frame video: khung game thật là 324x720 trong video 1280x720 (crop=324:720:478:0); hai bên là dải mờ.
+- JSON level: Width/Height là chỉ số lớn nhất, không phải số ô.

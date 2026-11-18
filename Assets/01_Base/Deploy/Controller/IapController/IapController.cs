@@ -13,12 +13,12 @@ using UnityEngine.Events;
 using UnityEngine.Purchasing;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-#if RECEIPT_VALIDATION
-using UnityEngine.Purchasing.Security;
 using Falcon;
 using Falcon.FalconAnalytics.Scripts.Models.Messages.PreDefines;
 using Falcon.Mediation.Runtime;
 using BaseProject.Core.Feature;
+#if RECEIPT_VALIDATION
+using UnityEngine.Purchasing.Security;
 #endif
 
 public enum InAppStatus
