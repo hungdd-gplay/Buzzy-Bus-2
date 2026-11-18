@@ -1,0 +1,427 @@
+{
+  "id": 3258,
+  "idHardMode": 0,
+  "standConfig": [
+    {
+      "idBirds": [
+        60,
+        85,
+        41,
+        91,
+        7,
+        43
+      ],
+      "standData": {
+        "type": 2,
+        "numSlot": 6
+      },
+      "side": -1
+    },
+    {
+      "idBirds": [
+        22,
+        91,
+        75,
+        60,
+        81,
+        7
+      ],
+      "standData": {
+        "type": 2,
+        "numSlot": 6
+      },
+      "side": 1
+    },
+    {
+      "idBirds": [
+        43
+      ],
+      "standData": {
+        "type": 2,
+        "numSlot": 6
+      },
+      "side": -1
+    },
+    {
+      "idBirds": [
+        81,
+        55,
+        2,
+        1,
+        43
+      ],
+      "standData": {
+        "type": 2,
+        "numSlot": 6
+      },
+      "side": 1
+    },
+    {
+      "idBirds": [
+        93,
+        22,
+        55,
+        85,
+        93,
+        43
+      ],
+      "standData": {
+        "type": 2,
+        "numSlot": 6
+      },
+      "side": -1
+    },
+    {
+      "idBirds": [
+        91,
+        31,
+        60,
+        80,
+        22,
+        91
+      ],
+      "standData": {
+        "type": 2,
+        "numSlot": 6
+      },
+      "side": 1
+    },
+    {
+      "idBirds": [
+        31,
+        81,
+        93,
+        93,
+        91,
+        81
+      ],
+      "standData": {
+        "type": 2,
+        "numSlot": 6
+      },
+      "side": -1
+    },
+    {
+      "idBirds": [
+        11,
+        15,
+        22,
+        75,
+        85,
+        75
+      ],
+      "standData": {
+        "type": 2,
+        "numSlot": 6
+      },
+      "side": 1
+    },
+    {
+      "idBirds": [
+        1,
+        75,
+        15,
+        80,
+        41,
+        45
+      ],
+      "standData": {
+        "type": 2,
+        "numSlot": 6
+      },
+      "side": -1
+    },
+    {
+      "idBirds": [
+        2,
+        45,
+        45,
+        85,
+        2,
+        43
+      ],
+      "standData": {
+        "type": 2,
+        "numSlot": 6
+      },
+      "side": 1
+    },
+    {
+      "idBirds": [
+        75,
+        93,
+        7,
+        7,
+        60,
+        2
+      ],
+      "standData": {
+        "type": 2,
+        "numSlot": 6
+      },
+      "side": -1
+    },
+    {
+      "idBirds": [
+        60,
+        7,
+        11,
+        45,
+        1,
+        11
+      ],
+      "standData": {
+        "type": 2,
+        "numSlot": 6
+      },
+      "side": 1
+    },
+    {
+      "idBirds": [
+        85,
+        11,
+        91,
+        2,
+        15,
+        55
+      ],
+      "standData": {
+        "type": 2,
+        "numSlot": 6
+      },
+      "side": -1
+    },
+    {
+      "idBirds": [
+        15,
+        2,
+        31,
+        31,
+        60,
+        15
+      ],
+      "standData": {
+        "type": 2,
+        "numSlot": 6
+      },
+      "side": 1
+    },
+    {
+      "idBirds": [
+        55,
+        41,
+        1,
+        22,
+        11,
+        22
+      ],
+      "standData": {
+        "type": 2,
+        "numSlot": 6
+      },
+      "side": -1
+    },
+    {
+      "idBirds": [
+        7,
+        1,
+        81,
+        81,
+        1,
+        43
+      ],
+      "standData": {
+        "type": 2,
+        "numSlot": 6
+      },
+      "side": 1
+    },
+    {
+      "idBirds": [],
+      "standData": {
+        "type": 2,
+        "numSlot": 6
+      },
+      "side": -1
+    },
+    {
+      "idBirds": [
+        41,
+        85,
+        11,
+        41,
+        80,
+        75
+      ],
+      "standData": {
+        "type": 2,
+        "numSlot": 6
+      },
+      "side": 1
+    },
+    {
+      "idBirds": [
+        45,
+        31,
+        80,
+        55,
+        15,
+        93
+      ],
+      "standData": {
+        "type": 2,
+        "numSlot": 6
+      },
+      "side": -1
+    },
+    {
+      "idBirds": [
+        80,
+        80,
+        31,
+        45,
+        55,
+        41
+      ],
+      "standData": {
+        "type": 2,
+        "numSlot": 6
+      },
+      "side": 1
+    }
+  ],
+  "extralsConfig": [
+    {
+      "type": 5,
+      "positionData": {
+        "posType": 1,
+        "indexStand": 12,
+        "indexBird": 0,
+        "localPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      },
+      "extralValues": [
+        "0.0",
+        "0.0"
+      ],
+      "birdParent": null,
+      "standParent": null
+    },
+    {
+      "type": 5,
+      "positionData": {
+        "posType": 1,
+        "indexStand": 13,
+        "indexBird": 0,
+        "localPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      },
+      "extralValues": [
+        "1.0",
+        "1.0"
+      ],
+      "birdParent": null,
+      "standParent": null
+    },
+    {
+      "type": 2,
+      "positionData": {
+        "posType": 0,
+        "indexStand": 18,
+        "indexBird": 3,
+        "localPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      },
+      "extralValues": [
+        "15.0"
+      ],
+      "birdParent": null,
+      "standParent": null
+    },
+    {
+      "type": 2,
+      "positionData": {
+        "posType": 0,
+        "indexStand": 10,
+        "indexBird": 4,
+        "localPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      },
+      "extralValues": [
+        "41.0"
+      ],
+      "birdParent": null,
+      "standParent": null
+    },
+    {
+      "type": 2,
+      "positionData": {
+        "posType": 0,
+        "indexStand": 5,
+        "indexBird": 4,
+        "localPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      },
+      "extralValues": [
+        "7.0"
+      ],
+      "birdParent": null,
+      "standParent": null
+    },
+    {
+      "type": 4,
+      "positionData": {
+        "posType": 0,
+        "indexStand": 0,
+        "indexBird": 5,
+        "localPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      },
+      "extralValues": [
+        "4.0",
+        "13.0"
+      ],
+      "birdParent": null,
+      "standParent": null
+    },
+    {
+      "type": 3,
+      "positionData": {
+        "posType": 0,
+        "indexStand": 18,
+        "indexBird": 4,
+        "localPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      },
+      "extralValues": [
+        "11.0",
+        "1.0"
+      ],
+      "birdParent": null,
+      "standParent": null
+    }
+  ],
+  "min": 20,
+  "second": 0
+}

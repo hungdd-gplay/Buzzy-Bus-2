@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e26c6ffbc202c434089b30d04522293e, type: 3}
+  m_Name: SdkIdConfig
+  m_EditorClassIdentifier: Assembly-CSharp::SdkIdConfig
+  admob:
+    isEnable: 1
+    isUseTestId: 0
+    appId:
+      android: ca-app-pub-9457878244675693~6488851992
+      ios: ca-app-pub-9457878244675693~3008927510
+    banner:
+      android: ca-app-pub-9457878244675693/1908612182
+      ios: ca-app-pub-9457878244675693/6063245506
+      isEnable: 1
+    bannerCollapse:
+      android: ca-app-pub-9457878244675693/9348118506
+      ios: ca-app-pub-9457878244675693/9507666490
+      isEnable: 1
+    bannerMrec:
+      android: ca-app-pub-9457878244675693/1639161209
+      ios: ca-app-pub-9457878244675693/1639161209
+      isEnable: 1
+    interstitial:
+      android: ca-app-pub-9457878244675693/8113070216
+      ios: ca-app-pub-8467610367562059/5655666608
+      isEnable: 1
+    reward:
+      android: 
+      ios: 
+      isEnable: 0
+    appOpen:
+      android: ca-app-pub-9457878244675693/3614647346
+      ios: ca-app-pub-9457878244675693/5619876469
+      isEnable: 1
+  max:
+    isEnable: 1
+    sdkKey: M4GLwqezVT2WDo75OWFGOV873pVg6-3S3Kpz8Rxe_-9CnHI9oXPB2TI5LpnRnqvr8hpH8kw7i4KTMcc891KCad
+    admobAdapterAppId:
+      android: ca-app-pub-9457878244675693~6488851992
+      ios: ca-app-pub-9457878244675693~3008927510
+    banner:
+      android: 5e65a04d1e14efd3
+      ios: ff665c0a75cadcc4
+      isEnable: 1
+    mrec:
+      android: 802c865561f1039d
+      ios: 6fb959c7b9a69602
+      isEnable: 1
+    interstitial:
+      android: 4dec3a272f533458
+      ios: c8d31e48f08ed31e
+      isEnable: 1
+    reward:
+      android: cb024cb6279767b8
+      ios: 02932bb866cbb369
+      isEnable: 1
+  facebook:
+    isEnable: 1
+    appName: 'Bird Sort 2: Color Puzzle'
+    appId: 664562915218890
+    clientToken: 
+  appsFlyer:
+    isEnable: 1
+    devKey: UAVHtuYSgwSPXxXQVDGA65
+    appIdIOS: 6689494714
+    isDebug: 0
+    isGetConversionData: 0

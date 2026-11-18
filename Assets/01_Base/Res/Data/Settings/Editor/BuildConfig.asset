@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1793779a6fd579429b92bc61266cf68, type: 3}
+  m_Name: BuildConfig
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::BaseProject.EditorTools.Build.BuildConfig
+  common:
+    productName: Project Base
+    versionName: 1.0
+    iconApp: {fileID: 0}
+    iapProductPrefix: 
+    fileNameBuild: 'Bird Sort 2: Color Puzzle'
+  android:
+    packageName: com.DefaultCompany.ProjectBase
+    versionCode: 2026100801
+    isAutoVersionCodeForAab: 1
+    isAutoVersionCodeForApk: 0
+    keystorePath: Assets/04_Environment/KeyStore/birdsort2.keystore
+    keystorePass: 12345678two
+    keyAliasName: birdsort2
+    keyAliasPass: 12345678two
+    isStorePasswordLocal: 0
+    isArm64: 1
+    isArmV7: 1
+    isUseIL2CPP: 1
+    minSdkVersion: 25
+  ios:
+    bundleIdentifier: com.DefaultCompany.Project-Base
+    buildNumber: 0
+    isAutoBuildNumber: 1
+    appleTeamId: 
+    isAutomaticSigning: 0
+    targetOSVersion: 15.0
+    appStoreId: 6689494714

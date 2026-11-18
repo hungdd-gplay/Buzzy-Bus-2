@@ -1,0 +1,35 @@
+// Template matching: mỗi thread tính điểm khớp của 1 vị trí (x, y) trên ảnh demo.
+// Điểm = 1 - (tổng sai khác RGB trên các điểm mẫu) / (số điểm mẫu * 765)
+#pragma kernel CSMatchTemplate
+
+StructuredBuffer<uint> _DemoPixels;   // RGBA8 đóng gói: r | g<<8 | b<<16 | a<<24
+StructuredBuffer<int4> _Samples;      // x, y = offset trong ảnh thành phần; z = màu đóng gói; w = không dùng
+RWStructuredBuffer<float> _Scores;    // kích thước _ResultWidth * _ResultHeight
+
+int _DemoWidth;
+int _SampleCount;
+int _ResultWidth;
+int _ResultHeight;
+
+float3 UnpackRgb(uint packedColor)
+{
+    return float3(packedColor & 255u, (packedColor >> 8) & 255u, (packedColor >> 16) & 255u);
+}
+
+[numthreads(8, 8, 1)]
+void CSMatchTemplate(uint3 id : SV_DispatchThreadID)
+{
+    if (id.x >= (uint)_ResultWidth || id.y >= (uint)_ResultHeight)
+        return;
+
+    float sumDiff = 0;
+    for (int i = 0; i < _SampleCount; i++)
+    {
+        int4 sample = _Samples[i];
+        uint demoColor = _DemoPixels[(id.y + sample.y) * _DemoWidth + (id.x + sample.x)];
+        float3 diff = abs(UnpackRgb(demoColor) - UnpackRgb((uint)sample.z));
+        sumDiff += diff.x + diff.y + diff.z;
+    }
+
+    _Scores[id.y * _ResultWidth + id.x] = 1.0 - sumDiff / (_SampleCount * 765.0);
+}

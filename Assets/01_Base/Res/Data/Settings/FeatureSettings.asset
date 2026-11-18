@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33fc11e2d39ad7448f6cedaa8c33934, type: 3}
+  m_Name: FeatureSettings
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::BaseProject.Core.Feature.EditorTools.FeatureSettings
+  toggles:
+  - id: 10
+    isEnabled: 1
+  - id: 20
+    isEnabled: 1
+  - id: 30
+    isEnabled: 1
+  - id: 40
+    isEnabled: 1
+  - id: 50
+    isEnabled: 1
+  - id: 60
+    isEnabled: 1
+  - id: 70
+    isEnabled: 1
+  - id: 80
+    isEnabled: 1
+  - id: 90
+    isEnabled: 1
+  - id: 100
+    isEnabled: 1
+  - id: 110
+    isEnabled: 1
+  - id: 120
+    isEnabled: 1
+  - id: 130
+    isEnabled: 1
+  - id: 140
+    isEnabled: 1

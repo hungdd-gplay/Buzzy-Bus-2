@@ -1,0 +1,101 @@
+# =====================================================================
+#  Unity - Base Project
+#  Chỉ commit: Assets/, Packages/manifest.json + packages-lock.json,
+#  ProjectSettings/, SDKs/ (gói SDK), file cấu hình ở thư mục gốc.
+# =====================================================================
+
+# ---------- Thư mục Unity tự sinh ----------
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+/CacheServer/
+/ExportedObj/
+/.utmp/
+
+# Asset Store Tools
+/[Aa]ssets/AssetStoreTools*
+
+# Unity tự sinh khi crash / profiler
+sysinfo.txt
+crashlytics-build.properties
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# Gradle / build Android, iOS do Unity export
+/[Aa]ssets/Plugins/Android/gradleOut*
+/[Aa]ssets/Plugins/Android/*.androidlib/build/
+*.apk
+*.aab
+*.unitypackage.tmp
+/[Aa]ssets/StreamingAssets/build_info.txt
+/[Aa]ssets/StreamingAssets/aa/
+/[Aa]ssets/StreamingAssets/aa.meta
+/ServerData/
+
+# Burst / IL2CPP debug
+*_BurstDebugInformation_DoNotShip/
+*_BackUpThisFolder_ButDontShipItWithYourGame/
+
+# AssetBundle build (Theme Manager)
+/AssetBundles/
+
+# Cache của plugin Find Reference 2 (sinh lại được)
+/[Aa]ssets/FR2_Cache.asset
+/[Aa]ssets/FR2_Cache.asset.meta
+
+# External Dependency Manager tự sinh
+/[Aa]ssets/GeneratedLocalRepo/
+/[Aa]ssets/GeneratedLocalRepo.meta
+/[Aa]ssets/Plugins/Android/mainTemplate.gradle.bak*
+
+# Backup do Theme Manager tạo khi đổi concept
+/ThemeBackup/
+
+# ---------- IDE ----------
+.vs/
+.vscode/
+.idea/
+.consulo/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+/.localhistory/
+
+# JetBrains Rider plugin (Unity tự thêm)
+/[Aa]ssets/Plugins/Editor/JetBrains*
+
+# ---------- Hệ điều hành ----------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# ---------- Khác ----------
+*.zip
+*.log
+/SVN_resource/
+/SVN_Anim/
+# lịch sử pipeline
+.game/

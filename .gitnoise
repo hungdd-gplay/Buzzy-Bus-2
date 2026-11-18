@@ -1,0 +1,18 @@
+# Mẫu dòng "rác" cho Tools > Base Project > Git > Dọn thay đổi rác
+# Mỗi dòng 1 regex (C#). File mà MỌI dòng thay đổi đều khớp 1 trong các mẫu dưới sẽ được đề xuất khôi phục.
+# Unity 6 tự thêm "Assembly::Namespace.Class" vào m_EditorClassIdentifier khi mở/bấm vào asset
+^\s*m_EditorClassIdentifier:
+# .meta cũ có timeCreated / licenseType
+^\s*timeCreated:
+^\s*licenseType:
+# Nâng cấp phiên bản serialize khi mở bằng Unity mới
+^\s*serializedVersion:
+^\s*fileFormatVersion:
+# Lighting của scene tự tính lại khi mở scene
+^\s*m_IndirectSpecularColor:
+^\s*m_LightingDataAsset:
+^\s*m_LastModified
+# Bỏ dấu # đầu dòng nếu muốn coi các dòng sau là rác:
+# ^\s*m_RootOrder:
+# ^\s*m_SortingLayerID:
+# ^\s*m_AnchoredPosition:
