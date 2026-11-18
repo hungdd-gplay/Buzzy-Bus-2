@@ -26,7 +26,13 @@ namespace Buzzy.Game
         public bool SpeedUnlocked { get { return _lv.index >= _cfg.speedUnlockLevel; } }
         public bool Fast { get { return _fast; } }
 
-        void InitBoosters() { for (int i = 0; i < 4; i++) BoosterCount[i] = IsUnlocked(i) ? _cfg.boosterStartCount : 0; RefreshBoosterUi(); }
+        void InitBoosters()
+        {
+            EnsureMeta();
+            for (int i = 0; i < 4; i++) BoosterCount[i] = IsUnlocked(i) ? Meta.Boosters[i] : 0;
+            RefreshBoosterUi();
+            int pend = Meta.PendingUnlock(); if (pend >= 0 && Meta.Level == _lv.index) ShowUnlock(pend);   // U5: popup mở khoá ở level vừa mở
+        }
 
         // ---------------------------------------------------------------- UI
         void BuildBoosterBar(Transform ct)
@@ -101,7 +107,7 @@ namespace Buzzy.Game
 
         void Spent(int i, string what)
         {
-            BoosterCount[i]--; _mode = -1; RefreshBoosterUi();
+            BoosterCount[i]--; _mode = -1; RefreshBoosterUi(); if (Meta != null) { Meta.Boosters[i] = BoosterCount[i]; MetaChanged?.Invoke(); }
             Log?.Invoke("t=" + Time.ToString("0.00") + " Booster " + what + " (còn " + BoosterCount[i] + ")");
         }
 
@@ -171,7 +177,7 @@ namespace Buzzy.Game
                 h.tr.localPosition = pos;
                 if (dir.sqrMagnitude > 1e-6f) h.tr.localRotation = Quaternion.Slerp(h.tr.localRotation, Quaternion.LookRotation(new Vector3(dir.x, 0f, dir.z)), 1f - Mathf.Exp(-8f * dt));
                 h.wing.localEulerAngles += new Vector3(0f, 1500f * dt, 0f);
-                if (u >= 1f) { Destroy(h.tr.gameObject); _heli.RemoveAt(i); }
+                if (u >= 1f) { Kill(h.tr.gameObject); _heli.RemoveAt(i); }
             }
         }
 
@@ -195,11 +201,15 @@ namespace Buzzy.Game
 
         bool UiTap(float nx, float ny)
         {
+            if (Popup != PopupKind.None) return PopupTap(nx, ny);
+            if (Time < _inputOpenAt) return true;
+            if (Hit(_cfg.settingsCenter, _cfg.settingsSize, nx, ny)) { OpenSettings(); return true; }
             if (SpeedUnlocked && Hit(_cfg.speedButtonCenter, _cfg.speedButtonSize, nx, ny)) { ToggleSpeed(); return true; }
             for (int i = 0; i < 4; i++)
             {
                 if (!Hit(new Vector2(_cfg.boosterX[i], _cfg.boosterY), _cfg.boosterSize, nx, ny)) continue;
-                if (!IsUnlocked(i) || BoosterCount[i] <= 0) { if (Vibrate != null) Vibrate(); Log?.Invoke("Booster " + i + " chưa mở hoặc hết (mua bằng xu ở M5)"); return true; }
+                if (!IsUnlocked(i)) { if (Vibrate != null) Vibrate(); Log?.Invoke("Booster " + i + " chưa mở"); return true; }
+                if (BoosterCount[i] <= 0) { ShowBuyBooster(i); return true; }
                 _mode = _mode == i ? -1 : i; RefreshBoosterUi();
                 return true;
             }

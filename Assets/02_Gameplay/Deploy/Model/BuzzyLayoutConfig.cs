@@ -90,12 +90,35 @@ namespace Buzzy.Game
         [Tooltip("C7: tốc độ xe rời bến (đơn vị/s)")] public float leaveSpeed = 22f;
         [Tooltip("C7: z của làn trên để xe chạy ngược ra")] public float leaveLaneZ = 17.963f;
         [Tooltip("C7: x mép phải/trái xe thoát ra")] public float leaveEdgeX = 12f;
-        [Tooltip("C4: thời gian bay của 1 pixel (s)")] public float flightDuration = 0.6f;
-        [Tooltip("C4: tổng thời gian xả cả cụm (s) cho 50 người")] public float flightSpread = 2.0f;
-        [Tooltip("C4: độ cao vòng cung")] public float flightArc = 5f;
+        [Tooltip("C4: thời gian bay của 1 pixel (s)")] public float flightDuration = 1.4f;
+        [Tooltip("C4: tổng thời gian xả cả cụm (s) cho 50 người")] public float flightSpread = 1.4f;
+        [Tooltip("C4/C17: độ cao vòng cung (đám đông đi bộ: thấp, có nhảy)")] public float flightArc = 0.9f;
         [Tooltip("C5: pixel xuất hiện đầu level: tổng lan (s) và thời lượng mỗi khối (s)")] public Vector2 appearSpreadDuration = new Vector2(0.9f, 0.7f);
         [Tooltip("C9: trễ rào chắn sau khi xe rời (s)")] public float barrierDelay = 0.36f;
         [Tooltip("C13: bắt đầu cho chạm sau khi vào màn (s)")] public float inputDelay = 1.5f;
+
+        [Header("Chuyển động hoãn từ M2 - làm ở M5 (V17, V18, V23, C3, C4, C13, C17, C18)")]
+        [Tooltip("V18: tỉ lệ thu mesh Barrier (mẫu rào ~8 % bề ngang khung)")] public float barrierScale = 0.42f;
+        [Tooltip("V17: vạch P ô trống: màu, cỡ khung đứt (dài theo z, rộng theo x, thế giới), nét, cỡ chữ P")] public Color pMarkColor = new Color32(0x9A, 0xA0, 0xC4, 255);
+        public Vector2 pMarkSize = new Vector2(1.9f, 2.7f);
+        public float pMarkDash = 0.32f;
+        public float pMarkLine = 0.07f;
+        public float pLetterSize = 2.2f;
+        [Tooltip("C3/C4: vào màn: khung phóng to từ giữa (hệ số thu ban đầu, thời lượng s) + màn đỏ tan dần (màu+alpha, thời lượng s)")] public float introZoom = 4f;
+        public float introZoomDuration = 0.8f;
+        public Color introHazeColor = new Color(0.85f, 0.12f, 0.12f, 0.7f);
+        public float introHazeDuration = 0.9f;
+        [Tooltip("C17/C18: hành khách đi bộ thành đám: lắc ngang (thế giới), nhảy (cao, số bước), lệch tốc độ ±, xoay mặt theo hướng đi")] public float walkWobble = 0.45f;
+        public float walkHop = 0.22f;
+        public int walkHops = 3;
+        public float walkSpeedJitter = 0.3f;
+        [Tooltip("C13: xe rời bến: nhích lùi (thế giới) trong bao lâu (s), rồi dừng ngắn (phanh) trước khi rẽ")] public float leaveReverse = 0.35f;
+        public float leaveReverseDuration = 0.22f;
+        public float leaveBrakePause = 0.08f;
+        [Tooltip("V23: cụm rời (không dính ảnh chính) bay lơ lửng: dịch xa camera (z), dịch vào tâm (số ô), biên độ + tốc độ nhấp nhô [thiết kế]")] public float looseLift = 0f;
+        public float looseInward = 0.7f;
+        public float looseBob = 0.9f;
+        public float looseBobSpeed = 1.6f;
 
         [Header("Mechanic + booster - M3 (V27-V30, C23-C24, U7, [thiết kế] mục 4-12)")]
         [Tooltip("V28: màu khối băng (alpha = độ trong)")] public Color iceColor = new Color(0.62f, 0.9f, 1f, 0.8f);
@@ -127,6 +150,100 @@ namespace Buzzy.Game
         public float heliHeight = 6f;
         public float heliScale = 0.6f;
         [Tooltip("VIP Bus / pixel biến mất: thời lượng thu nhỏ (s)")] public float vanishDuration = 0.35f;
+
+        [Header("Màn thắng + popup - M5 (V31, V32, U1-U6) [thiết kế: design-decisions 3, 7, 8]")]
+        [Tooltip("V31: nền tối phủ màn")] public Color overlayColor = new Color32(0x12, 0x10, 0x1C, 255);
+        public float overlayAlpha = 0.92f;
+        [Tooltip("V31→U2: thời gian logo + pháo hoa trước popup (s)")] public float winSequenceDuration = 2.4f;
+        [Tooltip("V31: logo giữa màn (bề ngang %, tâm y %)")] public float winLogoWidth = 0.66f;
+        public float winLogoY = 0.415f;
+        public Color logoPlateColor = new Color32(0x3B, 0x7B, 0xE0, 255);
+        public float logoPlateAspect = 0.68f;
+        public float logoLineGap = 0.05f;
+        public int logoFontPx = 140;
+        public Color logoTopColor = new Color32(0xFF, 0xC8, 0x20, 255);
+        public Color logoBottomColor = new Color32(0xFF, 0xFF, 0xFF, 255);
+        public Color textOutlineColor = new Color32(0x3A, 0x22, 0x66, 255);
+        [Tooltip("V31: ruy băng tím trên + 2 bên; ribbonTopVisible = phần oval lộ dưới mép trên (tỉ lệ cao sprite)")] public float ribbonTopWidth = 1.1f;
+        public float ribbonTopVisible = 0.12f;
+        public float ribbonSideWidth = 0.20f;
+        public float ribbonSideX = 0.09f;
+        public float ribbonSideY = 0.10f;
+        [Tooltip("V31: 4 loa tím hai góc dưới: tâm loa 1 bên trái (x, y %), lệch loa 2, bề ngang")] public Vector2 trumpetLeft = new Vector2(0.12f, 0.63f);
+        public Vector2 trumpetOffset = new Vector2(-0.04f, 0.1f);
+        public float trumpetWidth = 0.30f;
+        [Tooltip("V31: pháo hoa: số tia mỗi chùm, thời lượng (s), bán kính (% rộng), cỡ tia")] public int fireworkSparks = 18;
+        public float fireworkDuration = 0.9f;
+        public float fireworkRadius = 0.28f;
+        public float sparkWidth = 0.12f;
+        [Tooltip("U2/U5: khung tím ngoài (bề ngang %, tỉ lệ cao/rộng, tâm y %); bảng kem trong (bề ngang, đỉnh + chiều cao theo tỉ lệ khung ngoài); tấm tiêu đề (bề ngang, tỉ lệ, dịch xuống)")] public float popupWidth = 0.86f;
+        public float popupAspect = 1.36f;
+        public float popupCenterY = 0.505f;
+        public float popupInnerWidth = 0.76f;
+        public float popupInnerTop = 0.22f;
+        public float popupInnerHeightTall = 0.54f;
+        public float popupInnerHeight = 0.44f;
+        public float popupTitleWidth = 0.60f;
+        public float popupTitleAspect = 0.30f;
+        public float popupTitleDrop = 0.035f;
+        public float popupButtonWideWidth = 0.44f;
+        [Tooltip("U3: nút = sprite vuông kéo thành viên thuốc (cao/rộng)")] public float popupButtonAspect = 0.55f;
+        public Color popupTextColor = new Color32(0x5A, 0x3E, 0x9E, 255);
+        [Tooltip("U2: hàng New Feature / Your Reward / thanh nhân (tỉ lệ chiều cao khung từ đỉnh); nút cách đáy")] public float featureRowY = 0.37f;
+        public float rewardRowY = 0.47f;
+        public float sliderRowY = 0.66f;
+        public float buttonRowUp = 0.13f;
+        public float featureBarWidth = 0.50f;
+        public Color featureFillColor = new Color32(0x6A, 0xD0, 0x2A, 255);
+        public float coinPileWidth = 0.28f;
+        public float sliderWidth = 0.60f;
+        public Color sliderMarkColor = new Color(1f, 1f, 1f, 0.45f);
+        [Tooltip("U3: nút xu / AD: bề ngang %, lệch khỏi tâm %")] public float popupButtonWidth = 0.32f;
+        public float popupButtonGap = 0.185f;
+        public float closeButtonSize = 0.10f;
+        [Tooltip("U4: thanh xu trên cùng + tim Full")] public Vector2 currencyBarCenter = new Vector2(0.09f, 0.10f);
+        public float currencyBarWidth = 0.22f;
+        public Vector2 heartCenter = new Vector2(0.27f, 0.10f);
+        public float heartWidth = 0.09f;
+        [Tooltip("Thua: trễ sau bế tắc tới popup (s); cỡ hình minh hoạ")] public float loseDelay = 0.8f;
+        public float loseIllusWidth = 0.44f;
+        [Tooltip("Cài đặt / shop: hàng đầu (tỉ lệ cao khung), bước hàng, cỡ nút gạt")] public float settingsFirstRowY = 0.3f;
+        public float settingsRowStep = 0.13f;
+        public float toggleWidth = 0.15f;
+        public float shopFirstRowY = 0.30f;
+        public float shopRowStep = 0.10f;
+        [Tooltip("Shop [thiết kế]: gói xu + giá hiển thị (IAP nối ở M7), xu xem quảng cáo")] public int[] shopPackCoins = { 200, 1000, 3000 };
+        public string[] shopPackPrice = { "$0.99", "$3.99", "$9.99" };
+        public int shopAdCoins = 50;
+        [Tooltip("U1: màn loading: thời lượng (s), thanh (bề ngang %, y %), logo y %")] public float loadingDuration = 2.5f;
+        public float loadingBarWidth = 0.70f;
+        public float loadingBarY = 0.835f;
+        public float loadingBarAspect = 0.11f;
+        public float loadingLogoY = 0.25f;
+        public float loadingLogoWidth = 0.66f;
+
+        [Header("Meta - M5 [thiết kế] (design-decisions 7, 14; video V4: 640 → 720 xu)")]
+        public int startCoins = 600;
+        public int winCoins = 40;
+        public int[] adMultipliers = { 2, 3, 4, 3, 2 };
+        public float sliderStepSeconds = 0.35f;
+        [Tooltip("BoosterConfig: CoinPrice, CoinRewardQuantity 3, AdsRewardQuantity 1; quà mở khoá 1")] public int[] boosterPrice = { 500, 700, 300, 600 };
+        public int boosterBuyQty = 3;
+        public int boosterAdQty = 1;
+        public int boosterUnlockGift = 1;
+        [Tooltip("FeatureUnlockConfig (_showVictoryProgress, trong phạm vi): mốc + tên hiện ở New Feature")] public int[] featureLevels = { 6, 10, 40 };
+        public string[] featureNames = { "Hidden", "Frozen Pixel", "Locked Bus" };
+        public int maxLevel = 300;
+
+        public Buzzy.Core.MetaConfig ToMetaConfig()
+        {
+            return new Buzzy.Core.MetaConfig
+            {
+                StartCoins = startCoins, WinCoins = winCoins, AdMultipliers = adMultipliers, SliderStepSeconds = sliderStepSeconds,
+                BoosterUnlock = boosterUnlock, BoosterPrice = boosterPrice, BoosterBuyQty = boosterBuyQty, BoosterAdQty = boosterAdQty, BoosterUnlockGift = boosterUnlockGift,
+                FeatureLevels = featureLevels, FeatureNames = featureNames, MaxLevel = maxLevel
+            };
+        }
 
         [Header("Màu nền (V3, V4, V8)")]
         public Color backgroundTop = new Color32(0xA7, 0xAC, 0xE6, 255);

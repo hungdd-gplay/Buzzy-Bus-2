@@ -6,15 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/02_Gameplay/Res/Scenes/BuzzyLoading.unity
+    guid: b8aec5157e30ac64ebb7d1e62763ebeb
+  - enabled: 1
+    path: Assets/02_Gameplay/Res/Scenes/BuzzyGame.unity
+    guid: 6cc9c4a47f550b8489b009688c917650
+  - enabled: 0
     path: Assets/01_Base/Res/Scenes/0_Loading/LoadingScene.unity
     guid: 49d0dcebe398c7e4f98b46affb5b26b6
-  - enabled: 1
+  - enabled: 0
     path: Assets/01_Base/Res/Scenes/0_Loading/LoadingScene_Main.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/01_Base/Res/Scenes/1_Home/HomeScene_Main.unity
     guid: b05e034cfb7444249910e34c143fd583
-  - enabled: 1
+  - enabled: 0
     path: Assets/01_Base/Res/Scenes/2_Gameplay/GamePlay_Main.unity
     guid: 1470b426b4371bc4ba72b415bb059efe
   m_configObjects: {}

@@ -44,3 +44,39 @@ MonoBehaviour:
   speedHalfGreen: {fileID: 21300000, guid: 19a7770e5e699064cb9e4451fce6570f, type: 3}
   speedHalfPurple: {fileID: 21300000, guid: 0623ae5a3b0a71743ab349b06e8fad54, type: 3}
   speedHalfRim: {fileID: 21300000, guid: c9da9d6bbc1427a41af19fbb5ce21039, type: 3}
+  ribbonTop: {fileID: 21300000, guid: 8ef7a48edb2c55d46abc18ce79abb698, type: 3}
+  ribbonSide: {fileID: 21300000, guid: 1d4054ad7afcd79488c09726147b6e43, type: 3}
+  trumpetLeft: {fileID: 21300000, guid: a1fbb3d1b261ced4eae89ab6d3a62bec, type: 3}
+  trumpetRight: {fileID: 21300000, guid: 42c31bd730424e54db877b09a3054bb8, type: 3}
+  spark: {fileID: 21300000, guid: 7a81d019a0b640740ac44b87edbafbf3, type: 3}
+  logoPlate: {fileID: 21300000, guid: f1d615998e541fd4eb71e13081b205ae, type: 3}
+  framePopup: {fileID: 21300000, guid: 3e6ab77c55410ff4ba96abaa8202914b, type: 3}
+  frameOuter: {fileID: 21300000, guid: 24c3bfe0348e6e04b8df49353ee55fe8, type: 3}
+  titlePlate: {fileID: 21300000, guid: 1e8de1d08b465ad46bd6a397607dcac4, type: 3}
+  titleYellow: {fileID: 21300000, guid: c503300dc9700354f988b173846aaabf, type: 3}
+  titlePurple: {fileID: 21300000, guid: dc7066764d87b2a468992035605f388d, type: 3}
+  titleRed: {fileID: 21300000, guid: 92c02d890ab83d1489975e129f9c3764, type: 3}
+  buttonGreen: {fileID: 21300000, guid: ef59c31435f9a3141b5af2a7f4bd96f6, type: 3}
+  buttonOrange: {fileID: 21300000, guid: 9eb845a73c3fcff45bacc26cc3835766, type: 3}
+  closeButton: {fileID: 21300000, guid: 4a8d003e2a61c634182764bb94e87402, type: 3}
+  whiteFrame: {fileID: 21300000, guid: f1d615998e541fd4eb71e13081b205ae, type: 3}
+  currencyBar: {fileID: 21300000, guid: b759f6da5a820384b9a7abe9fd527315, type: 3}
+  coinIcon: {fileID: 21300000, guid: 3d6877a3fc21eb742826fb1754794e6e, type: 3}
+  coinPile: {fileID: 21300000, guid: be6615c4c4bd7a4459f9da1ca28b4190, type: 3}
+  coinSmall: {fileID: 21300000, guid: b6e40d165a8b2f745a4c617b43eb6f94, type: 3}
+  adIcon: {fileID: 21300000, guid: d70227e8002f8e147b610295f95dd9fd, type: 3}
+  heartInfinity: {fileID: 21300000, guid: be105e06f79f2504a92f91128f8d4ffa, type: 3}
+  rewardSlider: {fileID: 21300000, guid: 63ee3248f38d4dc4db73d04e9b34339a, type: 3}
+  featureTrack: {fileID: 21300000, guid: 18123a75fd97f2d44a99fb5b9e16a3d5, type: 3}
+  soundIcon: {fileID: 21300000, guid: ab4822dbcab93ca4cbbf07eb79043edb, type: 3}
+  musicIcon: {fileID: 21300000, guid: 5b6476ee67c46b8498f66afa2dc94ac3, type: 3}
+  hapticIcon: {fileID: 21300000, guid: 32708026fdbcbf845af967f5a3926a31, type: 3}
+  toggleOn: {fileID: 21300000, guid: ca1fb344d71815145b18e4e1952837c0, type: 3}
+  toggleOff: {fileID: 21300000, guid: ab10ee69793e19244a5404c833089b40, type: 3}
+  loseIllustration: {fileID: 21300000, guid: f4186b29488cf04468890efceea1e00d, type: 3}
+  busLoading: {fileID: 21300000, guid: dab0e368ebc45d84f840d25501909e66, type: 3}
+  featureIcons:
+  - {fileID: 21300000, guid: 8ae9de8fb43c9b8418973db973fc3300, type: 3}
+  - {fileID: 21300000, guid: ede78a62c92e5c44f93bd126cef24edc, type: 3}
+  - {fileID: 21300000, guid: 8026c33749398e141a6ec351990d0980, type: 3}
+  loadingBackground: {fileID: 2800000, guid: 4c716a2474ddc8b4d9ce129b88682f03, type: 3}

@@ -37,6 +37,7 @@ Skill `gplay-game` đọc file này trước.
 ## Lệnh
 - Test logic thuần: `C:/Users/PC/.dotnet/dotnet.exe test CoreTests`
 - Compile Unity batchmode: `UNITY_EXE="C:/Program Files/Unity/Hub/Editor/6000.3.10f1/Editor/Unity.exe" python <plugin>/scripts/unity_run.py compile`
+- Luồng (M5): scene `BuzzyLoading` → `BuzzyGame` (`BuzzyBootstrap` = flow: MetaState + GPlayerPrefs, popup trong `BuzzyGameView.Popups.cs`); chụp màn: `unity_run.py exec Buzzy.Game.EditorTools.BuzzyScreensCapture.Run` (BUZZY_OUT, BUZZY_LEVEL)
 - Validator: `python tools/solve_levels.py` (M4: gọi dotnet ValidatorTests; báo cáo `.game/research/level-report.md`, tool Unity `Tools/Buzzy Bus/Validate Levels`) · Tự chơi + ảnh: `unity_run.py playtest --levels N --out <tmp>`, Unity đóng, có GPU
 - Art tạm / bên thứ ba phải thay trước phát hành: toàn bộ mesh / sprite / shader / audio / level từ APK gốc (tên, logo cũng thế)
 

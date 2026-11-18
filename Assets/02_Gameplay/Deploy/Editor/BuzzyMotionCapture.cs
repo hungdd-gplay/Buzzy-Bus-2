@@ -31,6 +31,16 @@ namespace Buzzy.Game.EditorTools
             a.tunnel = Sprite("Tunnel"); a.levelBar = Sprite("lvl_bar"); a.boosterCircle = Sprite("btn_Booster2");
             a.lockIcon = Sprite("icon_Lock"); a.settings = Sprite("btn_Setting");
             a.knob = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Knob.psd");
+            // M5
+            a.ribbonTop = Sprite("ribbon_U"); a.ribbonSide = Sprite("ribbon_L"); a.trumpetLeft = Sprite("trumpet_L"); a.trumpetRight = Sprite("trumpet_R"); a.spark = Sprite("spark"); a.logoPlate = Sprite("white_frame");
+            a.framePopup = Sprite("frame_popup"); a.frameOuter = Sprite("tab_menu"); a.titlePlate = Sprite("title_btn"); a.titleYellow = Sprite("title_Yellow2"); a.titlePurple = Sprite("title_Purple"); a.titleRed = Sprite("tite_Red");
+            a.buttonGreen = Sprite("btn_Green"); a.buttonOrange = Sprite("btn_Orange"); a.closeButton = Sprite("btn_X"); a.whiteFrame = Sprite("white_frame");
+            a.currencyBar = Sprite("currency_bar"); a.coinIcon = Sprite("icon_coin"); a.coinPile = Sprite("icon_gold5"); a.coinSmall = Sprite("icon_gold2"); a.adIcon = Sprite("icon_Ads");
+            a.heartInfinity = Sprite("icon_HeartInfinity"); a.rewardSlider = Sprite("reward_slider"); a.featureTrack = Sprite("ui_bst_unlock");
+            a.soundIcon = Sprite("icon_Sound"); a.musicIcon = Sprite("icon_Music"); a.hapticIcon = Sprite("icon_Haptic"); a.toggleOn = Sprite("slider_on"); a.toggleOff = Sprite("slider_off");
+            a.loseIllustration = Sprite("illus_lose"); a.busLoading = Sprite("icon_BusLoading");
+            a.featureIcons = new[] { Sprite("ic_MysteryPixel"), Sprite("ic_MysteryCanvas"), Sprite("icon_Lock") };
+            a.loadingBackground = AssetDatabase.LoadAssetAtPath<Texture2D>(Res + "Buzzy/Textures/BG_Home_Halloween.png");   // U1: nền đêm Halloween như mẫu
             EditorUtility.SetDirty(a); AssetDatabase.SaveAssets();
             return a;
         }
@@ -43,7 +53,7 @@ namespace Buzzy.Game.EditorTools
             var db = AssetDatabase.LoadAssetAtPath<BuzzyLevelDatabase>(Res + "Levels/BuzzyLevels.asset");
             var scene = UnityEditor.SceneManagement.EditorSceneManager.NewScene(UnityEditor.SceneManagement.NewSceneSetup.EmptyScene, UnityEditor.SceneManagement.NewSceneMode.Single);
             var go = new GameObject("BuzzyBootstrap"); var b = go.AddComponent<BuzzyBootstrap>();
-            b.database = db; b.config = cfg; b.assets = assets; b.level = 2;
+            b.database = db; b.config = cfg; b.assets = assets; b.level = 0;
             Directory.CreateDirectory(Res + "Scenes");
             UnityEditor.SceneManagement.EditorSceneManager.SaveScene(scene, Res + "Scenes/BuzzyGame.unity");
             Debug.Log("[BuzzyMotionCapture] Đã tạo " + Res + "Scenes/BuzzyGame.unity");
@@ -89,7 +99,8 @@ namespace Buzzy.Game.EditorTools
 
             var rt = new RenderTexture(size.x, size.y, 24, RenderTextureFormat.ARGB32); cam.targetTexture = rt;
             var tex = new Texture2D(size.x, size.y, TextureFormat.RGB24, false);
-            bool probed = false; float dt = 1f / 60f, nextShot = 0f, nextTap = 0f, endAt = float.MaxValue; int shot = 0;
+            bool probed = false; float dt = 1f / 60f, nextShot = 0f, nextTap = 0f, endAt = float.MaxValue, claimAt = -1f; int shot = 0;
+            view.LevelCompleted += c => log.Add("LEVEL XONG: +" + c + " xu (flow sẽ sang level kế)");
             // thứ tự chạm: tìm bằng Solver.FindOrder (level có mechanic thì greedy thuần có thể bế tắc)
             var sp = new double[3][]; for (int i = 0; i < 3; i++) sp[i] = new[] { view.Game.SlotX[i], view.Game.SlotY[i] };
             var order = Solver.FindOrder(lv.ToCore(), view.Game.Rules, sp, 400, 1);
@@ -134,7 +145,10 @@ namespace Buzzy.Game.EditorTools
                     if (!c.HasValue && view.Game.Status == GameStatus.Deadlock) { log.Add("BẾ TẮC t=" + view.Time.ToString("0.00")); break; }
                     if (c.HasValue && !tapped && view.Game.Status == GameStatus.Deadlock && view.Game.InFlight == 0) { log.Add("BẾ TẮC (chạm không khớp) t=" + view.Time.ToString("0.00")); break; }
                 }
-                if (view.Won && endAt == float.MaxValue) endAt = view.Time + 1.2f;
+                if (view.Won && endAt == float.MaxValue) endAt = view.Time + Env("BUZZY_AFTERWIN", 1.2f);
+                // M5: BUZZY_CLAIM=coin|ad → bấm nút ở popup thắng sau BUZZY_CLAIMAT giây kể từ khi popup hiện
+                if (view.Popup == BuzzyGameView.PopupKind.Completed && claimAt < 0f) claimAt = view.Time + Env("BUZZY_CLAIMAT", 1.0f);
+                if (claimAt > 0f && view.Time >= claimAt && view.Popup == BuzzyGameView.PopupKind.Completed) { var cl = Environment.GetEnvironmentVariable("BUZZY_CLAIM"); if (!string.IsNullOrEmpty(cl)) view.ClaimWin(cl == "ad"); claimAt = float.MaxValue; }
                 if (view.Time >= nextShot)
                 {
                     cam.Render(); RenderTexture.active = rt;

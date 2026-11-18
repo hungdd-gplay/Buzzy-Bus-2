@@ -235,13 +235,13 @@ namespace Buzzy.Game
             {
                 var f = _fades[i]; float u = Mathf.Clamp01((Time - f.start) / f.dur);
                 if (f.tr != null) f.tr.localScale = f.from * (1f - u * u);
-                if (u >= 1f) { if (f.tr != null) Destroy(f.tr.gameObject); _fades.RemoveAt(i); }
+                if (u >= 1f) { if (f.tr != null) Kill(f.tr.gameObject); _fades.RemoveAt(i); }
             }
             for (int i = _vanish.Count - 1; i >= 0; i--)
             {
                 var v = _vanish[i]; float u = Mathf.Clamp01((Time - v.start) / _cfg.vanishDuration);
                 if (v.p.tr != null) v.p.tr.localScale = BlockScale * (1f - u);
-                if (u >= 1f) { if (v.p.tr != null) Destroy(v.p.tr.gameObject); ForgetPass(v.p); _vanish.RemoveAt(i); }
+                if (u >= 1f) { if (v.p.tr != null) Kill(v.p.tr.gameObject); ForgetPass(v.p); _vanish.RemoveAt(i); }
             }
             TickBoosters(dt);
         }

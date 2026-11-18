@@ -25,9 +25,9 @@ namespace Buzzy.Game
 
         float _cellX0;          // x thế giới của cột 0
         float _boardZ0;         // z thế giới của hàng 0 (tâm bảng cố định, V33)
-        class Pass { public Transform tr; public PixelData d; public Vector3 home; public float appearAt; public bool flying; public bool hidden; public MeshRenderer mr; }
-        class Flight { public Pass p; public CarV car; public float start, dur; public Vector3 from; }
-        class Move { public Vector3[] pts; public float[] cum; public float dur, t; public Quaternion endRot; public bool useEndRot; public float delay; public Action done; }
+        class Pass { public Transform tr; public PixelData d; public Vector3 home; public float appearAt; public bool flying; public bool hidden; public MeshRenderer mr; public bool loose; public float phase; }
+        class Flight { public Pass p; public CarV car; public float start, dur; public Vector3 from; public float phase, side; }
+        class Move { public Vector3[] pts; public float[] cum; public float dur, t; public Quaternion endRot; public bool useEndRot; public float delay; public Action done; public bool keepRot; }
         class CarV
         {
             public Car car; public Transform tr; public TextMesh[] texts; public Move move; public bool leaving; public int col; public Vector3 slotPos; public GameObject lockObj; public MeshRenderer mr;
@@ -41,7 +41,8 @@ namespace Buzzy.Game
         readonly CarV[] _slotCar = new CarV[3];
         readonly List<Pop> _pops = new List<Pop>();
         Material _vehMat0; Transform _root; Canvas _canvas; RectTransform[] _fullBubbles = new RectTransform[3];
-        GameObject _winOverlay; float _inputOpenAt;
+        float _inputOpenAt;
+        readonly GameObject[] _pMark = new GameObject[3]; float _baseOrtho; RectTransform _uiRoot; Image _haze; System.Random _rnd = new System.Random(3);
 
         public Vector3 SlotPos(int i) { return new Vector3(_cfg.slotX[i], 0f, _cfg.slotZ); }
         Vector3 QueuePos(int col, int k) { return new Vector3(_cfg.queueX[col], 0f, _cfg.queueZ + (k == 0 ? 0f : 6f + (k - 1) * 4.5f)); }
@@ -69,6 +70,7 @@ namespace Buzzy.Game
             BuildUi();
             _inputOpenAt = cfg.inputDelay;
             InitBoosters();
+            StartIntro();
         }
 
         // ---------------------------------------------------------------- dựng cảnh
@@ -100,6 +102,57 @@ namespace Buzzy.Game
             // đường + vạch đứt
             Quad("Road", _cfg.roadColor, 0f, _cfg.roadNearZ, _cfg.roadFarZ, 40f, 0f);
             for (float x = -14f; x <= 14f; x += _cfg.dashSpacing) Quad("Dash", _cfg.dashColor, x, _cfg.dashZ - _cfg.dashHalfWidth, _cfg.dashZ + _cfg.dashHalfWidth, _cfg.dashHalfLength, 0.03f);
+            for (int i = 0; i < 3; i++) BuildPMark(i);
+        }
+
+        // V17: khung đứt nét + chữ P ở ô bến (chữ P chỉ hiện khi ô trống)
+        void BuildPMark(int slot)
+        {
+            var root = new GameObject("PMark" + slot); root.transform.SetParent(_root, false);
+            root.transform.localPosition = SlotPos(slot) + new Vector3(0f, 0.02f, 0f); root.transform.localRotation = SlotRot;
+            var mat = Mat("Custom/BuzzyEnvironment", _cfg.pMarkColor);
+            float w = _cfg.pMarkSize.x, l = _cfg.pMarkSize.y, d = _cfg.pMarkDash, t = _cfg.pMarkLine;
+            Action<Vector3, Vector3> seg = (c, sz) =>
+            {
+                var q = GameObject.CreatePrimitive(PrimitiveType.Quad); Destroy(q.GetComponent<Collider>());
+                q.transform.SetParent(root.transform, false); q.transform.localEulerAngles = new Vector3(90f, 0f, 0f);
+                q.transform.localPosition = c; q.transform.localScale = new Vector3(sz.x, sz.z, 1f); q.GetComponent<MeshRenderer>().sharedMaterial = mat;
+            };
+            for (float z = -l * 0.5f + d * 0.5f; z <= l * 0.5f; z += d * 2f) { seg(new Vector3(-w * 0.5f, 0f, z), new Vector3(t, 0f, d)); seg(new Vector3(w * 0.5f, 0f, z), new Vector3(t, 0f, d)); }
+            for (float x = -w * 0.5f + d * 0.5f; x <= w * 0.5f; x += d * 2f) { seg(new Vector3(x, 0f, -l * 0.5f), new Vector3(d, 0f, t)); seg(new Vector3(x, 0f, l * 0.5f), new Vector3(d, 0f, t)); }
+            var pgo = new GameObject("P"); pgo.transform.SetParent(root.transform, false);
+            pgo.transform.localPosition = new Vector3(0f, 0.03f, 0f); pgo.transform.localEulerAngles = new Vector3(90f, 0f, 0f);
+            var tm = pgo.AddComponent<TextMesh>(); tm.text = "P"; tm.font = _a.font; tm.fontSize = 64; tm.characterSize = _cfg.pLetterSize * 0.1f;
+            tm.anchor = TextAnchor.MiddleCenter; tm.alignment = TextAlignment.Center; tm.color = _cfg.pMarkColor;
+            var m2 = new Material(_a.font.material); m2.renderQueue = 2450; pgo.GetComponent<MeshRenderer>().sharedMaterial = m2;
+            _pMark[slot] = pgo; pgo.SetActive(false);
+        }
+
+        // C3/C4: vào màn: khung phóng to từ giữa + màn đỏ tan dần
+        void StartIntro()
+        {
+            _baseOrtho = _cam.orthographicSize;
+            if (!_cam.orthographic || _cfg.introZoomDuration <= 0f) return;
+            _cam.orthographicSize = _baseOrtho * _cfg.introZoom;
+            if (_uiRoot != null) _uiRoot.localScale = Vector3.one / _cfg.introZoom;
+            var go = new GameObject("Haze", typeof(RectTransform), typeof(Image)); go.transform.SetParent(_canvas.transform, false);
+            _haze = go.GetComponent<Image>(); _haze.color = _cfg.introHazeColor; _haze.raycastTarget = false;
+            var rt = go.GetComponent<RectTransform>(); rt.anchorMin = Vector2.zero; rt.anchorMax = Vector2.one; rt.offsetMin = rt.offsetMax = Vector2.zero;
+        }
+
+        void TickIntro()
+        {
+            if (_baseOrtho <= 0f || _cfg.introZoomDuration <= 0f) return;
+            float u = Mathf.Clamp01(Time / _cfg.introZoomDuration), e = 1f - (1f - u) * (1f - u);
+            float k = Mathf.Lerp(_cfg.introZoom, 1f, e);
+            _cam.orthographicSize = _baseOrtho * k;
+            if (_uiRoot != null) _uiRoot.localScale = Vector3.one / k;
+            if (_haze != null)
+            {
+                float a = _cfg.introHazeColor.a * (1f - Mathf.Clamp01(Time / _cfg.introHazeDuration));
+                _haze.color = new Color(_cfg.introHazeColor.r, _cfg.introHazeColor.g, _cfg.introHazeColor.b, a);
+                if (a <= 0f) { Kill(_haze.gameObject); _haze = null; }
+            }
         }
 
         readonly Dictionary<int, Material> _blockMats = new Dictionary<int, Material>();
@@ -115,6 +168,42 @@ namespace Buzzy.Game
                 float diag = ((float)x / Mathf.Max(1, _lv.width)) * 0.55f + ((float)y / Mathf.Max(1, _lv.height)) * 0.45f;
                 _buildSeed += 0.37f;
                 CreatePass(new PixelData(x, y, c), diag * _cfg.appearSpreadDuration.x + 0.04f * Mathf.Abs(Mathf.Sin(_buildSeed)));
+            }
+            MarkLooseClusters();
+        }
+
+        // V23 [thiết kế]: cụm không dính ảnh chính (thành phần liên thông nhỏ hơn) đứng tách ra: dịch vào tâm + xa camera, nhấp nhô nhẹ
+        void MarkLooseClusters()
+        {
+            var b = Game.Board; var comp = new int[b.W, b.H]; int n = 0; var sizes = new List<int>();
+            var stack = new Stack<int>();
+            for (int x = 0; x < b.W; x++) for (int y = 0; y < b.H; y++)
+            {
+                if (b.ColorAt(x, y) == Board.Empty || comp[x, y] != 0) continue;
+                n++; int size = 0; stack.Push(x * 1000 + y); comp[x, y] = n;
+                while (stack.Count > 0)
+                {
+                    int k = stack.Pop(), cx = k / 1000, cy = k % 1000; size++;
+                    int[] dx = { 1, -1, 0, 0 }, dy = { 0, 0, 1, -1 };
+                    for (int d = 0; d < 4; d++)
+                    {
+                        int nx = cx + dx[d], ny = cy + dy[d];
+                        if (!b.InBounds(nx, ny) || b.ColorAt(nx, ny) == Board.Empty || comp[nx, ny] != 0) continue;
+                        comp[nx, ny] = n; stack.Push(nx * 1000 + ny);
+                    }
+                }
+                sizes.Add(size);
+            }
+            if (n <= 1) return;
+            int main = 1; for (int i = 1; i < sizes.Count; i++) if (sizes[i] > sizes[main - 1]) main = i + 1;
+            float cx0 = _cfg.boardCenterX;
+            foreach (var kv in _pass)
+            {
+                var p = kv.Value; int c = comp[p.d.X, p.d.Y];
+                if (c == main || b.IsFrozen(p.d.X, p.d.Y)) continue;
+                float dir = p.home.x < cx0 ? 1f : -1f;
+                p.home += new Vector3(dir * _cfg.looseInward * _cfg.cellPitchX, 0f, _cfg.looseLift);
+                p.loose = true; p.phase = c * 1.7f;
             }
         }
 
@@ -225,7 +314,9 @@ namespace Buzzy.Game
             var cv = new GameObject("Canvas", typeof(Canvas), typeof(CanvasScaler)); cv.transform.SetParent(_root, false);
             _canvas = cv.GetComponent<Canvas>(); _canvas.renderMode = RenderMode.ScreenSpaceCamera; _canvas.worldCamera = _cam; _canvas.planeDistance = 1f;
             var sc = cv.GetComponent<CanvasScaler>(); sc.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize; sc.referenceResolution = _canvasSize;
-            var ct = cv.transform;
+            var ur = new GameObject("UiRoot", typeof(RectTransform)); ur.transform.SetParent(cv.transform, false);
+            _uiRoot = ur.GetComponent<RectTransform>(); _uiRoot.anchorMin = Vector2.zero; _uiRoot.anchorMax = Vector2.one; _uiRoot.offsetMin = _uiRoot.offsetMax = Vector2.zero;
+            var ct = _uiRoot;
             Img("Tray", _a.tunnel, Color.white, ct, new Vector2(0.5f, _cfg.trayVisibleHeight * 0.5f - 0.11f + _cfg.trayShift), 1.06f);
             float barTop = _lv.tag > 0 ? _cfg.hardBottomBarTop : _cfg.bottomBarTop;
             Img("BottomBar", null, _lv.tag > 0 ? _cfg.hardBottomBarColor : _cfg.bottomBarColor, ct, new Vector2(0.5f, (1f + barTop) * 0.5f), 1f, (1f - barTop) * _canvasSize.y / _canvasSize.x);
@@ -280,7 +371,10 @@ namespace Buzzy.Game
             // xe rẽ phải, chạy ngược qua làn trên ra mép trái (C7)
             var pts = new[] { s, new Vector3(s.x + 3f, 0f, s.z + 1.5f), new Vector3(_cfg.leaveEdgeX, 0f, _cfg.leaveLaneZ), new Vector3(-_cfg.leaveEdgeX - 4f, 0f, _cfg.leaveLaneZ) };
             float len = 0f; for (int i = 1; i < pts.Length; i++) len += Vector3.Distance(pts[i - 1], pts[i]);
-            StartMove(cv, pts, len / _cfg.leaveSpeed, Quaternion.identity, false, 0.1f, () => { _cars.Remove(cv); Destroy(cv.tr.gameObject); });
+            Action go = () => StartMove(cv, pts, len / _cfg.leaveSpeed, Quaternion.identity, false, _cfg.leaveBrakePause, () => { _cars.Remove(cv); Kill(cv.tr.gameObject); });
+            // C13: nhích lùi (giữ hướng) rồi dừng ngắn trước khi rẽ
+            var back = s - cv.tr.localRotation * Vector3.forward * _cfg.leaveReverse;
+            StartMove(cv, new[] { s, back }, _cfg.leaveReverseDuration, cv.tr.localRotation, true, 0.1f, go); cv.move.keepRot = true; pts[0] = back;
         }
 
         void OnCarEntered(Car car, int slot)
@@ -307,7 +401,7 @@ namespace Buzzy.Game
             var m = Mat("Custom/BuzzyEnvironment", Color.white); m.mainTexture = tex; go.AddComponent<MeshRenderer>().sharedMaterial = m;
             var s = SlotPos(slot);
             go.transform.localPosition = s + new Vector3(0.5f, 0f, 0f); go.transform.localEulerAngles = new Vector3(0, 0, 0);
-            _pops.Add(new Pop { tr = go.transform, at = Time + _cfg.barrierDelay, dur = 0.3f, scale = Vector3.one * 0.9f });
+            _pops.Add(new Pop { tr = go.transform, at = Time + _cfg.barrierDelay, dur = 0.3f, scale = Vector3.one * _cfg.barrierScale });
             go.transform.localScale = Vector3.zero;
         }
 
@@ -333,7 +427,8 @@ namespace Buzzy.Game
             {
                 Pass p; if (!_pass.TryGetValue(r.Pixels[i].X * 1000 + r.Pixels[i].Y, out p)) continue;
                 p.flying = true;
-                _flights.Add(new Flight { p = p, car = cv, start = Time + delay + (n <= 1 ? 0f : (i / (float)(n - 1)) * spread), dur = _cfg.flightDuration, from = p.home });
+                float jit = 1f + _cfg.walkSpeedJitter * ((float)_rnd.NextDouble() * 2f - 1f);
+                _flights.Add(new Flight { p = p, car = cv, start = Time + delay + (n <= 1 ? 0f : (i / (float)(n - 1)) * spread), dur = _cfg.flightDuration * jit, from = p.home, phase = (float)_rnd.NextDouble() * 6.28f, side = _rnd.Next(2) == 0 ? -1f : 1f });
             }
         }
 
@@ -348,11 +443,21 @@ namespace Buzzy.Game
         {
             Time += dt;
             // pixel xuất hiện
+            TickIntro();
             foreach (var kv in _pass)
             {
                 var p = kv.Value; if (p.flying) continue;
                 float u = Mathf.Clamp01((Time - p.appearAt) / _cfg.appearSpreadDuration.y);
                 SetPassScale(p, EaseOutBack(u));
+                if (p.loose && u >= 1f) p.tr.localPosition = p.home + new Vector3(0f, _cfg.looseBob * Mathf.Max(0f, Mathf.Sin(Time * _cfg.looseBobSpeed + p.phase)), 0f);   // nhảy lên rồi nghỉ
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                if (_pMark[i] == null) continue;
+                // V17: chữ P chỉ khi không còn xe nào trên ô (xe kế chưa đỗ xong, xe rời đã đi khỏi ô)
+                bool show = (_slotCar[i] == null || _slotCar[i].move != null) && !Game.Barrier[i] && !Won;
+                if (show) foreach (var c in _cars) if (Vector3.Distance(c.tr.localPosition, SlotPos(i)) < _cfg.pMarkSize.y * 0.6f) { show = false; break; }
+                if (_pMark[i].activeSelf != show) _pMark[i].SetActive(show);
             }
             // pixel bay
             for (int i = _flights.Count - 1; i >= 0; i--)
@@ -362,14 +467,17 @@ namespace Buzzy.Game
                 if (u < 0f) { f.p.tr.localPosition = f.p.home; continue; }
                 var to = f.car.tr.position + new Vector3(0f, 1.4f, 0f);
                 float e = Mathf.Clamp01(u); e = e * e * (3f - 2f * e);
-                var pos = Vector3.Lerp(f.from, to, e) + Vector3.up * (_cfg.flightArc * 4f * e * (1f - e));
+                var flat = to - f.from; flat.y = 0f; var perp = Vector3.Cross(Vector3.up, flat.normalized);
+                float wob = _cfg.walkWobble * Mathf.Sin(e * Mathf.PI * 2f + f.phase) * (1f - e) * f.side;
+                float hop = _cfg.walkHop * Mathf.Abs(Mathf.Sin(e * Mathf.PI * _cfg.walkHops)) * (1f - e * 0.6f);
+                var pos = Vector3.Lerp(f.from, to, e) + perp * wob + Vector3.up * (_cfg.flightArc * 4f * e * (1f - e) + hop);
                 f.p.tr.localPosition = pos;
-                f.p.tr.localScale = BlockScale * Mathf.Lerp(1f, 0.35f, e);
-                f.p.tr.localEulerAngles = new Vector3(0, 180f + e * 360f, 0);
+                f.p.tr.localScale = BlockScale * Mathf.Lerp(1f, 0.35f, e * e);
+                if (flat.sqrMagnitude > 0.001f) f.p.tr.localRotation = Quaternion.LookRotation(flat.normalized) * Quaternion.Euler(0f, 180f + 25f * Mathf.Sin(e * 12f + f.phase), 0f);
                 if (u >= 1f)
                 {
                     _flights.RemoveAt(i);
-                    Destroy(f.p.tr.gameObject); ForgetPass(f.p);
+                    Kill(f.p.tr.gameObject); ForgetPass(f.p);
                     Game.Arrive(f.car.car, f.p.d);
                 }
             }
@@ -402,6 +510,8 @@ namespace Buzzy.Game
                 bool anyLeaving = false; foreach (var c in _cars) if (c.leaving) anyLeaving = true;
                 if (!anyLeaving) { Won = true; WonAt = Time; ShowWin(); }
             }
+            CheckLose();
+            TickPopups(dt);
         }
 
         void StepCar(CarV cv, float dt)
@@ -421,7 +531,7 @@ namespace Buzzy.Game
             cv.tr.localPosition = Vector3.Lerp(mv.pts[seg - 1], mv.pts[seg], lu);
             Quaternion want = dir.sqrMagnitude > 0.0001f ? Quaternion.LookRotation(-dir) : cv.tr.localRotation;
             if (mv.useEndRot && u > 0.7f) want = Quaternion.Slerp(want, mv.endRot, Mathf.InverseLerp(0.7f, 1f, u));
-            cv.tr.localRotation = Quaternion.Slerp(cv.tr.localRotation, want, 1f - Mathf.Exp(-10f * dt));
+            if (!mv.keepRot) cv.tr.localRotation = Quaternion.Slerp(cv.tr.localRotation, want, 1f - Mathf.Exp(-10f * dt));
             if (u >= 1f)
             {
                 cv.tr.localPosition = mv.pts[mv.pts.Length - 1];
@@ -431,18 +541,7 @@ namespace Buzzy.Game
             }
         }
 
-        void ShowWin()
-        {
-            Log?.Invoke("t=" + Time.ToString("0.00") + " THẮNG: hết pixel");
-            HideWorldTexts();
-            _winOverlay = new GameObject("Win", typeof(RectTransform), typeof(Image)); _winOverlay.transform.SetParent(_canvas.transform, false);
-            var im = _winOverlay.GetComponent<Image>(); im.color = new Color(0.07f, 0.07f, 0.1f, 0.92f);
-            var rt = _winOverlay.GetComponent<RectTransform>(); rt.anchorMin = Vector2.zero; rt.anchorMax = Vector2.one; rt.offsetMin = rt.offsetMax = Vector2.zero;
-            var t = Label("BUZZY BUS", _winOverlay.transform, Vector2.zero, (int)(120 * _canvasSize.x / 1080f), new Color32(0xFF, 0xC8, 0x20, 255));
-            var trt = t.GetComponent<RectTransform>(); trt.anchorMin = trt.anchorMax = new Vector2(0.5f, 0.55f); trt.sizeDelta = new Vector2(_canvasSize.x, 300f); trt.anchoredPosition = Vector2.zero;
-            var t2 = Label("Level " + _lv.index + " hoàn thành!", _winOverlay.transform, Vector2.zero, (int)(56 * _canvasSize.x / 1080f), Color.white);
-            var t2r = t2.GetComponent<RectTransform>(); t2r.anchorMin = t2r.anchorMax = new Vector2(0.5f, 0.45f); t2r.sizeDelta = new Vector2(_canvasSize.x, 200f); t2r.anchoredPosition = Vector2.zero;
-        }
+        // màn thắng + popup: BuzzyGameView.Popups.cs (M5)
 
         static float EaseOutBack(float x)
         {

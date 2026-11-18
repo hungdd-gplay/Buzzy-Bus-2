@@ -119,7 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &190202888
+--- !u!1 &1465485737
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,8 +127,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 190202890}
-  - component: {fileID: 190202889}
+  - component: {fileID: 1465485739}
+  - component: {fileID: 1465485738}
   m_Layer: 0
   m_Name: BuzzyBootstrap
   m_TagString: Untagged
@@ -136,13 +136,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &190202889
+--- !u!114 &1465485738
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 190202888}
+  m_GameObject: {fileID: 1465485737}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 532e5b6272376564a967bc90a497eb05, type: 3}
@@ -151,15 +151,15 @@ MonoBehaviour:
   database: {fileID: 11400000, guid: dc0ecc35bce700248a20225fe89a82f3, type: 2}
   config: {fileID: 11400000, guid: 53646793c079ba340bca71d118243de1, type: 2}
   assets: {fileID: 11400000, guid: 7c23fdcf53a1e7b4f99bed61b6b1d7d1, type: 2}
-  level: 2
+  level: 0
   timeScale: 1
---- !u!4 &190202890
+--- !u!4 &1465485739
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 190202888}
+  m_GameObject: {fileID: 1465485737}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -172,4 +172,4 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 190202890}
+  - {fileID: 1465485739}

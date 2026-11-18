@@ -3,16 +3,22 @@ using UnityEditor;
 
 public static class OpenSceneMenuGenerated
 {
-    [MenuItem("Open Scene/LoadingScene &1", false, 1)]
-    private static void OpenScene_1() { OpenSceneMenuGenerator.OpenSceneByGuid("49d0dcebe398c7e4f98b46affb5b26b6", "Assets/01_Base/Res/Scenes/0_Loading/LoadingScene.unity"); }
+    [MenuItem("Open Scene/BuzzyLoading &1", false, 1)]
+    private static void OpenScene_1() { OpenSceneMenuGenerator.OpenSceneByGuid("b8aec5157e30ac64ebb7d1e62763ebeb", "Assets/02_Gameplay/Res/Scenes/BuzzyLoading.unity"); }
 
-    [MenuItem("Open Scene/LoadingScene_Main &2", false, 2)]
-    private static void OpenScene_2() { OpenSceneMenuGenerator.OpenSceneByGuid("2cda990e2423bbf4892e6590ba056729", "Assets/01_Base/Res/Scenes/0_Loading/LoadingScene_Main.unity"); }
+    [MenuItem("Open Scene/BuzzyGame &2", false, 2)]
+    private static void OpenScene_2() { OpenSceneMenuGenerator.OpenSceneByGuid("6cc9c4a47f550b8489b009688c917650", "Assets/02_Gameplay/Res/Scenes/BuzzyGame.unity"); }
 
-    [MenuItem("Open Scene/HomeScene_Main &3", false, 3)]
-    private static void OpenScene_3() { OpenSceneMenuGenerator.OpenSceneByGuid("b05e034cfb7444249910e34c143fd583", "Assets/01_Base/Res/Scenes/1_Home/HomeScene_Main.unity"); }
+    [MenuItem("Open Scene/LoadingScene (disabled) &3", false, 3)]
+    private static void OpenScene_3() { OpenSceneMenuGenerator.OpenSceneByGuid("49d0dcebe398c7e4f98b46affb5b26b6", "Assets/01_Base/Res/Scenes/0_Loading/LoadingScene.unity"); }
 
-    [MenuItem("Open Scene/GamePlay_Main &4", false, 4)]
-    private static void OpenScene_4() { OpenSceneMenuGenerator.OpenSceneByGuid("1470b426b4371bc4ba72b415bb059efe", "Assets/01_Base/Res/Scenes/2_Gameplay/GamePlay_Main.unity"); }
+    [MenuItem("Open Scene/LoadingScene_Main (disabled) &4", false, 4)]
+    private static void OpenScene_4() { OpenSceneMenuGenerator.OpenSceneByGuid("2cda990e2423bbf4892e6590ba056729", "Assets/01_Base/Res/Scenes/0_Loading/LoadingScene_Main.unity"); }
+
+    [MenuItem("Open Scene/HomeScene_Main (disabled) &5", false, 5)]
+    private static void OpenScene_5() { OpenSceneMenuGenerator.OpenSceneByGuid("b05e034cfb7444249910e34c143fd583", "Assets/01_Base/Res/Scenes/1_Home/HomeScene_Main.unity"); }
+
+    [MenuItem("Open Scene/GamePlay_Main (disabled) &6", false, 6)]
+    private static void OpenScene_6() { OpenSceneMenuGenerator.OpenSceneByGuid("1470b426b4371bc4ba72b415bb059efe", "Assets/01_Base/Res/Scenes/2_Gameplay/GamePlay_Main.unity"); }
 
 }

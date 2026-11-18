@@ -71,12 +71,33 @@ MonoBehaviour:
   leaveSpeed: 22
   leaveLaneZ: 17.963
   leaveEdgeX: 12
-  flightDuration: 0.6
-  flightSpread: 2
-  flightArc: 5
+  flightDuration: 1.4
+  flightSpread: 1.4
+  flightArc: 0.9
   appearSpreadDuration: {x: 0.9, y: 0.7}
   barrierDelay: 0.36
   inputDelay: 1.5
+  barrierScale: 0.42
+  pMarkColor: {r: 0.6039216, g: 0.627451, b: 0.76862746, a: 1}
+  pMarkSize: {x: 1.9, y: 2.7}
+  pMarkDash: 0.32
+  pMarkLine: 0.07
+  pLetterSize: 2.2
+  introZoom: 4
+  introZoomDuration: 0.8
+  introHazeColor: {r: 0.85, g: 0.12, b: 0.12, a: 0.7}
+  introHazeDuration: 0.9
+  walkWobble: 0.45
+  walkHop: 0.22
+  walkHops: 3
+  walkSpeedJitter: 0.3
+  leaveReverse: 0.35
+  leaveReverseDuration: 0.22
+  leaveBrakePause: 0.08
+  looseLift: 0
+  looseInward: 0.7
+  looseBob: 0.9
+  looseBobSpeed: 1.6
   iceColor: {r: 0.62, g: 0.9, b: 1, a: 0.8}
   hardBottomBarColor: {r: 0.78431374, g: 0.16862746, b: 0.16862746, a: 1}
   hardBadgeTextColor: {r: 0.72156864, g: 0.14117648, b: 0.14117648, a: 1}
@@ -106,6 +127,92 @@ MonoBehaviour:
   heliHeight: 6
   heliScale: 0.6
   vanishDuration: 0.35
+  overlayColor: {r: 0.07058824, g: 0.0627451, b: 0.10980392, a: 1}
+  overlayAlpha: 0.92
+  winSequenceDuration: 2.4
+  winLogoWidth: 0.66
+  winLogoY: 0.415
+  logoPlateColor: {r: 0.23137255, g: 0.48235294, b: 0.8784314, a: 1}
+  logoPlateAspect: 0.68
+  logoLineGap: 0.05
+  logoFontPx: 140
+  logoTopColor: {r: 1, g: 0.78431374, b: 0.1254902, a: 1}
+  logoBottomColor: {r: 1, g: 1, b: 1, a: 1}
+  textOutlineColor: {r: 0.22745098, g: 0.13333334, b: 0.4, a: 1}
+  ribbonTopWidth: 1.1
+  ribbonTopVisible: 0.12
+  ribbonSideWidth: 0.2
+  ribbonSideX: 0.09
+  ribbonSideY: 0.1
+  trumpetLeft: {x: 0.12, y: 0.63}
+  trumpetOffset: {x: -0.04, y: 0.1}
+  trumpetWidth: 0.3
+  fireworkSparks: 18
+  fireworkDuration: 0.9
+  fireworkRadius: 0.28
+  sparkWidth: 0.12
+  popupWidth: 0.86
+  popupAspect: 1.36
+  popupCenterY: 0.505
+  popupInnerWidth: 0.76
+  popupInnerTop: 0.22
+  popupInnerHeightTall: 0.54
+  popupInnerHeight: 0.44
+  popupTitleWidth: 0.6
+  popupTitleAspect: 0.3
+  popupTitleDrop: 0.035
+  popupButtonWideWidth: 0.44
+  popupButtonAspect: 0.55
+  popupTextColor: {r: 0.3529412, g: 0.24313726, b: 0.61960787, a: 1}
+  featureRowY: 0.37
+  rewardRowY: 0.47
+  sliderRowY: 0.66
+  buttonRowUp: 0.13
+  featureBarWidth: 0.5
+  featureFillColor: {r: 0.41568628, g: 0.8156863, b: 0.16470589, a: 1}
+  coinPileWidth: 0.28
+  sliderWidth: 0.6
+  sliderMarkColor: {r: 1, g: 1, b: 1, a: 0.45}
+  popupButtonWidth: 0.32
+  popupButtonGap: 0.185
+  closeButtonSize: 0.1
+  currencyBarCenter: {x: 0.09, y: 0.1}
+  currencyBarWidth: 0.22
+  heartCenter: {x: 0.27, y: 0.1}
+  heartWidth: 0.09
+  loseDelay: 0.8
+  loseIllusWidth: 0.44
+  settingsFirstRowY: 0.3
+  settingsRowStep: 0.13
+  toggleWidth: 0.15
+  shopFirstRowY: 0.3
+  shopRowStep: 0.1
+  shopPackCoins: c8000000e8030000b80b0000
+  shopPackPrice:
+  - $0.99
+  - $3.99
+  - $9.99
+  shopAdCoins: 50
+  loadingDuration: 2.5
+  loadingBarWidth: 0.7
+  loadingBarY: 0.835
+  loadingBarAspect: 0.16
+  loadingLogoY: 0.25
+  loadingLogoWidth: 0.66
+  startCoins: 600
+  winCoins: 40
+  adMultipliers: 0200000003000000040000000300000002000000
+  sliderStepSeconds: 0.35
+  boosterPrice: f4010000bc0200002c01000058020000
+  boosterBuyQty: 3
+  boosterAdQty: 1
+  boosterUnlockGift: 1
+  featureLevels: 060000000a00000028000000
+  featureNames:
+  - Hidden
+  - Frozen Pixel
+  - Locked Bus
+  maxLevel: 300
   backgroundTop: {r: 0.654902, g: 0.6745098, b: 0.9019608, a: 1}
   backgroundBottom: {r: 0.5294118, g: 0.54901963, b: 0.7764706, a: 1}
   roadColor: {r: 0.26666668, g: 0.2901961, b: 0.41960785, a: 1}
