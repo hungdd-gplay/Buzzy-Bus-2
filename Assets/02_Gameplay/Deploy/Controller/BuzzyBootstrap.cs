@@ -18,10 +18,7 @@ namespace Buzzy.Game
             camGo.tag = "MainCamera";
             var cam = camGo.AddComponent<Camera>();
             cam.clearFlags = CameraClearFlags.SolidColor; cam.backgroundColor = config.backgroundTop;
-            cam.transform.position = config.cameraPosition; cam.transform.eulerAngles = config.cameraEuler;
-            cam.fieldOfView = config.fieldOfView; cam.nearClipPlane = 0.3f; cam.farClipPlane = 200f;
-            float aspect = (float)Screen.width / Screen.height;
-            cam.aspect = aspect;
+            config.ApplyCamera(cam, (float)Screen.width / Screen.height);
             var size = new Vector2Int(Screen.width, Screen.height);
             var view = gameObject.AddComponent<BuzzyGameView>();
             view.TimeScale = timeScale;

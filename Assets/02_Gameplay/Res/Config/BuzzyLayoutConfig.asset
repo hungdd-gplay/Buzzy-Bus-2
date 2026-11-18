@@ -13,30 +13,32 @@ MonoBehaviour:
   m_Name: BuzzyLayoutConfig
   m_EditorClassIdentifier: Assembly-CSharp::Buzzy.Game.BuzzyLayoutConfig
   captureSize: {x: 1080, y: 2400}
-  cameraPosition: {x: 0, y: 20.16, z: -7.35}
-  cameraEuler: {x: 54, y: 0, z: 0}
+  cameraPosition: {x: 0, y: 30, z: -9.64}
+  cameraEuler: {x: 60, y: 0, z: 0}
+  cameraOrthographic: 1
+  orthographicSize: 13.8
   fieldOfView: 64.4
-  cellPitch: 0.5
+  cellPitch: 0.495
   cellPitchX: 0.466
-  blockScale: 0.44
+  blockScale: 0.39
   boardCenterX: 0
-  boardZ0: 0
-  roadNearZ: 16.8
-  roadFarZ: 34.4
-  dashZ: 25.1
-  slotZ: 19.6
+  boardCenterZ: 4.358
+  roadNearZ: 14.03
+  roadFarZ: 21.79
+  dashZ: 17.963
+  slotZ: 15.689
   slotX:
-  - -3.78
-  - 0.24
-  - 4.35
-  slotYaw: 38
-  busScale: 1.24
-  queueZ: 28.9
+  - -2.53
+  - 0.16
+  - 2.92
+  slotYaw: 22
+  busScale: 0.9
+  queueZ: 20.408
   queueX:
-  - -4.17
+  - -2.36
   - 0
-  - 3.95
-  queueBusScale: 1.03
+  - 2.24
+  queueBusScale: 0.95
   badgeCenter: {x: 0.12, y: 0.067}
   badgeWidth: 0.245
   trayVisibleHeight: 0.115
@@ -54,9 +56,11 @@ MonoBehaviour:
   bottomBarColor: {r: 0.41960785, g: 0.22745098, b: 0.85490197, a: 1}
   fullBubbleCenter: {x: 0.2, y: 0.268}
   fullBubbleWidth: 0.085
-  blockHeightScale: 1.5
-  blockWidthScale: 1.14
-  dashHalfLength: 0.78
+  blockHeightScale: 1.65
+  blockWidthScale: 1.25
+  dashHalfLength: 0.29
+  dashSpacing: 0.86
+  dashHalfWidth: 0.04
   lipColor: {r: 0.4862745, g: 0.50980395, b: 0.8352941, a: 1}
   roofNumberSize: 1.3
   enterFromZ: 16
@@ -65,7 +69,7 @@ MonoBehaviour:
   queueEnterDelay: 0.5
   queueToSlotDuration: 0.8
   leaveSpeed: 22
-  leaveLaneZ: 24.5
+  leaveLaneZ: 17.963
   leaveEdgeX: 12
   flightDuration: 0.6
   flightSpread: 2
@@ -73,6 +77,35 @@ MonoBehaviour:
   appearSpreadDuration: {x: 0.9, y: 0.7}
   barrierDelay: 0.36
   inputDelay: 1.5
+  iceColor: {r: 0.62, g: 0.9, b: 1, a: 0.8}
+  hardBottomBarColor: {r: 0.78431374, g: 0.16862746, b: 0.16862746, a: 1}
+  hardBadgeTextColor: {r: 0.72156864, g: 0.14117648, b: 0.14117648, a: 1}
+  speedPillSize: {x: 0.19, y: 0.048}
+  hardBottomBarTop: 0.922
+  hardBadgeScale: 0.9
+  hardBadgeDropY: 0.01
+  iceYScale: 0.75
+  iceNumberSize: 2.4
+  wallColor: {r: 0.36078432, g: 0.3764706, b: 0.65882355, a: 1}
+  wallHeight: 1
+  spawnerColor: {r: 0.6039216, g: 0.41960785, b: 0.8784314, a: 1}
+  spawnerHeight: 1.3
+  keyColor: {r: 1, g: 0.78431374, b: 0.1254902, a: 1}
+  keyScale: 2.2
+  lockScale: 1.6
+  revealPopDuration: 0.35
+  boosterUnlock: 04000000080000000d00000010000000
+  boosterStartCount: 1
+  speedUnlockLevel: 3
+  speedButtonCenter: {x: 0.885, y: 0.067}
+  speedButtonSize: 0.19
+  speedFast: 2
+  clawLift: 4
+  clawDuration: 1
+  heliDuration: 1.6
+  heliHeight: 6
+  heliScale: 0.6
+  vanishDuration: 0.35
   backgroundTop: {r: 0.654902, g: 0.6745098, b: 0.9019608, a: 1}
   backgroundBottom: {r: 0.5294118, g: 0.54901963, b: 0.7764706, a: 1}
   roadColor: {r: 0.26666668, g: 0.2901961, b: 0.41960785, a: 1}

@@ -15,6 +15,12 @@ MonoBehaviour:
   busMesh: {fileID: -8432194743100748415, guid: 67269ebc15e69d0469b1a9c73295b1db, type: 3}
   blockMesh: {fileID: 369902225449701964, guid: ac57821d495521b40a787c1d29c70d5d, type: 3}
   barrierMesh: {fileID: -6214979170766498539, guid: 0588fc463ddfea94496e4aaf1eec80d5, type: 3}
+  iceMesh: {fileID: -2766543194829352674, guid: c39e067d670f5e647a250bb156430ebc, type: 3}
+  keyMesh: {fileID: -5956616693027770453, guid: 5724bd776fc740f4d8878b73a03f4c30, type: 3}
+  lockMesh: {fileID: -845274940626621876, guid: 6b359bee5a1202647a884dca93e2717a, type: 3}
+  heliMesh: {fileID: -2355870046610318947, guid: 4d025b04b2bda374a98c4ff4864c8c25, type: 3}
+  heliWingMesh: {fileID: 6750532328402947756, guid: b87dc4b1b498cf340a7bf9072ca00927, type: 3}
+  clawMesh: {fileID: 8809242151064389203, guid: 2d3940c6084cfae4b97603d07ce8d4f7, type: 3}
   busTexture: {fileID: 2800000, guid: 4428227009f58b4409c7513d8c41b69b, type: 3}
   font: {fileID: 12800000, guid: 69a1d8997c4999b4591011a0618a4fbb, type: 3}
   tunnel: {fileID: 21300000, guid: 2121d7f9a91439648a036e3354af6925, type: 3}
@@ -23,3 +29,18 @@ MonoBehaviour:
   lockIcon: {fileID: 21300000, guid: 8026c33749398e141a6ec351990d0980, type: 3}
   settings: {fileID: 21300000, guid: a4d4fde25d3f5654ab9299a50e124c47, type: 3}
   knob: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  boosterIcons:
+  - {fileID: 21300000, guid: 19149729727384847a0454c3591902e0, type: 3}
+  - {fileID: 21300000, guid: c8441af8da770404b86806cdb58e9694, type: 3}
+  - {fileID: 21300000, guid: 080b2fb76ad4a684880fd9164905ee9e, type: 3}
+  - {fileID: 21300000, guid: bdbe5d941e122074e93980b2759c3fc0, type: 3}
+  countBadge: {fileID: 21300000, guid: 5bac72e28df0f1342be8cd48717f0b45, type: 3}
+  speedIcon: {fileID: 21300000, guid: 8eefa7d1d988a7d4cb6bc1c61f249dd2, type: 3}
+  speedGreen: {fileID: 21300000, guid: b56ae0502bd9c6146ad3464e40f6d1f1, type: 3}
+  speedPurple: {fileID: 21300000, guid: e6ceee8a9b19f464eb196c0b32406f40, type: 3}
+  pauseIcon: {fileID: 21300000, guid: 17e89dbd8a779bd47bd955b7453362f4, type: 3}
+  levelBarHard: {fileID: 21300000, guid: 785e429b636bf834a9dc4b7dcdd1bc92, type: 3}
+  levelBarSuper: {fileID: 21300000, guid: 9f10c8af230e26e47859ef98670ab7d2, type: 3}
+  speedHalfGreen: {fileID: 21300000, guid: 19a7770e5e699064cb9e4451fce6570f, type: 3}
+  speedHalfPurple: {fileID: 21300000, guid: 0623ae5a3b0a71743ab349b06e8fad54, type: 3}
+  speedHalfRim: {fileID: 21300000, guid: c9da9d6bbc1427a41af19fbb5ce21039, type: 3}

@@ -10,7 +10,7 @@ namespace Buzzy.Game
     /// M2: dựng màn chơi từ BuzzyLevel + BuzzyLayoutConfig + BuzzyAssets, nối luật lõi (BusGame) với chuyển động.
     /// Chuyển động chạy bằng Tick(dt) thuần (Update gọi Tick) để bộ chụp trong Editor bước thời gian xác định.
     /// </summary>
-    public class BuzzyGameView : MonoBehaviour
+    public partial class BuzzyGameView : MonoBehaviour
     {
         // ----- cấu hình + trạng thái -----
         BuzzyLayoutConfig _cfg; BuzzyAssets _a; BuzzyLevel _lv; Camera _cam; Vector2 _canvasSize;
@@ -24,12 +24,13 @@ namespace Buzzy.Game
         public Action Vibrate;
 
         float _cellX0;          // x thế giới của cột 0
-        class Pass { public Transform tr; public PixelData d; public Vector3 home; public float appearAt; public bool flying; }
+        float _boardZ0;         // z thế giới của hàng 0 (tâm bảng cố định, V33)
+        class Pass { public Transform tr; public PixelData d; public Vector3 home; public float appearAt; public bool flying; public bool hidden; public MeshRenderer mr; }
         class Flight { public Pass p; public CarV car; public float start, dur; public Vector3 from; }
         class Move { public Vector3[] pts; public float[] cum; public float dur, t; public Quaternion endRot; public bool useEndRot; public float delay; public Action done; }
         class CarV
         {
-            public Car car; public Transform tr; public TextMesh[] texts; public Move move; public bool leaving; public int col; public Vector3 slotPos;
+            public Car car; public Transform tr; public TextMesh[] texts; public Move move; public bool leaving; public int col; public Vector3 slotPos; public GameObject lockObj; public MeshRenderer mr;
         }
         class Pop { public Transform tr; public float at, dur; public Vector3 scale; }
 
@@ -44,27 +45,30 @@ namespace Buzzy.Game
 
         public Vector3 SlotPos(int i) { return new Vector3(_cfg.slotX[i], 0f, _cfg.slotZ); }
         Vector3 QueuePos(int col, int k) { return new Vector3(_cfg.queueX[col], 0f, _cfg.queueZ + (k == 0 ? 0f : 6f + (k - 1) * 4.5f)); }
-        Vector3 PixelPos(PixelData d) { return new Vector3(_cellX0 + d.X * _cfg.cellPitchX, 0f, _cfg.boardZ0 + d.Y * _cfg.cellPitch); }
+        Vector3 PixelPos(PixelData d) { return new Vector3(_cellX0 + d.X * _cfg.cellPitchX, 0f, _boardZ0 + d.Y * _cfg.cellPitch); }
         Quaternion SlotRot { get { return Quaternion.Euler(0f, _cfg.slotYaw, 0f); } }
 
         public void Init(BuzzyLevel lv, BuzzyLayoutConfig cfg, BuzzyAssets assets, Camera cam, Vector2Int renderSize)
         {
             _lv = lv; _cfg = cfg; _a = assets; _cam = cam; _canvasSize = new Vector2(renderSize.x, renderSize.y);
             _root = new GameObject("BuzzyWorld").transform; _root.SetParent(transform, false);
-            _cellX0 = cfg.boardCenterX - (lv.width * 0.5f) * cfg.cellPitchX;
+            _cellX0 = cfg.boardCenterX - (lv.width * 0.5f) * cfg.cellPitchX; _boardZ0 = cfg.BoardZ0(lv.height);
             BuildEnvironment();
             // luật lõi: tọa độ ô bến theo lưới để tính "gần xe nhất"
             var slotGrid = new double[3][];
-            for (int i = 0; i < 3; i++) slotGrid[i] = new double[] { (cfg.slotX[i] - _cellX0) / cfg.cellPitchX, (cfg.slotZ - cfg.boardZ0) / cfg.cellPitch };
+            for (int i = 0; i < 3; i++) slotGrid[i] = new double[] { (cfg.slotX[i] - _cellX0) / cfg.cellPitchX, (cfg.slotZ - _boardZ0) / cfg.cellPitch };
             Game = new BusGame(lv.ToCore(), slotGrid);
+            SubscribeMechanics();
             Game.PixelArrived += OnPixelArrived;
             Game.CarEntered += OnCarEntered;
             Game.CarDeparted += OnCarDeparted;
             Game.BarrierPlaced += OnBarrier;
             BuildBoard();
+            BuildMechanics();
             BuildCars();
             BuildUi();
             _inputOpenAt = cfg.inputDelay;
+            InitBoosters();
         }
 
         // ---------------------------------------------------------------- dựng cảnh
@@ -91,34 +95,47 @@ namespace Buzzy.Game
             var bg = GameObject.CreatePrimitive(PrimitiveType.Quad); Destroy(bg.GetComponent<Collider>());
             bg.name = "BackgroundGradient"; bg.transform.SetParent(_cam.transform, false);
             var m = new Material(Shader.Find("Unlit/Texture")); m.mainTexture = tex; bg.GetComponent<MeshRenderer>().sharedMaterial = m;
-            float dist = 150f, h = 2f * dist * Mathf.Tan(_cam.fieldOfView * 0.5f * Mathf.Deg2Rad);
-            bg.transform.localPosition = new Vector3(0, 0, dist); bg.transform.localScale = new Vector3(h * _cam.aspect * 1.2f, h * 1.2f, 1f);
+            float dist = 150f; var bs = _cfg.BackdropSize(_cam, dist);
+            bg.transform.localPosition = new Vector3(0, 0, dist); bg.transform.localScale = new Vector3(bs.x, bs.y, 1f);
             // đường + vạch đứt
             Quad("Road", _cfg.roadColor, 0f, _cfg.roadNearZ, _cfg.roadFarZ, 40f, 0f);
-            for (float x = -14f; x <= 14f; x += 2.2f) Quad("Dash", _cfg.dashColor, x, _cfg.dashZ - 0.12f, _cfg.dashZ + 0.12f, _cfg.dashHalfLength, 0.03f);
+            for (float x = -14f; x <= 14f; x += _cfg.dashSpacing) Quad("Dash", _cfg.dashColor, x, _cfg.dashZ - _cfg.dashHalfWidth, _cfg.dashZ + _cfg.dashHalfWidth, _cfg.dashHalfLength, 0.03f);
         }
+
+        readonly Dictionary<int, Material> _blockMats = new Dictionary<int, Material>();
+        float _buildSeed;
 
         void BuildBoard()
         {
-            var blockMats = new Dictionary<int, Material>();
-            float seed = 0f;
-            foreach (var p in _lv.pixels)
+            var b = Game.Board;
+            for (int x = 0; x < b.W; x++) for (int y = 0; y < b.H; y++)
             {
-                Material mat;
-                if (!blockMats.TryGetValue(p.color, out mat)) { mat = Mat("Custom/BuzzyPassenger", BuzzyPalette.Get(p.color)); blockMats[p.color] = mat; }
-                var go = new GameObject("P");
-                go.transform.SetParent(_root, false);
-                go.AddComponent<MeshFilter>().sharedMesh = _a.blockMesh;
-                go.AddComponent<MeshRenderer>().sharedMaterial = mat;
-                var bc = go.AddComponent<BoxCollider>(); bc.center = new Vector3(0f, 0.7f, 0f); bc.size = new Vector3(1.2f, 1.4f, 1.0f);
-                var d = new PixelData(p.x, p.y, p.color);
-                var ps = new Pass { tr = go.transform, d = d, home = PixelPos(d) };
+                int c = b.ColorAt(x, y); if (c == Board.Empty) continue;
                 // dựng từ dưới-trái lan chéo lên phải (C5)
-                float diag = ((float)p.x / Mathf.Max(1, _lv.width)) * 0.55f + ((float)p.y / Mathf.Max(1, _lv.height)) * 0.45f;
-                seed += 0.37f; ps.appearAt = diag * _cfg.appearSpreadDuration.x + 0.04f * Mathf.Abs(Mathf.Sin(seed));
-                _pass[p.x * 1000 + p.y] = ps;
-                SetPassScale(ps, 0f);
+                float diag = ((float)x / Mathf.Max(1, _lv.width)) * 0.55f + ((float)y / Mathf.Max(1, _lv.height)) * 0.45f;
+                _buildSeed += 0.37f;
+                CreatePass(new PixelData(x, y, c), diag * _cfg.appearSpreadDuration.x + 0.04f * Mathf.Abs(Mathf.Sin(_buildSeed)));
             }
+        }
+
+        Material PassMat(int color)
+        {
+            Material mat;
+            if (!_blockMats.TryGetValue(color, out mat)) { mat = Mat("Custom/BuzzyPassenger", BuzzyPalette.Get(color)); _blockMats[color] = mat; }
+            return mat;
+        }
+
+        Pass CreatePass(PixelData d, float appearAt)
+        {
+            var go = new GameObject("P");
+            go.transform.SetParent(_root, false);
+            go.AddComponent<MeshFilter>().sharedMesh = _a.blockMesh;
+            var mr = go.AddComponent<MeshRenderer>(); mr.sharedMaterial = PassMat(d.Color);
+            var bc = go.AddComponent<BoxCollider>(); bc.center = new Vector3(0f, 0.7f, 0f); bc.size = new Vector3(1.2f, 1.4f, 1.0f);
+            var ps = new Pass { tr = go.transform, d = d, home = PixelPos(d), appearAt = appearAt, mr = mr };
+            _pass[d.X * 1000 + d.Y] = ps;
+            SetPassScale(ps, 0f);
+            return ps;
         }
 
         Vector3 BlockScale { get { return new Vector3(_cfg.blockScale * _cfg.blockWidthScale, _cfg.blockScale * _cfg.blockHeightScale, _cfg.blockScale); } }
@@ -137,8 +154,10 @@ namespace Buzzy.Game
             go.transform.SetParent(_root, false);
             go.AddComponent<MeshFilter>().sharedMesh = _a.busMesh; go.AddComponent<MeshRenderer>().sharedMaterial = mat;
             go.transform.localPosition = pos; go.transform.localRotation = rot; go.transform.localScale = Vector3.one * scale;
-            var cv = new CarV { car = car, tr = go.transform };
+            var cv = new CarV { car = car, tr = go.transform, mr = go.GetComponent<MeshRenderer>() };
+            var bcol = go.AddComponent<BoxCollider>(); bcol.center = new Vector3(0f, 0.8f, 0f); bcol.size = new Vector3(1.7f, 1.6f, 2.8f);
             cv.texts = AddRoofNumber(go.transform, car.Remaining);
+            if (car.Locked) AddLockOverlay(cv);
             _cars.Add(cv);
             return cv;
         }
@@ -208,18 +227,14 @@ namespace Buzzy.Game
             var sc = cv.GetComponent<CanvasScaler>(); sc.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize; sc.referenceResolution = _canvasSize;
             var ct = cv.transform;
             Img("Tray", _a.tunnel, Color.white, ct, new Vector2(0.5f, _cfg.trayVisibleHeight * 0.5f - 0.11f + _cfg.trayShift), 1.06f);
-            Img("BottomBar", null, _cfg.bottomBarColor, ct, new Vector2(0.5f, (1f + _cfg.bottomBarTop) * 0.5f), 1f, (1f - _cfg.bottomBarTop) * _canvasSize.y / _canvasSize.x);
-            var badge = Img("LvBadge", _a.levelBar, Color.white, ct, _cfg.badgeCenter, _cfg.badgeWidth);
-            Label("Lv." + _lv.index, badge, new Vector2(badge.sizeDelta.x * 0.5f, -badge.sizeDelta.y * 0.38f), (int)(52 * _canvasSize.x / 1080f), new Color32(0x4A, 0x45, 0x9A, 255));
-            string[] lvTxt = { "Lv.4", "Lv.8", "Lv.13", "Lv.16" };
-            for (int i = 0; i < 4; i++)
-            {
-                var c = new Vector2(_cfg.boosterX[i], _cfg.boosterY);
-                Img("Booster" + i, _a.boosterCircle, Color.white, ct, c, _cfg.boosterSize);
-                Img("Lock" + i, _a.lockIcon, Color.white, ct, new Vector2(c.x, c.y - 0.008f), _cfg.boosterSize * 0.52f);
-                var pill = Img("Pill" + i, _a.levelBar, Color.white, ct, new Vector2(c.x, c.y + 0.034f), _cfg.boosterSize * 0.55f, 0.5f);
-                Label(lvTxt[i], pill, new Vector2(pill.sizeDelta.x * 0.5f, -pill.sizeDelta.y * 0.5f), (int)(34 * _canvasSize.x / 1080f), new Color32(0x4A, 0x45, 0x9A, 255));
-            }
+            float barTop = _lv.tag > 0 ? _cfg.hardBottomBarTop : _cfg.bottomBarTop;
+            Img("BottomBar", null, _lv.tag > 0 ? _cfg.hardBottomBarColor : _cfg.bottomBarColor, ct, new Vector2(0.5f, (1f + barTop) * 0.5f), 1f, (1f - barTop) * _canvasSize.y / _canvasSize.x);
+            // U8: level khó / siêu khó dùng badge đầu lâu + thanh đáy đỏ
+            var badgeSprite = _lv.tag == 1 ? _a.levelBarHard : _lv.tag == 2 ? _a.levelBarSuper : _a.levelBar;
+            var badge = Img("LvBadge", badgeSprite, Color.white, ct, _lv.tag > 0 ? _cfg.badgeCenter + new Vector2(0f, _cfg.hardBadgeDropY) : _cfg.badgeCenter, _lv.tag > 0 ? _cfg.badgeWidth * _cfg.hardBadgeScale : _cfg.badgeWidth);
+            Label("Lv." + _lv.index, badge, new Vector2(badge.sizeDelta.x * 0.5f, -badge.sizeDelta.y * (_lv.tag > 0 ? 0.6f : 0.38f)), (int)(52 * _canvasSize.x / 1080f), _lv.tag > 0 ? _cfg.hardBadgeTextColor : new Color32(0x4A, 0x45, 0x9A, 255));
+            BuildBoosterBar(ct);
+            BuildSpeedButton(ct);
             Img("Settings", _a.settings, Color.white, ct, _cfg.settingsCenter, _cfg.settingsSize);
             for (int i = 0; i < 3; i++)
             {
@@ -304,31 +319,28 @@ namespace Buzzy.Game
             var r = Game.Tap(color);
             if (!r.Matched) { if (Vibrate != null) Vibrate(); Log?.Invoke("t=" + Time.ToString("0.00") + " Tap màu " + color + " -> NoMatch (rung)"); return false; }
             TapCount++;
+            Log?.Invoke("t=" + Time.ToString("0.00") + " Tap màu " + color + " -> " + r.Pixels.Count + " pixel lên xe #" + r.Car.Id + " (ô " + r.Slot + ")");
+            StartFlights(r);
+            return true;
+        }
+
+        void StartFlights(TapResult r, float delay = 0f)
+        {
             var cv = ViewOf(r.Car);
             int n = r.Pixels.Count;
             float spread = Mathf.Min(_cfg.flightSpread, _cfg.flightSpread * n / 50f + 0.4f);
-            Log?.Invoke("t=" + Time.ToString("0.00") + " Tap màu " + color + " -> " + n + " pixel lên xe #" + r.Car.Id + " (ô " + r.Slot + ")");
             for (int i = 0; i < n; i++)
             {
                 Pass p; if (!_pass.TryGetValue(r.Pixels[i].X * 1000 + r.Pixels[i].Y, out p)) continue;
                 p.flying = true;
-                _flights.Add(new Flight { p = p, car = cv, start = Time + (n <= 1 ? 0f : (i / (float)(n - 1)) * spread), dur = _cfg.flightDuration, from = p.home });
+                _flights.Add(new Flight { p = p, car = cv, start = Time + delay + (n <= 1 ? 0f : (i / (float)(n - 1)) * spread), dur = _cfg.flightDuration, from = p.home });
             }
-            return true;
         }
 
         // ---------------------------------------------------------------- vòng lặp
         void Update()
         {
-#if ENABLE_LEGACY_INPUT_MANAGER
-            if (UnityEngine.Input.GetMouseButtonDown(0) && _cam != null)
-            {
-                var ray = _cam.ScreenPointToRay(UnityEngine.Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, 500f))
-                    foreach (var kv in _pass) if (kv.Value.tr == hit.transform) { TapColor(kv.Value.d.Color); break; }
-            }
-#endif
+            HandleInput();
             Tick(UnityEngine.Time.deltaTime * TimeScale);
         }
 
@@ -357,7 +369,7 @@ namespace Buzzy.Game
                 if (u >= 1f)
                 {
                     _flights.RemoveAt(i);
-                    Destroy(f.p.tr.gameObject); _pass.Remove(f.p.d.X * 1000 + f.p.d.Y);
+                    Destroy(f.p.tr.gameObject); ForgetPass(f.p);
                     Game.Arrive(f.car.car, f.p.d);
                 }
             }
@@ -383,8 +395,9 @@ namespace Buzzy.Game
                     _fullBubbles[i].anchoredPosition = new Vector2((vp.x - 0.11f) * _canvasSize.x, -(1f - vp.y + 0.005f) * _canvasSize.y);
                 }
             }
+            TickMechanics(dt);
             // thắng
-            if (!Won && Game.Board.Count == 0 && _flights.Count == 0)
+            if (!Won && Game.Status == GameStatus.Won && _flights.Count == 0 && _vanish.Count == 0)
             {
                 bool anyLeaving = false; foreach (var c in _cars) if (c.leaving) anyLeaving = true;
                 if (!anyLeaving) { Won = true; WonAt = Time; ShowWin(); }
@@ -421,6 +434,7 @@ namespace Buzzy.Game
         void ShowWin()
         {
             Log?.Invoke("t=" + Time.ToString("0.00") + " THẮNG: hết pixel");
+            HideWorldTexts();
             _winOverlay = new GameObject("Win", typeof(RectTransform), typeof(Image)); _winOverlay.transform.SetParent(_canvas.transform, false);
             var im = _winOverlay.GetComponent<Image>(); im.color = new Color(0.07f, 0.07f, 0.1f, 0.92f);
             var rt = _winOverlay.GetComponent<RectTransform>(); rt.anchorMin = Vector2.zero; rt.anchorMax = Vector2.one; rt.offsetMin = rt.offsetMax = Vector2.zero;

@@ -98,7 +98,7 @@ namespace Buzzy.Game.EditorTools
             // nền + đường + vạch đứt
             AddGradientBackground(cam0: null, cfg: cfg, root: root);
             Quad("Road", cfg.roadColor, 0f, cfg.roadNearZ, cfg.roadFarZ, 40f, 0f, root);
-            for (float x = -14f; x <= 14f; x += 2.2f) Quad("Dash", cfg.dashColor, x, cfg.dashZ - 0.12f, cfg.dashZ + 0.12f, cfg.dashHalfLength, 0.03f, root);
+            for (float x = -14f; x <= 14f; x += cfg.dashSpacing) Quad("Dash", cfg.dashColor, x, cfg.dashZ - cfg.dashHalfWidth, cfg.dashZ + cfg.dashHalfWidth, cfg.dashHalfLength, 0.03f, root);
 
             // xe: đầu cột vào ô bến, xe thứ hai ở hàng chờ
             for (int i = 0; i < lv.queues.Count; i++)
@@ -119,26 +119,24 @@ namespace Buzzy.Game.EditorTools
             }
 
             // ảnh pixel
-            float cx = cfg.boardCenterX - (lv.width * 0.5f) * cfg.cellPitchX;
+            float cx = cfg.boardCenterX - (lv.width * 0.5f) * cfg.cellPitchX, z0 = cfg.BoardZ0(lv.height);
             foreach (var p in lv.pixels)
             {
                 Material m;
                 if (!_passengerMats.TryGetValue(p.color, out m)) { m = Mat("Custom/BuzzyPassenger", BuzzyPalette.Get(p.color)); _passengerMats[p.color] = m; }
-                Make("P", blockMesh, m, new Vector3(cx + p.x * cfg.cellPitchX, 0f, cfg.boardZ0 + p.y * cfg.cellPitch), new Vector3(0, 180f, 0), new Vector3(cfg.blockScale * cfg.blockWidthScale, cfg.blockScale * cfg.blockHeightScale, cfg.blockScale), root);
+                Make("P", blockMesh, m, new Vector3(cx + p.x * cfg.cellPitchX, 0f, z0 + p.y * cfg.cellPitch), new Vector3(0, 180f, 0), new Vector3(cfg.blockScale * cfg.blockWidthScale, cfg.blockScale * cfg.blockHeightScale, cfg.blockScale), root);
             }
 
             // camera
             var camGo = new GameObject("Camera");
             var cam = camGo.AddComponent<Camera>();
             cam.clearFlags = CameraClearFlags.SolidColor; cam.backgroundColor = cfg.backgroundTop;
-            cam.transform.position = cfg.cameraPosition; cam.transform.eulerAngles = cfg.cameraEuler;
-            cam.fieldOfView = cfg.fieldOfView; cam.nearClipPlane = 0.3f; cam.farClipPlane = 200f;
-            cam.aspect = (float)cfg.captureSize.x / cfg.captureSize.y;
+            cfg.ApplyCamera(cam, (float)cfg.captureSize.x / cfg.captureSize.y);
             if (_bg != null)
             {
                 _bg.SetParent(cam.transform, false);
-                float dist = 150f; float h = 2f * dist * Mathf.Tan(cam.fieldOfView * 0.5f * Mathf.Deg2Rad);
-                _bg.localPosition = new Vector3(0, 0, dist); _bg.localRotation = Quaternion.identity; _bg.localScale = new Vector3(h * cam.aspect * 1.2f, h * 1.2f, 1f);
+                float dist = 150f; var bs = cfg.BackdropSize(cam, dist);
+                _bg.localPosition = new Vector3(0, 0, dist); _bg.localRotation = Quaternion.identity; _bg.localScale = new Vector3(bs.x, bs.y, 1f);
             }
 
             BuildUi(cam, cfg, levelIndex, root);

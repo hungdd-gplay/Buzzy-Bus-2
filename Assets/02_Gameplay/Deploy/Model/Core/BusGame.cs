@@ -6,9 +6,17 @@ namespace Buzzy.Core
     /// <summary>Một xe. Seats = tổng chỗ; Reserved = chỗ đã giữ (pixel đã xuất phát); Boarded = pixel đã lên xe.</summary>
     public sealed class Car
     {
-        public readonly int Id, Color, Seats;
+        public readonly int Id;
+        public int Seats { get; private set; }
+        public int Color { get; private set; }
         public int Reserved, Boarded;
-        public Car(CarData d) { Id = d.Id; Color = d.Color; Seats = d.Seats; }
+        /// <summary>Xe bị xích (chưa vào bến) tới khi chìa KeyColor được nhặt.</summary>
+        public bool Locked;
+        public readonly int KeyColor;
+        public Car(CarData d) { Id = d.Id; Color = d.Color; Seats = d.Seats; Locked = d.Locked; KeyColor = d.KeyColor; }
+        public void Recolor(int color) { Color = color; }
+        /// <summary>Đổi cả màu lẫn số chỗ với xe khác (Magic Wand): tổng chỗ mỗi màu giữ nguyên nên level vẫn thắng được.</summary>
+        public void SwapIdentity(Car o) { int c = Color, s = Seats; Color = o.Color; Seats = o.Seats; o.Color = c; o.Seats = s; }
         /// <summary>Số người còn phải lên (hiển thị trên xe).</summary>
         public int Remaining { get { return Seats - Boarded; } }
         /// <summary>Số chỗ còn có thể giữ thêm. 0 = hiện bóng "Full".</summary>
@@ -46,11 +54,23 @@ namespace Buzzy.Core
         public event Action<Car, int> CarDeparted;     // xe rời bến
         public event Action<int> BarrierPlaced;        // ô bị rào
         public event Action<Car, PixelData> PixelArrived;
+        // M3
+        public event Action<int> FrozenBroken;                 // chỉ số vùng băng vỡ
+        public event Action<PixelData> MysteryRevealed;        // ô ẩn vừa lộ
+        public event Action<PixelData> PixelSpawned;           // pixel mới do ô phát sinh ra
+        public event Action<int, int> KeyCollected;            // (chỉ số chìa, màu)
+        public event Action<Car> CarUnlocked;                  // xe hết xích
+        public event Action<Car, int, int, int> CarClawed;     // (xe, cột chờ, vị trí trong cột, ô bến) — Bus Claw
+        public event Action<Car, int, int> CarDisplaced;       // (xe bị đẩy về hàng chờ, cột, vị trí) — Bus Claw khi không có ô trống
+        public event Action<Car, int> CarRecolored;            // (xe, màu cũ) — Magic Wand
+        public event Action<List<PixelData>> PixelsVanished;   // pixel biến mất tức thì (VIP Bus)
+        public readonly MechanicRules Rules;
 
         /// <summary>slotPos null = mặc định: 3 ô chia đều theo chiều ngang, nằm dưới lưới (y = -3). [giả định]</summary>
-        public BusGame(LevelData level, double[][] slotPos = null)
+        public BusGame(LevelData level, double[][] slotPos = null, MechanicRules rules = null)
         {
-            Board = Board.FromLevel(level);
+            Rules = rules ?? new MechanicRules();
+            Board = Board.FromLevel(level, Rules);
             for (int i = 0; i < SlotCount; i++)
             {
                 Queues[i] = new Queue<Car>();
@@ -63,8 +83,36 @@ namespace Buzzy.Core
 
         private void Refill(int slot)
         {
-            if (Queues[slot].Count > 0) { Slots[slot] = Queues[slot].Dequeue(); if (CarEntered != null) CarEntered(Slots[slot], slot); }
+            if (Queues[slot].Count > 0)
+            {
+                if (!Rules.LockedEntersSlot && Queues[slot].Peek().Locked) { Slots[slot] = null; return; }   // chế độ cũ: xe xích đứng đầu cột, ô chờ chìa
+                Slots[slot] = Queues[slot].Dequeue(); if (CarEntered != null) CarEntered(Slots[slot], slot);
+            }
             else { Slots[slot] = null; Barrier[slot] = true; if (BarrierPlaced != null) BarrierPlaced(slot); }
+        }
+
+        /// <summary>Ô trống nhưng chưa rào: đang chờ xe (xe xích đứng đầu cột, hoặc vừa kẹp xe đi).</summary>
+        public bool IsWaiting(int slot) { return Slots[slot] == null && !Barrier[slot]; }
+
+        // Sau khi gỡ pixel: cập nhật mechanic (băng, ô ẩn, phát đợt, chìa) và phát event.
+        private void Process(List<PixelData> removed)
+        {
+            var ch = Board.Apply(removed);
+            if (!ch.Any) return;
+            foreach (int f in ch.FrozenBroken) if (FrozenBroken != null) FrozenBroken(f);
+            foreach (var r in ch.Revealed) if (MysteryRevealed != null) MysteryRevealed(r);
+            foreach (var sp in ch.Spawned) if (PixelSpawned != null) PixelSpawned(sp);
+            foreach (int k in ch.KeysCollected)
+            {
+                int kc = Board.KeyList[k].Color;
+                if (KeyCollected != null) KeyCollected(k, kc);
+                foreach (var q in Queues) foreach (var car in q)
+                    if (car.Locked && car.KeyColor == kc) { car.Locked = false; if (CarUnlocked != null) CarUnlocked(car); }
+                foreach (var car in Slots)
+                    if (car != null && car.Locked && car.KeyColor == kc) { car.Locked = false; if (CarUnlocked != null) CarUnlocked(car); }
+            }
+            if (ch.KeysCollected.Count > 0)
+                for (int i = 0; i < SlotCount; i++) if (IsWaiting(i)) Refill(i);
         }
 
         /// <summary>Tap theo pixel: dùng màu của pixel đó (ô rỗng = NoMatch).</summary>
@@ -84,7 +132,7 @@ namespace Buzzy.Core
             for (int i = 0; i < SlotCount; i++)
             {
                 var car = Slots[i];
-                if (car != null && car.Color == color && car.Free > 0 && (best < 0 || car.Free > Slots[best].Free)) best = i;
+                if (car != null && !car.Locked && car.Color == color && car.Free > 0 && (best < 0 || car.Free > Slots[best].Free)) best = i;
             }
             if (best < 0) return TapResult.NoMatch;
             var picked = Board.PickExposed(color, Slots[best].Free, SlotX[best], SlotY[best]);
@@ -92,7 +140,93 @@ namespace Buzzy.Core
             foreach (var p in picked) Board.Remove(p.X, p.Y);
             Slots[best].Reserved += picked.Count;
             InFlight += picked.Count;
+            Process(picked);
             return new TapResult { Matched = true, Car = Slots[best], Slot = best, Pixels = picked };
+        }
+
+        // ---------------- Booster [thiết kế mục 4-6] ----------------
+
+        /// <summary>VIP Bus: xoá ngay xe đang đỗ ở ô <paramref name="slot"/>; pixel còn thiếu của nó biến mất, xe rời, xe kế xuống.</summary>
+        public bool VipBus(int slot)
+        {
+            var car = Slots[slot];
+            if (car == null || car.Reserved != car.Boarded) return false;   // còn pixel đang bay tới xe
+            var picked = Board.PickExposed(car.Color, car.Seats - car.Boarded, SlotX[slot], SlotY[slot], true);
+            foreach (var p in picked) Board.Remove(p.X, p.Y);
+            car.Boarded = car.Seats; car.Reserved = car.Seats;
+            if (PixelsVanished != null) PixelsVanished(picked);
+            Process(picked);
+            if (CarDeparted != null) CarDeparted(car, slot);
+            Refill(slot);
+            return true;
+        }
+
+        /// <summary>
+        /// Bus Claw: kẹp xe ở vị trí <paramref name="pos"/> (0 = đầu cột) của cột <paramref name="queue"/> thả vào ô bến.
+        /// Ưu tiên ô đang chờ (trống); không có thì đổi chỗ với một xe đang đỗ chưa nhận pixel nào (xe đó về chỗ của xe kẹp trong hàng chờ). [thiết kế mục 6]
+        /// </summary>
+        public bool Claw(int queue, int pos)
+        {
+            if (queue < 0 || queue >= SlotCount || pos < 0 || pos >= Queues[queue].Count) return false;
+            var list = new List<Car>(Queues[queue]);
+            var car = list[pos];
+            if (car.Locked) return false;
+            int dest = -1;
+            if (IsWaiting(queue)) dest = queue;
+            else for (int i = 0; i < SlotCount && dest < 0; i++) if (IsWaiting(i)) dest = i;
+            Car displaced = null;
+            if (dest < 0)
+            {
+                for (int i = 0; i < SlotCount; i++)
+                {
+                    var c = Slots[i];
+                    if (c != null && !c.Locked && c.Reserved == 0 && c.Boarded == 0 && (dest < 0 || i == queue)) dest = i;
+                }
+                if (dest < 0) return false;
+                displaced = Slots[dest];
+            }
+            if (displaced != null) list[pos] = displaced; else list.RemoveAt(pos);
+            Queues[queue].Clear(); foreach (var c in list) Queues[queue].Enqueue(c);
+            Slots[dest] = car;
+            if (displaced != null && CarDisplaced != null) CarDisplaced(displaced, queue, pos);
+            if (CarClawed != null) CarClawed(car, queue, pos, dest);
+            if (displaced == null && list.Count == 0 && IsWaiting(queue)) Refill(queue);   // cột vừa hết xe: rào ô của nó
+            return true;
+        }
+
+        /// <summary>Sky Grab: nhấc tối đa Rules.SkyGrabCount pixel màu <paramref name="color"/> (kể cả băng / ẩn) vào xe cùng màu đang đỗ.</summary>
+        public TapResult SkyGrab(int color)
+        {
+            int best = -1;
+            for (int i = 0; i < SlotCount; i++)
+            {
+                var car = Slots[i];
+                if (car != null && !car.Locked && car.Color == color && car.Free > 0 && (best < 0 || car.Free > Slots[best].Free)) best = i;
+            }
+            if (best < 0) return TapResult.NoMatch;
+            var picked = Board.PickExposed(color, Math.Min(Rules.SkyGrabCount, Slots[best].Free), SlotX[best], SlotY[best], true);
+            if (picked.Count == 0) return TapResult.NoMatch;
+            foreach (var p in picked) Board.Remove(p.X, p.Y);
+            Slots[best].Reserved += picked.Count; InFlight += picked.Count;
+            Process(picked);
+            return new TapResult { Matched = true, Car = Slots[best], Slot = best, Pixels = picked };
+        }
+
+        /// <summary>
+        /// Magic Wand: xe đỗ ở ô <paramref name="slot"/> (chưa nhận pixel nào) đổi sang màu <paramref name="color"/>:
+        /// đổi cả màu lẫn số chỗ với xe chờ sớm nhất cùng màu đó, nên tổng chỗ mỗi màu không đổi.
+        /// </summary>
+        public bool MagicWand(int slot, int color)
+        {
+            var car = Slots[slot];
+            if (car == null || car.Locked || car.Color == color || car.Reserved != 0 || car.Boarded != 0 || Board.CountColor(color) == 0) return false;
+            Car other = null;
+            foreach (var q in Queues) { foreach (var c in q) if (!c.Locked && c.Color == color) { other = c; break; } if (other != null) break; }
+            if (other == null) return false;
+            int old = car.Color;
+            car.SwapIdentity(other);
+            if (CarRecolored != null) { CarRecolored(car, old); CarRecolored(other, color); }
+            return true;
         }
 
         /// <summary>Một pixel bay tới xe: Boarded+1; đủ chỗ thì xe rời, xe kế xuống (hoặc rào).</summary>
@@ -115,7 +249,7 @@ namespace Buzzy.Core
         {
             get
             {
-                if (Board.Count == 0) return GameStatus.Won;
+                if (Board.Count == 0 && !Board.HasPendingWaves) return GameStatus.Won;
                 // [thiết kế] bế tắc: mọi ô có xe hoặc rào, không pixel đang bay, không xe nào chạm được pixel cùng màu đang lộ.
                 if (InFlight == 0 && !CanTapAny()) return GameStatus.Deadlock;
                 return GameStatus.Playing;
@@ -130,7 +264,7 @@ namespace Buzzy.Core
         {
             Car best = null;
             foreach (var car in Slots)
-                if (car != null && car.Free > 0 && Board.HasExposed(car.Color) && (best == null || car.Free > best.Free)) best = car;
+                if (car != null && !car.Locked && car.Free > 0 && Board.HasExposed(car.Color) && (best == null || car.Free > best.Free)) best = car;
             return best == null ? (int?)null : best.Color;
         }
     }
@@ -142,6 +276,34 @@ namespace Buzzy.Core
         public static GameStatus Greedy(LevelData level, double[][] slotPos = null)
         {
             return Greedy(new BusGame(level, slotPos));
+        }
+
+        /// <summary>
+        /// Tìm thứ tự chạm màu thắng bằng chọn ngẫu nhiên có khởi động lại (cố định seed). Trả null nếu không tìm được.
+        /// Dùng cho bộ tự chơi (level có mechanic mà greedy thuần bế tắc) và kiểm 300 level.
+        /// </summary>
+        public static List<int> FindOrder(LevelData level, MechanicRules rules = null, double[][] slotPos = null, int tries = 200, int seed = 1)
+        {
+            var rnd = new Random(seed);
+            for (int t = 0; t < tries; t++)
+            {
+                var g = new BusGame(level, slotPos, rules);
+                var order = new List<int>();
+                int guard = 100000;
+                while (g.Status == GameStatus.Playing && guard-- > 0)
+                {
+                    var cols = new List<int>();
+                    foreach (var car in g.Slots)
+                        if (car != null && !car.Locked && car.Free > 0 && g.Board.HasExposed(car.Color) && !cols.Contains(car.Color)) cols.Add(car.Color);
+                    if (cols.Count == 0) break;
+                    int c = cols[rnd.Next(cols.Count)];
+                    var r = g.Tap(c);
+                    if (!r.Matched) break;
+                    order.Add(c); g.ArriveAll(r);
+                }
+                if (g.Status == GameStatus.Won) return order;
+            }
+            return null;
         }
 
         public static GameStatus Greedy(BusGame g)
