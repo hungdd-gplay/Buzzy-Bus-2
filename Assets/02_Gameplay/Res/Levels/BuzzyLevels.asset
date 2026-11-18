@@ -791,6 +791,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 8
+    physicalHeight: 8
+    showRoof: 1
+    solvable: 1
+    winRate: 1
+    taps: 6
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -1823,6 +1832,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 8.333333
+    showRoof: 1
+    solvable: 1
+    winRate: 1
+    taps: 9
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -3214,6 +3232,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 8
+    physicalHeight: 10.666667
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 16
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -5072,6 +5099,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 17
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -6746,6 +6782,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 18
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -9150,6 +9195,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 23
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -11382,6 +11436,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 10.357142
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 17
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -13833,6 +13896,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 19
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -15680,6 +15752,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 8.928572
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 14
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -18143,6 +18224,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 16
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -20503,6 +20593,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 11
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 19
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -22530,6 +22629,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 14
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 19
+    difficultyBand: 0
+    validation: 
     walls:
     - x: 4
       y: -1
@@ -24802,6 +24910,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 11.785714
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 19
+    difficultyBand: 0
+    validation: 
     walls:
     - x: 27
       y: -1
@@ -26977,6 +27094,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 11.724138
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 16
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -29464,6 +29590,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 12.8
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 18
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -31396,6 +31531,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 12.692307
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 21
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -33670,6 +33814,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 12.307693
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 21
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -36094,6 +36247,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 10
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 21
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -37997,6 +38159,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 11.923077
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 20
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -40138,6 +40309,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 15
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 19
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -42557,6 +42737,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 20
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -45310,6 +45499,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 12.666667
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 22
+    difficultyBand: 0
+    validation: 
     walls:
     - x: 3
       y: -1
@@ -46996,6 +47194,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 20
+    difficultyBand: 0
+    validation: 
     walls:
     - x: 1
       y: -1
@@ -49443,6 +49650,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 20
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -51680,6 +51896,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 17
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -54138,6 +54363,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 23
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -56542,6 +56776,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 17
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -59003,6 +59246,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 26
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -61477,6 +61729,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 31
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -63146,6 +63407,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 20
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -65248,6 +65518,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 12.916667
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 32
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -67664,6 +67943,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 18
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -70115,6 +70403,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 0.19
+    taps: 27
+    difficultyBand: 2
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -72243,6 +72540,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 12.916667
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 17
+    difficultyBand: 0
+    validation: 
     walls:
     - x: 0
       y: 9
@@ -74719,6 +75025,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 26
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -77229,6 +77544,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 30
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -79629,6 +79953,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 15
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -83497,6 +83830,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 2
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -85253,6 +85595,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.2
+    showRoof: 0
+    solvable: 1
+    winRate: 0.72
+    taps: 20
+    difficultyBand: 0
+    validation: 
     walls:
     - x: -1
       y: 17
@@ -87653,6 +88004,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 21
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -90092,6 +90452,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 27
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -92512,6 +92881,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 11
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 22
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -94922,6 +95300,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 29
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -96848,6 +97235,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 27
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -99347,6 +99743,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 12.8
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 28
+    difficultyBand: 0
+    validation: 
     walls:
     - x: 13
       y: -1
@@ -103092,6 +103497,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 32
+    difficultyBand: 0
+    validation: 
     walls:
     - x: 8
       y: 35
@@ -105557,6 +105971,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 20
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -107548,6 +107971,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 19
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -111383,6 +111815,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 44
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -113832,6 +114273,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 27
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -115805,6 +116255,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 18
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -118350,6 +118809,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 36
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -120824,6 +121292,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 31
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -123256,6 +123733,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 12.8
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 33
+    difficultyBand: 0
+    validation: 
     walls:
     - x: 18
       y: 0
@@ -126432,6 +126918,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 31
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -128662,6 +129157,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 34
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -131098,6 +131602,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 23
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -133561,6 +134074,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 21
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -136045,6 +136567,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 0.24
+    taps: 37
+    difficultyBand: 1
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -138406,6 +138937,17 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 11.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 4: 206 pixel > 156 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 19: 236 pixel > 116 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u
+      13: 84 pixel > 44 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -140780,6 +141322,18 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.076923
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 0: 206 pixel > 186 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 5: 206 pixel > 130 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u
+      1: 178 pixel > 88 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u 2: 178
+      pixel > 90 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -143214,6 +143768,18 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 13: 140 pixel > 101 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt
+      pixel); m\xE0u 12: 46 pixel > 30 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 19: 200 pixel > 170 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u
+      17: 54 pixel > 24 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -145715,6 +146281,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 32
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -148150,6 +148725,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 36
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -150621,6 +151205,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 28
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -152013,6 +152606,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 28
+    difficultyBand: 0
+    validation: 
     walls:
     - x: 0
       y: 0
@@ -154542,6 +155144,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 33
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -157008,6 +157619,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 31
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -160245,6 +160865,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 12.857142
+    showRoof: 0
+    solvable: 1
+    winRate: 0.23
+    taps: 46
+    difficultyBand: 1
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -162676,6 +163305,17 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 11: 41 pixel > 30 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 9: 90 pixel > 70 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u
+      15: 42 pixel > 0 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -165070,6 +165710,18 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 19: 244 pixel > 174 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt
+      pixel); m\xE0u 16: 196 pixel > 156 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 1: 114 pixel > 90 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u
+      15: 70 pixel > 30 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen:
     - rect:
@@ -167496,6 +168148,16 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 2: 261 pixel > 211 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 9: 128 pixel > 40 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -171301,6 +171963,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 38
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -173720,6 +174391,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 20
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -176253,6 +176933,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 34
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -178293,6 +178982,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 22
+    difficultyBand: 0
+    validation: 
     walls:
     - x: 1
       y: 24
@@ -180170,6 +180868,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 12.916667
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 2
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -181805,6 +182512,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 2
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -185647,6 +186363,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 43
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -187865,6 +188590,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: elevator;
+    outOfScope: elevator;
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -190329,6 +191063,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: elevator;
+    outOfScope: elevator;
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -192843,6 +193586,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: elevator;
+    outOfScope: elevator;
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -195263,6 +196015,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 31
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -196909,6 +197670,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 0.96
+    taps: 27
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -199350,6 +200120,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 22
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -201809,6 +202588,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 28
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -204327,6 +205115,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 28
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -206746,6 +207543,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 20
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -208623,6 +209429,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 0.13
+    taps: 40
+    difficultyBand: 2
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -212165,6 +212980,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 33
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -214320,6 +215144,17 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.461538
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 2: 191 pixel > 131 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 0: 66 pixel > 56 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u
+      3: 73 pixel > 35 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls:
     - x: 1
       y: 8
@@ -216749,6 +217584,16 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 19: 135 pixel > 85 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 3: 201 pixel > 141 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -219208,6 +220053,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 28
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -221617,6 +222471,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 16
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -224116,6 +224979,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 36
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -227884,6 +228756,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 36
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -230003,6 +230884,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 12.857142
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 17
+    difficultyBand: 0
+    validation: 
     walls:
     - x: 0
       y: 0
@@ -232464,6 +233354,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 22
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -234884,6 +235783,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 31
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -236851,6 +237759,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 12.5
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -239295,6 +240212,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -241764,6 +242690,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -244174,6 +245109,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 17
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -246671,6 +247615,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 32
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -248875,6 +249828,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 12.692307
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 31
+    difficultyBand: 0
+    validation: 
     walls:
     - x: 0
       y: 0
@@ -250885,6 +251847,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.75
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 26
+    difficultyBand: 0
+    validation: 
     walls:
     - x: 6
       y: 27
@@ -253376,6 +254347,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 22
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -255570,6 +256550,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.6
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 28
+    difficultyBand: 0
+    validation: 
     walls:
     - x: 0
       y: 0
@@ -259402,6 +260391,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 37
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -261871,6 +262869,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 33
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -264330,6 +265337,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 24
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -266775,6 +267791,17 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;elevator;"
+    outOfScope: "xe 2 m\xE0u;elevator;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 5: 110 pixel > 54 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 12: 160 pixel > 140 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u
+      9: 205 pixel > 145 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -269244,6 +270271,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: elevator;
+    outOfScope: elevator;
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -271791,6 +272827,16 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;elevator;"
+    outOfScope: "xe 2 m\xE0u;elevator;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 19: 58 pixel > 56 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 5: 110 pixel > 0 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -274215,6 +275261,16 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 18: 210 pixel > 150 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt
+      pixel); m\xE0u 1: 48 pixel > 38 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen:
     - rect:
@@ -278041,6 +279097,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 41
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -280497,6 +281562,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 21
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -282926,6 +284000,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 22
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -285307,6 +286390,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.2
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 34
+    difficultyBand: 0
+    validation: 
     walls:
     - x: 24
       y: 4
@@ -287781,6 +288873,16 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 9: 163 pixel > 123 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 2: 142 pixel > 92 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -290163,6 +291265,17 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 0: 134 pixel > 80 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 3: 144 pixel > 100 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u
+      2: 112 pixel > 96 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys:
@@ -292583,6 +293696,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 19
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -296393,6 +297515,17 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 11: 112 pixel > 82 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 3: 299 pixel > 249 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u
+      16: 129 pixel > 99 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -298817,6 +299950,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 27
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -301566,6 +302708,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 36
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -304010,6 +305161,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 25
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -306439,6 +307599,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 22
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -308883,6 +310052,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 25
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -311367,6 +312545,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 33
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -313289,6 +314476,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 31
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -315808,6 +317004,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;elevator;"
+    outOfScope: "xe 2 m\xE0u;elevator;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -318232,6 +319437,16 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 19: 150 pixel > 130 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt
+      pixel); m\xE0u 2: 143 pixel > 93 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -320653,6 +321868,18 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 10: 40 pixel > 20 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 2: 78 pixel > 28 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u
+      11: 111 pixel > 51 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u 0: 22
+      pixel > 0 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -323097,6 +324324,17 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 12: 185 pixel > 125 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt
+      pixel); m\xE0u 1: 59 pixel > 0 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 19: 8 pixel > 0 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -325541,6 +326779,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 25
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -329337,6 +330584,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 0.99
+    taps: 49
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -331781,6 +333037,16 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 15: 88 pixel > 70 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 19: 206 pixel > 196 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys:
@@ -334221,6 +335487,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 23
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -336736,6 +338011,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 38
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -339175,6 +340459,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 24
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -341650,6 +342943,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 25
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -344114,6 +345416,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 38
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -346746,6 +348057,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 28
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -349193,6 +350513,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 31
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -351668,6 +352997,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 2
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -354197,6 +355535,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 30
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -356631,6 +357978,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 23
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -359080,6 +360436,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 26
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -361560,6 +362925,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 31
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -364029,6 +365403,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 30
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -366431,6 +367814,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 22
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -368612,6 +370004,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 12.8
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 21
+    difficultyBand: 0
+    validation: 
     walls:
     - x: 0
       y: 1
@@ -372439,6 +373840,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 36
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -374918,6 +376328,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 32
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -377320,6 +378739,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;elevator;"
+    outOfScope: "xe 2 m\xE0u;elevator;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 9: 132 pixel > 72 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys:
@@ -379672,6 +381100,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 27
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -382106,6 +383543,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 23
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -384177,6 +385623,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 23
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -386688,6 +388143,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 36
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -389107,6 +390571,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 20
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -391552,6 +393025,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 24
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -395317,6 +396799,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 30
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -397781,6 +399272,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 29
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -400235,6 +401735,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 27
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -402637,6 +404146,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 22
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -405147,6 +406665,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 37
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -407601,6 +409128,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 27
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -410058,6 +411594,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 25
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -414024,6 +415569,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 51
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -416428,6 +417982,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 17
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -418815,6 +420378,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 19
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -421228,6 +422800,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 26
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -423714,6 +425295,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 31
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -426198,6 +427788,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 33
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -428648,6 +430247,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 25
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -431157,6 +432765,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 38
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -433596,6 +435213,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 24
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -436000,6 +437626,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 17
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -439768,6 +441403,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 40
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -442333,6 +443977,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 24
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -444920,6 +446573,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 24
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -447347,6 +449009,16 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 15: 113 pixel > 102 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt
+      pixel); m\xE0u 5: 176 pixel > 80 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys:
@@ -449842,6 +451514,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 0.77
+    taps: 35
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -452339,6 +454020,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 0.57
+    taps: 27
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -454969,6 +456659,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 30
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -457496,6 +459195,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 39
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -460123,6 +461831,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 26
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -462567,6 +464284,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 25
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -466400,6 +468126,17 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 6: 77 pixel > 60 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 19: 86 pixel > 56 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u
+      10: 91 pixel > 45 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -468824,6 +470561,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 21
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -471293,6 +473039,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 30
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -473722,6 +475477,16 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 12: 172 pixel > 132 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt
+      pixel); m\xE0u 5: 72 pixel > 52 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -476207,6 +477972,18 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 2: 84 pixel > 74 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 7: 144 pixel > 124 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u
+      17: 236 pixel > 186 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u 13:
+      22 pixel > 0 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys:
@@ -478677,6 +480454,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 29
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -481151,6 +482937,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 31
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -484923,6 +486718,18 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 7: 231 pixel > 181 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 5: 310 pixel > 250 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u
+      19: 187 pixel > 167 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u 14:
+      43 pixel > 0 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen:
     - rect:
@@ -487359,6 +489166,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 21
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -489739,6 +491555,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 23
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -492185,6 +494010,17 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 12: 210 pixel > 140 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt
+      pixel); m\xE0u 9: 215 pixel > 195 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 13: 12 pixel > 0 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -494644,6 +496480,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 28
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -496574,6 +498419,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 21
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -499065,6 +500919,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 26
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -501541,6 +503404,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -504022,6 +505894,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 24
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -506467,6 +508348,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 24
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -508874,6 +510764,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 23
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -510767,6 +512666,17 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 8: 71 pixel > 41 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 1: 35 pixel > 0 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u
+      6: 37 pixel > 0 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -513206,6 +515116,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 24
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -516961,6 +518880,18 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 2: 132 pixel > 112 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 14: 220 pixel > 170 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u
+      13: 198 pixel > 148 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u 4:
+      94 pixel > 70 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen:
     - rect:
@@ -519468,6 +521399,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 34
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -521882,6 +523822,17 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 3: 140 pixel > 100 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 12: 90 pixel > 10 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u
+      9: 12 pixel > 0 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -524274,6 +526225,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 20
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -527938,6 +529898,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 32
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -530452,6 +532421,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 18
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -532866,6 +534844,16 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 15: 162 pixel > 132 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt
+      pixel); m\xE0u 19: 91 pixel > 46 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen:
     - rect:
@@ -535307,6 +537295,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -537818,6 +539815,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 36
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -540195,6 +542201,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 17
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -544011,6 +546026,18 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 16: 176 pixel > 156 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt
+      pixel); m\xE0u 1: 196 pixel > 166 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 12: 191 pixel > 155 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u
+      2: 65 pixel > 50 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -546393,6 +548420,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 12.916667
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 27
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -548862,6 +550898,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 30
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -551259,6 +553304,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 21
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -553694,6 +555748,18 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 1: 129 pixel > 90 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 19: 126 pixel > 70 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u
+      16: 129 pixel > 79 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u 4: 98
+      pixel > 78 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -556158,6 +558224,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -558186,6 +560261,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 12.692307
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 26
+    difficultyBand: 0
+    validation: 
     walls:
     - x: 0
       y: 0
@@ -559595,6 +561679,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 10
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls:
     - x: 0
       y: 0
@@ -562152,6 +564245,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 28
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -563841,6 +565943,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 12.692307
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 21
+    difficultyBand: 0
+    validation: 
     walls:
     - x: 0
       y: 14
@@ -567613,6 +569724,16 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 9: 239 pixel > 169 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 2: 266 pixel > 241 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys:
@@ -570079,6 +572200,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 27
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -572528,6 +574658,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 26
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -574992,6 +577131,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 29
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -577461,6 +579609,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 0.92
+    taps: 30
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -579951,6 +582108,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -582391,6 +584557,16 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 12: 180 pixel > 120 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt
+      pixel)"
     walls: []
     frozen: []
     keys: []
@@ -584865,6 +587041,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 3: 122 pixel > 72 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen:
     - rect:
@@ -587335,6 +589520,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 29
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -589784,6 +591978,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 26
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -592470,6 +594673,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.793103
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls:
     - x: 14
       y: 7
@@ -594992,6 +597204,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 29
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -597446,6 +599667,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 27
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -599905,6 +602135,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 28
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -602347,6 +604586,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 30
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -604817,6 +607065,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 29
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -607316,6 +609573,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 38
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -609736,6 +612002,18 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 16: 231 pixel > 161 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt
+      pixel); m\xE0u 19: 121 pixel > 111 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 3: 129 pixel > 100 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u
+      8: 218 pixel > 198 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys:
@@ -612202,6 +614480,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 27
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -614653,6 +616940,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -618530,6 +620826,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -621042,6 +623347,17 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 6: 206 pixel > 146 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 0: 126 pixel > 106 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel); m\xE0u
+      2: 110 pixel > 70 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -622726,6 +625042,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 12.083333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 17
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -624606,6 +626931,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 16
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -627081,6 +629415,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -629102,6 +631445,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.913043
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -631285,6 +633637,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 12.8
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 25
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -633735,6 +636096,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 6: 256 pixel > 226 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -636239,6 +638609,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 33
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -638266,6 +640645,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 19
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -642103,6 +644491,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "xe 2 m\xE0u;c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 13: 114 pixel > 96 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -643805,6 +646202,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 30
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -645686,6 +648092,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 11.538462
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 21
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -647447,6 +649862,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 21
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -649905,6 +652329,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 32
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -651830,6 +654263,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 9: 181 pixel > 130 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -653711,6 +656153,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 28
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -656198,6 +658649,16 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 19: 186 pixel > 156 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt
+      pixel)"
     walls: []
     frozen: []
     keys: []
@@ -658007,6 +660468,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 11.6
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 23
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -659866,6 +662336,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -663664,6 +666143,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -665545,6 +668033,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 11.666667
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 24
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -668005,6 +670502,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 31
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -669861,6 +672367,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 12.8
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 19
+    difficultyBand: 0
+    validation: 
     walls:
     - x: 5
       y: 0
@@ -672301,6 +674816,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 29
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -674178,6 +676702,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 19
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -675783,6 +678316,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 12.5
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 24
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -678259,6 +680801,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 27
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -680741,6 +683292,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 29
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -683191,6 +685751,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 23
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -687057,6 +689626,16 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 2: 74 pixel > 64 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel);
+      m\xE0u 10: 120 pixel > 90 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -689603,6 +692182,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 40
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -691788,6 +694376,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 26
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -693551,6 +696148,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 0.97
+    taps: 25
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -696041,6 +698647,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -698486,6 +701101,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 24
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -700976,6 +703600,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 27
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -703459,6 +706092,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -705052,6 +707694,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "xe 2 m\xE0u;"
+    outOfScope: "xe 2 m\xE0u;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: "m\xE0u 10: 44 pixel > 0 ch\u1ED7 (kh\xF4ng th\u1EC3 h\u1EBFt pixel)"
     walls: []
     frozen: []
     keys: []
@@ -706745,6 +709396,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.913043
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 18
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -710584,6 +713244,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -713043,6 +715712,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 25
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -714901,6 +717579,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 27
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen:
     - rect:
@@ -717324,6 +720011,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 25
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -719759,6 +722455,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -722183,6 +724888,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 21
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -724657,6 +727371,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 31
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []
@@ -726908,6 +729631,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 20
+    difficultyBand: 0
+    validation: 
     walls:
     - x: 6
       y: 5
@@ -728678,6 +731410,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 12.916667
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 19
+    difficultyBand: 0
+    validation: 
     walls:
     - x: 9
       y: 16
@@ -730789,6 +733530,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 24
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -734603,6 +737353,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    outOfScope: "c\u1ED5ng \u0111\u1ED5i c\u1ED9t;"
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys:
@@ -737166,6 +739925,15 @@ MonoBehaviour:
         locked: 0
         keyColor: 0
     warnings: 
+    outOfScope: 
+    physicalWidth: 10
+    physicalHeight: 13.333333
+    showRoof: 0
+    solvable: 1
+    winRate: 1
+    taps: 44
+    difficultyBand: 0
+    validation: 
     walls: []
     frozen: []
     keys: []

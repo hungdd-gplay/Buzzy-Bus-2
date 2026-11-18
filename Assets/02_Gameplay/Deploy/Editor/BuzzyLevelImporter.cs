@@ -25,11 +25,11 @@ namespace Buzzy.Game.EditorTools
         [Serializable] class JSurprise { public List<JCell> Pixels; }
         [Serializable] class JImage
         {
-            public int Width, Height; public List<JPixel> Pixels;
+            public int Width, Height; public float PhysicalWidth, PhysicalHeight; public List<JPixel> Pixels;
             public List<JRect> Walls; public List<JFrozen> FrozenAreas; public List<JKey> Keys; public List<JSpawner> Spawners; public JSurprise SurprisePixels;
         }
         [Serializable] class JLevelData { public JQueueGroup CarQueueGroup; public JImage PixelImageData; }
-        [Serializable] class JRoot { public int levelIndex, levelTag; public JLevelData LevelData; }
+        [Serializable] class JRoot { public int levelIndex, levelTag; public bool showRoof = true; public JLevelData LevelData; }
 
         [MenuItem("Tools/Buzzy Bus/Import Levels")]
         public static void ImportMenu() { ImportAll(DefaultSource); }
@@ -51,7 +51,8 @@ namespace Buzzy.Game.EditorTools
                 var lv = new BuzzyLevel
                 {
                     index = root.levelIndex, tag = root.levelTag,
-                    width = root.LevelData.PixelImageData.Width, height = root.LevelData.PixelImageData.Height
+                    width = root.LevelData.PixelImageData.Width, height = root.LevelData.PixelImageData.Height,
+                    physicalWidth = root.LevelData.PixelImageData.PhysicalWidth, physicalHeight = root.LevelData.PixelImageData.PhysicalHeight, showRoof = root.showRoof
                 };
                 foreach (var p in root.LevelData.PixelImageData.Pixels) lv.pixels.Add(new BuzzyPixel { x = p.x, y = p.y, color = p.ColorCode });
                 foreach (var q in root.LevelData.CarQueueGroup.CarQueues)
@@ -76,6 +77,7 @@ namespace Buzzy.Game.EditorTools
                 string raw = File.ReadAllText(f);
                 if (raw.Contains("\"Elevators\": [") && !raw.Contains("\"Elevators\": []")) lv.warnings += "elevator;";
                 if (raw.Contains("\"QueueBoardGatePairs\": [") && !raw.Contains("\"QueueBoardGatePairs\": []")) lv.warnings += "cổng đổi cột;";
+                lv.outOfScope = lv.warnings ?? "";
                 if (!string.IsNullOrEmpty(lv.warnings)) warn++;
                 db.levels.Add(lv);
             }

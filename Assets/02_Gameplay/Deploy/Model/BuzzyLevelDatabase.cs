@@ -26,6 +26,19 @@ namespace Buzzy.Game
         public List<BuzzyQueue> queues = new List<BuzzyQueue>();
         /// <summary>Level có mechanic ngoài phạm vi bản đầu: xe 2 màu, Elevator, cổng đổi cột (importer ghi cảnh báo).</summary>
         public string warnings;
+        /// <summary>Lý do ngoài phạm vi (rỗng = trong phạm vi); cùng nội dung với warnings, dạng cờ để lọc.</summary>
+        public string outOfScope = "";
+        /// <summary>Kích thước vật lý của ảnh trong game gốc (PhysicalWidth/Height; ô vuông, V33) + cờ hiện nóc xe.</summary>
+        public float physicalWidth, physicalHeight;
+        public bool showRoof = true;
+        // Kết quả LevelValidator (M4): ghi bởi Tools/Buzzy Bus/Validate Levels, không sửa tay
+        public bool solvable;
+        /// <summary>Tỉ lệ thắng khi chơi ngẫu nhiên (độ khó đo được).</summary>
+        public float winRate;
+        public int taps;
+        /// <summary>0 thường, 1 khó, 2 siêu khó theo ValidatorOptions.</summary>
+        public int difficultyBand;
+        public string validation;
         // Mechanic M3 (rỗng = level thuần)
         public List<BuzzyRect> walls = new List<BuzzyRect>();
         public List<BuzzyFrozen> frozen = new List<BuzzyFrozen>();

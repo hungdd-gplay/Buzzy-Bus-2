@@ -284,7 +284,19 @@ namespace Buzzy.Core
         /// </summary>
         public static List<int> FindOrder(LevelData level, MechanicRules rules = null, double[][] slotPos = null, int tries = 200, int seed = 1)
         {
+            int wins; List<int> best;
+            Sample(level, rules, slotPos, tries, seed, out wins, out best, true);
+            return best;
+        }
+
+        /// <summary>
+        /// Chơi ngẫu nhiên `tries` ván (cố định seed): đếm số ván thắng (độ khó cho validator M4) và giữ thứ tự chạm ngắn nhất.
+        /// stopAtFirstWin = true: dừng ngay ván thắng đầu (nhanh, cho bộ tự chơi).
+        /// </summary>
+        public static void Sample(LevelData level, MechanicRules rules, double[][] slotPos, int tries, int seed, out int wins, out List<int> best, bool stopAtFirstWin = false)
+        {
             var rnd = new Random(seed);
+            wins = 0; best = null;
             for (int t = 0; t < tries; t++)
             {
                 var g = new BusGame(level, slotPos, rules);
@@ -301,9 +313,13 @@ namespace Buzzy.Core
                     if (!r.Matched) break;
                     order.Add(c); g.ArriveAll(r);
                 }
-                if (g.Status == GameStatus.Won) return order;
+                if (g.Status == GameStatus.Won)
+                {
+                    wins++;
+                    if (best == null || order.Count < best.Count) best = order;
+                    if (stopAtFirstWin) return;
+                }
             }
-            return null;
         }
 
         public static GameStatus Greedy(BusGame g)
