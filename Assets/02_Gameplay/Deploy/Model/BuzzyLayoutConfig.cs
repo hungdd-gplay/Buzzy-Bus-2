@@ -59,6 +59,23 @@ namespace Buzzy.Game
         [Tooltip("V4: màu rim khay / bến")] public Color lipColor = new Color32(0x7C, 0x82, 0xD5, 255);
         [Tooltip("V12: chữ số chỗ trên nóc xe, cỡ")] public float roofNumberSize = 1.3f;
 
+
+        [Header("Chuyển động (C*) - M2")]
+        [Tooltip("C1: xe xuất hiện phía trên cách ô bến bao nhiêu z (hầm)")] public float enterFromZ = 16f;
+        [Tooltip("C1: thời lượng xe lăn vào ô bến (s)")] public float enterDuration = 0.9f;
+        [Tooltip("C1: trễ giữa các xe lúc vào màn (s)")] public float enterStagger = 0.12f;
+        [Tooltip("C1: xe hàng chờ vào sau (s)")] public float queueEnterDelay = 0.5f;
+        [Tooltip("C3: xe ở hàng chờ xuống ô trống (s)")] public float queueToSlotDuration = 0.8f;
+        [Tooltip("C7: tốc độ xe rời bến (đơn vị/s)")] public float leaveSpeed = 22f;
+        [Tooltip("C7: z của làn trên để xe chạy ngược ra")] public float leaveLaneZ = 24.5f;
+        [Tooltip("C7: x mép phải/trái xe thoát ra")] public float leaveEdgeX = 12f;
+        [Tooltip("C4: thời gian bay của 1 pixel (s)")] public float flightDuration = 0.6f;
+        [Tooltip("C4: tổng thời gian xả cả cụm (s) cho 50 người")] public float flightSpread = 2.0f;
+        [Tooltip("C4: độ cao vòng cung")] public float flightArc = 5f;
+        [Tooltip("C5: pixel xuất hiện đầu level: tổng lan (s) và thời lượng mỗi khối (s)")] public Vector2 appearSpreadDuration = new Vector2(0.9f, 0.7f);
+        [Tooltip("C9: trễ rào chắn sau khi xe rời (s)")] public float barrierDelay = 0.36f;
+        [Tooltip("C13: bắt đầu cho chạm sau khi vào màn (s)")] public float inputDelay = 1.5f;
+
         [Header("Màu nền (V3, V4, V8)")]
         public Color backgroundTop = new Color32(0xA7, 0xAC, 0xE6, 255);
         [Tooltip("V3: màu đáy nền (chuyển sắc dọc)")] public Color backgroundBottom = new Color32(0x87, 0x8C, 0xC6, 255);
