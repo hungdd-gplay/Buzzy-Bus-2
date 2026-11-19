@@ -123,10 +123,10 @@ namespace Buzzy.Game
         /// <summary>M8 (U16): chữ mô tả nhiều ngôn ngữ: ô rộng popupDescWidth × bảng kem, tối đa popupDescLines dòng, best fit co chữ, NEO MÉP DƯỚI bảng kem (r2 RU: neo theo ảnh minh hoạ bị rơi xuống vùng tím vì sprite có lề trong suốt). yBottomRef = mép dưới ô (đơn vị khung tham chiếu).</summary>
         Text PDesc(string s, float yBottomRef, int px)
         {
-            float hRef = RefH(px * 1.25f * Mathf.Max(1, _cfg.popupDescLines));
+            // r3 RU: best fit co về cỡ tối thiểu dù ô rộng (glyph Cyrillic từ font dự phòng) → cỡ chữ CỐ ĐỊNH px, xuống dòng tối đa popupDescLines dòng, không best fit
+            float hRef = RefH(px * 1.3f * Mathf.Max(1, _cfg.popupDescLines));
             var t = PText(s, new Vector2(0.5f, yBottomRef - hRef * 0.5f), _cfg.popupInnerWidth * _cfg.popupDescWidth, hRef, px, _cfg.popupTextColor, false);
-            t.horizontalOverflow = HorizontalWrapMode.Wrap; t.verticalOverflow = VerticalWrapMode.Truncate;
-            t.resizeTextForBestFit = true; t.resizeTextMaxSize = px; t.resizeTextMinSize = Px(16);
+            t.horizontalOverflow = HorizontalWrapMode.Wrap; t.verticalOverflow = VerticalWrapMode.Overflow; t.resizeTextForBestFit = false;
             return t;
         }
 
@@ -352,8 +352,9 @@ namespace Buzzy.Game
             Overlay(); CurrencyBar();
             float top, bottom; Frame(_a.titleRed, S("bz_out_of_space"), null, _cfg.popupInnerHeight, out top, out bottom); float h = bottom - top;
             CloseButton(top, Retry);
-            PImg("Illus", _a.loseIllustration, Color.white, new Vector2(0.5f, top + h * 0.40f), _cfg.loseIllusWidth);
-            PDesc(S("bz_no_bus"), top + h * (_cfg.popupInnerTop + _cfg.popupInnerHeight) - WRef(_cfg.popupDescGap), Px(28));   // M8: sát mép dưới bảng kem, 2 dòng best fit
+            float ib = top + h * (_cfg.popupInnerTop + _cfg.popupInnerHeight);   // đáy RECT bảng kem (đơn vị khung tham chiếu)
+            PImg("Illus", _a.loseIllustration, Color.white, new Vector2(0.5f, ib - WRef(_cfg.popupIllusCenterUp)), _cfg.loseIllusWidth * _cfg.popupIllusScale);   // M8 r4: thu 60 %, đẩy lên chừa chỗ mô tả
+            PDesc(S("bz_no_bus"), ib - WRef(_cfg.popupDescGap), Px(28));   // M8: TRONG bảng kem, dưới ảnh, 2 dòng cỡ cố định
             float by = bottom - h * _cfg.buttonRowUp;
             Btn("Revive", _a.buttonGreen, new Vector2(0.5f - _cfg.popupButtonGap, by), _cfg.popupButtonWidth, S("bz_revive"), _a.adIcon, Revive, 40);
             Btn("Retry", _a.buttonOrange, new Vector2(0.5f + _cfg.popupButtonGap, by), _cfg.popupButtonWidth, S("bz_retry"), null, Retry, 40);
@@ -380,8 +381,9 @@ namespace Buzzy.Game
             Overlay();
             float top, bottom; Frame(_a.titlePurple, S(BoosterNameKey[i]), null, _cfg.popupInnerHeight, out top, out bottom); float h = bottom - top;
             CloseButton(top, ClosePopup);
-            PImg("Icon", _a.boosterIcons[i], Color.white, new Vector2(0.5f, top + h * 0.38f), _cfg.popupWidth * 0.4f);
-            PDesc(S(BoosterDescKey[i]), top + h * (_cfg.popupInnerTop + _cfg.popupInnerHeight) - WRef(_cfg.popupDescGap), Px(30));
+            float ib = top + h * (_cfg.popupInnerTop + _cfg.popupInnerHeight);
+            PImg("Icon", _a.boosterIcons[i], Color.white, new Vector2(0.5f, ib - WRef(_cfg.popupIllusCenterUp)), _cfg.popupWidth * 0.4f * _cfg.popupIllusScale);
+            PDesc(S(BoosterDescKey[i]), ib - WRef(_cfg.popupDescGap), Px(30));
             Btn("Claim", _a.buttonGreen, new Vector2(0.5f, bottom - h * _cfg.buttonRowUp), _cfg.popupButtonWideWidth, S("bz_claim"), null, ClaimUnlockPopup, 40);
         }
 
@@ -398,8 +400,9 @@ namespace Buzzy.Game
             Overlay(); CurrencyBar();
             float top, bottom; Frame(_a.titlePurple, S(BoosterNameKey[i]), null, _cfg.popupInnerHeight, out top, out bottom); float h = bottom - top;
             CloseButton(top, ClosePopup);
-            PImg("Icon", _a.boosterIcons[i], Color.white, new Vector2(0.5f, top + h * 0.38f), _cfg.popupWidth * 0.4f);
-            PDesc(BuzzyStrings.Format("bz_buy_qty", Meta.Cfg.BoosterBuyQty) + "  " + S(BoosterDescKey[i]), top + h * (_cfg.popupInnerTop + _cfg.popupInnerHeight) - WRef(_cfg.popupDescGap), Px(28));
+            float ib = top + h * (_cfg.popupInnerTop + _cfg.popupInnerHeight);
+            PImg("Icon", _a.boosterIcons[i], Color.white, new Vector2(0.5f, ib - WRef(_cfg.popupIllusCenterUp)), _cfg.popupWidth * 0.4f * _cfg.popupIllusScale);
+            PDesc(BuzzyStrings.Format("bz_buy_qty", Meta.Cfg.BoosterBuyQty) + "  " + S(BoosterDescKey[i]), ib - WRef(_cfg.popupDescGap), Px(28));
             float by = bottom - h * _cfg.buttonRowUp;
             Btn("Buy", _a.buttonGreen, new Vector2(0.5f - _cfg.popupButtonGap, by), _cfg.popupButtonWidth, Meta.Cfg.BoosterPrice[i].ToString(), _a.coinIcon, () =>
             {

@@ -509,9 +509,11 @@ namespace Buzzy.Game
         public int languageFontPx = 26;
         [Tooltip("U17: hàng Language trong Settings: vị trí hàng (tỉ lệ cao khung, sau 3 hàng Sound/Music/Haptic), rộng nút tên ngôn ngữ (% bề ngang)")] public float settingsLanguageRowY = 0.70f;
         public float settingsLanguageButtonWidth = 0.34f;
-        [Tooltip("U16: dòng mô tả trong popup thua / mở khoá / mua: đặt DƯỚI ảnh minh hoạ cách (% bề ngang), rộng (tỉ lệ bảng kem), tối đa số dòng (best fit co chữ, min 16 px)")] public float popupDescGap = 0.035f;
-        public float popupDescWidth = 0.9f;
+        [Tooltip("U16 (r4 RU): sprite bảng kem có lề trong suốt ~8,6 % bề ngang dưới mép nhìn thấy → mô tả đặt TRONG bảng: đáy ô chữ cách đáy RECT bảng kem (% bề ngang) = lề 8,6 % + lề trong 2,5 %; rộng (tỉ lệ bảng kem); tối đa số dòng, cỡ cố định 28–30 px")] public float popupDescGap = 0.11f;
+        public float popupDescWidth = 0.95f;   // r3: ô rộng hơn để câu dài (RU) đủ 2 dòng ở cỡ 28 px
         public int popupDescLines = 2;
+        [Tooltip("U16: ảnh minh hoạ / icon trong popup thua / mở khoá / mua thu còn (tỉ lệ) và tâm cách đáy RECT bảng kem (% bề ngang) để chừa chỗ 2 dòng mô tả bên dưới trong bảng")] public float popupIllusScale = 0.6f;
+        public float popupIllusCenterUp = 0.28f;
 
         [Header("Màu nền (V3, V4, V8)")]
         public Color backgroundTop = new Color32(0xA7, 0xAC, 0xE6, 255);
