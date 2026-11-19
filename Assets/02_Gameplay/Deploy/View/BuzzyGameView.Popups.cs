@@ -130,7 +130,7 @@ namespace Buzzy.Game
         {
             if (Popup == PopupKind.None) return false;
             foreach (var b in _btns)
-                if (Mathf.Abs(nx - b.c.x) <= b.size.x * 0.5f && Mathf.Abs(ny - b.c.y) <= b.size.y * 0.5f) { Log?.Invoke("t=" + Time.ToString("0.00") + " nút " + b.name); b.act(); return true; }
+                if (Mathf.Abs(nx - b.c.x) <= b.size.x * 0.5f && Mathf.Abs(ny - b.c.y) <= b.size.y * 0.5f) { Log?.Invoke("t=" + Time.ToString("0.00") + " nút " + b.name); Sfx(_a.sfxButton); b.act(); return true; }
             return true;   // popup mở: nuốt mọi chạm khác
         }
 
@@ -140,6 +140,7 @@ namespace Buzzy.Game
         void ShowWin()
         {
             Log?.Invoke("t=" + Time.ToString("0.00") + " THẮNG: hết pixel");
+            Sfx(_a.sfxWin);   // A6 (M7)
             HideWorldTexts(); EnsureMeta();
             ClosePopup(); Popup = PopupKind.WinSequence; _popupAt = Time; _nextBurst = Time + 0.2f;
             Overlay(); _overlayImg.color = new Color(_cfg.overlayColor.r, _cfg.overlayColor.g, _cfg.overlayColor.b, 0f);
@@ -209,7 +210,7 @@ namespace Buzzy.Game
         // ---------------------------------------------------------------- popup thắng (U2–U4)
         public void ShowCompleted()
         {
-            EnsureMeta(); ClosePopup(); Popup = PopupKind.Completed; _popupAt = Time;
+            EnsureMeta(); ClosePopup(); Popup = PopupKind.Completed; _popupAt = Time; Sfx(_a.sfxSwipe);
             Overlay(); CurrencyBar();
             float top, bottom; Frame(_a.titleYellow, "Completed!", "Level " + _lv.index, _cfg.popupInnerHeightTall, out top, out bottom);
             float h = bottom - top;
@@ -256,7 +257,7 @@ namespace Buzzy.Game
 
         void FinishLevel(int coins)
         {
-            CoinsEarned = coins; SyncBoosters(); ClosePopup();
+            CoinsEarned = coins; SyncBoosters(); ClosePopup(); Sfx(_a.sfxReward);   // A6 (M7)
             Log?.Invoke("t=" + Time.ToString("0.00") + " nhận " + coins + " xu, sang level kế");
             LevelCompleted?.Invoke(coins);
         }
@@ -267,14 +268,14 @@ namespace Buzzy.Game
         void CheckLose()
         {
             if (Won || Lost || Popup != PopupKind.None) return;
-            if (Game.Status != GameStatus.Deadlock || _flights.Count != 0 || _vanish.Count != 0) return;
+            if (Game.Status != GameStatus.Deadlock || _flights.Count != 0 || _walks.Count != 0 || _vanish.Count != 0 || BoosterBusy) return;
             foreach (var c in _cars) if (c.move != null || c.leaving) return;
             Lost = true; LostAt = Time; Log?.Invoke("t=" + Time.ToString("0.00") + " BẾ TẮC: hết chỗ");
         }
 
         public void ShowLose()
         {
-            EnsureMeta(); ClosePopup(); Popup = PopupKind.Lose; _popupAt = Time; Lost = true;
+            EnsureMeta(); ClosePopup(); Popup = PopupKind.Lose; _popupAt = Time; Lost = true; Sfx(_a.sfxLose);   // A6 (M7)
             Overlay(); CurrencyBar();
             float top, bottom; Frame(_a.titleRed, "Out of space!", null, _cfg.popupInnerHeight, out top, out bottom); float h = bottom - top;
             CloseButton(top, Retry);
@@ -302,21 +303,25 @@ namespace Buzzy.Game
         // ---------------------------------------------------------------- mở khoá booster (U5) + mua booster (mục 7)
         public void ShowUnlock(int i)
         {
-            EnsureMeta(); ClosePopup(); Popup = PopupKind.Unlock; _popupAt = Time; _buyIdx = i;
+            EnsureMeta(); ClosePopup(); Popup = PopupKind.Unlock; _popupAt = Time; _buyIdx = i; Sfx(_a.sfxIntroduce);   // A6 (M7)
             Overlay();
             float top, bottom; Frame(_a.titlePurple, BoosterNames[i], null, _cfg.popupInnerHeight, out top, out bottom); float h = bottom - top;
             CloseButton(top, ClosePopup);
             PImg("Icon", _a.boosterIcons[i], Color.white, new Vector2(0.5f, top + h * 0.38f), _cfg.popupWidth * 0.4f);
             PText(BoosterDesc[i], new Vector2(0.5f, top + h * 0.58f), _cfg.popupWidth, 0.04f, Px(30), _cfg.popupTextColor, false);
-            Btn("Claim", _a.buttonGreen, new Vector2(0.5f, bottom - h * _cfg.buttonRowUp), _cfg.popupButtonWideWidth, "Claim", null, () =>
-            {
-                Meta.ClaimUnlock(i); BoosterCount[i] = Meta.Boosters[i]; RefreshBoosterUi(); Changed(); ClosePopup();
-            }, 40);
+            Btn("Claim", _a.buttonGreen, new Vector2(0.5f, bottom - h * _cfg.buttonRowUp), _cfg.popupButtonWideWidth, "Claim", null, ClaimUnlockPopup, 40);
+        }
+
+        /// <summary>Nút Claim của popup mở khoá (bộ tự chơi M6 gọi thẳng). Đóng bằng X thì quà còn treo, popup hiện lại ở level kế.</summary>
+        public void ClaimUnlockPopup()
+        {
+            if (Popup != PopupKind.Unlock) return; int i = _buyIdx;
+            Meta.ClaimUnlock(i); BoosterCount[i] = Meta.Boosters[i]; RefreshBoosterUi(); Changed(); ClosePopup();
         }
 
         public void ShowBuyBooster(int i)
         {
-            EnsureMeta(); ClosePopup(); Popup = PopupKind.BuyBooster; _popupAt = Time; _buyIdx = i;
+            EnsureMeta(); ClosePopup(); Popup = PopupKind.BuyBooster; _popupAt = Time; _buyIdx = i; Sfx(_a.sfxSwipe);
             Overlay(); CurrencyBar();
             float top, bottom; Frame(_a.titlePurple, BoosterNames[i], null, _cfg.popupInnerHeight, out top, out bottom); float h = bottom - top;
             CloseButton(top, ClosePopup);
@@ -338,6 +343,7 @@ namespace Buzzy.Game
         // ---------------------------------------------------------------- cài đặt (mục 8, 13)
         public void OpenSettings()
         {
+            if (Popup != PopupKind.Settings) Sfx(_a.sfxSwipe);
             EnsureMeta(); ClosePopup(); Popup = PopupKind.Settings; _popupAt = Time;
             Overlay();
             float top, bottom; Frame(_a.titlePurple, "Settings", null, _cfg.popupInnerHeight, out top, out bottom); float h = bottom - top;
@@ -354,6 +360,7 @@ namespace Buzzy.Game
                 _btns.Add(new PBtn { c = tc, size = new Vector2(_cfg.toggleWidth, tg.sizeDelta.y / _canvasSize.y), name = "Toggle" + names[i], act = () =>
                 {
                     if (k == 0) Meta.Sound = !Meta.Sound; else if (k == 1) Meta.Music = !Meta.Music; else Meta.Haptic = !Meta.Haptic;
+                    ApplyAudio();   // M7
                     OpenSettings();
                 } });
             }
@@ -362,7 +369,7 @@ namespace Buzzy.Game
         // ---------------------------------------------------------------- shop (mục 8) [thiết kế]: IAP nối ở M7
         public void OpenShop()
         {
-            EnsureMeta(); ClosePopup(); Popup = PopupKind.Shop; _popupAt = Time;
+            EnsureMeta(); ClosePopup(); Popup = PopupKind.Shop; _popupAt = Time; Sfx(_a.sfxSwipe);
             Overlay(); CurrencyBar();
             float top, bottom; Frame(_a.titleYellow, "Shop", null, _cfg.popupInnerHeight, out top, out bottom); float h = bottom - top;
             CloseButton(top, () => { Changed(); ClosePopup(); });

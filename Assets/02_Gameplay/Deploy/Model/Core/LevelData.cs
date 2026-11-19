@@ -44,12 +44,23 @@ namespace Buzzy.Core
     /// <summary>Số liệu chỉnh được của mechanic (làm bằng dữ liệu để đổi dễ, xem design-decisions.md).</summary>
     public sealed class MechanicRules
     {
-        /// <summary>Số "hit" gốc của Frozen chia hệ số này ra số pixel kề cần lấy.</summary>
-        public double FrozenHitDivisor = 12;
-        /// <summary>Pixel lấy được trong khoảng này (ô) quanh vùng băng mới tính là một hit.</summary>
-        public int FrozenReach = 4;
+        /// <summary>Số "hit" gốc của Frozen chia hệ số này ra số pixel cần lấy. M6: 1 (số trên băng = RequiredHits, khớp 210 ở Lv.77 mẫu).</summary>
+        public double FrozenHitDivisor = 1;
+        /// <summary>Pixel lấy được trong khoảng này (ô) quanh vùng băng mới tính là một hit. Âm = mọi pixel lấy được ở bất kỳ đâu đều tính (M6 [thiết kế]).</summary>
+        public int FrozenReach = -1;
+        /// <summary>true: pixel ẩn (Mystery) không chạm được tới khi lộ (kề ô rỗng). false: vẫn chạm được, chỉ giấu màu tới khi bay (M6 [thiết kế]).</summary>
+        public bool MysteryBlocks = false;
         /// <summary>Số pixel tối đa Sky Grab nhấc mỗi lần.</summary>
         public int SkyGrabCount = 10;
+        /// <summary>M7 (góp ý 04): true = luật 1a: chỉ pixel có đường ra ngoài (kề ô rỗng thông ra mép lưới) mới lấy được bằng chạm, pixel bị bao quanh ở lại.
+        /// Mặc định false = luật 1b: chạm chọn hết màu (pixel sâu vẫn lên xe), còn "chỉ đi khi có đường" là chuyện hiển thị (view đi bộ).
+        /// Lý do: với 1a, 76/233 level (vd Lv.16: toàn bộ viền ngoài một màu) bế tắc bắt buộc sau 1 chạm → game gốc không thể dùng 1a (design-decisions 19).</summary>
+        public bool ExposedOnly = true;    // người dùng chốt 1c (2026-11-19, qua phiên 3c)
+        /// <summary>[thiết kế] Chạm được màu có xe cùng màu đang xuống bến (view báo MarkParked khi xe đỗ xong); false = chỉ xe đã đỗ. Clip chưa xác nhận (3 ca chạm đều khi xe đã đỗ).</summary>
+        public bool TapWhileArriving = true;
+        /// <summary>M7 (luật 1c, phiên 3c đề xuất, chờ người dùng chốt): true = trong cùng lớp, pixel gần ĐIỂM CHẠM đi trước (người chơi chọn chỗ mở);
+        /// false = gần ô bến đi trước (như cũ). Chỉ tác dụng khi chạm theo pixel (Tap(x, y)).</summary>
+        public bool OrderFromTapPoint = true;   // người dùng chốt 1c
         /// <summary>true: xe xích vẫn vào ô bến nhưng không nhận pixel tới khi có chìa; false: đứng chờ ở đầu cột, ô để trống.</summary>
         public bool LockedEntersSlot = false;
         /// <summary>Tỉ lệ pixel quanh chìa (vòng 5x5 bỏ 3x3) phải bị lấy thì chìa được nhặt.</summary>

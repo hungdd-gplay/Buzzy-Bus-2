@@ -33,6 +33,11 @@ MonoBehaviour:
   - 2.92
   slotYaw: 22
   busScale: 0.9
+  carShadowOffset: {x: 0.1, y: -0.15}
+  carShadowSize: {x: 2.15, y: 3.4}
+  carShadowAlpha: 0.55
+  carShadowSoft: 0.35
+  carShadowColor: {r: 0.05, g: 0.05, b: 0.12, a: 1}
   queueZ: 20.408
   queueX:
   - -2.36
@@ -56,6 +61,13 @@ MonoBehaviour:
   bottomBarColor: {r: 0.41960785, g: 0.22745098, b: 0.85490197, a: 1}
   fullBubbleCenter: {x: 0.2, y: 0.268}
   fullBubbleWidth: 0.085
+  fullSignScale: 0.73
+  fullSignOffset: {x: 1.1, y: 1.4}
+  fullSignSink: 0.32
+  fullSignDiscY: 1.1
+  fullSignColor: {r: 0.7490196, g: 0.76862746, b: 0.9411765, a: 1}
+  fullSignRimScale: 1.08
+  fullSignRimColor: {r: 0.9019608, g: 0.9137255, b: 1, a: 1}
   blockHeightScale: 1.65
   blockWidthScale: 1.25
   dashHalfLength: 0.29
@@ -71,13 +83,26 @@ MonoBehaviour:
   leaveSpeed: 22
   leaveLaneZ: 17.963
   leaveEdgeX: 12
+  laneClearZ: 1.5
   flightDuration: 1.4
   flightSpread: 1.4
   flightArc: 0.9
   appearSpreadDuration: {x: 0.9, y: 0.7}
-  barrierDelay: 0.36
+  barrierDelay: 0.2
+  barrierAppearDuration: 0.45
+  barrierDropDuration: 0.1
+  barrierDropHeight: 1.6
+  barrierStartScale: 0.2
+  barrierOvershoot: 0.12
+  barrierBounceHeight: 0.6
   inputDelay: 1.5
-  barrierScale: 0.42
+  barrierScale: 0.9
+  barrierForward: 1.2
+  barrierRed: {r: 0.9098039, g: 0.16862746, b: 0.16862746, a: 1}
+  barrierWhite: {r: 0.95686275, g: 0.95686275, b: 0.972549, a: 1}
+  barrierStripePeriod: 6
+  barrierYawOffset: 0
+  barrierTilt: 0
   pMarkColor: {r: 0.6039216, g: 0.627451, b: 0.76862746, a: 1}
   pMarkSize: {x: 1.9, y: 2.7}
   pMarkDash: 0.32
@@ -213,6 +238,160 @@ MonoBehaviour:
   - Frozen Pixel
   - Locked Bus
   maxLevel: 300
+  frozenHitDivisor: 1
+  frozenReach: -1
+  mysteryBlocks: 0
+  lockedEntersSlot: 0
+  keyClearFraction: 0.5
+  skyGrabCount: 10
+  exposedOnly: 1
+  tapWhileArriving: 1
+  orderFromTapPoint: 1
+  sfxVolume: 1
+  musicVolume: 0.45
+  popVolume: 0.55
+  popPitchBase: 0.95
+  popPitchStep: 0.025
+  popPitchSteps: 24
+  popMinInterval: 0.045
+  popResetGap: 0.6
+  tapVolume: 0.8
+  wrongVolume: 0.9
+  hapticOnTap: 0
+  pickLift: 0
+  pickLiftDuration: 0.12
+  carBounce: 0.03
+  boardRockPitch: 8
+  carBounceLift: 0.12
+  carBounceDuration: 0.4
+  carBounceMinInterval: 0.3
+  parkBounce: 0.14
+  numberPop: 0.5
+  numberPopDuration: 0.18
+  fullWiggle: 6
+  fullWiggleCycles: 2
+  fullWiggleDuration: 0.4
+  wrongShake: 0.12
+  wrongShakeCycles: 3
+  wrongShakeDuration: 0.3
+  devPanelY: 0.85
+  devButtonSize: 0.075
+  devPanelX:
+  - 0.05
+  - 0.16
+  - 0.27
+  - 0.365
+  walkSpeed: 7.5
+  walkSpeedVariance: 0.2
+  walkGap: 0.06
+  walkGroupMin: 2
+  walkGroupMax: 4
+  walkGroupGap: 0.01
+  walkLanes: 3
+  walkLaneSpacing: 1
+  walkLaneOffset: 0.5
+  walkStride: 0.9
+  walkBobHeight: 0.12
+  walkSway: 12
+  boardSide: -1
+  boardSideOffset: 0.85
+  boardFrontOffset: 0.5
+  boardHeight: 0.6
+  boardPointOffset: 1.6
+  gatherMode: 1
+  waitLineZ: 14.03
+  waitLineOffset: 0.2
+  waitSpread: 10
+  waitRows: 3
+  waitWhileBayBusy: 1
+  boardJumpHeight: 1
+  boardJumpDuration: 0.22
+  stragglerDelay: 1
+  stragglerHopHeight: 2
+  walkScale: 1
+  walkObstacleRadius: 0.22
+  walkGridMargin: 3
+  walkEdgePenalty: 3
+  travelAcceleration: 30
+  travelMaxSpeed: 20
+  travelArrivalBrakeDistance: 2.5
+  travelMinArrivalSpeed: 0.6
+  travelCurveHandle: 0.4
+  travelBankStrength: 0.06
+  travelMaxBank: 18
+  travelBankSmoothing: 10
+  travelAccelPitch: 4
+  travelBrakePitch: 8
+  walkMinDist: 0.45
+  walkSeparation: 8
+  walkSeparationRelax: 0.6
+  walkSolverIterations: 4
+  walkQueueRows: 3
+  boardInterval: 0.02
+  boardParallel: 16
+  walkNoOvertake: 0
+  walkDepthScale: 1
+  leaveReverseSpeed: 8
+  leaveBrakePitch: 14
+  leaveBrakePitchDuration: 0.45
+  leaveLaunchPause: 0.22
+  leaveLaunchPitch: 7
+  leaveLaunchPitchDuration: 0.5
+  skidLength: 2.5
+  skidRearOffset: 0.9
+  skidGrow: 0.35
+  skidHalfTrack: 0.42
+  skidWidth: 0.17
+  skidColor: {r: 0.08, g: 0.08, b: 0.12, a: 0.7}
+  skidFade: 1.6
+  leaveExitSpeed: 17
+  nextCarDelay: 1.3
+  fillPickRule: 0
+  fillPopHeight: 1.2
+  fillPopDuration: 0.3
+  fillGatherHeight: 3.2
+  fillGatherRadius: 1.5
+  fillGatherDuration: 0.85
+  fillDropDuration: 0.35
+  fillSpread: 0.5
+  skyRadius: 2.5
+  skyVanishUnmatched: 1
+  skyTakesFrozen: 0
+  skyEnterFrom: {x: -14, y: 7}
+  skyEnterDelay: 0.3
+  skyEnterDuration: 1
+  skyHover: 1.8
+  skyExitDuration: 0.5
+  skyHeight: 5
+  skyScale: 0.5
+  skyShadowSize: {x: 1.6, y: 2.6}
+  skyRotorSpeed: 1500
+  skySuckSpread: 1
+  skySuckDuration: 0.5
+  wandPickRule: 0
+  wandStagger: 0.17
+  wandSpin: 0.5
+  wandGrey: 0.5
+  wandNumberDelay: 0.17
+  wandGreyColor: {r: 0.36, g: 0.37, b: 0.44, a: 1}
+  clawCamUp: 0.3
+  clawCamBack: 0.4
+  clawCamMargin: 4
+  clawDescend: 1.5
+  clawGrab: 0.7
+  clawLiftDuration: 0.5
+  clawLiftHeight: 2
+  clawCarry: 1.5
+  clawRelease: 0.3
+  clawCableHeight: 3.5
+  clawMeshScale: 1.1
+  clawLanePos: {x: 1.6, y: 17.96}
+  swirlDuration: 0.5
+  tooltipY: 0.8
+  tooltipWidth: 0.82
+  tooltipAspect: 0.19
+  tooltipFontSize: 30
+  vipDimAlpha: 0.55
   backgroundTop: {r: 0.654902, g: 0.6745098, b: 0.9019608, a: 1}
   backgroundBottom: {r: 0.5294118, g: 0.54901963, b: 0.7764706, a: 1}
   roadColor: {r: 0.26666668, g: 0.2901961, b: 0.41960785, a: 1}

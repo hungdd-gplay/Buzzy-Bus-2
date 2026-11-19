@@ -51,6 +51,11 @@ namespace Buzzy.Game
         [Tooltip("V13: x tâm 3 ô bến")] public float[] slotX = { -2.53f, 0.16f, 2.92f };
         [Tooltip("V13: góc xoay yaw xe ở bến (độ)")] public float slotYaw = 22f;
         [Tooltip("V14: tỉ lệ thu mesh Bus (rộng xe ~19 % khung)")] public float busScale = 0.9f;
+        [Tooltip("V14 (góp ý 10): bóng đổ mềm dưới xe (Shadow.png): lệch (x, z thế giới; phải-dưới), cỡ (rộng, dài thế giới, theo cỡ xe ở bến), độ đậm")] public Vector2 carShadowOffset = new Vector2(0.1f, -0.15f);   // 3c đo đợt 3: lệch phải-dưới ít hơn + quad to hơn 10 % để có viền mỏng bên trái / dưới đuôi như mẫu
+        public Vector2 carShadowSize = new Vector2(2.15f, 3.4f);   // ≈ đáy xe + 20 % (mesh 1,7 × 2,8)
+        public float carShadowAlpha = 0.55f;   // 3c đo: mẫu tối hơn đường ~35 %
+        [Tooltip("V14: phần mép mờ của bóng (tỉ lệ nửa cạnh)")] public float carShadowSoft = 0.35f;
+        [Tooltip("V14: màu nhân vào Shadow.png (texture gốc sáng hơn đường; mẫu bóng tối hơn đường ~30 %)")] public Color carShadowColor = new Color(0.05f, 0.05f, 0.12f, 1f);
 
         [Header("Hàng chờ (V10-V12)")]
         [Tooltip("V10: z tâm xe hàng chờ")] public float queueZ = 20.408f;
@@ -72,6 +77,13 @@ namespace Buzzy.Game
         [Tooltip("V25: màu thanh đáy")] public Color bottomBarColor = new Color32(0x6B, 0x3A, 0xDA, 255);
         [Tooltip("V16: tâm bong bóng Full (x %, y %)")] public Vector2 fullBubbleCenter = new Vector2(0.20f, 0.268f);
         [Tooltip("V16: bề ngang bong bóng Full (% bề ngang)")] public float fullBubbleWidth = 0.085f;
+        [Tooltip("V16 (góp ý 14, sbs_full_zoom.jpg): biển Full 3D Sign_Full.obj: tỉ lệ (đĩa rộng 1,58 đv × 0,65 ≈ 1,03 đv ≈ 8,3 % khung), lệch (x = sang trái khung, y = về phía mũi) so với tâm ô: góc trước-trái, đuôi chạm đất đè vạch dưới ô; y cục bộ tâm đĩa để đặt chữ")] public float fullSignScale = 0.73f;   // r10 (3c đo, asset 0,73): đĩa trong 8,5 % khung ≈ golden 8,3 → giữ
+        public Vector2 fullSignOffset = new Vector2(1.1f, 1.4f);   // r7: 0,55 làm đĩa chui vào thân xe → 1,1 ra ngoài hông trái; r10 (asset 1,0): đáy 26,0 % vs golden 27,9 % → về phía mũi thêm 0,6
+        [Tooltip("V16 (góp ý 14): lún đuôi xuống đất theo trục biển (đv) để chân thành đuôi giọt ngắn ≈ 0,3 đường kính và tâm đĩa hạ (r10: 23,3 % → golden 26,5 %)")] public float fullSignSink = 0.32f;   // r11: 1,6 / 0,4 ra tâm 27,0 % đáy 29,4 % (golden 26,5 / 27,9) → nhích lên
+        public float fullSignDiscY = 1.1f;
+        public Color fullSignColor = new Color32(0xBF, 0xC4, 0xF0, 255);   // mẫu: lòng lavender
+        [Tooltip("V16: lớp 2 = bản sao biển to hơn (tỉ lệ) màu sáng hơn đặt sau → viền sáng ~8 % đường kính")] public float fullSignRimScale = 1.08f;
+        public Color fullSignRimColor = new Color32(0xE6, 0xE9, 0xFF, 255);
         [Tooltip("V21: nhân chiều cao khối pixel (mẫu cao hơn rộng)")] public float blockHeightScale = 1.65f;
         [Tooltip("V20: nhân bề ngang khối pixel (mẫu: khối chạm nhau theo hàng ngang)")] public float blockWidthScale = 1.25f;
         [Tooltip("V9: nửa dài mỗi vạch đứt (thế giới)")] public float dashHalfLength = 0.29f;
@@ -87,18 +99,31 @@ namespace Buzzy.Game
         [Tooltip("C1: trễ giữa các xe lúc vào màn (s)")] public float enterStagger = 0.12f;
         [Tooltip("C1: xe hàng chờ vào sau (s)")] public float queueEnterDelay = 0.5f;
         [Tooltip("C3: xe ở hàng chờ xuống ô trống (s)")] public float queueToSlotDuration = 0.8f;
-        [Tooltip("C7: tốc độ xe rời bến (đơn vị/s)")] public float leaveSpeed = 22f;
+        [Tooltip("C7: tốc độ xe rời bến đoạn chạy ra + quay đầu (đơn vị/s; clip ~13)")] public float leaveSpeed = 22f;   // = asset (44 quyết 2026-11-19: giá trị chạy thật, C13–C16 đo đạt trên 22)
         [Tooltip("C7: z của làn trên để xe chạy ngược ra")] public float leaveLaneZ = 17.963f;
         [Tooltip("C7: x mép phải/trái xe thoát ra")] public float leaveEdgeX = 12f;
+        [Tooltip("B10 (góp ý 11): làn trên chỉ 1 xe một lúc; xe rời ở trong dải |z - leaveLaneZ| < laneClearZ còn chiếm làn")] public float laneClearZ = 1.5f;
         [Tooltip("C4: thời gian bay của 1 pixel (s)")] public float flightDuration = 1.4f;
         [Tooltip("C4: tổng thời gian xả cả cụm (s) cho 50 người")] public float flightSpread = 1.4f;
         [Tooltip("C4/C17: độ cao vòng cung (đám đông đi bộ: thấp, có nhảy)")] public float flightArc = 0.9f;
         [Tooltip("C5: pixel xuất hiện đầu level: tổng lan (s) và thời lượng mỗi khối (s)")] public Vector2 appearSpreadDuration = new Vector2(0.9f, 0.7f);
-        [Tooltip("C9: trễ rào chắn sau khi xe rời (s)")] public float barrierDelay = 0.36f;
+        [Tooltip("C9: trễ rào chắn sau khi xe rời (s); góp ý 16 (3c đo clip Lv.1): 0,2 — trường cũ trong asset → đổi qua Sync")] public float barrierDelay = 0.2f;
+        [Tooltip("J7 (góp ý 16, 3c đo clip Lv.1 t=26,63 / 29,67): rào xuất hiện: tổng tới ổn định (s), rơi chạm đất sau (s), độ cao rơi (đv ≈ 0,7 cao rào 1,06), cỡ lúc đầu (0,1–0,5), nở quá (1,10–1,15 → 0,15), nẩy 1 lần cao (đv ≈ 25 % cao rào)")] public float barrierAppearDuration = 0.45f;
+        public float barrierDropDuration = 0.10f;
+        public float barrierDropHeight = 1.6f;   // tâm xuất phát cao hơn chỗ đứng 2,9 % khung (clip 21 px/720): camera pitch 60° chiếu trục Y còn 0,5 → 0,029 × 27,6 / 0,5
+        public float barrierStartScale = 0.2f;
+        public float barrierOvershoot = 0.12f;   // nở ngang (clip 1,10–1,15); cao chỉ ép 0,3 × số này
+        public float barrierBounceHeight = 0.6f;   // nẩy 1 lần 8 px/720 = 1,1 % khung → 0,011 × 27,6 / 0,5
         [Tooltip("C13: bắt đầu cho chạm sau khi vào màn (s)")] public float inputDelay = 1.5f;
 
         [Header("Chuyển động hoãn từ M2 - làm ở M5 (V17, V18, V23, C3, C4, C13, C17, C18)")]
-        [Tooltip("V18: tỉ lệ thu mesh Barrier (mẫu rào ~8 % bề ngang khung)")] public float barrierScale = 0.42f;
+        [Tooltip("V18 (góp ý 14, sbs_barrier_zoom.jpg): rào đường 3D Barrier.obj (thanh đỏ sọc trắng + 4 chân, rộng 1,78 đv): tỉ lệ → rộng ≈ 1,3 đv ≈ 60 % bề rộng ô 1,9 / ≈ 11 % khung; lùi về mép dưới ô theo hướng mũi (ô dài 2,7 → 1,2); xoay thêm so với góc ô (độ)")] public float barrierScale = 0.9f;   // r9c (asset đã đồng bộ): 1,0 → phần đỏ 84 px/648, golden 76 → 0,9; LƯU Ý đổi số này phải chạy Tools/Buzzy Bus/Sync Config Defaults (asset M5 giữ 0,42)
+        public float barrierForward = 1.2f;
+        public Color barrierRed = new Color32(0xE8, 0x2B, 0x2B, 255);
+        public Color barrierWhite = new Color32(0xF4, 0xF4, 0xF8, 255);
+        [Tooltip("V18: chu kỳ sọc chéo (px trên texture 64): nhỏ → nhiều sọc; mẫu 2 sọc trắng trên thanh")] public int barrierStripePeriod = 6;
+        public float barrierYawOffset = 0f;
+        [Tooltip("V18: nghiêng rào quanh trục x (độ); góp ý 14: mesh Barrier.obj vốn đã đứng (probe14), giữ 0")] public float barrierTilt = 0f;
         [Tooltip("V17: vạch P ô trống: màu, cỡ khung đứt (dài theo z, rộng theo x, thế giới), nét, cỡ chữ P")] public Color pMarkColor = new Color32(0x9A, 0xA0, 0xC4, 255);
         public Vector2 pMarkSize = new Vector2(1.9f, 2.7f);
         public float pMarkDash = 0.32f;
@@ -218,7 +243,7 @@ namespace Buzzy.Game
         [Tooltip("U1: màn loading: thời lượng (s), thanh (bề ngang %, y %), logo y %")] public float loadingDuration = 2.5f;
         public float loadingBarWidth = 0.70f;
         public float loadingBarY = 0.835f;
-        public float loadingBarAspect = 0.11f;
+        public float loadingBarAspect = 0.16f;   // = asset (44 quyết: U-row M5 đã duyệt bằng mắt trên 0,16)
         public float loadingLogoY = 0.25f;
         public float loadingLogoWidth = 0.66f;
 
@@ -243,6 +268,179 @@ namespace Buzzy.Game
                 BoosterUnlock = boosterUnlock, BoosterPrice = boosterPrice, BoosterBuyQty = boosterBuyQty, BoosterAdQty = boosterAdQty, BoosterUnlockGift = boosterUnlockGift,
                 FeatureLevels = featureLevels, FeatureNames = featureNames, MaxLevel = maxLevel
             };
+        }
+
+        [Header("Luật mechanic [thiết kế] M6 (design-decisions mục 15; README_Assumptions 12, 14)")]
+        [Tooltip("Băng: RequiredHits chia hệ số này = số pixel cần lấy để vỡ (1 = số hiện trên băng đúng dữ liệu gốc)")] public float frozenHitDivisor = 1f;
+        [Tooltip("Băng: chỉ pixel trong tầm này (ô) quanh vùng mới tính; âm = pixel ở đâu cũng tính")] public int frozenReach = -1;
+        [Tooltip("Mystery: true = pixel ẩn không chạm được tới khi lộ; false = chạm được, chỉ giấu màu")] public bool mysteryBlocks = false;
+        [Tooltip("Xe khoá: true = vào bến đứng chờ chìa; false = đứng đầu cột, ô bến trống")] public bool lockedEntersSlot = false;
+        [Tooltip("Chìa: tỉ lệ pixel vòng quanh phải bị lấy để nhặt")] public float keyClearFraction = 0.5f;
+        [Tooltip("Sky Grab: số pixel nhấc mỗi lần")] public int skyGrabCount = 10;
+        [Tooltip("M7 góp ý 04: true = luật 1a (chỉ pixel có đường ra ngoài mới lấy khi chạm; 76/233 level bế tắc bắt buộc); false = 1b (chọn hết màu, view cho pixel trong chờ tới khi có đường)")] public bool exposedOnly = true;
+        [Tooltip("[thiết kế] (góp ý 13, 44 quyết): nhận chạm màu có xe cùng màu ĐANG XUỐNG bến (clip 3/3 ca chạm khi xe đã đỗ, không có ca ngược lại → chưa xác nhận); tắt = chỉ xe đã đỗ xong mới chạm được")] public bool tapWhileArriving = true;
+        [Tooltip("M7 luật 1c (chờ người dùng chốt): true = trong cùng lớp, pixel gần điểm chạm đi trước; false = gần ô bến đi trước")] public bool orderFromTapPoint = true;
+
+        public Buzzy.Core.MechanicRules ToMechanicRules()
+        {
+            return new Buzzy.Core.MechanicRules
+            {
+                FrozenHitDivisor = frozenHitDivisor, FrozenReach = frozenReach, MysteryBlocks = mysteryBlocks,
+                LockedEntersSlot = lockedEntersSlot, KeyClearFraction = keyClearFraction, SkyGrabCount = skyGrabCount, ExposedOnly = exposedOnly, OrderFromTapPoint = orderFromTapPoint, TapWhileArriving = tapWhileArriving
+            };
+        }
+
+        [Header("Cảm giác chơi (feel) - M7 góp ý 03 [thiết kế] (visual-check mục G: A* âm, J* phản hồi, T* bảng thử)")]
+        [Tooltip("A1: âm lượng hiệu ứng chung; A2: nhạc nền (bg_1 lặp)")] public float sfxVolume = 1f;
+        public float musicVolume = 0.45f;
+        [Tooltip("A3: pop mỗi khách lên xe: âm lượng, cao độ đầu, bước tăng mỗi khách, số bước tối đa, khoảng cách tối thiểu 2 pop (s), nghỉ bao lâu thì cao độ về đầu (s)")] public float popVolume = 0.55f;
+        public float popPitchBase = 0.95f;
+        public float popPitchStep = 0.025f;
+        public int popPitchSteps = 24;
+        public float popMinInterval = 0.045f;
+        public float popResetGap = 0.6f;
+        [Tooltip("A4: âm lượng tiếng chạm cụm (tap_passenger) và chạm sai (choose_wrong)")] public float tapVolume = 0.8f;
+        public float wrongVolume = 0.9f;
+        [Tooltip("A5: rung máy khi chạm đúng (ngoài rung chạm sai C21); tắt vì Handheld.Vibrate dài")] public bool hapticOnTap = false;
+        [Tooltip("J1: cụm được chọn nhấc lên (thế giới) trong bao lâu (s) — chỉ còn cho Sky Grab; góp ý 04: 0 (hành khách đứng yên tới lượt đi)")] public float pickLift = 0f;
+        public float pickLiftDuration = 0.12f;
+        [Tooltip("J2: xe lắc khi khách lên: ép cỡ (tỉ lệ), chúi mũi (độ, gốc _boardRockPitchAngle 10), thời lượng (s), cách nhau tối thiểu (s) (góp ý 07: chậm, thưa; đợt 2: thấy được ở 20 fps); J3: biên độ khi đỗ xong")] public float carBounce = 0.03f;
+        public float boardRockPitch = 8f;
+        [Tooltip("J2 đợt 3: nhấc cả xe lên (đơn vị thế giới) mỗi nhịp khách lên; 0,12 ≈ 5 px / 648 ≈ 7 % cao xe (3c: cần ≥ 5 %)")] public float carBounceLift = 0.12f;
+        public float carBounceDuration = 0.4f;
+        public float carBounceMinInterval = 0.3f;
+        public float parkBounce = 0.14f;
+        [Tooltip("J4: số trên nóc bật to khi đổi: hệ số, thời lượng (s)")] public float numberPop = 0.5f;
+        public float numberPopDuration = 0.18f;
+        [Tooltip("J5: xe vừa đủ chỗ lắc yaw: độ, số lần, thời lượng (s)")] public float fullWiggle = 6f;
+        public int fullWiggleCycles = 2;
+        public float fullWiggleDuration = 0.4f;
+        [Tooltip("J6: chạm sai: cụm màu đó rung ngang (thế giới), số lần, thời lượng (s)")] public float wrongShake = 0.12f;
+        public int wrongShakeCycles = 3;
+        public float wrongShakeDuration = 0.3f;
+        [Tooltip("T1: bảng thử nghiệm Editor giữa đáy bảng và thanh booster (tránh xe hàng chờ): y tâm (%), cỡ nút (% bề ngang), x tâm 4 nút (<, Lv, >, R)")] public float devPanelY = 0.85f;
+        public float devButtonSize = 0.075f;
+        public float[] devPanelX = { 0.05f, 0.16f, 0.27f, 0.365f };
+
+        [Header("Đi bộ + đường xe - M7 góp ý 04 (W*, visual-check mục G; config gốc PassengerEntity / CarEntity)")]
+        [Tooltip("W1: tốc độ đi bộ (đơn vị thế giới / s; gốc _moveToCarSpeed 6 theo ô của họ), lệch ± (gốc _speedVariance 0.3, giảm để không vượt nhau)")] public float walkSpeed = 7.5f;   // clip Lv.1 ~6 đv/s theo ô của họ; đợt 3: người đầu phải lên xe ≤ 1,5 s sau chạm (đo 2,2 s) → nhanh hơn 25 %
+        public float walkSpeedVariance = 0.2f;   // clip: túm dãn co (gốc 0.3)
+        [Tooltip("W2 (walk-compare-fb08): đi thành TÚM 2–4 người sát nhau (trong túm cách walkGroupGap s), giữa các túm cách walkGap s; số làn, bước làn (× walkMinDist)")] public float walkGap = 0.06f;   // C8 đợt 3 (3c): xả hết 50 người ≤ 1,5 s như clip: 17 túm × 0,06 + 50 × 0,01 ≈ 1,5 s (trước 3,33 s)
+        public int walkGroupMin = 2;
+        public int walkGroupMax = 4;
+        public float walkGroupGap = 0.01f;
+        public int walkLanes = 3;
+        public float walkLaneSpacing = 1.0f;
+        public float walkLaneOffset = 0.5f;   // (không dùng từ góp ý 05)
+        [Tooltip("W3: bước chân: quãng 1 nhịp (thế giới), nhún cao, lắc mặt (độ)")] public float walkStride = 0.9f;
+        public float walkBobHeight = 0.12f;
+        public float walkSway = 12f;
+        [Tooltip("W4 / C17 (góp ý 15, [người dùng chọn] 19/11, ghi đè clip 6/7 ca hông trái khung của góp ý 13): lên xe ở phía CỬA = hông trái theo chiều xe chạy = hông PHẢI KHUNG HÌNH (-1; +1 = trái khung), cửa GẦN ĐẦU XE (boardFrontOffset dương = về mũi), cách tâm xe, độ cao cửa; mọi ô bến như nhau. Trường đã có trong asset → đổi qua Sync Config Defaults")] public int boardSide = -1;
+        public float boardSideOffset = 0.85f;
+        public float boardFrontOffset = 0.5f;
+        public float boardHeight = 0.6f;
+        public float boardPointOffset = 1.6f;
+        [Tooltip("W7 (góp ý 13, fb13 l2_wait_12.4-15.6.jpg): xe chưa đỗ → chờ ở PHÍA BẢNG của mép lề (waitLineZ = roadNearZ), hàng đầu cách mép waitLineOffset ô (0–0,3), dàn ngang tối đa waitSpread ô (9–11) tâm = ô bến đích, cột = sĩ số / waitRows (2–3); xe đỗ xong mới băng qua đường tới hông. gatherMode 0 = chờ cạnh xe như góp ý 08")] public int gatherMode = 1;
+        public float waitLineZ = 14.03f;
+        public float waitLineOffset = 0.2f;
+        public float waitSpread = 10f;
+        public int waitRows = 3;
+        [Tooltip("W7 (góp ý 13, clip Lv.2 16,0–16,8 / 20,0–20,6): đứng ở lề khi còn xe nào đang chuyển động trong bến (vào / lùi / chạy làn), dù xe của mình đã đỗ; tắt = chỉ chờ xe mình")] public bool waitWhileBayBusy = true;
+        public float boardJumpHeight = 1.0f;
+        public float boardJumpDuration = 0.22f;   // đợt 3: nhảy nhanh hơn để nhịp lên xe ~17 người / s
+        [Tooltip("W5: pixel kẹt hẳn (bị màu khác bao kín): chờ (s) rồi nhảy qua, độ cao nhảy (gốc _stragglerMigrationDelay 0.6)")] public float stragglerDelay = 1.0f;
+        public float stragglerHopHeight = 2.0f;
+        [Tooltip("W1 (góp ý 09): cỡ người khi đi so với khối đứng: 1 = giữ nguyên tới lúc nhảy vào xe; bán kính không lấn vào khối đứng (thế giới)")] public float walkScale = 1f;
+        public float walkObstacleRadius = 0.22f;
+        [Tooltip("W6: lề lưới tìm đường quanh bảng (ô); W3: phạt ô kề khối khi tìm đường (ô cách 2 phạt một nửa) để đi cách rìa 1–2 ô như clip")] public int walkGridMargin = 3;
+        public float walkEdgePenalty = 3f;
+        [Tooltip("C15/C1 (góp ý 07, gốc CarEntity): xe chạy tới bến: gia tốc, tốc độ tối đa, quãng phanh cuối, tốc độ lúc tới; đường cong (tỉ lệ tay cầm Bezier); nghiêng khi cua: hệ số (độ nghiêng / độ-mỗi-giây đổi hướng), tối đa (độ), độ mượt; ngửa khi tăng tốc / chúi khi phanh (độ)")] public float travelAcceleration = 30f;
+        public float travelMaxSpeed = 20f;
+        public float travelArrivalBrakeDistance = 2.5f;
+        public float travelMinArrivalSpeed = 0.6f;
+        public float travelCurveHandle = 0.4f;
+        public float travelBankStrength = 0.06f;
+        public float travelMaxBank = 18f;
+        public float travelBankSmoothing = 10f;
+        public float travelAccelPitch = 4f;
+        public float travelBrakePitch = 8f;
+        [Tooltip("W7 (góp ý 05): khoảng cách tối thiểu giữa 2 người (thế giới; khối rộng ~0.49), lực đẩy nhau (gốc _separationStrength 1.5), tốc độ tự về làn")] public float walkMinDist = 0.45f;   // W2: túm sát nhau, chạm mép nhưng không chồng tâm (khối rộng 0,49)
+        public float walkSeparation = 8f;   // (không dùng từ góp ý 06, thay bằng chiếu)
+        public float walkSeparationRelax = 0.6f;
+        [Tooltip("W7 (góp ý 06): số vòng giải va chạm mỗi khung (gốc _crowdSolverIterations 3); đội hình chờ trước cửa: số hàng; lên xe cách nhau (s)")] public int walkSolverIterations = 4;
+        public int walkQueueRows = 3;
+        [Tooltip("W5 (clip 15–25 người / s): số người được nhảy lên xe cùng lúc, cách nhau (s)")] public float boardInterval = 0.02f;   // đợt 3 (3c đo 9,4 / s, clip 17 / s)
+        public int boardParallel = 16;
+        [Tooltip("W2: hệ số đi chậm khi có người ngay trước mặt (0 = tắt; đợt 2 tắt vì làm cả dòng bò)")] public float walkNoOvertake = 0f;
+        [Tooltip("W7: hệ số nhân chiều sâu (z) khi đo khoảng cách (camera nghiêng 60°: khối sau bị che nếu chỉ cách 1 khối)")] public float walkDepthScale = 1.0f;   // clip: cho phép chồng lấn nhẹ theo chiều sâu
+        [Tooltip("C13 (góp ý 05): xe rời LÙI vòng cung (đít quét sang phải, bán kính = leaveLaneZ - slotZ) với tốc độ này tới khi thẳng làn trên, rồi phóng sang trái (leaveExitSpeed, gốc 12→24)")] public float leaveReverseSpeed = 8f;   // góp ý 06: lùi vọt rồi hãm gấp (ease 1); ảnh nét: 11 quá nhanh (0,1 s)
+        [Tooltip("C13 (góp ý 06): phanh gấp cuối cú lùi: ngửa mũi (độ), thời lượng; đứng bao lâu rồi phóng; phóng chúi mũi (độ), thời lượng (gốc _leavePivotBrakePitchAngle 16 / 0.6 s)")] public float leaveBrakePitch = 14f;
+        public float leaveBrakePitchDuration = 0.45f;
+        public float leaveLaunchPause = 0.22f;
+        public float leaveLaunchPitch = 7f;
+        public float leaveLaunchPitchDuration = 0.5f;
+        [Tooltip("C13: vệt bánh khi phóng: dài, nửa khoảng cách 2 bánh, rộng, màu (alpha), thời gian mờ (s); bắt đầu từ bánh sau (lùi so với tâm xe), mọc dần trong (s)")] public float skidLength = 2.5f;
+        public float skidRearOffset = 0.9f;
+        public float skidGrow = 0.35f;
+        public float skidHalfTrack = 0.42f;
+        public float skidWidth = 0.17f;
+        public Color skidColor = new Color(0.08f, 0.08f, 0.12f, 0.7f);
+        public float skidFade = 1.6f;
+        public float leaveExitSpeed = 17f;   // clip: 14–19 đv/s
+        [Tooltip("C15 (góp ý 04): xe kế của cột bắt đầu xuống sau khi xe cũ rời bao lâu (s) (clip: ~1.5 s, lúc xe cũ sắp khuất)")] public float nextCarDelay = 1.3f;
+
+        // Booster B1–B9 (góp ý 11; clip V4 Lv.4 / V5 Lv.8, 13, 16; design-decisions 4–6). Phiên 1f thêm; luật trong BusGameBoosters.cs.
+        [Header("Booster B1–B9 (góp ý 11)")]
+        [Tooltip("B1/B7 (chốt 4a): thứ tự lấy pixel khi đổ đầy: 0 = cụm lớn nhất trước (không cần lộ), 1 = lớp ngoài như chạm")] public int fillPickRule = 0;
+        [Tooltip("B2: pixel bật lên tại chỗ (cao, s) → bay tụ thành đám trên nóc xe (cao, bán kính, s) → rơi vào xe (s); xuất phát rải trong (s); tổng ≈ 2,0 s")] public float fillPopHeight = 1.2f;
+        public float fillPopDuration = 0.3f;
+        public float fillGatherHeight = 3.2f;
+        public float fillGatherRadius = 1.5f;
+        public float fillGatherDuration = 0.85f;
+        public float fillDropDuration = 0.35f;
+        public float fillSpread = 0.5f;
+        [Tooltip("B3 (chốt 2a): Sky Grab bán kính vùng hút (ô) (clip ~25 pixel); chốt 1a: pixel không có xe đỗ cùng màu / xe đầy → biến mất; hút cả băng / ẩn")] public float skyRadius = 2.5f;
+        public bool skyVanishUnmatched = true;
+        public bool skyTakesFrozen = false;
+        [Tooltip("B4: trực thăng vào từ (lệch x, lệch z so với điểm chạm) sau (s), bay tới điểm chạm (s), lơ lửng (s), bay lên qua hàng xe rồi ra mép trên (mỗi đoạn s); độ cao, cỡ, tốc độ cánh (độ/s)")] public Vector2 skyEnterFrom = new Vector2(-14f, 7f);
+        public float skyEnterDelay = 0.3f;
+        public float skyEnterDuration = 1.0f;
+        public float skyHover = 1.8f;
+        public float skyExitDuration = 0.5f;
+        public float skyHeight = 5f;
+        public float skyScale = 0.5f;   // 3c đo r5_boost16: 1,1 → thân heli ~30 % bề ngang khung, clip ~12 %; mesh Helicopter rộng 1,82 đv × 0,5 ≈ 0,9 đv ≈ 11,5 % khung (khung ≈ 7,9 đv)
+        [Tooltip("B4: bóng mờ dưới trực thăng trên mặt bảng (rộng, dài, đv) để thấy đang lơ lửng; 0 = tắt")] public Vector2 skyShadowSize = new Vector2(1.6f, 2.6f);
+        public float skyRotorSpeed = 1500f;
+        [Tooltip("B4: pixel bị hút: bắt đầu rải trong (s) từ lúc lơ lửng, mỗi pixel bay lên bụng trực thăng trong (s)")] public float skySuckSpread = 1.0f;
+        public float skySuckDuration = 0.5f;
+        [Tooltip("B5 (chốt 3a): 0 = 3 xe đỗ mới là màu nhiều pixel LỘ nhất, 1 = ngẫu nhiên")] public int wandPickRule = 0;
+        [Tooltip("B6: từng cột trái→phải cách (s); xe đỗ xoay 1 vòng (s); khối xám '?' giữ (s); số hiện sau (s); màu khối xám")] public float wandStagger = 0.17f;
+        public float wandSpin = 0.5f;
+        public float wandGrey = 0.5f;
+        public float wandNumberDelay = 0.17f;
+        public Color wandGreyColor = new Color(0.36f, 0.37f, 0.44f, 1f);   // fd r3_boost16 f88–f90: màu cũ sáng, trông như ô trống
+        [Tooltip("B8: camera trượt lên thấy cả cột chờ (s), về (s), lề trên / dưới (thế giới)")] public float clawCamUp = 0.3f;
+        public float clawCamBack = 0.4f;
+        public float clawCamMargin = 4f;
+        [Tooltip("B8: kẹp: cáp thả (s), kẹp (s), nhấc (s, cao), mang tới làn (s), nhả + thu cáp (s); độ cao đỉnh cáp; cỡ kẹp; vị trí thả (x, z) trên làn; xoáy tím trên nóc (s)")] public float clawDescend = 1.5f;
+        public float clawGrab = 0.7f;
+        public float clawLiftDuration = 0.5f;
+        public float clawLiftHeight = 2f;   // fd r5_boost16 f132–f138: 4 → xe bị thanh HUD trên che lúc mang
+        public float clawCarry = 1.5f;
+        public float clawRelease = 0.3f;
+        public float clawCableHeight = 3.5f;   // fd r3_boost16 f114–f128: 14 → kẹp + cáp nằm ngoài khung suốt lúc thả
+        public float clawMeshScale = 1.1f;   // đầu kẹp = khối 1,4 đv × 1,1 ≈ 1,5 đv ≈ bề ngang xe (clip); móc Claw.obj treo dưới. r5/r6: mesh móc 0,46 đv × 1,5 vẫn chỉ là chấm
+        public Vector2 clawLanePos = new Vector2(1.6f, 17.96f);
+        public float swirlDuration = 0.5f;   // 3c: xoáy tím 0,3–0,7 s TRƯỚC khi pixel bay
+        [Tooltip("B9: tooltip đáy: y tâm (%), rộng (%), cao / rộng, cỡ chữ (px @1080); VIP: màn tối alpha")] public float tooltipY = 0.80f;
+        public float tooltipWidth = 0.82f;
+        public float tooltipAspect = 0.19f;
+        public int tooltipFontSize = 30;
+        public float vipDimAlpha = 0.55f;
+
+        public Buzzy.Core.BoosterRules ToBoosterRules()
+        {
+            return new Buzzy.Core.BoosterRules { SkyGrabRadius = skyRadius, SkyGrabVanishUnmatched = skyVanishUnmatched, SkyGrabTakesFrozen = skyTakesFrozen, WandPick = wandPickRule, FillPick = fillPickRule };
         }
 
         [Header("Màu nền (V3, V4, V8)")]

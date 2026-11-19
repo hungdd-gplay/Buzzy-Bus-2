@@ -7,6 +7,8 @@ namespace Buzzy.Game
     public class BuzzyAssets : ScriptableObject
     {
         public Mesh busMesh, blockMesh, barrierMesh, iceMesh, keyMesh, lockMesh, heliMesh, heliWingMesh, clawMesh;
+        public Mesh fullSignMesh;   // góp ý 14: biển Full 3D (Sign_Full.obj) đuôi chạm đất
+        public Texture2D colorTexture;   // atlas màu gốc (Color.png); lưu ý: UV của Barrier / Sign_Full không trỏ vào bảng màu (đo 2026-11-19), hiện chưa mesh nào dùng
         public Texture2D busTexture;
         public Font font;
         public Sprite tunnel, levelBar, boosterCircle, lockIcon, settings, knob;
@@ -23,5 +25,12 @@ namespace Buzzy.Game
         /// <summary>Icon tính năng kế (song song featureNames: Hidden, Frozen Pixel, Locked Bus).</summary>
         public Sprite[] featureIcons;
         public Texture2D loadingBackground;
+        /// <summary>V14 (góp ý 10): bóng đổ mềm dưới xe (Shadow.png gốc, tím nhạt alpha).</summary>
+        public Texture2D shadowTexture;
+        /// <summary>M7 âm thanh (Full_APK_Export/Audio → Res/Buzzy/Audio; ánh xạ sự kiện [thiết kế] design-decisions 17).</summary>
+        public AudioClip sfxTap, sfxPop, sfxWrong, sfxWin, sfxLose, sfxButton, sfxPositive, sfxBubble, sfxSwipe, sfxReward, sfxIntroduce, sfxChangeFalling, sfxBusLeave;
+        public AudioClip sfxIceInit, sfxIceBreak, sfxIceBreak2, sfxVip, sfxHeli, sfxClawStart, sfxClawEnd, sfxShuffle;
+        /// <summary>Nhạc nền (bg_1, bg_2); phát [0] lặp.</summary>
+        public AudioClip[] music;
     }
 }

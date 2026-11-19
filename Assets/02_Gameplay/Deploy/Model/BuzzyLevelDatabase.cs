@@ -81,5 +81,18 @@ namespace Buzzy.Game
             for (int i = 0; i < levels.Count; i++) if (levels[i].index == index) return levels[i];
             return null;
         }
+
+        /// <summary>M6 [thiết kế]: level thứ n (1-based) người chơi gặp = level trong phạm vi thứ n theo index tăng (level ngoài phạm vi bị bỏ qua).</summary>
+        public BuzzyLevel GetPlayable(int n)
+        {
+            int k = 0;
+            for (int i = 0; i < levels.Count; i++) if (string.IsNullOrEmpty(levels[i].outOfScope) && ++k == n) return levels[i];
+            return null;
+        }
+
+        public int PlayableCount
+        {
+            get { int k = 0; for (int i = 0; i < levels.Count; i++) if (string.IsNullOrEmpty(levels[i].outOfScope)) k++; return k; }
+        }
     }
 }

@@ -5104,7 +5104,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.51
     taps: 17
     difficultyBand: 0
     validation: 
@@ -9200,8 +9200,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 23
+    winRate: 0.77
+    taps: 17
     difficultyBand: 0
     validation: 
     walls: []
@@ -11441,7 +11441,7 @@ MonoBehaviour:
     physicalHeight: 10.357142
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.69
     taps: 17
     difficultyBand: 0
     validation: 
@@ -13901,8 +13901,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 19
+    winRate: 0.86
+    taps: 18
     difficultyBand: 0
     validation: 
     walls: []
@@ -15757,7 +15757,7 @@ MonoBehaviour:
     physicalHeight: 8.928572
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.94
     taps: 14
     difficultyBand: 0
     validation: 
@@ -18229,7 +18229,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.74
     taps: 16
     difficultyBand: 0
     validation: 
@@ -22634,7 +22634,7 @@ MonoBehaviour:
     physicalHeight: 14
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.96
     taps: 19
     difficultyBand: 0
     validation: 
@@ -24915,7 +24915,7 @@ MonoBehaviour:
     physicalHeight: 11.785714
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.66
     taps: 19
     difficultyBand: 0
     validation: 
@@ -29595,7 +29595,7 @@ MonoBehaviour:
     physicalHeight: 12.8
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.91
     taps: 18
     difficultyBand: 0
     validation: 
@@ -31536,7 +31536,7 @@ MonoBehaviour:
     physicalHeight: 12.692307
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.83
     taps: 21
     difficultyBand: 0
     validation: 
@@ -33819,7 +33819,7 @@ MonoBehaviour:
     physicalHeight: 12.307693
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.73
     taps: 21
     difficultyBand: 0
     validation: 
@@ -36252,7 +36252,7 @@ MonoBehaviour:
     physicalHeight: 10
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.53
     taps: 21
     difficultyBand: 0
     validation: 
@@ -38164,9 +38164,9 @@ MonoBehaviour:
     physicalHeight: 11.923077
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.31
     taps: 20
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -40314,7 +40314,7 @@ MonoBehaviour:
     physicalHeight: 15
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.86
     taps: 19
     difficultyBand: 0
     validation: 
@@ -42742,7 +42742,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.99
     taps: 20
     difficultyBand: 0
     validation: 
@@ -45504,7 +45504,7 @@ MonoBehaviour:
     physicalHeight: 12.666667
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.93
     taps: 22
     difficultyBand: 0
     validation: 
@@ -47199,8 +47199,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 20
+    winRate: 0.68
+    taps: 21
     difficultyBand: 0
     validation: 
     walls:
@@ -49655,9 +49655,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.12
     taps: 20
-    difficultyBand: 0
+    difficultyBand: 2
     validation: 
     walls: []
     frozen:
@@ -51902,7 +51902,7 @@ MonoBehaviour:
     showRoof: 0
     solvable: 1
     winRate: 1
-    taps: 17
+    taps: 16
     difficultyBand: 0
     validation: 
     walls: []
@@ -54368,8 +54368,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 23
+    winRate: 0.54
+    taps: 24
     difficultyBand: 0
     validation: 
     walls: []
@@ -56781,7 +56781,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.93
     taps: 17
     difficultyBand: 0
     validation: 
@@ -59251,7 +59251,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.52
     taps: 26
     difficultyBand: 0
     validation: 
@@ -61734,9 +61734,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.14
     taps: 31
-    difficultyBand: 0
+    difficultyBand: 2
     validation: 
     walls: []
     frozen:
@@ -65523,7 +65523,7 @@ MonoBehaviour:
     physicalHeight: 12.916667
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.67
     taps: 32
     difficultyBand: 0
     validation: 
@@ -67948,8 +67948,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 18
+    winRate: 0.94
+    taps: 17
     difficultyBand: 0
     validation: 
     walls: []
@@ -70408,9 +70408,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 0.19
-    taps: 27
-    difficultyBand: 2
+    winRate: 0.41
+    taps: 24
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -72545,8 +72545,8 @@ MonoBehaviour:
     physicalHeight: 12.916667
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 17
+    winRate: 0.8
+    taps: 16
     difficultyBand: 0
     validation: 
     walls:
@@ -75030,8 +75030,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 26
+    winRate: 0.8
+    taps: 23
     difficultyBand: 0
     validation: 
     walls: []
@@ -77549,9 +77549,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 30
-    difficultyBand: 0
+    winRate: 0.13
+    taps: 32
+    difficultyBand: 2
     validation: 
     walls: []
     frozen:
@@ -79958,7 +79958,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.61
     taps: 15
     difficultyBand: 0
     validation: 
@@ -83834,9 +83834,9 @@ MonoBehaviour:
     physicalWidth: 10
     physicalHeight: 13.333333
     showRoof: 0
-    solvable: 0
-    winRate: 0
-    taps: 0
+    solvable: 1
+    winRate: 0.03
+    taps: 49
     difficultyBand: 2
     validation: 
     walls: []
@@ -85599,10 +85599,10 @@ MonoBehaviour:
     physicalWidth: 10
     physicalHeight: 13.2
     showRoof: 0
-    solvable: 1
-    winRate: 0.72
-    taps: 20
-    difficultyBand: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 2
     validation: 
     walls:
     - x: -1
@@ -88009,9 +88009,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.28
     taps: 21
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -90457,7 +90457,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.9
     taps: 27
     difficultyBand: 0
     validation: 
@@ -92886,9 +92886,9 @@ MonoBehaviour:
     physicalHeight: 11
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.21
     taps: 22
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -95305,9 +95305,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.27
     taps: 29
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -97240,9 +97240,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 27
-    difficultyBand: 0
+    winRate: 0.22
+    taps: 24
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -99748,7 +99748,7 @@ MonoBehaviour:
     physicalHeight: 12.8
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.5
     taps: 28
     difficultyBand: 0
     validation: 
@@ -103502,8 +103502,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 32
+    winRate: 0.56
+    taps: 30
     difficultyBand: 0
     validation: 
     walls:
@@ -105976,8 +105976,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 20
+    winRate: 0.71
+    taps: 21
     difficultyBand: 0
     validation: 
     walls: []
@@ -107976,7 +107976,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.94
     taps: 19
     difficultyBand: 0
     validation: 
@@ -111820,9 +111820,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.13
     taps: 44
-    difficultyBand: 0
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -114278,8 +114278,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 27
+    winRate: 0.82
+    taps: 26
     difficultyBand: 0
     validation: 
     walls: []
@@ -116260,7 +116260,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.62
     taps: 18
     difficultyBand: 0
     validation: 
@@ -118814,7 +118814,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.52
     taps: 36
     difficultyBand: 0
     validation: 
@@ -121297,9 +121297,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.27
     taps: 31
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -123738,9 +123738,9 @@ MonoBehaviour:
     physicalHeight: 12.8
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.19
     taps: 33
-    difficultyBand: 0
+    difficultyBand: 2
     validation: 
     walls:
     - x: 18
@@ -126923,7 +126923,7 @@ MonoBehaviour:
     physicalHeight: 13
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.85
     taps: 31
     difficultyBand: 0
     validation: 
@@ -129162,8 +129162,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 34
+    winRate: 0.85
+    taps: 36
     difficultyBand: 0
     validation: 
     walls: []
@@ -131607,8 +131607,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 23
+    winRate: 0.68
+    taps: 21
     difficultyBand: 0
     validation: 
     walls: []
@@ -134079,7 +134079,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.98
     taps: 21
     difficultyBand: 0
     validation: 
@@ -136572,8 +136572,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 0.24
-    taps: 37
+    winRate: 0.2
+    taps: 33
     difficultyBand: 1
     validation: 
     walls: []
@@ -146286,9 +146286,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 32
-    difficultyBand: 0
+    winRate: 0.35
+    taps: 33
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -148730,9 +148730,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.4
     taps: 36
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -151210,7 +151210,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.94
     taps: 28
     difficultyBand: 0
     validation: 
@@ -152611,9 +152611,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 28
-    difficultyBand: 0
+    winRate: 0.29
+    taps: 30
+    difficultyBand: 1
     validation: 
     walls:
     - x: 0
@@ -155149,7 +155149,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.86
     taps: 33
     difficultyBand: 0
     validation: 
@@ -157624,9 +157624,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 31
-    difficultyBand: 0
+    winRate: 0.11
+    taps: 28
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -160870,9 +160870,9 @@ MonoBehaviour:
     physicalHeight: 12.857142
     showRoof: 0
     solvable: 1
-    winRate: 0.23
-    taps: 46
-    difficultyBand: 1
+    winRate: 0.02
+    taps: 48
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -171968,7 +171968,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.5
     taps: 38
     difficultyBand: 0
     validation: 
@@ -174397,7 +174397,7 @@ MonoBehaviour:
     showRoof: 0
     solvable: 1
     winRate: 1
-    taps: 20
+    taps: 21
     difficultyBand: 0
     validation: 
     walls: []
@@ -176938,9 +176938,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.31
     taps: 34
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen:
@@ -178987,7 +178987,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.91
     taps: 22
     difficultyBand: 0
     validation: 
@@ -182516,10 +182516,10 @@ MonoBehaviour:
     physicalWidth: 10
     physicalHeight: 13.333333
     showRoof: 0
-    solvable: 0
-    winRate: 0
-    taps: 0
-    difficultyBand: 2
+    solvable: 1
+    winRate: 1
+    taps: 24
+    difficultyBand: 0
     validation: 
     walls: []
     frozen:
@@ -186368,9 +186368,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 43
-    difficultyBand: 0
+    winRate: 0.28
+    taps: 44
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -196020,9 +196020,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 31
-    difficultyBand: 0
+    winRate: 0.14
+    taps: 32
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -197675,9 +197675,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 0.96
+    winRate: 0.21
     taps: 27
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -200125,7 +200125,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.91
     taps: 22
     difficultyBand: 0
     validation: 
@@ -205120,9 +205120,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.35
     taps: 28
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -207549,7 +207549,7 @@ MonoBehaviour:
     showRoof: 0
     solvable: 1
     winRate: 1
-    taps: 20
+    taps: 21
     difficultyBand: 0
     validation: 
     walls: []
@@ -209434,8 +209434,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 0.13
-    taps: 40
+    winRate: 0.02
+    taps: 42
     difficultyBand: 2
     validation: 
     walls: []
@@ -212985,7 +212985,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.74
     taps: 33
     difficultyBand: 0
     validation: 
@@ -220058,9 +220058,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.32
     taps: 28
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -222476,7 +222476,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.62
     taps: 16
     difficultyBand: 0
     validation: 
@@ -224984,9 +224984,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.18
     taps: 36
-    difficultyBand: 0
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -228761,9 +228761,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.35
     taps: 36
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -233359,7 +233359,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.69
     taps: 22
     difficultyBand: 0
     validation: 
@@ -235788,9 +235788,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.16
     taps: 31
-    difficultyBand: 0
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -245114,7 +245114,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.92
     taps: 17
     difficultyBand: 0
     validation: 
@@ -247620,7 +247620,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.93
     taps: 32
     difficultyBand: 0
     validation: 
@@ -249833,7 +249833,7 @@ MonoBehaviour:
     physicalHeight: 12.692307
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.96
     taps: 31
     difficultyBand: 0
     validation: 
@@ -251852,7 +251852,7 @@ MonoBehaviour:
     physicalHeight: 13.75
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.6
     taps: 26
     difficultyBand: 0
     validation: 
@@ -254352,8 +254352,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 22
+    winRate: 0.63
+    taps: 21
     difficultyBand: 0
     validation: 
     walls: []
@@ -256555,8 +256555,8 @@ MonoBehaviour:
     physicalHeight: 13.6
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 28
+    winRate: 0.75
+    taps: 29
     difficultyBand: 0
     validation: 
     walls:
@@ -260396,9 +260396,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 37
-    difficultyBand: 0
+    winRate: 0.06
+    taps: 38
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -262874,8 +262874,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 33
+    winRate: 0.64
+    taps: 31
     difficultyBand: 0
     validation: 
     walls: []
@@ -265342,9 +265342,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.12
     taps: 24
-    difficultyBand: 0
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -279102,9 +279102,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 41
-    difficultyBand: 0
+    winRate: 0.02
+    taps: 42
+    difficultyBand: 2
     validation: 
     walls: []
     frozen:
@@ -281567,7 +281567,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.97
     taps: 21
     difficultyBand: 0
     validation: 
@@ -284005,7 +284005,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.74
     taps: 22
     difficultyBand: 0
     validation: 
@@ -286395,9 +286395,9 @@ MonoBehaviour:
     physicalHeight: 13.2
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 34
-    difficultyBand: 0
+    winRate: 0.05
+    taps: 35
+    difficultyBand: 2
     validation: 
     walls:
     - x: 24
@@ -293701,7 +293701,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.85
     taps: 19
     difficultyBand: 0
     validation: 
@@ -299955,8 +299955,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 27
+    winRate: 0.76
+    taps: 21
     difficultyBand: 0
     validation: 
     walls: []
@@ -302713,9 +302713,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 36
-    difficultyBand: 0
+    winRate: 0.11
+    taps: 37
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -305166,7 +305166,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.67
     taps: 25
     difficultyBand: 0
     validation: 
@@ -307604,9 +307604,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.42
     taps: 22
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -310057,9 +310057,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 25
-    difficultyBand: 0
+    winRate: 0.08
+    taps: 28
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -312550,9 +312550,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 33
-    difficultyBand: 0
+    winRate: 0.08
+    taps: 34
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -314481,9 +314481,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 31
-    difficultyBand: 0
+    winRate: 0.31
+    taps: 32
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -326784,9 +326784,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.26
     taps: 25
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -330589,9 +330589,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 0.99
-    taps: 49
-    difficultyBand: 0
+    winRate: 0.1
+    taps: 52
+    difficultyBand: 2
     validation: 
     walls: []
     frozen:
@@ -335492,8 +335492,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 23
+    winRate: 0.72
+    taps: 24
     difficultyBand: 0
     validation: 
     walls: []
@@ -338016,9 +338016,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 38
-    difficultyBand: 0
+    winRate: 0.27
+    taps: 41
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -340464,8 +340464,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 24
+    winRate: 0.81
+    taps: 25
     difficultyBand: 0
     validation: 
     walls: []
@@ -342948,9 +342948,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 25
-    difficultyBand: 0
+    winRate: 0.07
+    taps: 26
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -345421,8 +345421,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 38
+    winRate: 0.98
+    taps: 25
     difficultyBand: 0
     validation: 
     walls: []
@@ -348062,7 +348062,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.77
     taps: 28
     difficultyBand: 0
     validation: 
@@ -350518,9 +350518,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.16
     taps: 31
-    difficultyBand: 0
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -353001,9 +353001,9 @@ MonoBehaviour:
     physicalWidth: 10
     physicalHeight: 13.333333
     showRoof: 0
-    solvable: 0
-    winRate: 0
-    taps: 0
+    solvable: 1
+    winRate: 0.12
+    taps: 31
     difficultyBand: 2
     validation: 
     walls: []
@@ -355540,7 +355540,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.62
     taps: 30
     difficultyBand: 0
     validation: 
@@ -357983,7 +357983,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.97
     taps: 23
     difficultyBand: 0
     validation: 
@@ -360441,9 +360441,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.3
     taps: 26
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen:
@@ -362930,9 +362930,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.2
     taps: 31
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -365408,9 +365408,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.41
     taps: 30
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -367819,9 +367819,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.45
     taps: 22
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen:
@@ -370009,8 +370009,8 @@ MonoBehaviour:
     physicalHeight: 12.8
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 21
+    winRate: 0.54
+    taps: 22
     difficultyBand: 0
     validation: 
     walls:
@@ -373845,8 +373845,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 36
+    winRate: 0.64
+    taps: 37
     difficultyBand: 0
     validation: 
     walls: []
@@ -376333,7 +376333,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.74
     taps: 32
     difficultyBand: 0
     validation: 
@@ -381105,9 +381105,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.41
     taps: 27
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -383548,7 +383548,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.53
     taps: 23
     difficultyBand: 0
     validation: 
@@ -385628,9 +385628,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 23
-    difficultyBand: 0
+    winRate: 0.34
+    taps: 25
+    difficultyBand: 1
     validation: 
     walls: []
     frozen:
@@ -388148,9 +388148,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 36
-    difficultyBand: 0
+    winRate: 0.21
+    taps: 37
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -390576,7 +390576,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.96
     taps: 20
     difficultyBand: 0
     validation: 
@@ -393030,7 +393030,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.56
     taps: 24
     difficultyBand: 0
     validation: 
@@ -396804,9 +396804,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.44
     taps: 30
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -399277,9 +399277,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.29
     taps: 29
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -401740,9 +401740,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 27
-    difficultyBand: 0
+    winRate: 0.37
+    taps: 28
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -404151,7 +404151,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.71
     taps: 22
     difficultyBand: 0
     validation: 
@@ -406670,9 +406670,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 37
-    difficultyBand: 0
+    winRate: 0.07
+    taps: 38
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -409133,7 +409133,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.65
     taps: 27
     difficultyBand: 0
     validation: 
@@ -411599,8 +411599,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 25
+    winRate: 0.68
+    taps: 24
     difficultyBand: 0
     validation: 
     walls: []
@@ -415574,8 +415574,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 51
+    winRate: 0.53
+    taps: 52
     difficultyBand: 0
     validation: 
     walls: []
@@ -417987,7 +417987,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.64
     taps: 17
     difficultyBand: 0
     validation: 
@@ -420383,7 +420383,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.77
     taps: 19
     difficultyBand: 0
     validation: 
@@ -422805,9 +422805,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 26
-    difficultyBand: 0
+    winRate: 0.03
+    taps: 27
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -425299,10 +425299,10 @@ MonoBehaviour:
     physicalWidth: 10
     physicalHeight: 13.333333
     showRoof: 0
-    solvable: 1
-    winRate: 1
-    taps: 31
-    difficultyBand: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -427793,9 +427793,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.3
     taps: 33
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen:
@@ -430252,7 +430252,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.6
     taps: 25
     difficultyBand: 0
     validation: 
@@ -432770,9 +432770,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 38
-    difficultyBand: 0
+    winRate: 0.29
+    taps: 39
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -435218,7 +435218,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.64
     taps: 24
     difficultyBand: 0
     validation: 
@@ -437631,7 +437631,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.89
     taps: 17
     difficultyBand: 0
     validation: 
@@ -441408,8 +441408,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 40
+    winRate: 0.78
+    taps: 36
     difficultyBand: 0
     validation: 
     walls: []
@@ -443982,9 +443982,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 24
-    difficultyBand: 0
+    winRate: 0.33
+    taps: 23
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -446578,9 +446578,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 24
-    difficultyBand: 0
+    winRate: 0.32
+    taps: 25
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -451519,9 +451519,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 0.77
-    taps: 35
-    difficultyBand: 0
+    winRate: 0.01
+    taps: 37
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -454025,8 +454025,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 0.57
-    taps: 27
+    winRate: 0.83
+    taps: 26
     difficultyBand: 0
     validation: 
     walls: []
@@ -456664,8 +456664,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 30
+    winRate: 0.58
+    taps: 31
     difficultyBand: 0
     validation: 
     walls: []
@@ -459200,9 +459200,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 39
-    difficultyBand: 0
+    winRate: 0.03
+    taps: 42
+    difficultyBand: 2
     validation: 
     walls: []
     frozen:
@@ -461836,7 +461836,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.86
     taps: 26
     difficultyBand: 0
     validation: 
@@ -464289,7 +464289,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.86
     taps: 25
     difficultyBand: 0
     validation: 
@@ -470566,8 +470566,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 21
+    winRate: 0.52
+    taps: 23
     difficultyBand: 0
     validation: 
     walls: []
@@ -473044,9 +473044,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.35
     taps: 30
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -480459,9 +480459,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.34
     taps: 29
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -482941,10 +482941,10 @@ MonoBehaviour:
     physicalWidth: 10
     physicalHeight: 13.333333
     showRoof: 0
-    solvable: 1
-    winRate: 1
-    taps: 31
-    difficultyBand: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 2
     validation: 
     walls: []
     frozen:
@@ -491559,10 +491559,10 @@ MonoBehaviour:
     physicalWidth: 10
     physicalHeight: 13.333333
     showRoof: 0
-    solvable: 1
-    winRate: 1
-    taps: 23
-    difficultyBand: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -496485,7 +496485,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.52
     taps: 28
     difficultyBand: 0
     validation: 
@@ -498424,9 +498424,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 21
-    difficultyBand: 0
+    winRate: 0.44
+    taps: 20
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -500924,9 +500924,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 26
-    difficultyBand: 0
+    winRate: 0.17
+    taps: 27
+    difficultyBand: 2
     validation: 
     walls: []
     frozen:
@@ -505899,9 +505899,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 24
-    difficultyBand: 0
+    winRate: 0.35
+    taps: 25
+    difficultyBand: 1
     validation: 
     walls: []
     frozen:
@@ -508353,9 +508353,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 24
-    difficultyBand: 0
+    winRate: 0.08
+    taps: 27
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -510769,9 +510769,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 23
-    difficultyBand: 0
+    winRate: 0.08
+    taps: 25
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -515121,9 +515121,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.37
     taps: 24
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -521404,9 +521404,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.16
     taps: 34
-    difficultyBand: 0
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -526230,7 +526230,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.5
     taps: 20
     difficultyBand: 0
     validation: 
@@ -529903,7 +529903,7 @@ MonoBehaviour:
     physicalHeight: 13
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.77
     taps: 32
     difficultyBand: 0
     validation: 
@@ -532426,7 +532426,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.64
     taps: 18
     difficultyBand: 0
     validation: 
@@ -539820,9 +539820,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 36
-    difficultyBand: 0
+    winRate: 0.16
+    taps: 37
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -548425,9 +548425,9 @@ MonoBehaviour:
     physicalHeight: 12.916667
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 27
-    difficultyBand: 0
+    winRate: 0.39
+    taps: 28
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -550903,8 +550903,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 30
+    winRate: 0.53
+    taps: 31
     difficultyBand: 0
     validation: 
     walls: []
@@ -553309,7 +553309,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.57
     taps: 21
     difficultyBand: 0
     validation: 
@@ -560266,9 +560266,9 @@ MonoBehaviour:
     physicalHeight: 12.692307
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 26
-    difficultyBand: 0
+    winRate: 0.04
+    taps: 29
+    difficultyBand: 2
     validation: 
     walls:
     - x: 0
@@ -564250,7 +564250,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.72
     taps: 28
     difficultyBand: 0
     validation: 
@@ -565948,7 +565948,7 @@ MonoBehaviour:
     physicalHeight: 12.692307
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.63
     taps: 21
     difficultyBand: 0
     validation: 
@@ -572205,8 +572205,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 27
+    winRate: 0.64
+    taps: 28
     difficultyBand: 0
     validation: 
     walls: []
@@ -574663,9 +574663,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.47
     taps: 26
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -577136,9 +577136,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.36
     taps: 29
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -579614,9 +579614,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 0.92
-    taps: 30
-    difficultyBand: 0
+    winRate: 0.17
+    taps: 32
+    difficultyBand: 2
     validation: 
     walls: []
     frozen:
@@ -589525,9 +589525,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 29
-    difficultyBand: 0
+    winRate: 0.11
+    taps: 31
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -591983,8 +591983,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 26
+    winRate: 0.68
+    taps: 30
     difficultyBand: 0
     validation: 
     walls: []
@@ -597209,7 +597209,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.94
     taps: 29
     difficultyBand: 0
     validation: 
@@ -599672,7 +599672,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.54
     taps: 27
     difficultyBand: 0
     validation: 
@@ -602140,9 +602140,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.43
     taps: 28
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -604591,9 +604591,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 30
-    difficultyBand: 0
+    winRate: 0.12
+    taps: 34
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -607070,9 +607070,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 29
-    difficultyBand: 0
+    winRate: 0.48
+    taps: 30
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -609578,9 +609578,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 38
-    difficultyBand: 0
+    winRate: 0.33
+    taps: 37
+    difficultyBand: 1
     validation: 
     walls: []
     frozen:
@@ -614485,7 +614485,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.7
     taps: 27
     difficultyBand: 0
     validation: 
@@ -625047,7 +625047,7 @@ MonoBehaviour:
     physicalHeight: 12.083333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.59
     taps: 17
     difficultyBand: 0
     validation: 
@@ -626936,7 +626936,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.99
     taps: 16
     difficultyBand: 0
     validation: 
@@ -633642,9 +633642,9 @@ MonoBehaviour:
     physicalHeight: 12.8
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.32
     taps: 25
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen:
@@ -638614,9 +638614,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 33
-    difficultyBand: 0
+    winRate: 0.4
+    taps: 34
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -640650,7 +640650,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.8
     taps: 19
     difficultyBand: 0
     validation: 
@@ -646207,9 +646207,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 30
-    difficultyBand: 0
+    winRate: 0.04
+    taps: 32
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -648097,7 +648097,7 @@ MonoBehaviour:
     physicalHeight: 11.538462
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.85
     taps: 21
     difficultyBand: 0
     validation: 
@@ -649867,7 +649867,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.53
     taps: 21
     difficultyBand: 0
     validation: 
@@ -652334,9 +652334,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.2
     taps: 32
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen:
@@ -656158,8 +656158,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 28
+    winRate: 0.57
+    taps: 27
     difficultyBand: 0
     validation: 
     walls: []
@@ -660473,9 +660473,9 @@ MonoBehaviour:
     physicalHeight: 11.6
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.37
     taps: 23
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -668038,9 +668038,9 @@ MonoBehaviour:
     physicalHeight: 11.666667
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.08
     taps: 24
-    difficultyBand: 0
+    difficultyBand: 2
     validation: 
     walls: []
     frozen:
@@ -670507,8 +670507,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 31
+    winRate: 0.6
+    taps: 27
     difficultyBand: 0
     validation: 
     walls: []
@@ -672372,7 +672372,7 @@ MonoBehaviour:
     physicalHeight: 12.8
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.88
     taps: 19
     difficultyBand: 0
     validation: 
@@ -674821,9 +674821,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.03
     taps: 29
-    difficultyBand: 0
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -676707,7 +676707,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.89
     taps: 19
     difficultyBand: 0
     validation: 
@@ -678320,10 +678320,10 @@ MonoBehaviour:
     physicalWidth: 10
     physicalHeight: 12.5
     showRoof: 0
-    solvable: 1
-    winRate: 1
-    taps: 24
-    difficultyBand: 0
+    solvable: 0
+    winRate: 0
+    taps: 0
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []
@@ -680806,9 +680806,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 27
-    difficultyBand: 0
+    winRate: 0.4
+    taps: 28
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -683297,9 +683297,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 29
-    difficultyBand: 0
+    winRate: 0.47
+    taps: 30
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -685756,9 +685756,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 23
-    difficultyBand: 0
+    winRate: 0.04
+    taps: 25
+    difficultyBand: 2
     validation: 
     walls: []
     frozen:
@@ -692187,7 +692187,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.53
     taps: 40
     difficultyBand: 0
     validation: 
@@ -694381,7 +694381,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.73
     taps: 26
     difficultyBand: 0
     validation: 
@@ -696153,7 +696153,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 0.97
+    winRate: 0.86
     taps: 25
     difficultyBand: 0
     validation: 
@@ -701106,7 +701106,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.5
     taps: 24
     difficultyBand: 0
     validation: 
@@ -703605,9 +703605,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.26
     taps: 27
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -709401,7 +709401,7 @@ MonoBehaviour:
     physicalHeight: 13.913043
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.71
     taps: 18
     difficultyBand: 0
     validation: 
@@ -715717,9 +715717,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.37
     taps: 25
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -717584,7 +717584,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.73
     taps: 27
     difficultyBand: 0
     validation: 
@@ -720016,7 +720016,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.93
     taps: 25
     difficultyBand: 0
     validation: 
@@ -724893,8 +724893,8 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 21
+    winRate: 0.56
+    taps: 22
     difficultyBand: 0
     validation: 
     walls: []
@@ -727376,9 +727376,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 31
-    difficultyBand: 0
+    winRate: 0.41
+    taps: 32
+    difficultyBand: 1
     validation: 
     walls: []
     frozen: []
@@ -729636,9 +729636,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 20
-    difficultyBand: 0
+    winRate: 0.09
+    taps: 21
+    difficultyBand: 2
     validation: 
     walls:
     - x: 6
@@ -731415,9 +731415,9 @@ MonoBehaviour:
     physicalHeight: 12.916667
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.49
     taps: 19
-    difficultyBand: 0
+    difficultyBand: 1
     validation: 
     walls:
     - x: 9
@@ -733535,7 +733535,7 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
+    winRate: 0.63
     taps: 24
     difficultyBand: 0
     validation: 
@@ -739930,9 +739930,9 @@ MonoBehaviour:
     physicalHeight: 13.333333
     showRoof: 0
     solvable: 1
-    winRate: 1
-    taps: 44
-    difficultyBand: 0
+    winRate: 0.01
+    taps: 49
+    difficultyBand: 2
     validation: 
     walls: []
     frozen: []

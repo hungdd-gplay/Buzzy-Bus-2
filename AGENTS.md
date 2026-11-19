@@ -35,3 +35,4 @@ Luật cho mọi AI agent (Claude, Codex, Gemini). Chi tiết: `.claude/game-pro
 - Lệnh bị từ chối quyền: KHÔNG gọi vòng (script tạm, wrapper). Ghi lệnh vào báo cáo để người điều phối chạy.
 - Hỏi người dùng bằng chữ ngắn, đánh số, giải thích thuật ngữ (người dùng không thích hộp AskUserQuestion).
 - Mở project 6000.3 bằng Unity 6000.0.76f1 có thể sửa `ProjectVersion.txt` / `Packages`; bản sao lưu ở scratchpad `backup_unity/`.
+- `BuzzyLayoutConfig.asset` là giá trị CHẠY THẬT (ảnh nghiệm thu đo trên nó). Trường đã có trong asset: đổi giá trị = đổi asset qua tool `Tools/Buzzy Bus/Sync Config Defaults` (batch: `unity_run.py exec Buzzy.Game.EditorTools.BuzzyMotionCapture.SyncConfigDefaults`, `BUZZY_FIELDS=a,b`) + ghi dòng visual-check; đổi mặc định code KHÔNG có tác dụng; mặc định code phải bằng asset. Trường mới thêm thì mặc định code ăn ngay. OBJ gốc có sub-mesh quad `X_1`: tool nạp mesh lấy sub-mesh nhiều đỉnh nhất.

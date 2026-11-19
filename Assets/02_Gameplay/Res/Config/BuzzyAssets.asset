@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Buzzy.Game.BuzzyAssets
   busMesh: {fileID: -8432194743100748415, guid: 67269ebc15e69d0469b1a9c73295b1db, type: 3}
   blockMesh: {fileID: 369902225449701964, guid: ac57821d495521b40a787c1d29c70d5d, type: 3}
-  barrierMesh: {fileID: -6214979170766498539, guid: 0588fc463ddfea94496e4aaf1eec80d5, type: 3}
+  barrierMesh: {fileID: 4482525686594419796, guid: 0588fc463ddfea94496e4aaf1eec80d5, type: 3}
   iceMesh: {fileID: -2766543194829352674, guid: c39e067d670f5e647a250bb156430ebc, type: 3}
   keyMesh: {fileID: -5956616693027770453, guid: 5724bd776fc740f4d8878b73a03f4c30, type: 3}
   lockMesh: {fileID: -845274940626621876, guid: 6b359bee5a1202647a884dca93e2717a, type: 3}
   heliMesh: {fileID: -2355870046610318947, guid: 4d025b04b2bda374a98c4ff4864c8c25, type: 3}
   heliWingMesh: {fileID: 6750532328402947756, guid: b87dc4b1b498cf340a7bf9072ca00927, type: 3}
   clawMesh: {fileID: 8809242151064389203, guid: 2d3940c6084cfae4b97603d07ce8d4f7, type: 3}
+  fullSignMesh: {fileID: 5778551676020850382, guid: 376b96b1a203ca441809b58d89e3f722, type: 3}
+  colorTexture: {fileID: 2800000, guid: 835d3972f3bcf8d43beb0f57777a8a12, type: 3}
   busTexture: {fileID: 2800000, guid: 4428227009f58b4409c7513d8c41b69b, type: 3}
   font: {fileID: 12800000, guid: 69a1d8997c4999b4591011a0618a4fbb, type: 3}
   tunnel: {fileID: 21300000, guid: 2121d7f9a91439648a036e3354af6925, type: 3}
@@ -80,3 +82,28 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ede78a62c92e5c44f93bd126cef24edc, type: 3}
   - {fileID: 21300000, guid: 8026c33749398e141a6ec351990d0980, type: 3}
   loadingBackground: {fileID: 2800000, guid: 4c716a2474ddc8b4d9ce129b88682f03, type: 3}
+  shadowTexture: {fileID: 2800000, guid: 1912e637dec8a4a4a8b24d7fd7b2eaa5, type: 3}
+  sfxTap: {fileID: 8300000, guid: 8c4e20e4ce3e8f54597db43bdf722a32, type: 3}
+  sfxPop: {fileID: 8300000, guid: 4993d58a58573aa4983364be52804dc1, type: 3}
+  sfxWrong: {fileID: 8300000, guid: 36798de97b684c344b061d7ee5a2571a, type: 3}
+  sfxWin: {fileID: 8300000, guid: 17988514d9d93e241907ec27e96c0745, type: 3}
+  sfxLose: {fileID: 8300000, guid: 39d7faab1ccd0f341b011669e4f21ebc, type: 3}
+  sfxButton: {fileID: 8300000, guid: ffe15e953fb64324d87d36c19e2a6ffe, type: 3}
+  sfxPositive: {fileID: 8300000, guid: f1f8be251fe613a468e2ab4328ce0413, type: 3}
+  sfxBubble: {fileID: 8300000, guid: 951116cab7b340043b94fb511dbc1eab, type: 3}
+  sfxSwipe: {fileID: 8300000, guid: 32aba0b694db42243ae8beb09750cfcb, type: 3}
+  sfxReward: {fileID: 8300000, guid: 11b80d42607692b40959089ace9181bf, type: 3}
+  sfxIntroduce: {fileID: 8300000, guid: 0b068c67fcba68a45b1d737be9a2aecd, type: 3}
+  sfxChangeFalling: {fileID: 8300000, guid: c690223a11099144ab63b54f6793d42a, type: 3}
+  sfxBusLeave: {fileID: 8300000, guid: 2a96f266fa95b3a4bab464bfcd5137e3, type: 3}
+  sfxIceInit: {fileID: 8300000, guid: deaa7dd2de4f8fd4093e3ff12e0cdca0, type: 3}
+  sfxIceBreak: {fileID: 8300000, guid: 75130b7f66aa4a94f8569ace8acc9547, type: 3}
+  sfxIceBreak2: {fileID: 8300000, guid: 49ca49789dd972b4781faceb3fb1e953, type: 3}
+  sfxVip: {fileID: 8300000, guid: 9a0f183393106a0499b524dc020dc94b, type: 3}
+  sfxHeli: {fileID: 8300000, guid: be364513a0c744043b834d56a1018647, type: 3}
+  sfxClawStart: {fileID: 8300000, guid: fac512dce9d8734429120fd640ef8d23, type: 3}
+  sfxClawEnd: {fileID: 8300000, guid: 795858c9815d59e4d9eecb34a816fe58, type: 3}
+  sfxShuffle: {fileID: 8300000, guid: e60a10d8d69d18944a158007ae77564c, type: 3}
+  music:
+  - {fileID: 8300000, guid: a580455f0f545db429f0fd2d626b06d2, type: 3}
+  - {fileID: 8300000, guid: 450fbd40719c4594c9414d950b0cf899, type: 3}

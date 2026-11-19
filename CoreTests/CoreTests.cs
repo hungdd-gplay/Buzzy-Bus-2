@@ -94,15 +94,16 @@ public class CoreTests
     [Fact]
     public void PickOrder_OuterLayerFirst_ThenNearest()
     {
-        // lưới 5x3 đặc: viền độ sâu 1, hàng giữa x=1..3 độ sâu 2
-        var b = new Board(5, 3, Rect(0, 0, 4, 2, 0));
-        b.Remove(2, 2); // lộ (2,1) với độ sâu 2
-        // luật đã chốt: pixel sâu bên trong VẪN lấy được; lớp ngoài (11 pixel viền) đứng trước 3 pixel lớp trong,
+        // lưới 5x3 đặc: viền độ sâu 1, hàng giữa x=1..3 độ sâu 2. Luật cũ (ExposedOnly=false, giữ bằng dữ liệu):
+        // pixel sâu bên trong VẪN lấy được; lớp ngoài (11 pixel viền) đứng trước 3 pixel lớp trong,
         // và trong lớp trong thì (2,1) gần ô bến nhất nên đứng đầu nhóm.
+        var b = new Board(5, 3, Rect(0, 0, 4, 2, 0));   // mặc định ExposedOnly = false
+        b.Remove(2, 2); // (2,1) nay kề ô rỗng → lớp ngoài HIỆN TẠI (góp ý 05: độ sâu tính lại mỗi lần chọn), gần ô bến (2,1) nhất nên đứng đầu
         var all = b.PickExposed(0, 100, 2, 1);
         Assert.Equal(14, all.Count);
-        Assert.All(all.Take(11), p => Assert.True(p.Y != 1 || p.X == 0 || p.X == 4));
-        Assert.Equal(new PixelData(2, 1, 0), all[11]);
+        Assert.Equal(new PixelData(2, 1, 0), all[0]);
+        Assert.All(all.Take(12), p => Assert.True(p.Y != 1 || p.X == 0 || p.X == 4 || p.X == 2));
+        Assert.All(all.Skip(12), p => Assert.True(p.Y == 1 && (p.X == 1 || p.X == 3)));   // 2 pixel lớp trong cuối cùng
         // trong lớp ngoài: gần ô bến trước
         var two = b.PickExposed(0, 2, 0, -3);
         Assert.Equal(new[] { 0, 1 }, two.Select(p => p.X).ToArray());
@@ -110,6 +111,42 @@ public class CoreTests
         // pixel kẹt bên trong không "lộ" (chỉ ảnh hưởng hiển thị / thứ tự, không chặn lấy)
         Assert.False(b.IsExposed(1, 1));
         Assert.False(b.IsExposed(3, 1));
+    }
+
+    [Fact]
+    public void ExposedOnly_Flag_OnlyPixelsWithWayOutAreTaken()
+    {
+        // M7 (góp ý 04, giữ bằng dữ liệu ExposedOnly = true, mặc định false vì 84/233 level bế tắc): pixel màu X đi được nếu có đường ra mép
+        // qua ô rỗng hoặc qua pixel cùng màu X; pixel bị màu khác bao kín ở lại. Lưới 5x3: viền màu 0, hàng giữa x=1..3 màu 1.
+        var rules = new MechanicRules { ExposedOnly = true };
+        var px = Rect(0, 0, 4, 2, 0).Where(q => q.Y != 1 || q.X == 0 || q.X == 4).Concat(Rect(1, 1, 3, 1, 1)).ToList();
+        var b = new Board(5, 3, px, null, rules);
+        Assert.Equal(0, b.PickExposed(1, 100, 2, 1).Count);          // màu 1 bị màu 0 bao kín
+        Assert.Equal(12, b.PickExposed(0, 100, 2, 1).Count);         // cả viền
+        b.Remove(2, 2);                                              // mở một ô viền thông ra mép
+        var one = b.PickExposed(1, 100, 2, 1);
+        Assert.Equal(3, one.Count);                                  // (2,1) kề ô rỗng, (1,1) / (3,1) nối qua cùng màu
+        Assert.Equal(new PixelData(2, 1, 1), one[0]);                // gần ô bến nhất đứng đầu
+        Assert.True(b.IsReachable(2, 1)); Assert.False(b.IsReachable(1, 1));
+        // lỗ rỗng kín bên trong không phải đường ra: 5x5 màu 0 viền, 3x3 màu 1 trong, bỏ ô giữa
+        var px2 = Rect(0, 0, 4, 4, 0).Where(q => q.X == 0 || q.X == 4 || q.Y == 0 || q.Y == 4).Concat(Rect(1, 1, 3, 3, 1).Where(q => !(q.X == 2 && q.Y == 2))).ToList();
+        var h = new Board(5, 5, px2, null, rules);
+        Assert.Equal(0, h.PickExposed(1, 100, 2, 2).Count);
+        foreach (var q in h.PickExposed(0, 100, 2, 2)) h.Remove(q.X, q.Y);
+        Assert.Equal(8, h.PickExposed(1, 100, 2, 2).Count);
+    }
+
+    [Fact]
+    public void OrderFromTapPoint_BfsTunnelsFromTap()
+    {
+        // luật 1c (cờ dữ liệu): 5x3 đặc màu 0, xe 6 chỗ, chạm (0,0): lấy 6 ô theo BFS từ góc (đào hầm) kể cả hàng giữa, không bóc nguyên viền
+        var d = MechanicTests.Small(4, 2, Rect(0, 0, 4, 2, 0), new[] { new CarData(0, 6, 0) });
+        var g = new BusGame(d, null, new MechanicRules { OrderFromTapPoint = true, ExposedOnly = true });
+        var r = g.Tap(0, 0);
+        Assert.True(r.Matched); Assert.Equal(6, r.Pixels.Count);
+        Assert.Equal(new PixelData(0, 0, 0), r.Pixels[0]);
+        Assert.Contains(new PixelData(1, 1, 0), r.Pixels);   // ô ruột kề góc đi theo hầm
+        Assert.All(r.Pixels, p => Assert.True(p.X <= 2));
     }
 
     [Fact]

@@ -41,8 +41,28 @@ namespace Buzzy.Game.EditorTools
             a.loseIllustration = Sprite("illus_lose"); a.busLoading = Sprite("icon_BusLoading");
             a.featureIcons = new[] { Sprite("ic_MysteryPixel"), Sprite("ic_MysteryCanvas"), Sprite("icon_Lock") };
             a.loadingBackground = AssetDatabase.LoadAssetAtPath<Texture2D>(Res + "Buzzy/Textures/BG_Home_Halloween.png");   // U1: nền đêm Halloween như mẫu
+            a.colorTexture = AssetDatabase.LoadAssetAtPath<Texture2D>(Res + "Buzzy/Textures/Color.png");   // góp ý 14
+            a.fullSignMesh = Mesh("Sign_Full");
+            a.shadowTexture = AssetDatabase.LoadAssetAtPath<Texture2D>(Res + "Buzzy/Textures/Shadow.png");   // V14: bóng xe
+            // M7: âm thanh (tên file đã đổi từ APK, design-decisions 17)
+            a.sfxTap = Clip("tap_passenger"); a.sfxPop = Clip("pop"); a.sfxWrong = Clip("choose_wrong"); a.sfxWin = Clip("win"); a.sfxLose = Clip("on_lose");
+            a.sfxButton = Clip("button_click"); a.sfxPositive = Clip("positive_click"); a.sfxBubble = Clip("bubble"); a.sfxSwipe = Clip("menu_swipe"); a.sfxReward = Clip("reward_receive");
+            a.sfxIntroduce = Clip("introduce_booster"); a.sfxChangeFalling = Clip("change_falling"); a.sfxBusLeave = Clip("bus_leave");
+            a.sfxIceInit = Clip("ice_init"); a.sfxIceBreak = Clip("ice_break"); a.sfxIceBreak2 = Clip("ice_break_2"); a.sfxVip = Clip("vip_bus"); a.sfxHeli = Clip("helicopter");
+            a.sfxClawStart = Clip("claw_start"); a.sfxClawEnd = Clip("claw_end"); a.sfxShuffle = Clip("shuffle_car");
+            a.music = new[] { Clip("bg_1"), Clip("bg_2") };
             EditorUtility.SetDirty(a); AssetDatabase.SaveAssets();
             return a;
+        }
+
+        [MenuItem("Tools/Buzzy Bus/Refresh Assets")]
+        public static void RefreshAssets() { LoadOrCreateAssets(); Debug.Log("[BuzzyMotionCapture] Đã gán lại BuzzyAssets (mesh, sprite, âm thanh)"); }
+
+        static AudioClip Clip(string n)
+        {
+            var c = AssetDatabase.LoadAssetAtPath<AudioClip>(Res + "Buzzy/Audio/" + n + ".wav");
+            if (c == null) Debug.LogWarning("Không thấy âm thanh " + n);
+            return c;
         }
 
         [MenuItem("Tools/Buzzy Bus/Build Game Scene")]
@@ -61,8 +81,11 @@ namespace Buzzy.Game.EditorTools
 
         static Mesh Mesh(string n)
         {
-            foreach (var o in AssetDatabase.LoadAllAssetsAtPath(Res + "Buzzy/Meshes/" + n + ".obj")) if (o is Mesh m) return m;
-            throw new Exception("Không thấy mesh " + n);
+            // góp ý 14: OBJ gốc có 2 sub-mesh (X_0 = hình thật, X_1 = quad 2 mặt); LoadAllAssets trả quad trước với Barrier / Sign_Full → lấy sub-mesh nhiều đỉnh nhất
+            Mesh best = null;
+            foreach (var o in AssetDatabase.LoadAllAssetsAtPath(Res + "Buzzy/Meshes/" + n + ".obj")) if (o is Mesh m && (best == null || m.vertexCount > best.vertexCount)) best = m;
+            if (best == null) throw new Exception("Không thấy mesh " + n);
+            return best;
         }
 
         static Sprite Sprite(string n)
@@ -71,6 +94,27 @@ namespace Buzzy.Game.EditorTools
             var ti = AssetImporter.GetAtPath(path) as TextureImporter;
             if (ti != null && ti.textureType != TextureImporterType.Sprite) { ti.textureType = TextureImporterType.Sprite; ti.spriteImportMode = SpriteImportMode.Single; ti.alphaIsTransparency = true; ti.SaveAndReimport(); }
             return AssetDatabase.LoadAssetAtPath<Sprite>(path);
+        }
+
+        /// <summary>Góp ý 14 (bài học): asset BuzzyLayoutConfig lưu từ M5 giữ giá trị cũ của trường đã có → đổi mặc định trong code KHÔNG tới asset.
+        /// Chép mặc định code vào asset cho các trường BUZZY_FIELDS="a,b,c" (không có → mọi trường lệch), in danh sách đã đổi. Menu: Tools/Buzzy Bus/Sync Config Defaults.</summary>
+        [MenuItem("Tools/Buzzy Bus/Sync Config Defaults")]
+        public static void SyncConfigDefaults()
+        {
+            var cfg = BuzzyStaticBuilder.LoadOrCreateConfig(); var def = ScriptableObject.CreateInstance<BuzzyLayoutConfig>();
+            var only = Environment.GetEnvironmentVariable("BUZZY_FIELDS"); var set = string.IsNullOrEmpty(only) ? null : new HashSet<string>(only.Split(','));
+            int n = 0;
+            foreach (var f in typeof(BuzzyLayoutConfig).GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance))
+            {
+                if (set != null && !set.Contains(f.Name)) continue;
+                var a = f.GetValue(cfg); var b = f.GetValue(def);
+                if (a == null ? b == null : a.Equals(b)) continue;
+                if (f.FieldType.IsArray) continue;   // mảng: không tự đồng bộ (so tay)
+                Debug.Log("[SyncConfig] " + f.Name + ": " + a + " -> " + b); f.SetValue(cfg, b); n++;
+            }
+            EditorUtility.SetDirty(cfg); AssetDatabase.SaveAssets();
+            Debug.Log("[SyncConfig] đã đổi " + n + " trường");
+            UnityEngine.Object.DestroyImmediate(def);
         }
 
         static float Env(string k, float d) { var v = Environment.GetEnvironmentVariable(k); return string.IsNullOrEmpty(v) ? d : float.Parse(v, System.Globalization.CultureInfo.InvariantCulture); }
@@ -85,7 +129,8 @@ namespace Buzzy.Game.EditorTools
             var assets = LoadOrCreateAssets();
             var db = AssetDatabase.LoadAssetAtPath<BuzzyLevelDatabase>(Res + "Levels/BuzzyLevels.asset");
             var lv = db.Get(level);
-            var size = new Vector2Int(324, 720);
+            var size = new Vector2Int(324, 720); var szv = Environment.GetEnvironmentVariable("BUZZY_SIZE");
+            if (!string.IsNullOrEmpty(szv)) { var pp = szv.ToLower().Split('x'); size = new Vector2Int(int.Parse(pp[0]), int.Parse(pp[1])); }   // M7: chụp nét để soi
 
             var scene = UnityEditor.SceneManagement.EditorSceneManager.NewScene(UnityEditor.SceneManagement.NewSceneSetup.EmptyScene, UnityEditor.SceneManagement.NewSceneMode.Single);
             var camGo = new GameObject("Camera"); var cam = camGo.AddComponent<Camera>();
@@ -95,6 +140,8 @@ namespace Buzzy.Game.EditorTools
             var log = new List<string>();
             view.Log = s => log.Add(s);
             int vibrations = 0; view.Vibrate = () => { vibrations++; log.Add("RUNG (haptic) lần " + vibrations + " t=" + view.Time.ToString("0.00")); };
+            // M7: BUZZY_DEV=1 → hiện bảng thử nghiệm T1 (<, Lv, >, R) để chụp; BUZZY_DEVTAP=t → bấm nút ">" lúc t (log DEV)
+            if (Environment.GetEnvironmentVariable("BUZZY_DEV") == "1") { view.DevPanel = true; view.DevMaxLevel = db.PlayableCount; view.DevLevelRequested = n => log.Add("DEV yêu cầu level " + n + " t=" + view.Time.ToString("0.00")); view.DevRestartRequested = () => log.Add("DEV yêu cầu chơi lại t=" + view.Time.ToString("0.00")); }
             view.Init(lv, cfg, assets, cam, size);
 
             var rt = new RenderTexture(size.x, size.y, 24, RenderTextureFormat.ARGB32); cam.targetTexture = rt;
@@ -106,7 +153,8 @@ namespace Buzzy.Game.EditorTools
             var order = Solver.FindOrder(lv.ToCore(), view.Game.Rules, sp, 400, 1);
             log.Add(order == null ? "Solver: KHÔNG tìm được thứ tự thắng (level cần booster)" : "Solver: " + order.Count + " lần chạm");
             int oi = 0;
-            // kịch bản booster: BUZZY_SCRIPT="t:vip:slot;t:sky:color;t:wand:color;t:claw:col:pos;t:speed"
+            // kịch bản booster: BUZZY_SCRIPT="t:vip:slot;t:sky:color;t:wand:color;t:claw:col:pos;t:speed;t:mode:i;t:pick:p1:p2"
+            // góp ý 11: "mode:i" bấm nút booster i như người chơi (tooltip B9, màn tối VIP, camera trượt Claw B8; Wand dùng ngay), "pick:p1:p2" chọn đích cho booster đang chọn (VIP ô; Claw cột:vị trí; Sky toạ độ lưới)
             var script = new List<string[]>();
             var sv = Environment.GetEnvironmentVariable("BUZZY_SCRIPT");
             if (!string.IsNullOrEmpty(sv)) foreach (var part in sv.Split(';')) if (part.Trim().Length > 0) script.Add(part.Trim().Split(':'));
@@ -115,7 +163,9 @@ namespace Buzzy.Game.EditorTools
             while (view.Time < maxT && view.Time < endAt)
             {
                 view.Tick(dt);
-                if (!probed && view.Time >= cfg.inputDelay + 0.1f) { probed = true; view.TapColor(20); }   // màu không có xe (20 = trắng đặc biệt, không level nào dùng): phải rung
+                if (!probed && view.Time >= cfg.inputDelay + 0.1f) { probed = true; view.TapColor((int)Env("BUZZY_PROBE", 20f)); }   // chạm sai thử: màu không có xe đỗ (mặc định 20 = không level nào dùng; BUZZY_PROBE=<màu có pixel> để thấy cụm rung): phải rung
+                float devTap = Env("BUZZY_DEVTAP", -1f);
+                if (devTap >= 0f && view.Time >= devTap && view.DevPanel) { bool hit = view.DebugUiTap(cfg.devPanelX[2], cfg.devPanelY); log.Add("DEV bấm '>' tại (" + cfg.devPanelX[2] + ", " + cfg.devPanelY + ") -> " + hit); Environment.SetEnvironmentVariable("BUZZY_DEVTAP", "-1"); }
                 while (si < script.Count && view.Time >= float.Parse(script[si][0], System.Globalization.CultureInfo.InvariantCulture))
                 {
                     var a = script[si++]; string name = a[1]; int p1 = a.Length > 2 ? int.Parse(a[2]) : 0, p2 = a.Length > 3 ? int.Parse(a[3]) : 0;
@@ -128,7 +178,8 @@ namespace Buzzy.Game.EditorTools
                             if (!parked && view.Game.Board.CountColor(cc) > 0) p1 = cc;
                         }
                     if (name == "claw" && p1 < 0) for (int qq = 0; qq < 3 && p1 < 0; qq++) if (view.Game.Queues[qq].Count > 0) p1 = qq;
-                    bool ok = name == "vip" ? view.UseVipBus(p1) : name == "sky" ? view.UseSkyGrab(p1) : name == "wand" ? view.UseMagicWand(p1) : name == "claw" ? view.UseBusClaw(p1, p2) : false;
+                    bool ok = name == "vip" ? view.UseVipBus(p1) : name == "sky" ? view.UseSkyGrab(p1) : name == "wand" ? view.UseMagicWand(p1) : name == "claw" ? view.UseBusClaw(p1, p2)
+                        : name == "mode" ? view.DebugBoosterMode(p1) : name == "pick" ? view.DebugBoosterPick(p1, p2) : name == "tap" ? view.TapColor(p1) : false;   // tap:màu (góp ý 13: chạm khi xe đang xuống)
                     if (name == "speed") view.ToggleSpeed();
                     if (ok) order = null;   // booster đổi trạng thái: bỏ thứ tự đã tìm, chơi tham lam tiếp
                     log.Add("KỊCH BẢN t=" + view.Time.ToString("0.00") + " " + string.Join(":", a) + " -> " + (name == "speed" ? "x" + view.TimeScale : ok.ToString()));

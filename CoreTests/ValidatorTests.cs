@@ -41,8 +41,7 @@ public class ValidatorTests
         return doc.RootElement.TryGetProperty("levelTag", out var t) ? t.GetInt32() : 0;
     }
 
-    // Level trong phạm vi mà luật [thiết kế] hiện tại không giải được bằng chạm thuần (cần booster): xem README_Assumptions.md.
-    static readonly int[] KnownHard = { 38, 77, 78, 145 };
+    // M6: luật Mystery / Frozen đổi (README_Assumptions 12, 14) → mọi level trong phạm vi giải được bằng chạm thuần.
 
     [Fact]
     public void Validator_AllLevels_ReportAndKnownHard()
@@ -58,7 +57,7 @@ public class ValidatorTests
         Assert.Equal(300, checks.Count);
         Assert.Empty(checks.Where(c => c.InScope && c.Errors.Count > 0).Select(c => c.Index + ": " + string.Join("; ", c.Errors)));
         var unsolvable = checks.Where(c => c.InScope && !c.Solvable).Select(c => c.Index).ToArray();
-        Assert.Equal(KnownHard, unsolvable);
+        Assert.Equal(MechanicTests.KnownHard, unsolvable);
         // level khó (tag 1, 2) phải có tỉ lệ thắng ngẫu nhiên thấp hơn level thường (plan.md mục 4)
         double Avg(int tag) { var l = checks.Where(c => c.InScope && c.Tag == tag).ToList(); return l.Count == 0 ? 1 : l.Average(c => c.WinRate); }
         Assert.True(Avg(1) <= Avg(0) && Avg(2) <= Avg(0), string.Format("tỉ lệ thắng TB: tag0 {0:0.00} tag1 {1:0.00} tag2 {2:0.00}", Avg(0), Avg(1), Avg(2)));

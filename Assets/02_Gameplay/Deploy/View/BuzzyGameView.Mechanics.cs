@@ -127,6 +127,7 @@ namespace Buzzy.Game
         void OnFrozenBroken(int i)
         {
             Log?.Invoke("t=" + Time.ToString("0.00") + " Băng " + i + " vỡ");
+            Sfx(_a.sfxIceBreak);   // M7
             IceV v; if (!_ice.TryGetValue(i, out v)) return;
             _ice.Remove(i);
             _fades.Add(new Fade { tr = v.tr, start = Time, dur = 0.3f, from = v.tr.localScale });

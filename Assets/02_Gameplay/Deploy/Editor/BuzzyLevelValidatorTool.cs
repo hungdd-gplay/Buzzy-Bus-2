@@ -24,7 +24,7 @@ namespace Buzzy.Game.EditorTools
             string rep = Environment.GetEnvironmentVariable("BUZZY_REPORT"); if (string.IsNullOrEmpty(rep)) rep = DefaultReport;
             string tr = Environment.GetEnvironmentVariable("BUZZY_TRIES");
             var opt = new ValidatorOptions(); if (!string.IsNullOrEmpty(tr)) opt.Tries = int.Parse(tr);
-            var rules = new MechanicRules();
+            var rules = BuzzyStaticBuilder.LoadOrCreateConfig().ToMechanicRules();   // M6: luật mechanic là dữ liệu
             var checks = new List<LevelCheck>();
             foreach (var lv in db.levels)
             {

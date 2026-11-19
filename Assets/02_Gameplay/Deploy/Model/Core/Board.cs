@@ -10,6 +10,8 @@ namespace Buzzy.Core
         public readonly int W, H;
         private readonly int[,] _c;
         private readonly int[,] _depth; // độ sâu ban đầu (1 = lớp ngoài cùng), tính 1 lần lúc dựng
+        private readonly bool[,] _open;  // M7: ô rỗng thông ra ngoài lưới (qua ô rỗng kề 4 hướng); tính lại khi bảng đổi
+        private bool _openDirty = true;
         private static readonly int[] Dx = { 1, -1, 0, 0 };
         private static readonly int[] Dy = { 0, 0, 1, -1 };
 
@@ -31,7 +33,7 @@ namespace Buzzy.Core
 
         public Board(int w, int h, IEnumerable<PixelData> pixels, LevelData level = null, MechanicRules rules = null)
         {
-            W = w; H = h; _c = new int[w, h]; _depth = new int[w, h];
+            W = w; H = h; _c = new int[w, h]; _depth = new int[w, h]; _open = new bool[w, h];
             _frozenId = new int[w, h]; _mystery = new bool[w, h]; _revealed = new bool[w, h];
             _rules = rules ?? new MechanicRules();
             for (int x = 0; x < w; x++) for (int y = 0; y < h; y++) { _c[x, y] = Empty; _frozenId[x, y] = -1; }
@@ -73,7 +75,7 @@ namespace Buzzy.Core
         public bool IsHidden(int x, int y) { return IsMystery(x, y) && !_revealed[x, y] && _c[x, y] != Empty; }
 
         /// <summary>Pixel lấy được bằng chạm: có mặt, không bị băng, không còn ẩn.</summary>
-        public bool Takeable(int x, int y) { return ColorAt(x, y) != Empty && !IsFrozen(x, y) && !IsHidden(x, y); }
+        public bool Takeable(int x, int y) { return ColorAt(x, y) != Empty && !IsFrozen(x, y) && (!_rules.MysteryBlocks || !IsHidden(x, y)); }
 
         /// <summary>Ô rỗng thật (không phải tường): chỉ ô như vậy mới làm pixel kề "lộ".</summary>
         private bool OpenAt(int x, int y) { return ColorAt(x, y) == Empty && !IsWall(x, y); }
@@ -89,11 +91,37 @@ namespace Buzzy.Core
             return false;
         }
 
+        /// <summary>M7 (1a): pixel có đường ra ngoài: kề ô ngoài lưới hoặc kề ô rỗng thông ra ngoài qua chuỗi ô rỗng (hành khách đi bộ ra được).
+        /// Ô rỗng bị bao kín (lỗ trong ảnh) không tính.</summary>
+        public bool IsReachable(int x, int y)
+        {
+            if (ColorAt(x, y) == Empty) return false;
+            if (_openDirty) ComputeOpen();
+            for (int i = 0; i < 4; i++) { int nx = x + Dx[i], ny = y + Dy[i]; if (!InBounds(nx, ny)) return true; if (_open[nx, ny]) return true; }
+            return false;
+        }
+
+        // BFS từ mép lưới qua ô rỗng (không tường)
+        private void ComputeOpen()
+        {
+            _openDirty = false; var q = new Queue<int>();
+            for (int x = 0; x < W; x++) for (int y = 0; y < H; y++)
+            {
+                _open[x, y] = false;
+                if (OpenAt(x, y) && (x == 0 || y == 0 || x == W - 1 || y == H - 1)) { _open[x, y] = true; q.Enqueue(x * H + y); }
+            }
+            while (q.Count > 0)
+            {
+                int v = q.Dequeue(); int x = v / H, y = v % H;
+                for (int i = 0; i < 4; i++) { int nx = x + Dx[i], ny = y + Dy[i]; if (InBounds(nx, ny) && !_open[nx, ny] && OpenAt(nx, ny)) { _open[nx, ny] = true; q.Enqueue(nx * H + ny); } }
+            }
+        }
+
         /// <summary>Lấy pixel làm rỗng ô.</summary>
         public bool Remove(int x, int y)
         {
             if (ColorAt(x, y) == Empty) return false;
-            _c[x, y] = Empty; Count--; return true;
+            _c[x, y] = Empty; Count--; _openDirty = true; return true;
         }
 
         public int CountColor(int color)
@@ -106,9 +134,9 @@ namespace Buzzy.Core
         public bool HasExposed(int color) { return GetExposed(color).Count > 0; }
 
         /// <summary>
-        /// Các pixel lấy được của một màu (chưa sắp xếp). Luật đã chốt với người dùng: pixel nằm sâu bên trong VẪN bay được,
-        /// "lớp ngoài + gần xe nhất" chỉ là THỨ TỰ lấy. Chặn lấy (Frozen, Wall, Mystery...) sẽ lọc ở đây ở mốc M3.
-        /// Tên GetExposed giữ lại để không vỡ API.
+        /// Các pixel lấy được của một màu (chưa sắp xếp). M7 (góp ý 04, 1a): mặc định chỉ pixel có đường ra ngoài (IsReachable);
+        /// luật cũ (pixel sâu bên trong vẫn lấy, lớp ngoài chỉ là thứ tự) giữ bằng MechanicRules.ExposedOnly = false.
+        /// Chặn lấy (Frozen, Mystery...) lọc ở Takeable.
         /// </summary>
         public List<PixelData> GetExposed(int color) { return Collect(color, false); }
 
@@ -118,8 +146,31 @@ namespace Buzzy.Core
         private List<PixelData> Collect(int color, bool any)
         {
             var r = new List<PixelData>();
+            if (!any && _rules.ExposedOnly) return CollectReachable(color);
             for (int x = 0; x < W; x++) for (int y = 0; y < H; y++)
                 if (_c[x, y] == color && (any || Takeable(x, y))) r.Add(new PixelData(x, y, color));
+            return r;
+        }
+
+        /// <summary>
+        /// Luật 1b (M7, góp ý 04, design-decisions 19): pixel màu X đi được nếu có đường ra mép lưới qua ô rỗng HOẶC qua pixel cùng màu X
+        /// lấy được (cả khối "chảy" ra trong một lần chạm, clip Lv.2); chỉ pixel bị màu khác / băng / tường bao kín mới ở lại.
+        /// Flood từ các pixel X có IsReachable qua láng giềng 4 hướng cùng màu X lấy được.
+        /// </summary>
+        private List<PixelData> CollectReachable(int color)
+        {
+            var r = new List<PixelData>(); var seen = new bool[W, H]; var q = new Queue<int>();
+            for (int x = 0; x < W; x++) for (int y = 0; y < H; y++)
+                if (_c[x, y] == color && Takeable(x, y) && IsReachable(x, y)) { seen[x, y] = true; q.Enqueue(x * H + y); }
+            while (q.Count > 0)
+            {
+                int v = q.Dequeue(); int x = v / H, y = v % H; r.Add(new PixelData(x, y, color));
+                for (int i = 0; i < 4; i++)
+                {
+                    int nx = x + Dx[i], ny = y + Dy[i];
+                    if (InBounds(nx, ny) && !seen[nx, ny] && _c[nx, ny] == color && Takeable(nx, ny)) { seen[nx, ny] = true; q.Enqueue(nx * H + ny); }
+                }
+            }
             return r;
         }
 
@@ -127,12 +178,14 @@ namespace Buzzy.Core
         /// Chọn tối đa <paramref name="max"/> pixel của màu: lớp ngoài cùng (độ sâu ban đầu nhỏ) trước,
         /// rồi gần (sx, sy) nhất (vị trí ô bến, toạ độ lưới), cuối cùng theo (y, x) để ổn định. Không xoá pixel.
         /// </summary>
-        public List<PixelData> PickExposed(int color, int max, double sx, double sy, bool any = false)
+        public List<PixelData> PickExposed(int color, int max, double sx, double sy, bool any = false, bool bfsFromPoint = false)
         {
             var list = Collect(color, any);
+            if (bfsFromPoint) return PickByBfs(list, max, sx, sy);
+            var depth = CurrentDepth();   // M7 góp ý 05: lớp tính theo bảng HIỆN TẠI (pixel đã lộ ra sau nhiều lần lấy đứng trước), không theo độ sâu ban đầu
             list.Sort((a, b) =>
             {
-                int c = _depth[a.X, a.Y].CompareTo(_depth[b.X, b.Y]);
+                int c = depth[a.X, a.Y].CompareTo(depth[b.X, b.Y]);
                 if (c != 0) return c;
                 c = Dist2(a, sx, sy).CompareTo(Dist2(b, sx, sy));
                 if (c != 0) return c;
@@ -167,7 +220,7 @@ namespace Buzzy.Core
                 foreach (var p in removed)
                 {
                     if (r.Contains(p.X, p.Y)) continue;
-                    if (p.X >= r.X - reach && p.X < r.X + r.W + reach && p.Y >= r.Y - reach && p.Y < r.Y + r.H + reach)
+                    if (reach < 0 || (p.X >= r.X - reach && p.X < r.X + r.W + reach && p.Y >= r.Y - reach && p.Y < r.Y + r.H + reach))
                         if (--FrozenLeft[i] <= 0) { ch.FrozenBroken.Add(i); break; }
                 }
             }
@@ -209,7 +262,7 @@ namespace Buzzy.Core
             for (int x = a.X; x < a.X + a.W; x++) for (int y = a.Y; y < a.Y + a.H; y++)
             {
                 if (!InBounds(x, y)) continue;
-                _c[x, y] = color; _depth[x, y] = 1; Count++;
+                _c[x, y] = color; _depth[x, y] = 1; Count++; _openDirty = true;
                 if (ch != null) ch.Spawned.Add(new PixelData(x, y, color));
             }
         }
@@ -220,7 +273,52 @@ namespace Buzzy.Core
             get { for (int i = 0; i < SpawnerList.Count; i++) if (SpawnerList[i].Waves != null && SpawnWave[i] < SpawnerList[i].Waves.Length) return true; return false; }
         }
 
-        // BFS nhiều nguồn từ ô rỗng/ngoài lưới: lớp ngoài = 1.
+        /// <summary>Luật 1c (phiên 3c đề xuất, chờ chốt): thứ tự = BFS từ pixel gần điểm chạm nhất qua cạnh 4 hướng giữa các pixel trong tập lấy được ("đào hầm" từ chỗ chạm,
+        /// không bóc lớp); pixel không nối được xếp sau theo khoảng cách. Lấy tối đa max.</summary>
+        private List<PixelData> PickByBfs(List<PixelData> list, int max, double sx, double sy)
+        {
+            if (list.Count == 0) return list;
+            var inSet = new Dictionary<int, PixelData>(); foreach (var p in list) inSet[p.X * H + p.Y] = p;
+            PixelData start = list[0]; double bd = double.MaxValue;
+            foreach (var p in list) { double d = Dist2(p, sx, sy); if (d < bd || (d == bd && (p.Y < start.Y || (p.Y == start.Y && p.X < start.X)))) { bd = d; start = p; } }
+            var order = new List<PixelData>(); var seen = new HashSet<int> { start.X * H + start.Y }; var q = new Queue<PixelData>(); q.Enqueue(start);
+            while (q.Count > 0 && order.Count < max)
+            {
+                var p = q.Dequeue(); order.Add(p);
+                for (int i = 0; i < 4; i++)
+                {
+                    int k = (p.X + Dx[i]) * H + (p.Y + Dy[i]); PixelData n;
+                    if (InBounds(p.X + Dx[i], p.Y + Dy[i]) && inSet.TryGetValue(k, out n) && seen.Add(k)) q.Enqueue(n);
+                }
+            }
+            if (order.Count < max)
+            {
+                var rest = new List<PixelData>(); foreach (var p in list) if (!seen.Contains(p.X * H + p.Y)) rest.Add(p);
+                rest.Sort((a, b) => { int c = Dist2(a, sx, sy).CompareTo(Dist2(b, sx, sy)); if (c != 0) return c; c = a.Y.CompareTo(b.Y); return c != 0 ? c : a.X.CompareTo(b.X); });
+                foreach (var p in rest) { if (order.Count >= max) break; order.Add(p); }
+            }
+            return order;
+        }
+
+        /// <summary>Độ sâu theo bảng hiện tại: 1 = kề ô rỗng / ngoài lưới, tăng dần vào trong (BFS nhiều nguồn). Pixel không nối với lớp ngoài: giữ 0 → đẩy về cuối bằng int.MaxValue.</summary>
+        public int[,] CurrentDepth()
+        {
+            var d = new int[W, H]; var q = new Queue<int>();
+            for (int x = 0; x < W; x++) for (int y = 0; y < H; y++)
+            {
+                if (_c[x, y] == Empty) continue;
+                for (int i = 0; i < 4; i++) if (OpenAt(x + Dx[i], y + Dy[i])) { d[x, y] = 1; q.Enqueue(x * H + y); break; }
+            }
+            while (q.Count > 0)
+            {
+                int v = q.Dequeue(); int x = v / H, y = v % H;
+                for (int i = 0; i < 4; i++) { int nx = x + Dx[i], ny = y + Dy[i]; if (InBounds(nx, ny) && _c[nx, ny] != Empty && d[nx, ny] == 0) { d[nx, ny] = d[x, y] + 1; q.Enqueue(nx * H + ny); } }
+            }
+            for (int x = 0; x < W; x++) for (int y = 0; y < H; y++) if (_c[x, y] != Empty && d[x, y] == 0) d[x, y] = int.MaxValue;
+            return d;
+        }
+
+        // BFS nhiều nguồn từ ô rỗng/ngoài lưới: lớp ngoài = 1 (độ sâu ban đầu, dùng cho hiển thị / chẩn đoán).
         private void ComputeDepth()
         {
             var q = new Queue<int>();
