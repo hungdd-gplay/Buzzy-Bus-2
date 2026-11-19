@@ -5,12 +5,13 @@
 param(
     [string]$Source = "D:\Buzzy_Bus",
     [string]$Target = "D:\Buzzy_Bus_capture",
-    [switch]$PullConfig   # chép NGƯỢC đúng 1 file Res/Config/BuzzyLayoutConfig.asset từ bản sao về bản chính (sau SyncConfigDefaults chạy trên bản sao)
+    [switch]$PullConfig,   # chép NGƯỢC đúng 1 file Res/Config/BuzzyLayoutConfig.asset từ bản sao về bản chính (sau SyncConfigDefaults chạy trên bản sao)
+    [string]$PullPath = ""   # chép ngược 1 file khác (đường dẫn tương đối, vd .meta font sau BuzzyFontTool chạy trên bản sao vì Editor bản chính đang mở)
 )
 $ErrorActionPreference = "Stop"
 if (-not (Test-Path $Source)) { throw "Không thấy bản chính $Source" }
-if ($PullConfig) {
-    $rel = "Assets\02_Gameplay\Res\Config\BuzzyLayoutConfig.asset"
+if ($PullConfig -or $PullPath -ne "") {
+    $rel = if ($PullPath -ne "") { $PullPath } else { "Assets\02_Gameplay\Res\Config\BuzzyLayoutConfig.asset" }
     $from = Join-Path $Target $rel; $to = Join-Path $Source $rel
     if (-not (Test-Path $from)) { throw "Không thấy $from" }
     Copy-Item $from $to -Force

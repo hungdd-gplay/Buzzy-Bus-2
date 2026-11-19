@@ -15,7 +15,7 @@ namespace Buzzy.Game
     {
         public const int VipBus = 0, SkyGrab = 1, MagicWand = 2, BusClaw = 3;
         // B9: câu tooltip đáy đúng chữ clip (Magic Wand dùng ngay nên clip không có tooltip)
-        static readonly string[] BoosterHint = { "VIP Bus! Pick a Bus in park slot!", "Sky Grab! Tap anywhere to Sky Grab the passengers around it!", "Magic Wand! Shuffle the buses!", "Bus Claw! Pick up a bus from the queue!" };
+        static readonly string[] BoosterHintKey = { "bz_tip_vip", "bz_tip_sky", "bz_tip_wand", "bz_tip_claw" };   // M8: câu tooltip theo clip, qua Localize
 
         /// <summary>Số booster còn lại (kho xu / quảng cáo làm ở M5).</summary>
         public readonly int[] BoosterCount = new int[4];
@@ -32,6 +32,7 @@ namespace Buzzy.Game
         class HeliFx { public Transform tr, wing; public float t0; public Vector3 enter, target; public List<SuckFx> suck = new List<SuckFx>(); public bool sucked; public Transform shadow; }
         class ClawFx { public Transform claw, cable, swirl; public CarV cv; public ClawResult res; public int col; public float t0; public Vector3 busFrom; public bool filled, shifted; }
         class WandFx { public float t0; public List<CarV>[] cols; public bool[] grey, shown, numbers; public List<GameObject> greys = new List<GameObject>(); public HashSet<CarV> hidden = new HashSet<CarV>(); }
+        readonly Text[] _pillText = new Text[4];   // chữ Lv.N trên pill khoá (làm mới khi đổi ngôn ngữ)
         readonly List<FillFx> _fills = new List<FillFx>();
         readonly List<HeliFx> _heli = new List<HeliFx>();
         readonly List<ClawFx> _claws = new List<ClawFx>();
@@ -53,6 +54,7 @@ namespace Buzzy.Game
             for (int i = 0; i < 4; i++) BoosterCount[i] = IsUnlocked(i) ? Meta.Boosters[i] : 0;
             Game.Boosters = _cfg.ToBoosterRules();
             Game.LaneCarDeparted += OnLaneCarDeparted;
+            FitHudLabels();   // M8: nhãn Full / pill / badge co chữ theo vật chứa
             RefreshBoosterUi();
             int pend = Meta.PendingUnlock(); if (pend >= 0 && Meta.Level == _lv.index) ShowUnlock(pend);   // U5: popup mở khoá ở level vừa mở
         }
@@ -61,7 +63,8 @@ namespace Buzzy.Game
         void BuildBoosterBar(Transform ct)
         {
             _hudRoot = ct;
-            string[] lvTxt = { "Lv.4", "Lv.8", "Lv.13", "Lv.16" };
+            // M8: "Lv.N" theo cấp mở khoá trong config, qua khoá bz_lv
+            string[] lvTxt = new string[4]; for (int k = 0; k < 4; k++) lvTxt[k] = BuzzyStrings.Format("bz_lv", _cfg.boosterUnlock[k]);
             for (int i = 0; i < 4; i++)
             {
                 var c = Bottom(new Vector2(_cfg.boosterX[i], _cfg.boosterY));   // U13: neo mép dưới, lệch con theo RefDy
@@ -77,7 +80,7 @@ namespace Buzzy.Game
                 {
                     Img("Lock" + i, _a.lockIcon, Color.white, ct, new Vector2(c.x, c.y - RefDy(0.008f)), _cfg.boosterSize * 0.52f);
                     var pill = Img("Pill" + i, _a.levelBar, Color.white, ct, new Vector2(c.x, c.y + RefDy(0.034f)), _cfg.boosterSize * 0.55f, 0.5f);
-                    Label(lvTxt[i], pill, new Vector2(pill.sizeDelta.x * 0.5f, -pill.sizeDelta.y * 0.5f), (int)(34 * _canvasSize.x / 1080f), new Color32(0x4A, 0x45, 0x9A, 255));
+                    _pillText[i] = Label(lvTxt[i], pill, new Vector2(pill.sizeDelta.x * 0.5f, -pill.sizeDelta.y * 0.5f), (int)(34 * _canvasSize.x / 1080f), new Color32(0x4A, 0x45, 0x9A, 255));
                 }
             }
         }
@@ -93,7 +96,7 @@ namespace Buzzy.Game
             float h = _tipPanel.sizeDelta.y;
             var icon = Img("TipIcon", _a.boosterIcons != null && i < _a.boosterIcons.Length ? _a.boosterIcons[i] : null, Color.white, _tipPanel, Vector2.zero, 0f);
             icon.sizeDelta = new Vector2(h * 0.8f, h * 0.8f); icon.anchoredPosition = new Vector2(h * 0.6f, -h * 0.5f);
-            _hint = Label(BoosterHint[i], _tipPanel, new Vector2(_tipPanel.sizeDelta.x * 0.5f + h * 0.45f, -h * 0.5f), (int)(_cfg.tooltipFontSize * _canvasSize.x / 1080f), new Color32(0x5A, 0x3E, 0xA6, 255));
+            _hint = Label(BuzzyStrings.Get(BoosterHintKey[i]), _tipPanel, new Vector2(_tipPanel.sizeDelta.x * 0.5f + h * 0.45f, -h * 0.5f), (int)(_cfg.tooltipFontSize * _canvasSize.x / 1080f), new Color32(0x5A, 0x3E, 0xA6, 255));
             _hint.GetComponent<RectTransform>().sizeDelta = new Vector2(_tipPanel.sizeDelta.x - h * 1.3f, h * 0.32f);   // cao 1 dòng: câu dài phải thu chữ chứ không xuống dòng (r6 f50 dòng 2 tràn mép pill)
             _hint.horizontalOverflow = HorizontalWrapMode.Wrap;
             _hint.resizeTextForBestFit = true; _hint.resizeTextMaxSize = _hint.fontSize; _hint.resizeTextMinSize = 12;   // B9: câu Sky Grab dài → tự thu chữ, không tràn (fd r5 f50)

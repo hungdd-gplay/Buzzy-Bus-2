@@ -8,6 +8,7 @@ namespace Buzzy.Game
     {
         public Mesh busMesh, blockMesh, barrierMesh, iceMesh, keyMesh, lockMesh, heliMesh, heliWingMesh, clawMesh;
         public Mesh fullSignMesh;   // góp ý 14: biển Full 3D (Sign_Full.obj) đuôi chạm đất
+        public Mesh poseIdle, poseIdleB, poseRunA, poseRunB, poseJump, poseActive;   // M8 (góp ý 12): 7 pose cùng topology của nhân vật (Block_*.obj) → đổi mesh theo pha khi đi bộ
         public Texture2D colorTexture;   // atlas màu gốc (Color.png); lưu ý: UV của Barrier / Sign_Full không trỏ vào bảng màu (đo 2026-11-19), hiện chưa mesh nào dùng
         public Texture2D busTexture;
         public Font font;

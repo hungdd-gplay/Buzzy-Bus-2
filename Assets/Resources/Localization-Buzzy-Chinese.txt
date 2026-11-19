@@ -1,0 +1,35 @@
+KEY_lang,Chinese
+bz_booster_vip,VIP巴士
+bz_booster_sky,天空抓取
+bz_booster_wand,魔法棒
+bz_booster_claw,巴士抓钩
+bz_desc_vip,立即清空一辆巴士！
+bz_desc_sky,清除所选区域内的所有乘客！
+bz_desc_wand,重新洗牌巴士！
+bz_desc_claw,立即装满所选巴士！
+bz_tip_vip,VIP巴士！选择一辆停靠的巴士！
+bz_tip_sky,天空抓取！点击任意位置收走周围的乘客！
+bz_tip_wand,魔法棒！重新洗牌巴士！
+bz_tip_claw,巴士抓钩！从队列中抓一辆巴士！
+bz_completed,完成！
+bz_level_n,第{0}关
+bz_new_feature,新功能
+bz_your_reward,你的奖励
+bz_full,已满
+bz_out_of_space,没位置了！
+bz_no_bus,没有巴士能再载客了。
+bz_revive,复活
+bz_retry,重试
+bz_claim,领取
+bz_ad,广告
+bz_buy_qty,x{0}
+bz_settings,设置
+bz_sound,音效
+bz_music,音乐
+bz_haptic,震动
+bz_language,语言
+bz_shop,商店
+bz_free,+{0} 免费
+bz_loading,加载中...
+bz_version,版本 {0}
+bz_lv,第{0}关

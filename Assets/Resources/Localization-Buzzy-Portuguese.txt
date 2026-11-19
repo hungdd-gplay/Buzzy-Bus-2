@@ -1,0 +1,35 @@
+KEY_lang,Portuguese
+bz_booster_vip,Ônibus VIP
+bz_booster_sky,Resgate Aéreo
+bz_booster_wand,Varinha Mágica
+bz_booster_claw,Garra de Ônibus
+bz_desc_vip,Esvazie um ônibus na hora!
+bz_desc_sky,Retire todos os passageiros da área escolhida!
+bz_desc_wand,Embaralhe os ônibus!
+bz_desc_claw,Encha o ônibus escolhido na hora!
+bz_tip_vip,Ônibus VIP! Escolha um ônibus estacionado!
+bz_tip_sky,Resgate Aéreo! Toque em qualquer lugar para recolher os passageiros ao redor!
+bz_tip_wand,Varinha Mágica! Embaralhe os ônibus!
+bz_tip_claw,Garra de Ônibus! Pegue um ônibus da fila!
+bz_completed,Concluído!
+bz_level_n,Nível {0}
+bz_new_feature,Novo recurso
+bz_your_reward,Sua recompensa
+bz_full,Cheio
+bz_out_of_space,Sem espaço!
+bz_no_bus,Nenhum ônibus aceita mais passageiros.
+bz_revive,Reviver
+bz_retry,Tentar de novo
+bz_claim,Resgatar
+bz_ad,AD
+bz_buy_qty,x{0}
+bz_settings,Configurações
+bz_sound,Som
+bz_music,Música
+bz_haptic,Vibração
+bz_language,Idioma
+bz_shop,Loja
+bz_free,+{0} grátis
+bz_loading,Carregando...
+bz_version,Versão {0}
+bz_lv,Nv.{0}

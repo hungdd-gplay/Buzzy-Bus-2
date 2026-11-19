@@ -165,6 +165,27 @@ namespace Buzzy.Game
         Vector3 SlotSide { get { return Vector3.Cross(Vector3.up, SlotNose) * Mathf.Sign(_cfg.boardSide == 0 ? 1f : _cfg.boardSide); } }
         /// <summary>Điểm tập kết cạnh Ô BẾN (không theo xe đang chạy): phía hông xe lộ ra, trước mũi một chút; người tới trước đứng chờ xe đỗ (góp ý 05, 08).</summary>
         Vector3 BoardPoint(CarV cv) { return cv.slotPos + SlotSide * (_cfg.boardSideOffset + _cfg.boardPointOffset * 0.5f) + SlotNose * _cfg.boardPointOffset; }
+        /// <summary>M8: khoảng cách tối thiểu giữa 2 người = max(walkMinDist, bề ngang thật của pose chạy × walkMinDistPoseScale) — pose RunA/RunB rộng hơn Block_Mesh (tay vung) nên không dùng số khối cũ (44: đè 30–50 % ở p1).</summary>
+        float _poseWidth = -1f;
+        float MinDist
+        {
+            get
+            {
+                if (_poseWidth < 0f) { var m = _cfg.poseEnabled && _a.poseRunA != null ? _a.poseRunA : _a.blockMesh; _poseWidth = (m != null ? m.bounds.size.x : 1.3f) * BlockScale.x * _cfg.walkScale * _cfg.poseScale; }
+                return Mathf.Max(_cfg.walkMinDist, _poseWidth * _cfg.walkMinDistPoseScale);
+            }
+        }
+
+        /// <summary>M8 (góp ý 12): đổi mesh nhân vật theo pha; trả về độ bù Y (thế giới) để chân chạm đất với pose đã nướng độ cao.</summary>
+        float SetPose(Walk w, Mesh m, float bakedY)
+        {
+            if (!_cfg.poseEnabled || m == null || w.p.mf == null) return 0f;
+            if (w.p.mf.sharedMesh != m) w.p.mf.sharedMesh = m;
+            return -bakedY * BlockScale.y * _cfg.walkScale * _cfg.poseScale * _cfg.poseHeightScale;
+        }
+        /// <summary>Cỡ nhân vật đi bộ: ngang/sâu × poseScale, cao × thêm poseHeightScale (P1: camera nghiêng 60° nuốt chiều cao, 3c đo 1,32 ô vs đích 1,6).</summary>
+        Vector3 WalkerScale { get { var b = BlockScale * (_cfg.walkScale * _cfg.poseScale); b.y *= _cfg.poseHeightScale; return b; } }
+
         /// <summary>Có xe đang chuyển động trong vùng bến (vào ô, lùi ra, chạy trên làn; dưới cột chờ, trong khung): đám đông chờ ở lề không băng qua (góp ý 13).</summary>
         bool BayBusy()
         {
@@ -173,11 +194,11 @@ namespace Buzzy.Game
             return false;
         }
         /// <summary>Góp ý 13 (clip 6/7 ca): chỗ đứng sát hông trái khung, góc đuôi, trước khi nhảy (đích của đoạn băng qua đường sau khi xe đỗ).</summary>
-        Vector3 FlankPoint(CarV cv) { return cv.slotPos + SlotSide * (_cfg.boardSideOffset + _cfg.walkMinDist) + SlotNose * _cfg.boardFrontOffset; }
+        Vector3 FlankPoint(CarV cv) { return cv.slotPos + SlotSide * (_cfg.boardSideOffset + MinDist) + SlotNose * _cfg.boardFrontOffset; }
         /// <summary>Góp ý 13: chỗ chờ khi xe chưa đỗ: phía bảng của mép lề (waitLineZ), hàng đầu cách mép waitLineOffset ô, dàn ngang tâm = ô bến đích, tối đa waitSpread ô rộng, cột xếp từ giữa ra, số cột = sĩ số / waitRows.</summary>
         Vector3 WaitGoal(Walk w)
         {
-            float step = _cfg.walkMinDist * 1.05f;
+            float step = MinDist * 1.05f;
             int maxCols = Mathf.Max(1, Mathf.FloorToInt(_cfg.waitSpread * CellX / step));
             int cols = Mathf.Clamp(Mathf.CeilToInt(w.groupN / (float)Mathf.Max(1, _cfg.waitRows)), 1, maxCols);
             int row = w.order / cols, c = w.order % cols; int col = (c % 2 == 0 ? 1 : -1) * ((c + 1) / 2);   // 0, +1, -1, +2, -2...
@@ -212,7 +233,7 @@ namespace Buzzy.Game
                 {
                     var w = pend[i]; if (!ReachableNow(w.p.d.X, w.p.d.Y, open, ox, oy)) continue;
                     // W2: xếp làn luân phiên (đi 3–4 hàng ngang như clip), mỗi người cách walkGap
-                    int nl = Mathf.Max(1, _cfg.walkLanes); w.lane = ((released % nl) - (nl - 1) * 0.5f) * _cfg.walkMinDist * _cfg.walkLaneSpacing + ((float)_rnd.NextDouble() - 0.5f) * 0.1f;
+                    int nl = Mathf.Max(1, _cfg.walkLanes); w.lane = ((released % nl) - (nl - 1) * 0.5f) * MinDist * _cfg.walkLaneSpacing + ((float)_rnd.NextDouble() - 0.5f) * 0.1f;
                     w.slot = _walkSeq++;
                     // W2 (clip): đi thành túm 2–4 người sát nhau, giữa các túm cách walkGap
                     if (_groupLeft <= 0) { _groupLeft = _rnd.Next(Mathf.Max(1, _cfg.walkGroupMin), Mathf.Max(_cfg.walkGroupMin, _cfg.walkGroupMax) + 1); t += _cfg.walkGap * (0.7f + 0.6f * (float)_rnd.NextDouble()); }
@@ -236,8 +257,8 @@ namespace Buzzy.Game
             int nl = Mathf.Max(1, _cfg.walkLanes); int row = (w.slot / nl) % Mathf.Max(1, _cfg.walkQueueRows);
             Vector3 goalW;
             if (_cfg.gatherMode == 1 && !w.crossed) goalW = WaitGoal(w);                                   // góp ý 13: chờ trước mép lề
-            else if (_cfg.gatherMode == 1) goalW = FlankPoint(w.car) + SlotNose * ((w.order % 3) * _cfg.walkMinDist * 0.8f);   // băng qua đường tới hông trái khung, góc đuôi
-            else goalW = BoardPoint(w.car) + SlotNose * (row * _cfg.walkMinDist * 1.05f);   // hàng sau lùi về phía mũi xe / bảng
+            else if (_cfg.gatherMode == 1) goalW = FlankPoint(w.car) + SlotNose * ((w.order % 3) * MinDist * 0.8f);   // băng qua đường tới hông trái khung, góc đuôi
+            else goalW = BoardPoint(w.car) + SlotNose * (row * MinDist * 1.05f);   // hàng sau lùi về phía mũi xe / bảng
             var goal = WorldCell(goalW); var from = WorldCell(fromWorld);
             int gyMax = Mathf.Max(goal.y, from.y) + 1;
             int ox, oy; var d = DistField(goal, gyMax, out ox, out oy);
@@ -302,7 +323,7 @@ namespace Buzzy.Game
             for (int i = _walks.Count - 1; i >= 0; i--)
             {
                 var w = _walks[i]; var tr = w.p.tr; w.moving = false;
-                if (Time < w.start) { w.pos = w.p.home; w.off = Vector3.zero; tr.localPosition = w.p.home; continue; }   // chờ tại chỗ (không nhấc, không bay)
+                if (Time < w.start) { w.pos = w.p.home; w.off = Vector3.zero; tr.localPosition = w.p.home + Vector3.up * SetPose(w, _a.poseActive, _cfg.poseActiveBakedY); continue; }   // chờ tại chỗ: pose Active (đã chọn)
                 if (w.phase == -1)
                 {   // kẹt hẳn (bị màu khác bao kín): nhảy qua ra ô rỗng gần nhất
                     _pendingCells.Remove(w.p.d.X * 1000 + w.p.d.Y);
@@ -327,7 +348,7 @@ namespace Buzzy.Game
                     {
                         if (o == w || (o.phase != 2 && o.phase != 4) || Time < o.start) continue;
                         var dv = WPos(o) - WPos(w); dv.y = 0f; float along = Vector3.Dot(dv, w.dir); float lat = (dv - w.dir * along).magnitude;
-                        if (along > 0f && along < _cfg.walkMinDist * 1.1f && lat < _cfg.walkMinDist * 0.6f) { adv *= 0.35f; break; }
+                        if (along > 0f && along < MinDist * 1.1f && lat < MinDist * 0.6f) { adv *= 0.35f; break; }
                     }
                     w.dist += adv; w.moving = adv > 0.001f;
                     if (w.dist >= w.total) { w.dist = w.total; w.pos = w.pts[w.pts.Count - 1]; w.phase = 4; w.phaseStart = Time; }
@@ -356,13 +377,14 @@ namespace Buzzy.Game
                 {   // nhảy lên xe (gốc _jumpHeight / _jumpDuration), thu nhỏ khi vào
                     float u = Mathf.Clamp01((Time - w.phaseStart) / Mathf.Max(0.05f, _cfg.boardJumpDuration));
                     var to = BoardTarget(w.car);   // góp ý 08: vào hông xe, không lên nóc
-                    tr.localPosition = Vector3.Lerp(w.jumpFrom, to, u) + Vector3.up * (_cfg.boardJumpHeight * 4f * u * (1f - u));
-                    tr.localScale = BlockScale * (_cfg.walkScale * Mathf.Lerp(1f, 0.3f, u * u));
+                    float jy = SetPose(w, _a.poseJump, _cfg.poseJumpBakedY);
+                    tr.localPosition = Vector3.Lerp(w.jumpFrom, to, u) + Vector3.up * (_cfg.boardJumpHeight * 4f * u * (1f - u) + jy);
+                    tr.localScale = WalkerScale * Mathf.Lerp(1f, 0.3f, u * u);
                     if (u >= 1f) { _walks.RemoveAt(i); Kill(tr.gameObject); ForgetPass(w.p); Game.Arrive(w.car.car, w.p.d); }
                 }
             }
             // 2) giải va chạm bằng chiếu vị trí (gốc _crowdSolverIterations 3): hai người gần hơn walkMinDist thì đẩy nhau ra mỗi người một nửa (góp ý 06: hết đè)
-            float md = _cfg.walkMinDist;
+            float md = MinDist;
             if (md > 0f)
             {
                 var act = new List<Walk>(); foreach (var w in _walks) if ((w.phase == 2 || w.phase == 4) && Time >= w.start) act.Add(w);
@@ -382,13 +404,20 @@ namespace Buzzy.Game
             {
                 if (Time < w.start || w.phase == 3) continue;
                 var tr = w.p.tr;
-                if (w.phase == 1) { tr.localPosition = w.pos; if (w.dir.sqrMagnitude > 0.001f) tr.localRotation = Quaternion.LookRotation(w.dir.normalized) * Quaternion.Euler(0f, 180f, 0f); continue; }
+                if (w.phase == 1) { tr.localPosition = w.pos + Vector3.up * SetPose(w, _a.poseJump, _cfg.poseJumpBakedY); if (w.dir.sqrMagnitude > 0.001f) tr.localRotation = Quaternion.LookRotation(w.dir.normalized) * Quaternion.Euler(0f, 180f, 0f); continue; }
+                // M8: pose theo pha: đang đi → RunA↔RunB mỗi nửa bước; đứng chờ → Idle↔IdleB chậm
+                float py;
+                if (w.moving) { int half = Mathf.FloorToInt(w.dist / Mathf.Max(0.05f, _cfg.walkStride * 0.5f)); py = SetPose(w, (half & 1) == 0 ? _a.poseRunA : _a.poseRunB, _cfg.poseRunBakedY); }
+                else { bool b2 = _cfg.poseIdleSwap > 0f && (Mathf.FloorToInt((Time - w.phaseStart) / _cfg.poseIdleSwap + w.slot) & 1) == 1; py = SetPose(w, b2 ? _a.poseIdleB : _a.poseIdle, 0f); }
                 float bob = w.moving ? _cfg.walkBobHeight * Mathf.Abs(Mathf.Sin(w.dist / Mathf.Max(0.05f, _cfg.walkStride) * Mathf.PI))
                                      : _cfg.walkBobHeight * 0.3f * Mathf.Abs(Mathf.Sin((Time - w.phaseStart) * 6f + w.lane * 7f));
-                tr.localPosition = WPos(w) + Vector3.up * bob;
+                tr.localPosition = WPos(w) + Vector3.up * (bob + py);
                 if (w.dir.sqrMagnitude > 0.0001f)
-                    tr.localRotation = Quaternion.Slerp(tr.localRotation, Quaternion.LookRotation(w.dir) * Quaternion.Euler(0f, 180f + (w.moving ? _cfg.walkSway * Mathf.Sin(w.dist / Mathf.Max(0.05f, _cfg.walkStride) * Mathf.PI * 2f) : 0f), 0f), 1f - Mathf.Exp(-14f * dt));
-                tr.localScale = BlockScale * _cfg.walkScale;   // W1: người đi nhỏ hơn khối đứng (clip: hành khách nhỏ hơn pixel ảnh)
+                {   // P2 (3c đo clip): đang đi → mặt trước theo hướng đi; đứng chờ → mặt về camera như khối trên bảng
+                    var want = w.moving || !_cfg.poseIdleFaceCamera ? Quaternion.LookRotation(w.dir) * Quaternion.Euler(0f, 180f + (w.moving ? _cfg.walkSway * Mathf.Sin(w.dist / Mathf.Max(0.05f, _cfg.walkStride) * Mathf.PI * 2f) : 0f), 0f) : Quaternion.Euler(0f, 180f, 0f);
+                    tr.localRotation = Quaternion.Slerp(tr.localRotation, want, 1f - Mathf.Exp(-14f * dt));
+                }
+                tr.localScale = WalkerScale;   // W1 / P1: cỡ nhân vật đi bộ
             }
         }
     }

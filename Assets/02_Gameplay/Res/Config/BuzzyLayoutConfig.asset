@@ -291,6 +291,15 @@ MonoBehaviour:
   - 0.16
   - 0.27
   - 0.365
+  poseEnabled: 1
+  poseIdleSwap: 0.5
+  poseJumpBakedY: 0.88
+  poseRunBakedY: -0.08
+  poseActiveBakedY: 0
+  poseScale: 1.05
+  poseHeightScale: 1.5
+  poseIdleFaceCamera: 1
+  walkMinDistPoseScale: 0.75
   walkSpeed: 7.5
   walkSpeedVariance: 0.2
   walkGap: 0.06
@@ -314,8 +323,8 @@ MonoBehaviour:
   waitSpread: 10
   waitRows: 3
   waitWhileBayBusy: 1
-  boardJumpHeight: 1
-  boardJumpDuration: 0.22
+  boardJumpHeight: 1.5
+  boardJumpDuration: 0.4
   stragglerDelay: 1
   stragglerHopHeight: 2
   walkScale: 1
@@ -406,6 +415,14 @@ MonoBehaviour:
   hudUseSafeArea: 1
   hudSafeExtra: {x: 0, y: 0}
   bottomBarFillSafe: 1
+  languageCols: 3
+  languageFirstRowY: 0.26
+  languageRowStep: 0.125
+  languageColSpread: 0.31
+  languageButtonWidth: 0.2
+  languageFontPx: 26
+  settingsLanguageRowY: 0.7
+  settingsLanguageButtonWidth: 0.34
   backgroundTop: {r: 0.654902, g: 0.6745098, b: 0.9019608, a: 1}
   backgroundBottom: {r: 0.5294118, g: 0.54901963, b: 0.7764706, a: 1}
   roadColor: {r: 0.26666668, g: 0.2901961, b: 0.41960785, a: 1}

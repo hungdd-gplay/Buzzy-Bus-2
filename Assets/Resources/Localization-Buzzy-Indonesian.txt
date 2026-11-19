@@ -1,0 +1,35 @@
+KEY_lang,Indonesian
+bz_booster_vip,Bus VIP
+bz_booster_sky,Sambar Langit
+bz_booster_wand,Tongkat Ajaib
+bz_booster_claw,Capit Bus
+bz_desc_vip,Kosongkan satu bus seketika!
+bz_desc_sky,Singkirkan semua penumpang di area terpilih!
+bz_desc_wand,Acak bus!
+bz_desc_claw,Isi bus terpilih seketika!
+bz_tip_vip,Bus VIP! Pilih bus yang sedang parkir!
+bz_tip_sky,Sambar Langit! Ketuk di mana saja untuk mengambil penumpang di sekitarnya!
+bz_tip_wand,Tongkat Ajaib! Acak bus!
+bz_tip_claw,Capit Bus! Ambil satu bus dari antrean!
+bz_completed,Selesai!
+bz_level_n,Level {0}
+bz_new_feature,Fitur baru
+bz_your_reward,Hadiahmu
+bz_full,Penuh
+bz_out_of_space,Kehabisan tempat!
+bz_no_bus,Tidak ada bus yang bisa menampung penumpang lagi.
+bz_revive,Lanjut
+bz_retry,Coba lagi
+bz_claim,Ambil
+bz_ad,Iklan
+bz_buy_qty,x{0}
+bz_settings,Pengaturan
+bz_sound,Suara
+bz_music,Musik
+bz_haptic,Getar
+bz_language,Bahasa
+bz_shop,Toko
+bz_free,+{0} gratis
+bz_loading,Memuat...
+bz_version,Versi {0}
+bz_lv,Lv.{0}

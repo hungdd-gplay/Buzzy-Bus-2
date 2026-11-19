@@ -1,0 +1,35 @@
+KEY_lang,Japanese
+bz_booster_vip,VIPバス
+bz_booster_sky,スカイキャッチ
+bz_booster_wand,マジックワンド
+bz_booster_claw,バスクレーン
+bz_desc_vip,バスを1台すぐに満員に!
+bz_desc_sky,選んだ範囲の乗客を全員回収!
+bz_desc_wand,バスをシャッフル!
+bz_desc_claw,選んだバスをすぐに満員に!
+bz_tip_vip,VIPバス! 停車中のバスを選ぼう!
+bz_tip_sky,スカイキャッチ! 画面をタップして周りの乗客を回収しよう!
+bz_tip_wand,マジックワンド! バスをシャッフル!
+bz_tip_claw,バスクレーン! 待機列からバスを1台つかもう!
+bz_completed,クリア!
+bz_level_n,レベル {0}
+bz_new_feature,新機能
+bz_your_reward,ごほうび
+bz_full,満員
+bz_out_of_space,スペース切れ!
+bz_no_bus,これ以上乗客を乗せられるバスがありません。
+bz_revive,復活
+bz_retry,リトライ
+bz_claim,受け取る
+bz_ad,広告
+bz_buy_qty,x{0}
+bz_settings,設定
+bz_sound,効果音
+bz_music,音楽
+bz_haptic,振動
+bz_language,言語
+bz_shop,ショップ
+bz_free,+{0} 無料
+bz_loading,読み込み中...
+bz_version,バージョン {0}
+bz_lv,Lv.{0}

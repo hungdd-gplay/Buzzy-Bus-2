@@ -1,0 +1,35 @@
+KEY_lang,Italian
+bz_booster_vip,Bus VIP
+bz_booster_sky,Presa dal Cielo
+bz_booster_wand,Bacchetta Magica
+bz_booster_claw,Artiglio Bus
+bz_desc_vip,Svuota un bus all'istante!
+bz_desc_sky,Rimuovi tutti i passeggeri nell'area scelta!
+bz_desc_wand,Mescola i bus!
+bz_desc_claw,Riempi il bus scelto all'istante!
+bz_tip_vip,Bus VIP! Scegli un bus parcheggiato!
+bz_tip_sky,Presa dal Cielo! Tocca ovunque per raccogliere i passeggeri intorno!
+bz_tip_wand,Bacchetta Magica! Mescola i bus!
+bz_tip_claw,Artiglio Bus! Prendi un bus dalla coda!
+bz_completed,Completato!
+bz_level_n,Livello {0}
+bz_new_feature,Novità
+bz_your_reward,La tua ricompensa
+bz_full,Pieno
+bz_out_of_space,Spazio esaurito!
+bz_no_bus,Nessun bus può accogliere altri passeggeri.
+bz_revive,Rivivi
+bz_retry,Riprova
+bz_claim,Riscuoti
+bz_ad,AD
+bz_buy_qty,x{0}
+bz_settings,Impostazioni
+bz_sound,Suono
+bz_music,Musica
+bz_haptic,Vibrazione
+bz_language,Lingua
+bz_shop,Negozio
+bz_free,+{0} gratis
+bz_loading,Caricamento...
+bz_version,Versione {0}
+bz_lv,Liv.{0}

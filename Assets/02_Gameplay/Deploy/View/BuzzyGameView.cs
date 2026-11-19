@@ -27,7 +27,7 @@ namespace Buzzy.Game
 
         float _cellX0;          // x thế giới của cột 0
         float _boardZ0;         // z thế giới của hàng 0 (tâm bảng cố định, V33)
-        class Pass { public Transform tr; public PixelData d; public Vector3 home; public float appearAt; public bool flying; public bool hidden; public MeshRenderer mr; public bool loose; public float phase; }
+        class Pass { public Transform tr; public PixelData d; public Vector3 home; public float appearAt; public bool flying; public bool hidden; public MeshRenderer mr; public MeshFilter mf; public bool loose; public float phase; }
         class Flight { public Pass p; public CarV car; public float start, dur; public Vector3 from; public float phase, side; public float tapAt; }
         class Move { public Vector3[] pts; public float[] cum; public float dur, t; public Quaternion endRot; public bool useEndRot; public float delay; public Action done; public bool keepRot; public bool reverse; public int ease; public float[] prof; public bool bank; public CarV waitFor; }   // waitFor (B10): chưa đếm delay khi xe này còn chờ làn   // ease: 0 mặc định, 1 phanh, 2 phóng; prof: bảng quãng đường theo thời gian (tăng tốc / phanh cuối); bank: nghiêng khi cua
         class CarV
@@ -241,10 +241,10 @@ namespace Buzzy.Game
         {
             var go = new GameObject("P");
             go.transform.SetParent(_root, false);
-            go.AddComponent<MeshFilter>().sharedMesh = _a.blockMesh;
+            var mf = go.AddComponent<MeshFilter>(); mf.sharedMesh = _a.blockMesh;
             var mr = go.AddComponent<MeshRenderer>(); mr.sharedMaterial = PassMat(d.Color);
             var bc = go.AddComponent<BoxCollider>(); bc.center = new Vector3(0f, 0.7f, 0f); bc.size = new Vector3(1.2f, 1.4f, 1.0f);
-            var ps = new Pass { tr = go.transform, d = d, home = PixelPos(d), appearAt = appearAt, mr = mr };
+            var ps = new Pass { tr = go.transform, d = d, home = PixelPos(d), appearAt = appearAt, mr = mr, mf = mf };
             _pass[d.X * 1000 + d.Y] = ps;
             SetPassScale(ps, 0f);
             return ps;
@@ -419,7 +419,7 @@ namespace Buzzy.Game
             // U8: level khó / siêu khó dùng badge đầu lâu + thanh đáy đỏ
             var badgeSprite = _lv.tag == 1 ? _a.levelBarHard : _lv.tag == 2 ? _a.levelBarSuper : _a.levelBar;
             var badge = Img("LvBadge", badgeSprite, Color.white, ct, Top(_lv.tag > 0 ? _cfg.badgeCenter + new Vector2(0f, _cfg.hardBadgeDropY) : _cfg.badgeCenter), _lv.tag > 0 ? _cfg.badgeWidth * _cfg.hardBadgeScale : _cfg.badgeWidth);   // U12 (M7b): neo mép trên + safe area
-            Label("Lv." + (DisplayLevel > 0 ? DisplayLevel : _lv.index), badge, new Vector2(badge.sizeDelta.x * 0.5f, -badge.sizeDelta.y * (_lv.tag > 0 ? 0.6f : 0.38f)), (int)(52 * _canvasSize.x / 1080f), _lv.tag > 0 ? _cfg.hardBadgeTextColor : new Color32(0x4A, 0x45, 0x9A, 255));
+            _badgeLabel = Label(BuzzyStrings.Format("bz_lv", DisplayLevel > 0 ? DisplayLevel : _lv.index), badge, new Vector2(badge.sizeDelta.x * 0.5f, -badge.sizeDelta.y * (_lv.tag > 0 ? 0.6f : 0.38f)), (int)(52 * _canvasSize.x / 1080f), _lv.tag > 0 ? _cfg.hardBadgeTextColor : new Color32(0x4A, 0x45, 0x9A, 255));
             BuildBoosterBar(ct);
             BuildSpeedButton(ct);
             BuildDevPanel(ct);   // T1 (M7): chỉ khi DevPanel
@@ -427,7 +427,7 @@ namespace Buzzy.Game
             for (int i = 0; i < 3; i++)
             {
                 var b = Img("Full" + i, _a.knob, new Color(0.72f, 0.75f, 0.95f, 1f), ct, _cfg.fullBubbleCenter, _cfg.fullBubbleWidth, 1f);
-                Label("Full", b, new Vector2(b.sizeDelta.x * 0.5f, -b.sizeDelta.y * 0.45f), (int)(40 * _canvasSize.x / 1080f), new Color32(0x4A, 0x45, 0x9A, 255));
+                _fullLabels[i] = Label(S("bz_full"), b, new Vector2(b.sizeDelta.x * 0.5f, -b.sizeDelta.y * 0.45f), (int)(40 * _canvasSize.x / 1080f), new Color32(0x4A, 0x45, 0x9A, 255));   // M8: khoá bz_full
                 b.gameObject.SetActive(false); _fullBubbles[i] = b;
                 // góp ý 14 (V16, sbs_full_zoom.jpg): bong bóng là BIỂN 3D Sign_Full.obj (tròn 2 lớp, đuôi giọt chạm mặt đường) ở góc trước-trái xe; ảnh UI chỉ còn giữ chữ "Full"
                 if (_a.fullSignMesh != null)

@@ -1,0 +1,35 @@
+KEY_lang,French
+bz_booster_vip,Bus VIP
+bz_booster_sky,Rafle Céleste
+bz_booster_wand,Baguette Magique
+bz_booster_claw,Pince à Bus
+bz_desc_vip,Vide un bus instantanément !
+bz_desc_sky,Retire tous les passagers de la zone choisie !
+bz_desc_wand,Mélange les bus !
+bz_desc_claw,Remplis le bus choisi instantanément !
+bz_tip_vip,Bus VIP ! Choisis un bus garé !
+bz_tip_sky,Rafle Céleste ! Touche n'importe où pour ramasser les passagers autour !
+bz_tip_wand,Baguette Magique ! Mélange les bus !
+bz_tip_claw,Pince à Bus ! Prends un bus dans la file !
+bz_completed,Terminé !
+bz_level_n,Niveau {0}
+bz_new_feature,Nouveauté
+bz_your_reward,Ta récompense
+bz_full,Plein
+bz_out_of_space,Plus de place !
+bz_no_bus,Aucun bus ne peut prendre plus de passagers.
+bz_revive,Continuer
+bz_retry,Réessayer
+bz_claim,Récupérer
+bz_ad,PUB
+bz_buy_qty,x{0}
+bz_settings,Réglages
+bz_sound,Son
+bz_music,Musique
+bz_haptic,Vibration
+bz_language,Langue
+bz_shop,Boutique
+bz_free,+{0} offerts
+bz_loading,Chargement...
+bz_version,Version {0}
+bz_lv,Nv.{0}

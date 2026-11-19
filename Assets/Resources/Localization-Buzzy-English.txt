@@ -1,0 +1,35 @@
+KEY_lang,English
+bz_booster_vip,VIP Bus
+bz_booster_sky,Sky Grab
+bz_booster_wand,Magic Wand
+bz_booster_claw,Bus Claw
+bz_desc_vip,Clear a bus instantly!
+bz_desc_sky,Clear all passengers in the selected area!
+bz_desc_wand,Shuffle the buses!
+bz_desc_claw,Fill the selected bus instantly!
+bz_tip_vip,VIP Bus! Pick a Bus in park slot!
+bz_tip_sky,Sky Grab! Tap anywhere to Sky Grab the passengers around it!
+bz_tip_wand,Magic Wand! Shuffle the buses!
+bz_tip_claw,Bus Claw! Pick up a bus from the queue!
+bz_completed,Completed!
+bz_level_n,Level {0}
+bz_new_feature,New Feature
+bz_your_reward,Your Reward
+bz_full,Full
+bz_out_of_space,Out of space!
+bz_no_bus,No bus can take more passengers.
+bz_revive,Revive
+bz_retry,Retry
+bz_claim,Claim
+bz_ad,AD
+bz_buy_qty,x{0}
+bz_settings,Settings
+bz_sound,Sound
+bz_music,Music
+bz_haptic,Haptic
+bz_language,Language
+bz_shop,Shop
+bz_free,+{0} free
+bz_loading,Loading...
+bz_version,Version {0}
+bz_lv,Lv.{0}

@@ -1,0 +1,35 @@
+KEY_lang,Korean
+bz_booster_vip,VIP 버스
+bz_booster_sky,스카이 그랩
+bz_booster_wand,마법 지팡이
+bz_booster_claw,버스 집게
+bz_desc_vip,버스 한 대를 즉시 채우기!
+bz_desc_sky,선택한 구역의 승객을 모두 치우기!
+bz_desc_wand,버스 섞기!
+bz_desc_claw,선택한 버스를 즉시 채우기!
+bz_tip_vip,VIP 버스! 주차된 버스를 고르세요!
+bz_tip_sky,스카이 그랩! 아무 곳이나 눌러 주변 승객을 모으세요!
+bz_tip_wand,마법 지팡이! 버스를 섞으세요!
+bz_tip_claw,버스 집게! 대기줄에서 버스를 집으세요!
+bz_completed,완료!
+bz_level_n,레벨 {0}
+bz_new_feature,새 기능
+bz_your_reward,보상
+bz_full,만석
+bz_out_of_space,자리가 없어요!
+bz_no_bus,승객을 더 태울 수 있는 버스가 없어요.
+bz_revive,부활
+bz_retry,다시 하기
+bz_claim,받기
+bz_ad,광고
+bz_buy_qty,x{0}
+bz_settings,설정
+bz_sound,효과음
+bz_music,음악
+bz_haptic,진동
+bz_language,언어
+bz_shop,상점
+bz_free,+{0} 무료
+bz_loading,로딩 중...
+bz_version,버전 {0}
+bz_lv,Lv.{0}

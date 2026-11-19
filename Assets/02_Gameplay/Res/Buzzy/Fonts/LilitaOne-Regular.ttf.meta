@@ -10,6 +10,16 @@ TrueTypeFontImporter:
   includeFontData: 1
   fontNames:
   - Lilita One
+  - Arial
+  - Segoe UI
+  - Microsoft YaHei
+  - Malgun Gothic
+  - Meiryo
+  - Leelawadee UI
+  - Tahoma
+  - Noto Sans
+  - Noto Sans CJK SC
+  - Roboto
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

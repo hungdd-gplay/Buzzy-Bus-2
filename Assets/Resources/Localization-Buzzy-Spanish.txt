@@ -1,0 +1,35 @@
+KEY_lang,Spanish
+bz_booster_vip,Autobús VIP
+bz_booster_sky,Rapto Aéreo
+bz_booster_wand,Varita Mágica
+bz_booster_claw,Garra de Bus
+bz_desc_vip,¡Vacía un autobús al instante!
+bz_desc_sky,¡Retira a todos los pasajeros de la zona elegida!
+bz_desc_wand,¡Baraja los autobuses!
+bz_desc_claw,¡Llena el autobús elegido al instante!
+bz_tip_vip,¡Autobús VIP! ¡Elige un autobús aparcado!
+bz_tip_sky,¡Rapto Aéreo! Toca donde quieras para recoger a los pasajeros de alrededor
+bz_tip_wand,¡Varita Mágica! ¡Baraja los autobuses!
+bz_tip_claw,¡Garra de Bus! ¡Toma un autobús de la cola!
+bz_completed,¡Completado!
+bz_level_n,Nivel {0}
+bz_new_feature,Nueva función
+bz_your_reward,Tu recompensa
+bz_full,Lleno
+bz_out_of_space,¡Sin espacio!
+bz_no_bus,Ningún autobús admite más pasajeros.
+bz_revive,Revivir
+bz_retry,Reintentar
+bz_claim,Reclamar
+bz_ad,AD
+bz_buy_qty,x{0}
+bz_settings,Ajustes
+bz_sound,Sonido
+bz_music,Música
+bz_haptic,Vibración
+bz_language,Idioma
+bz_shop,Tienda
+bz_free,+{0} gratis
+bz_loading,Cargando...
+bz_version,Versión {0}
+bz_lv,Nv.{0}

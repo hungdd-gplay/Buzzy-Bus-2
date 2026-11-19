@@ -1,0 +1,35 @@
+KEY_lang,Russian
+bz_booster_vip,VIP-автобус
+bz_booster_sky,Небесный захват
+bz_booster_wand,Волшебная палочка
+bz_booster_claw,Автокран
+bz_desc_vip,Мгновенно очисти один автобус!
+bz_desc_sky,Убери всех пассажиров в выбранной зоне!
+bz_desc_wand,Перемешай автобусы!
+bz_desc_claw,Мгновенно заполни выбранный автобус!
+bz_tip_vip,VIP-автобус! Выбери автобус на стоянке!
+bz_tip_sky,Небесный захват! Коснись любого места и собери пассажиров вокруг!
+bz_tip_wand,Волшебная палочка! Перемешай автобусы!
+bz_tip_claw,Автокран! Возьми автобус из очереди!
+bz_completed,Готово!
+bz_level_n,Уровень {0}
+bz_new_feature,Новая функция
+bz_your_reward,Твоя награда
+bz_full,Полный
+bz_out_of_space,Нет места!
+bz_no_bus,Ни один автобус не вмещает больше пассажиров.
+bz_revive,Дальше
+bz_retry,Заново
+bz_claim,Забрать
+bz_ad,Реклама
+bz_buy_qty,x{0}
+bz_settings,Настройки
+bz_sound,Звук
+bz_music,Музыка
+bz_haptic,Вибрация
+bz_language,Язык
+bz_shop,Магазин
+bz_free,+{0} бесплатно
+bz_loading,Загрузка...
+bz_version,Версия {0}
+bz_lv,Ур.{0}

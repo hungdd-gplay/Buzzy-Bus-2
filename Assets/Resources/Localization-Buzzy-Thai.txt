@@ -1,0 +1,35 @@
+KEY_lang,Thai
+bz_booster_vip,รถบัส VIP
+bz_booster_sky,คว้าจากฟ้า
+bz_booster_wand,ไม้กายสิทธิ์
+bz_booster_claw,กรงเล็บรถบัส
+bz_desc_vip,เคลียร์รถบัสหนึ่งคันทันที!
+bz_desc_sky,เคลียร์ผู้โดยสารทั้งหมดในพื้นที่ที่เลือก!
+bz_desc_wand,สลับรถบัส!
+bz_desc_claw,เติมรถบัสที่เลือกให้เต็มทันที!
+bz_tip_vip,รถบัส VIP! เลือกรถบัสที่จอดอยู่!
+bz_tip_sky,คว้าจากฟ้า! แตะที่ใดก็ได้เพื่อเก็บผู้โดยสารรอบๆ!
+bz_tip_wand,ไม้กายสิทธิ์! สลับรถบัส!
+bz_tip_claw,กรงเล็บรถบัส! หยิบรถบัสจากแถวรอ!
+bz_completed,สำเร็จ!
+bz_level_n,ด่าน {0}
+bz_new_feature,ฟีเจอร์ใหม่
+bz_your_reward,รางวัลของคุณ
+bz_full,เต็ม
+bz_out_of_space,ที่ว่างหมด!
+bz_no_bus,ไม่มีรถบัสคันไหนรับผู้โดยสารเพิ่มได้
+bz_revive,ฟื้นคืน
+bz_retry,ลองใหม่
+bz_claim,รับ
+bz_ad,โฆษณา
+bz_buy_qty,x{0}
+bz_settings,ตั้งค่า
+bz_sound,เสียง
+bz_music,เพลง
+bz_haptic,สั่น
+bz_language,ภาษา
+bz_shop,ร้านค้า
+bz_free,ฟรี +{0}
+bz_loading,กำลังโหลด...
+bz_version,เวอร์ชัน {0}
+bz_lv,ด่าน {0}

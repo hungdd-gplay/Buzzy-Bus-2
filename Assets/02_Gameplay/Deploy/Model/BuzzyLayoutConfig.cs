@@ -362,6 +362,17 @@ namespace Buzzy.Game
         public float devButtonSize = 0.075f;
         public float[] devPanelX = { 0.05f, 0.16f, 0.27f, 0.365f };
 
+        [Header("Nhân vật hình người - M8 góp ý 12 (P1–P4): đổi mesh theo pha, khối đứng trên bảng vẫn Block_Mesh")]
+        [Tooltip("P1: bật đổi pose (false = khối vuông như M7). Pose từ APK cùng topology: Idle/IdleB (chờ), RunA/RunB (đi, đổi mỗi nửa walkStride), Jump (nhảy lên xe / nhảy qua), Active (đã chọn, chưa đi)")] public bool poseEnabled = true;
+        [Tooltip("P2: đổi Idle↔IdleB khi chờ mỗi (s); 0 = giữ Idle")] public float poseIdleSwap = 0.5f;
+        [Tooltip("P3: pose đã nướng sẵn độ cao chân (đơn vị mesh): Jump chân ở y 0,88, Active 0,79, Run −0,08 → trừ/cộng để chân chạm đất (Active giữ nguyên = bật lên tại chỗ như J1)")] public float poseJumpBakedY = 0.88f;
+        public float poseRunBakedY = -0.08f;
+        public float poseActiveBakedY = 0f;
+        [Tooltip("P1: tỉ lệ cỡ nhân vật đi bộ so với khối đứng (nhân thêm walkScale); 3c đo clip Lv.1: cao 1,4–2,4 ô")] public float poseScale = 1.05f;   // P1 (3c): bề ngang người chạy 1,23 ô = clip ~1,2 → giữ
+        [Tooltip("P1 (3c đo p2): cao người chạy trên màn 1,32 ô vs đích 1,4–2,4 (trung vị 1,6): nhân riêng trục cao (camera 60° nuốt chiều cao); không đổi bề ngang")] public float poseHeightScale = 1.5f;   // p3 (3c): 1,25 chỉ +7 % trên màn → 1,5 để ≈ 1,6 ô (bề ngang giữ)
+        [Tooltip("P2 (3c): đứng chờ quay mặt về camera (true) hay giữ hướng đi (false)")] public bool poseIdleFaceCamera = true;
+        [Tooltip("P1 / W2: khoảng cách tối thiểu giữa 2 người = max(walkMinDist, bề ngang bbox pose RunA (thế giới) × số này); 0,75 = thân không đè, tay được chạm")] public float walkMinDistPoseScale = 0.75f;
+
         [Header("Đi bộ + đường xe - M7 góp ý 04 (W*, visual-check mục G; config gốc PassengerEntity / CarEntity)")]
         [Tooltip("W1: tốc độ đi bộ (đơn vị thế giới / s; gốc _moveToCarSpeed 6 theo ô của họ), lệch ± (gốc _speedVariance 0.3, giảm để không vượt nhau)")] public float walkSpeed = 7.5f;   // clip Lv.1 ~6 đv/s theo ô của họ; đợt 3: người đầu phải lên xe ≤ 1,5 s sau chạm (đo 2,2 s) → nhanh hơn 25 %
         public float walkSpeedVariance = 0.2f;   // clip: túm dãn co (gốc 0.3)
@@ -386,8 +397,8 @@ namespace Buzzy.Game
         public float waitSpread = 10f;
         public int waitRows = 3;
         [Tooltip("W7 (góp ý 13, clip Lv.2 16,0–16,8 / 20,0–20,6): đứng ở lề khi còn xe nào đang chuyển động trong bến (vào / lùi / chạy làn), dù xe của mình đã đỗ; tắt = chỉ chờ xe mình")] public bool waitWhileBayBusy = true;
-        public float boardJumpHeight = 1.0f;
-        public float boardJumpDuration = 0.22f;   // đợt 3: nhảy nhanh hơn để nhịp lên xe ~17 người / s
+        public float boardJumpHeight = 1.5f;   // P4 (3c đo clip: đầu lên ≈ 2 ô, biến vào xe 0,33 s): về số APK 1,5 / 0,4; trường cũ → Sync
+        public float boardJumpDuration = 0.4f;   // boardParallel 16 nên nhịp lên xe vẫn ≥ 17 / s
         [Tooltip("W5: pixel kẹt hẳn (bị màu khác bao kín): chờ (s) rồi nhảy qua, độ cao nhảy (gốc _stragglerMigrationDelay 0.6)")] public float stragglerDelay = 1.0f;
         public float stragglerHopHeight = 2.0f;
         [Tooltip("W1 (góp ý 09): cỡ người khi đi so với khối đứng: 1 = giữ nguyên tới lúc nhảy vào xe; bán kính không lấn vào khối đứng (thế giới)")] public float walkScale = 1f;
@@ -488,6 +499,19 @@ namespace Buzzy.Game
         [Tooltip("U12: đẩy nhóm trên / dưới vào trong theo Screen.safeArea (tai thỏ, thanh home)")] public bool hudUseSafeArea = true;
         [Tooltip("U12: lề an toàn thêm tối thiểu (trên, dưới) tính % bề ngang, áp cả khi safeArea = cả màn (0 = không)")] public Vector2 hudSafeExtra = Vector2.zero;
         [Tooltip("U13: thanh đáy kéo dài xuống hết lề an toàn dưới (true) hay dừng ở mép lề (false)")] public bool bottomBarFillSafe = true;
+
+        [Header("Localization (M8; U16–U18)")]
+        [Tooltip("U17: popup chọn ngôn ngữ trong Settings: số cột, hàng đầu (tỉ lệ cao khung popup), bước hàng, x tâm cột (tỉ lệ bề ngang popup, đối xứng quanh 0,5), rộng nút (% bề ngang), cỡ chữ (px @1080)")] public int languageCols = 3;
+        public float languageFirstRowY = 0.26f;
+        public float languageRowStep = 0.125f;
+        public float languageColSpread = 0.31f;
+        public float languageButtonWidth = 0.2f;
+        public int languageFontPx = 26;
+        [Tooltip("U17: hàng Language trong Settings: vị trí hàng (tỉ lệ cao khung, sau 3 hàng Sound/Music/Haptic), rộng nút tên ngôn ngữ (% bề ngang)")] public float settingsLanguageRowY = 0.70f;
+        public float settingsLanguageButtonWidth = 0.34f;
+        [Tooltip("U16: dòng mô tả trong popup thua / mở khoá / mua: đặt DƯỚI ảnh minh hoạ cách (% bề ngang), rộng (tỉ lệ bảng kem), tối đa số dòng (best fit co chữ, min 16 px)")] public float popupDescGap = 0.035f;
+        public float popupDescWidth = 0.9f;
+        public int popupDescLines = 2;
 
         [Header("Màu nền (V3, V4, V8)")]
         public Color backgroundTop = new Color32(0xA7, 0xAC, 0xE6, 255);

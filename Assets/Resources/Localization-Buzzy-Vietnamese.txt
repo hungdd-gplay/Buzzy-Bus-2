@@ -1,0 +1,35 @@
+KEY_lang,Vietnamese
+bz_booster_vip,Xe VIP
+bz_booster_sky,Hút Từ Trời
+bz_booster_wand,Đũa Thần
+bz_booster_claw,Gắp Xe
+bz_desc_vip,Dọn một xe ngay lập tức!
+bz_desc_sky,Dọn mọi hành khách trong vùng đã chọn!
+bz_desc_wand,Xáo lại các xe!
+bz_desc_claw,Lấp đầy xe đã chọn ngay lập tức!
+bz_tip_vip,Xe VIP! Chọn một xe đang đỗ!
+bz_tip_sky,Hút Từ Trời! Chạm bất kỳ đâu để hút hành khách quanh đó!
+bz_tip_wand,Đũa Thần! Xáo lại các xe!
+bz_tip_claw,Gắp Xe! Gắp một xe từ hàng chờ!
+bz_completed,Hoàn thành!
+bz_level_n,Màn {0}
+bz_new_feature,Tính năng mới
+bz_your_reward,Phần thưởng
+bz_full,Đầy
+bz_out_of_space,Hết chỗ!
+bz_no_bus,Không xe nào nhận thêm khách được.
+bz_revive,Hồi sinh
+bz_retry,Chơi lại
+bz_claim,Nhận
+bz_ad,QC
+bz_buy_qty,x{0}
+bz_settings,Cài đặt
+bz_sound,Âm thanh
+bz_music,Nhạc
+bz_haptic,Rung
+bz_language,Ngôn ngữ
+bz_shop,Cửa hàng
+bz_free,+{0} miễn phí
+bz_loading,Đang tải...
+bz_version,Phiên bản {0}
+bz_lv,Màn {0}

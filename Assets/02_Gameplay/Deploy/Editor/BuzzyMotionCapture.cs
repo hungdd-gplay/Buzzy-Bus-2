@@ -43,6 +43,7 @@ namespace Buzzy.Game.EditorTools
             a.loadingBackground = AssetDatabase.LoadAssetAtPath<Texture2D>(Res + "Buzzy/Textures/BG_Home_Halloween.png");   // U1: nền đêm Halloween như mẫu
             a.colorTexture = AssetDatabase.LoadAssetAtPath<Texture2D>(Res + "Buzzy/Textures/Color.png");   // góp ý 14
             a.fullSignMesh = Mesh("Sign_Full");
+            a.poseIdle = Mesh("Block_Idle"); a.poseIdleB = Mesh("Block_IdleB"); a.poseRunA = Mesh("Block_RunA"); a.poseRunB = Mesh("Block_RunB"); a.poseJump = Mesh("Block_Jump"); a.poseActive = Mesh("Block_Active");   // M8
             a.shadowTexture = AssetDatabase.LoadAssetAtPath<Texture2D>(Res + "Buzzy/Textures/Shadow.png");   // V14: bóng xe
             // M7: âm thanh (tên file đã đổi từ APK, design-decisions 17)
             a.sfxTap = Clip("tap_passenger"); a.sfxPop = Clip("pop"); a.sfxWrong = Clip("choose_wrong"); a.sfxWin = Clip("win"); a.sfxLose = Clip("on_lose");

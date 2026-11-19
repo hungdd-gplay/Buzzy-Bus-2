@@ -1,0 +1,35 @@
+KEY_lang,German
+bz_booster_vip,VIP-Bus
+bz_booster_sky,Himmelsgriff
+bz_booster_wand,Zauberstab
+bz_booster_claw,Bus-Greifer
+bz_desc_vip,Leere sofort einen Bus!
+bz_desc_sky,Entferne alle Fahrgäste im gewählten Bereich!
+bz_desc_wand,Mische die Busse!
+bz_desc_claw,Fülle den gewählten Bus sofort!
+bz_tip_vip,VIP-Bus! Wähle einen geparkten Bus!
+bz_tip_sky,Himmelsgriff! Tippe irgendwo und sammle die Fahrgäste ringsum ein!
+bz_tip_wand,Zauberstab! Mische die Busse!
+bz_tip_claw,Bus-Greifer! Hol einen Bus aus der Schlange!
+bz_completed,Geschafft!
+bz_level_n,Level {0}
+bz_new_feature,Neue Funktion
+bz_your_reward,Deine Belohnung
+bz_full,Voll
+bz_out_of_space,Kein Platz!
+bz_no_bus,Kein Bus nimmt noch Fahrgäste auf.
+bz_revive,Weiter
+bz_retry,Nochmal
+bz_claim,Abholen
+bz_ad,AD
+bz_buy_qty,x{0}
+bz_settings,Einstellungen
+bz_sound,Ton
+bz_music,Musik
+bz_haptic,Vibration
+bz_language,Sprache
+bz_shop,Shop
+bz_free,+{0} gratis
+bz_loading,Lädt...
+bz_version,Version {0}
+bz_lv,Lv.{0}

@@ -1,0 +1,35 @@
+KEY_lang,Turkish
+bz_booster_vip,VIP Otobüs
+bz_booster_sky,Gökten Kapma
+bz_booster_wand,Sihirli Değnek
+bz_booster_claw,Otobüs Kıskacı
+bz_desc_vip,Bir otobüsü anında boşalt!
+bz_desc_sky,Seçilen alandaki tüm yolcuları kaldır!
+bz_desc_wand,Otobüsleri karıştır!
+bz_desc_claw,Seçilen otobüsü anında doldur!
+bz_tip_vip,VIP Otobüs! Park etmiş bir otobüs seç!
+bz_tip_sky,Gökten Kapma! Çevredeki yolcuları toplamak için herhangi bir yere dokun!
+bz_tip_wand,Sihirli Değnek! Otobüsleri karıştır!
+bz_tip_claw,Otobüs Kıskacı! Sıradan bir otobüs al!
+bz_completed,Tamamlandı!
+bz_level_n,Seviye {0}
+bz_new_feature,Yeni özellik
+bz_your_reward,Ödülün
+bz_full,Dolu
+bz_out_of_space,Yer kalmadı!
+bz_no_bus,Hiçbir otobüs daha fazla yolcu alamıyor.
+bz_revive,Devam et
+bz_retry,Tekrar dene
+bz_claim,Al
+bz_ad,Reklam
+bz_buy_qty,x{0}
+bz_settings,Ayarlar
+bz_sound,Ses
+bz_music,Müzik
+bz_haptic,Titreşim
+bz_language,Dil
+bz_shop,Mağaza
+bz_free,+{0} ücretsiz
+bz_loading,Yükleniyor...
+bz_version,Sürüm {0}
+bz_lv,Sv.{0}

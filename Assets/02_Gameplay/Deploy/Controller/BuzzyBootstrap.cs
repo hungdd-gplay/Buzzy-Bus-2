@@ -31,6 +31,7 @@ namespace Buzzy.Game
 
         void Start()
         {
+            BuzzyStrings.Init();   // M8 (1f): chuỗi UI theo ngôn ngữ đã lưu / hệ thống, trước khi dựng view
             _store = new BuzzyPrefsStore();
             var mc = config.ToMetaConfig(); mc.MaxLevel = Mathf.Min(mc.MaxLevel, Mathf.Max(1, database.PlayableCount));   // M6: hết level trong phạm vi thì đứng ở level cuối
             _meta = new MetaState(mc); _meta.Load(_store); _maxLevel = mc.MaxLevel;

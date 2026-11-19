@@ -25,6 +25,8 @@ namespace Buzzy.Game.EditorTools
             if (!string.IsNullOrEmpty(sz)) { var p = sz.ToLower().Split('x'); size = new Vector2Int(int.Parse(p[0]), int.Parse(p[1])); }
             var cfg = BuzzyStaticBuilder.LoadOrCreateConfig(); var assets = BuzzyMotionCapture.LoadOrCreateAssets();
             var db = AssetDatabase.LoadAssetAtPath<BuzzyLevelDatabase>(Res + "Levels/BuzzyLevels.asset");
+            // M8 (L1–L15): BUZZY_LANG=<tên SystemLanguage> đặt ngôn ngữ TRƯỚC khi dựng (chuỗi HUD lấy lúc dựng)
+            var lang = Environment.GetEnvironmentVariable("BUZZY_LANG"); if (!string.IsNullOrEmpty(lang)) Buzzy.Game.BuzzyStrings.SetLanguage(lang);
 
             EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
             var camGo = new GameObject("Camera"); var cam = camGo.AddComponent<Camera>();
@@ -49,6 +51,7 @@ namespace Buzzy.Game.EditorTools
             view.Log = s => log.Add(s);
             var meta = new Buzzy.Core.MetaState(cfg.ToMetaConfig()); meta.Level = level; meta.Coins = 640;
             for (int i = 0; i < 4; i++) if (meta.IsBoosterUnlocked(i) && cfg.boosterUnlock[i] < level) meta.ClaimUnlock(i);   // booster mở ở chính level này → còn popup Claim
+            for (int i = 0; i < 4; i++) if (meta.IsBoosterUnlocked(i) && meta.Boosters[i] <= 0) meta.Boosters[i] = 1;   // M8: đủ lượt để chụp tooltip (kể cả booster vừa mở ở level này)
             view.Meta = meta;
             view.Init(db.Get(level), cfg, assets, cam, size);
             float dt = 1f / 60f; Action<float> tick = sec => { int n = Mathf.CeilToInt(sec / dt); for (int i = 0; i < n; i++) view.Tick(dt); };
@@ -57,6 +60,9 @@ namespace Buzzy.Game.EditorTools
             else { view.ShowUnlock(0); tick(0.1f); shot("unlock"); view.ClosePopup(); }
             shot("level");
             view.OpenSettings(); tick(0.1f); shot("settings"); view.ClosePopup();
+            view.OpenLanguage(); tick(0.1f); shot("language"); view.ClosePopup();   // M8 U16–U18: popup chọn ngôn ngữ
+            // M8 B9/L*: tooltip 3 booster có chế độ chọn (VIP, Sky, Claw; Wand dùng ngay) — bấm nút rồi bấm lại để huỷ
+            foreach (int bi in new[] { 0, 1, 3 }) { if (view.DebugBoosterMode(bi)) { tick(0.15f); shot("tooltip_" + bi); view.DebugBoosterMode(bi); tick(0.05f); } else log.Add("tooltip_" + bi + ": booster chưa mở / hết lượt ở level này"); }
             view.OpenShop(); tick(0.1f); shot("shop"); view.ClosePopup();
             view.ShowBuyBooster(0); tick(0.1f); shot("buy_booster"); view.ClosePopup();
             view.ShowLose(); tick(0.1f); shot("lose"); view.ClosePopup();

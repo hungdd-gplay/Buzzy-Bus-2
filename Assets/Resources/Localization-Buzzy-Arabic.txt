@@ -1,0 +1,35 @@
+KEY_lang,Arabic
+bz_booster_vip,حافلة VIP
+bz_booster_sky,قبضة السماء
+bz_booster_wand,العصا السحرية
+bz_booster_claw,مخلب الحافلة
+bz_desc_vip,أفرغ حافلة فورًا!
+bz_desc_sky,أزل كل الركاب في المنطقة المحددة!
+bz_desc_wand,اخلط الحافلات!
+bz_desc_claw,املأ الحافلة المحددة فورًا!
+bz_tip_vip,حافلة VIP! اختر حافلة متوقفة!
+bz_tip_sky,قبضة السماء! انقر في أي مكان لجمع الركاب حوله!
+bz_tip_wand,العصا السحرية! اخلط الحافلات!
+bz_tip_claw,مخلب الحافلة! خذ حافلة من الطابور!
+bz_completed,اكتمل!
+bz_level_n,المستوى {0}
+bz_new_feature,ميزة جديدة
+bz_your_reward,مكافأتك
+bz_full,ممتلئة
+bz_out_of_space,لا مكان!
+bz_no_bus,لا توجد حافلة تتسع لمزيد من الركاب.
+bz_revive,إحياء
+bz_retry,إعادة
+bz_claim,استلام
+bz_ad,إعلان
+bz_buy_qty,x{0}
+bz_settings,الإعدادات
+bz_sound,الصوت
+bz_music,الموسيقى
+bz_haptic,الاهتزاز
+bz_language,اللغة
+bz_shop,المتجر
+bz_free,+{0} مجانًا
+bz_loading,جارٍ التحميل...
+bz_version,الإصدار {0}
+bz_lv,Lv.{0}

@@ -12,7 +12,7 @@ namespace Buzzy.Game
     /// </summary>
     public partial class BuzzyGameView
     {
-        public enum PopupKind { None, WinSequence, Completed, Lose, Unlock, Settings, Shop, BuyBooster }
+        public enum PopupKind { None, WinSequence, Completed, Lose, Unlock, Settings, Shop, BuyBooster, Language }
 
         /// <summary>Tiến trình người chơi; flow gán trước Init. Null → tạo mặc định theo level (test / bộ chụp).</summary>
         public MetaState Meta;
@@ -27,8 +27,11 @@ namespace Buzzy.Game
         /// <summary>Xem quảng cáo thưởng: gọi callback khi xem xong; trả false nếu không có quảng cáo (khi đó bỏ qua).</summary>
         public Func<Action, bool> ShowRewardAd;
 
-        static readonly string[] BoosterNames = { "VIP Bus", "Sky Grab", "Magic Wand", "Bus Claw" };
-        static readonly string[] BoosterDesc = { "Clear a bus instantly!", "Lift pixels from the sky!", "Recolor a parked bus!", "Pick up a bus from the queue!" };
+        // M8: khoá Localize (Resources/Localization-Buzzy-<Lang>.txt); tên / câu popup theo clip gốc
+        static readonly string[] BoosterNameKey = { "bz_booster_vip", "bz_booster_sky", "bz_booster_wand", "bz_booster_claw" };
+        static readonly string[] BoosterDescKey = { "bz_desc_vip", "bz_desc_sky", "bz_desc_wand", "bz_desc_claw" };
+        static string S(string key) { return BuzzyStrings.Get(key); }
+        Text _badgeLabel;   // chữ Lv.N trên badge (làm mới khi đổi ngôn ngữ)
 
         class PBtn { public Vector2 c, size; public Action act; public string name; public HudAnchor a; }
         class Spark { public RectTransform rt; public Image im; public Vector2 o, dir; public float at, size; }
@@ -100,7 +103,10 @@ namespace Buzzy.Game
             float hPct = r.sizeDelta.y / _canvasSize.y;   // % chiều cao THẬT: vùng chạm
             float tx = c.x;
             if (icon != null) { PImg(n + "Icon", icon, Color.white, new Vector2(c.x - w * 0.28f, c.y), w * 0.3f); tx = c.x + w * 0.1f; }
-            PText(label, new Vector2(tx, c.y), w, RefH(r.sizeDelta.y), Px(px), Color.white, true);
+            // M8 (3c đo DE/RU): nhãn nút co chữ (best fit) trong ô hẹp hơn nút, 1 dòng, không đè huy hiệu AD / viền nút
+            var lbl = PText(label, new Vector2(tx, c.y), icon != null ? w * 0.6f : w * 0.88f, RefH(r.sizeDelta.y) * 0.55f, Px(px), Color.white, true);
+            lbl.horizontalOverflow = HorizontalWrapMode.Wrap; lbl.verticalOverflow = VerticalWrapMode.Truncate;
+            lbl.resizeTextForBestFit = true; lbl.resizeTextMaxSize = Px(px); lbl.resizeTextMinSize = Px(16);
             _btns.Add(new PBtn { c = c, size = new Vector2(w, hPct), act = act, name = n, a = _pAnchor });
             return r;
         }
@@ -113,6 +119,31 @@ namespace Buzzy.Game
             foreach (var t in _root.GetComponentsInChildren<TextMesh>(false)) { t.gameObject.SetActive(false); _hiddenWorldTexts.Add(t.gameObject); }
         }
         void RestoreWorldTexts() { foreach (var g in _hiddenWorldTexts) if (g != null) g.SetActive(true); _hiddenWorldTexts.Clear(); }
+
+        /// <summary>M8 (U16): chữ mô tả nhiều ngôn ngữ: ô rộng popupDescWidth × bảng kem, tối đa popupDescLines dòng, best fit co chữ, NEO MÉP DƯỚI bảng kem (r2 RU: neo theo ảnh minh hoạ bị rơi xuống vùng tím vì sprite có lề trong suốt). yBottomRef = mép dưới ô (đơn vị khung tham chiếu).</summary>
+        Text PDesc(string s, float yBottomRef, int px)
+        {
+            float hRef = RefH(px * 1.25f * Mathf.Max(1, _cfg.popupDescLines));
+            var t = PText(s, new Vector2(0.5f, yBottomRef - hRef * 0.5f), _cfg.popupInnerWidth * _cfg.popupDescWidth, hRef, px, _cfg.popupTextColor, false);
+            t.horizontalOverflow = HorizontalWrapMode.Wrap; t.verticalOverflow = VerticalWrapMode.Truncate;
+            t.resizeTextForBestFit = true; t.resizeTextMaxSize = px; t.resizeTextMinSize = Px(16);
+            return t;
+        }
+
+        /// <summary>M8 (U16): nhãn HUD dựng bằng Label() (ô 260×90 mặc định) → thu ô theo vật chứa + best fit để chữ dài (RU "Полный", DE…) không tràn bong bóng Full / pill khoá / badge.</summary>
+        void FitHudLabels()
+        {
+            FitLabel(_badgeLabel, 0.85f, 0.7f);
+            for (int i = 0; i < 4; i++) FitLabel(_pillText[i], 0.9f, 0.8f);
+            for (int i = 0; i < 3; i++) FitLabel(_fullLabels[i], 0.8f, 0.5f);
+        }
+        void FitLabel(Text t, float wFrac, float hFrac)
+        {
+            if (t == null) return; var p = t.transform.parent as RectTransform; if (p == null) return;
+            var rt = t.GetComponent<RectTransform>(); rt.sizeDelta = new Vector2(p.sizeDelta.x * wFrac, p.sizeDelta.y * hFrac);
+            t.horizontalOverflow = HorizontalWrapMode.Wrap; t.verticalOverflow = VerticalWrapMode.Truncate;
+            t.resizeTextForBestFit = true; t.resizeTextMaxSize = t.fontSize; t.resizeTextMinSize = Px(12);
+        }
 
         void Overlay() { HideWorldTextsTemp(); _overlayImg = PImg("Overlay", null, new Color(_cfg.overlayColor.r, _cfg.overlayColor.g, _cfg.overlayColor.b, _cfg.overlayAlpha), new Vector2(0.5f, 0.5f), 1f, 1f / WH).GetComponent<Image>(); }
 
@@ -151,7 +182,8 @@ namespace Buzzy.Game
             // tim: bản đầu không giới hạn (U4: biểu tượng "Full")
             PImg("Heart", _a.heartInfinity, Color.white, _cfg.heartCenter, _cfg.heartWidth);
             var pill = PImg("HeartPill", _a.currencyBar, Color.white, new Vector2(_cfg.heartCenter.x + _cfg.heartWidth * 0.75f, _cfg.heartCenter.y), _cfg.heartWidth * 1.1f);
-            PText("Full", new Vector2(_cfg.heartCenter.x + _cfg.heartWidth * 0.85f, _cfg.heartCenter.y), _cfg.heartWidth, RefH(pill.sizeDelta.y), Px(34), Color.white, true);
+            var ft = PText(S("bz_full"), new Vector2(_cfg.heartCenter.x + _cfg.heartWidth * 0.85f, _cfg.heartCenter.y), _cfg.heartWidth * 0.95f, RefH(pill.sizeDelta.y) * 0.6f, Px(34), Color.white, true);
+            ft.horizontalOverflow = HorizontalWrapMode.Wrap; ft.verticalOverflow = VerticalWrapMode.Truncate; ft.resizeTextForBestFit = true; ft.resizeTextMaxSize = Px(34); ft.resizeTextMinSize = Px(14);   // M8: RU "Полный" tràn pill
             _pAnchor = HudAnchor.Center;
         }
 
@@ -253,14 +285,14 @@ namespace Buzzy.Game
         {
             EnsureMeta(); ClosePopup(); Popup = PopupKind.Completed; _popupAt = Time; Sfx(_a.sfxSwipe);
             Overlay(); CurrencyBar();
-            float top, bottom; Frame(_a.titleYellow, "Completed!", "Level " + _lv.index, _cfg.popupInnerHeightTall, out top, out bottom);
+            float top, bottom; Frame(_a.titleYellow, S("bz_completed"), BuzzyStrings.Format("bz_level_n", _lv.index), _cfg.popupInnerHeightTall, out top, out bottom);
             float h = bottom - top;
             // New Feature %
             int fi = Meta.NextFeature(_lv.index);
             if (fi >= 0)
             {
                 float y = top + h * _cfg.featureRowY;
-                PText("New Feature", new Vector2(0.5f, y - h * 0.06f), _cfg.popupWidth, 0.04f, Px(34), _cfg.popupTextColor, false);
+                PText(S("bz_new_feature"), new Vector2(0.5f, y - h * 0.06f), _cfg.popupWidth, 0.04f, Px(34), _cfg.popupTextColor, false);
                 float tx = 0.5f - _cfg.featureBarWidth * 0.08f;
                 var track = PImg("FeatureTrack", _a.featureTrack, Color.white, new Vector2(tx, y), _cfg.featureBarWidth);
                 float pr = (float)Meta.FeatureProgress(_lv.index), th = track.sizeDelta.y;
@@ -273,7 +305,7 @@ namespace Buzzy.Game
             }
             // Your Reward + đống xu + thanh nhân
             float ry = top + h * _cfg.rewardRowY;
-            PText("Your Reward", new Vector2(0.5f, ry), _cfg.popupWidth, 0.04f, Px(34), _cfg.popupTextColor, false);
+            PText(S("bz_your_reward"), new Vector2(0.5f, ry), _cfg.popupWidth, 0.04f, Px(34), _cfg.popupTextColor, false);
             PImg("Coins", _a.coinPile, Color.white, new Vector2(0.5f, ry + h * 0.11f), _cfg.coinPileWidth);
             float sy = top + h * _cfg.sliderRowY;
             _sliderRt = PImg("Slider", _a.rewardSlider, Color.white, new Vector2(0.5f, sy), _cfg.sliderWidth);
@@ -318,13 +350,13 @@ namespace Buzzy.Game
         {
             EnsureMeta(); ClosePopup(); Popup = PopupKind.Lose; _popupAt = Time; Lost = true; Sfx(_a.sfxLose);   // A6 (M7)
             Overlay(); CurrencyBar();
-            float top, bottom; Frame(_a.titleRed, "Out of space!", null, _cfg.popupInnerHeight, out top, out bottom); float h = bottom - top;
+            float top, bottom; Frame(_a.titleRed, S("bz_out_of_space"), null, _cfg.popupInnerHeight, out top, out bottom); float h = bottom - top;
             CloseButton(top, Retry);
             PImg("Illus", _a.loseIllustration, Color.white, new Vector2(0.5f, top + h * 0.40f), _cfg.loseIllusWidth);
-            PText("No bus can take more passengers.", new Vector2(0.5f, top + h * 0.57f), _cfg.popupWidth, 0.04f, Px(28), _cfg.popupTextColor, false);
+            PDesc(S("bz_no_bus"), top + h * (_cfg.popupInnerTop + _cfg.popupInnerHeight) - WRef(_cfg.popupDescGap), Px(28));   // M8: sát mép dưới bảng kem, 2 dòng best fit
             float by = bottom - h * _cfg.buttonRowUp;
-            Btn("Revive", _a.buttonGreen, new Vector2(0.5f - _cfg.popupButtonGap, by), _cfg.popupButtonWidth, "Revive", _a.adIcon, Revive, 40);
-            Btn("Retry", _a.buttonOrange, new Vector2(0.5f + _cfg.popupButtonGap, by), _cfg.popupButtonWidth, "Retry", null, Retry, 40);
+            Btn("Revive", _a.buttonGreen, new Vector2(0.5f - _cfg.popupButtonGap, by), _cfg.popupButtonWidth, S("bz_revive"), _a.adIcon, Revive, 40);
+            Btn("Retry", _a.buttonOrange, new Vector2(0.5f + _cfg.popupButtonGap, by), _cfg.popupButtonWidth, S("bz_retry"), null, Retry, 40);
         }
 
         /// <summary>Revive: xem quảng cáo → hiệu ứng VIP Bus xoá 1 xe đang đỗ rồi chơi tiếp.</summary>
@@ -346,11 +378,11 @@ namespace Buzzy.Game
         {
             EnsureMeta(); ClosePopup(); Popup = PopupKind.Unlock; _popupAt = Time; _buyIdx = i; Sfx(_a.sfxIntroduce);   // A6 (M7)
             Overlay();
-            float top, bottom; Frame(_a.titlePurple, BoosterNames[i], null, _cfg.popupInnerHeight, out top, out bottom); float h = bottom - top;
+            float top, bottom; Frame(_a.titlePurple, S(BoosterNameKey[i]), null, _cfg.popupInnerHeight, out top, out bottom); float h = bottom - top;
             CloseButton(top, ClosePopup);
             PImg("Icon", _a.boosterIcons[i], Color.white, new Vector2(0.5f, top + h * 0.38f), _cfg.popupWidth * 0.4f);
-            PText(BoosterDesc[i], new Vector2(0.5f, top + h * 0.58f), _cfg.popupWidth, 0.04f, Px(30), _cfg.popupTextColor, false);
-            Btn("Claim", _a.buttonGreen, new Vector2(0.5f, bottom - h * _cfg.buttonRowUp), _cfg.popupButtonWideWidth, "Claim", null, ClaimUnlockPopup, 40);
+            PDesc(S(BoosterDescKey[i]), top + h * (_cfg.popupInnerTop + _cfg.popupInnerHeight) - WRef(_cfg.popupDescGap), Px(30));
+            Btn("Claim", _a.buttonGreen, new Vector2(0.5f, bottom - h * _cfg.buttonRowUp), _cfg.popupButtonWideWidth, S("bz_claim"), null, ClaimUnlockPopup, 40);
         }
 
         /// <summary>Nút Claim của popup mở khoá (bộ tự chơi M6 gọi thẳng). Đóng bằng X thì quà còn treo, popup hiện lại ở level kế.</summary>
@@ -364,10 +396,10 @@ namespace Buzzy.Game
         {
             EnsureMeta(); ClosePopup(); Popup = PopupKind.BuyBooster; _popupAt = Time; _buyIdx = i; Sfx(_a.sfxSwipe);
             Overlay(); CurrencyBar();
-            float top, bottom; Frame(_a.titlePurple, BoosterNames[i], null, _cfg.popupInnerHeight, out top, out bottom); float h = bottom - top;
+            float top, bottom; Frame(_a.titlePurple, S(BoosterNameKey[i]), null, _cfg.popupInnerHeight, out top, out bottom); float h = bottom - top;
             CloseButton(top, ClosePopup);
             PImg("Icon", _a.boosterIcons[i], Color.white, new Vector2(0.5f, top + h * 0.38f), _cfg.popupWidth * 0.4f);
-            PText("x" + Meta.Cfg.BoosterBuyQty + "  " + BoosterDesc[i], new Vector2(0.5f, top + h * 0.58f), _cfg.popupWidth, 0.04f, Px(28), _cfg.popupTextColor, false);
+            PDesc(BuzzyStrings.Format("bz_buy_qty", Meta.Cfg.BoosterBuyQty) + "  " + S(BoosterDescKey[i]), top + h * (_cfg.popupInnerTop + _cfg.popupInnerHeight) - WRef(_cfg.popupDescGap), Px(28));
             float by = bottom - h * _cfg.buttonRowUp;
             Btn("Buy", _a.buttonGreen, new Vector2(0.5f - _cfg.popupButtonGap, by), _cfg.popupButtonWidth, Meta.Cfg.BoosterPrice[i].ToString(), _a.coinIcon, () =>
             {
@@ -387,15 +419,16 @@ namespace Buzzy.Game
             if (Popup != PopupKind.Settings) Sfx(_a.sfxSwipe);
             EnsureMeta(); ClosePopup(); Popup = PopupKind.Settings; _popupAt = Time;
             Overlay();
-            float top, bottom; Frame(_a.titlePurple, "Settings", null, _cfg.popupInnerHeight, out top, out bottom); float h = bottom - top;
+            float top, bottom; Frame(_a.titlePurple, S("bz_settings"), null, _cfg.popupInnerHeight, out top, out bottom); float h = bottom - top;
             CloseButton(top, () => { Changed(); ClosePopup(); });
-            string[] names = { "Sound", "Music", "Haptic" }; Sprite[] icons = { _a.soundIcon, _a.musicIcon, _a.hapticIcon };
+            string[] names = { "Sound", "Music", "Haptic" }; Sprite[] icons = { _a.soundIcon, _a.musicIcon, _a.hapticIcon };   // names: tên nút trong log / bộ chụp (không dịch)
+            string[] shown = { S("bz_sound"), S("bz_music"), S("bz_haptic") };
             bool[] on = { Meta.Sound, Meta.Music, Meta.Haptic };
             for (int i = 0; i < 3; i++)
             {
                 float y = top + h * (_cfg.settingsFirstRowY + i * _cfg.settingsRowStep);
                 PImg("Ico" + i, icons[i], Color.white, new Vector2(0.5f - _cfg.popupWidth * 0.32f, y), _cfg.popupWidth * 0.11f);
-                PText(names[i], new Vector2(0.5f - _cfg.popupWidth * 0.08f, y), _cfg.popupWidth * 0.3f, 0.05f, Px(38), _cfg.popupTextColor, false);
+                PText(shown[i], new Vector2(0.5f - _cfg.popupWidth * 0.08f, y), _cfg.popupWidth * 0.3f, 0.05f, Px(38), _cfg.popupTextColor, false);
                 int k = i; var tc = new Vector2(0.5f + _cfg.popupWidth * 0.28f, y);
                 var tg = PImg("Toggle" + i, on[i] ? _a.toggleOn : _a.toggleOff, Color.white, tc, _cfg.toggleWidth);
                 _btns.Add(new PBtn { c = tc, size = new Vector2(_cfg.toggleWidth, tg.sizeDelta.y / _canvasSize.y), name = "Toggle" + names[i], act = () =>
@@ -405,14 +438,55 @@ namespace Buzzy.Game
                     OpenSettings();
                 } });
             }
+            // M8 (U17): hàng Language → popup chọn 15 ngôn ngữ
+            float ly = top + h * _cfg.settingsLanguageRowY;
+            PText(S("bz_language"), new Vector2(0.5f - _cfg.popupWidth * 0.2f, ly), _cfg.popupWidth * 0.36f, 0.05f, Px(38), _cfg.popupTextColor, false);
+            Btn("Language", _a.buttonGreen, new Vector2(0.5f + _cfg.popupWidth * 0.2f, ly), _cfg.settingsLanguageButtonWidth, BuzzyStrings.NativeNames[BuzzyStrings.CurrentIndex], null, OpenLanguage, 30);
         }
+
+        // ---------------------------------------------------------------- chọn ngôn ngữ (M8, U17): 15 ngôn ngữ của base, lưới languageCols × hàng
+        public void OpenLanguage()
+        {
+            EnsureMeta(); ClosePopup(); Popup = PopupKind.Language; _popupAt = Time; Sfx(_a.sfxSwipe);
+            Overlay();
+            float top, bottom; Frame(_a.titlePurple, S("bz_language"), null, _cfg.popupInnerHeightTall, out top, out bottom); float h = bottom - top;
+            CloseButton(top, OpenSettings);
+            int cols = Mathf.Max(1, _cfg.languageCols), cur = BuzzyStrings.CurrentIndex;
+            for (int i = 0; i < BuzzyStrings.Languages.Length; i++)
+            {
+                int r = i / cols, c = i % cols; int k = i;
+                float cx = 0.5f + (cols == 1 ? 0f : (c / (float)(cols - 1) - 0.5f) * 2f * _cfg.languageColSpread * _cfg.popupWidth);
+                float y = top + h * (_cfg.languageFirstRowY + r * _cfg.languageRowStep);
+                Btn("Lang" + BuzzyStrings.Languages[i], i == cur ? _a.buttonGreen : _a.buttonOrange, new Vector2(cx, y), _cfg.languageButtonWidth, BuzzyStrings.NativeNames[i], null, () => SelectLanguage(BuzzyStrings.Languages[k]), _cfg.languageFontPx);
+            }
+        }
+
+        /// <summary>Đổi ngôn ngữ (bộ chụp gọi thẳng được): nạp file, làm mới chữ HUD, mở lại Settings.</summary>
+        public void SelectLanguage(string lang)
+        {
+            BuzzyStrings.Apply(lang);
+            Log?.Invoke("t=" + Time.ToString("0.00") + " ngôn ngữ: " + BuzzyStrings.Current);
+            RelocalizeHud();
+            Changed();
+            OpenSettings();
+        }
+
+        /// <summary>Làm mới chữ HUD đã dựng sẵn sau khi đổi ngôn ngữ (badge Lv, pill khoá booster, chữ Full, tooltip đang mở).</summary>
+        public void RelocalizeHud()
+        {
+            if (_badgeLabel != null) _badgeLabel.text = BuzzyStrings.Format("bz_lv", DisplayLevel > 0 ? DisplayLevel : _lv.index);
+            for (int i = 0; i < 4; i++) if (_pillText[i] != null) _pillText[i].text = BuzzyStrings.Format("bz_lv", _cfg.boosterUnlock[i]);
+            for (int i = 0; i < 3; i++) if (_fullLabels[i] != null) _fullLabels[i].text = S("bz_full");
+            if (_mode >= 0) ShowBoosterTip(_mode);
+        }
+        readonly Text[] _fullLabels = new Text[3];
 
         // ---------------------------------------------------------------- shop (mục 8) [thiết kế]: IAP nối ở M7
         public void OpenShop()
         {
             EnsureMeta(); ClosePopup(); Popup = PopupKind.Shop; _popupAt = Time; Sfx(_a.sfxSwipe);
             Overlay(); CurrencyBar();
-            float top, bottom; Frame(_a.titleYellow, "Shop", null, _cfg.popupInnerHeight, out top, out bottom); float h = bottom - top;
+            float top, bottom; Frame(_a.titleYellow, S("bz_shop"), null, _cfg.popupInnerHeight, out top, out bottom); float h = bottom - top;
             CloseButton(top, () => { Changed(); ClosePopup(); });
             for (int i = 0; i < _cfg.shopPackCoins.Length; i++)
             {
@@ -422,8 +496,8 @@ namespace Buzzy.Game
                 Btn("Pack" + i, _a.buttonGreen, new Vector2(0.5f + _cfg.popupWidth * 0.27f, y), _cfg.popupButtonWidth * 0.8f, _cfg.shopPackPrice[i], null, () => Log?.Invoke("IAP gói " + k + " (nối SDK ở M7)"), 30);
             }
             float ay = top + h * (_cfg.shopFirstRowY + _cfg.shopPackCoins.Length * _cfg.shopRowStep);
-            PText("+" + _cfg.shopAdCoins + " free", new Vector2(0.5f - _cfg.popupWidth * 0.1f, ay), _cfg.popupWidth * 0.4f, 0.05f, Px(34), _cfg.popupTextColor, false);
-            Btn("AdCoins", _a.buttonOrange, new Vector2(0.5f + _cfg.popupWidth * 0.27f, ay), _cfg.popupButtonWidth * 0.8f, "AD", _a.adIcon, () =>
+            PText(BuzzyStrings.Format("bz_free", _cfg.shopAdCoins), new Vector2(0.5f - _cfg.popupWidth * 0.1f, ay), _cfg.popupWidth * 0.4f, 0.05f, Px(34), _cfg.popupTextColor, false);
+            Btn("AdCoins", _a.buttonOrange, new Vector2(0.5f + _cfg.popupWidth * 0.27f, ay), _cfg.popupButtonWidth * 0.8f, S("bz_ad"), _a.adIcon, () =>
             {
                 Action go = () => { Meta.Coins += _cfg.shopAdCoins; Changed(); OpenShop(); };
                 if (ShowRewardAd != null) { if (!ShowRewardAd(go)) Log?.Invoke("không có quảng cáo"); } else go();
