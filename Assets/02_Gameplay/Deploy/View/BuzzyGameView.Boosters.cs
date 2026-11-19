@@ -64,19 +64,19 @@ namespace Buzzy.Game
             string[] lvTxt = { "Lv.4", "Lv.8", "Lv.13", "Lv.16" };
             for (int i = 0; i < 4; i++)
             {
-                var c = new Vector2(_cfg.boosterX[i], _cfg.boosterY);
+                var c = Bottom(new Vector2(_cfg.boosterX[i], _cfg.boosterY));   // U13: neo mép dưới, lệch con theo RefDy
                 _boosterRing[i] = Img("Booster" + i, _a.boosterCircle, Color.white, ct, c, _cfg.boosterSize).GetComponent<Image>();
                 if (IsUnlocked(i))
                 {
-                    Img("Icon" + i, _a.boosterIcons[i], Color.white, ct, new Vector2(c.x, c.y - 0.003f), _cfg.boosterSize * 0.8f);
-                    var badge = Img("Count" + i, _a.countBadge, Color.white, ct, new Vector2(c.x + _cfg.boosterSize * 0.34f, c.y + 0.025f), _cfg.boosterSize * 0.5f);
+                    Img("Icon" + i, _a.boosterIcons[i], Color.white, ct, new Vector2(c.x, c.y - RefDy(0.003f)), _cfg.boosterSize * 0.8f);
+                    var badge = Img("Count" + i, _a.countBadge, Color.white, ct, new Vector2(c.x + _cfg.boosterSize * 0.34f, c.y + RefDy(0.025f)), _cfg.boosterSize * 0.5f);
                     _countText[i] = Label(BoosterCount[i].ToString(), badge, new Vector2(badge.sizeDelta.x * 0.5f, -badge.sizeDelta.y * 0.5f), (int)(46 * _canvasSize.x / 1080f), Color.white);
                     _countObj[i] = badge.gameObject;
                 }
                 else
                 {
-                    Img("Lock" + i, _a.lockIcon, Color.white, ct, new Vector2(c.x, c.y - 0.008f), _cfg.boosterSize * 0.52f);
-                    var pill = Img("Pill" + i, _a.levelBar, Color.white, ct, new Vector2(c.x, c.y + 0.034f), _cfg.boosterSize * 0.55f, 0.5f);
+                    Img("Lock" + i, _a.lockIcon, Color.white, ct, new Vector2(c.x, c.y - RefDy(0.008f)), _cfg.boosterSize * 0.52f);
+                    var pill = Img("Pill" + i, _a.levelBar, Color.white, ct, new Vector2(c.x, c.y + RefDy(0.034f)), _cfg.boosterSize * 0.55f, 0.5f);
                     Label(lvTxt[i], pill, new Vector2(pill.sizeDelta.x * 0.5f, -pill.sizeDelta.y * 0.5f), (int)(34 * _canvasSize.x / 1080f), new Color32(0x4A, 0x45, 0x9A, 255));
                 }
             }
@@ -89,7 +89,7 @@ namespace Buzzy.Game
             if (_hudRoot == null) return;
             if (i == VipBus && _cfg.vipDimAlpha > 0f)
                 _dim = Img("VipDim", null, new Color(0f, 0f, 0f, _cfg.vipDimAlpha), _hudRoot, new Vector2(0.5f, 0.5f), 1f, _canvasSize.y / _canvasSize.x);
-            _tipPanel = Img("BoosterTip", _a.levelBar, new Color32(0xFF, 0xEF, 0xDA, 255), _hudRoot, new Vector2(0.5f, _cfg.tooltipY), _cfg.tooltipWidth, _cfg.tooltipAspect);
+            _tipPanel = Img("BoosterTip", _a.levelBar, new Color32(0xFF, 0xEF, 0xDA, 255), _hudRoot, Bottom(new Vector2(0.5f, _cfg.tooltipY)), _cfg.tooltipWidth, _cfg.tooltipAspect);   // U13: neo đáy
             float h = _tipPanel.sizeDelta.y;
             var icon = Img("TipIcon", _a.boosterIcons != null && i < _a.boosterIcons.Length ? _a.boosterIcons[i] : null, Color.white, _tipPanel, Vector2.zero, 0f);
             icon.sizeDelta = new Vector2(h * 0.8f, h * 0.8f); icon.anchoredPosition = new Vector2(h * 0.6f, -h * 0.5f);
@@ -109,8 +109,8 @@ namespace Buzzy.Game
         {
             if (!SpeedUnlocked) return;
             // pill = hai nửa (trái, phải lật) + viền kem phía sau; cao theo speedPillSize
-            float hw = _cfg.speedPillSize.x * 0.5f, asp = _cfg.speedPillSize.y * _canvasSize.y / (hw * _canvasSize.x);
-            var c0 = _cfg.speedButtonCenter;
+            float hw = _cfg.speedPillSize.x * 0.5f, asp = _cfg.speedPillSize.y * _cfg.hudRefAspect / hw;   // cao pill = % cũ × khung tham chiếu (theo bề ngang)
+            var c0 = Top(_cfg.speedButtonCenter);   // U12: neo mép trên
             Img("SpeedRimL", _a.speedHalfRim, Color.white, ct, new Vector2(c0.x - hw * 0.5f, c0.y), hw * 1.08f, asp * 1.08f);
             var rimR = Img("SpeedRimR", _a.speedHalfRim, Color.white, ct, new Vector2(c0.x + hw * 0.5f, c0.y), hw * 1.08f, asp * 1.08f); rimR.localScale = new Vector3(-1f, 1f, 1f);
             var left = Img("SpeedL", _a.speedHalfGreen, Color.white, ct, new Vector2(c0.x - hw * 0.5f, c0.y), hw, asp);
@@ -206,7 +206,7 @@ namespace Buzzy.Game
             var r = Game.SkyGrab(gx, gy);
             if (!r.Matched) { if (Vibrate != null) Vibrate(); CancelMode(); return false; }
             Spent(SkyGrab, "Sky Grab tại (" + gx.ToString("0.0") + "," + gy.ToString("0.0") + ") -> " + r.Count + " pixel (" + r.Vanished.Count + " biến mất)"); Sfx(_a.sfxHeli);
-            var target = new Vector3(_cellX0 + (float)gx * _cfg.cellPitchX, 0f, _boardZ0 + (float)gy * _cfg.cellPitch);
+            var target = new Vector3(_cellX0 + (float)gx * CellX, 0f, _boardZ0 + (float)gy * CellZ);   // M7b bước 2: ô có thể thu (CellScale)
             var fx = new HeliFx { t0 = Time, target = target + Vector3.up * _cfg.skyHeight, enter = target + new Vector3(_cfg.skyEnterFrom.x, _cfg.skyHeight, _cfg.skyEnterFrom.y) };
             var go = new GameObject("Heli"); go.transform.SetParent(_root, false);
             go.AddComponent<MeshFilter>().sharedMesh = _a.heliMesh;
@@ -618,11 +618,11 @@ namespace Buzzy.Game
             if (Popup != PopupKind.None) return PopupTap(nx, ny);
             if (DevTap(nx, ny)) return true;   // T1 (M7)
             if (Time < _inputOpenAt) return true;
-            if (Hit(_cfg.settingsCenter, _cfg.settingsSize, nx, ny)) { OpenSettings(); return true; }
-            if (SpeedUnlocked && Hit(_cfg.speedButtonCenter, _cfg.speedButtonSize, nx, ny)) { ToggleSpeed(); return true; }
+            if (Hit(Bottom(_cfg.settingsCenter), _cfg.settingsSize, nx, ny)) { OpenSettings(); return true; }
+            if (SpeedUnlocked && Hit(Top(_cfg.speedButtonCenter), _cfg.speedButtonSize, nx, ny)) { ToggleSpeed(); return true; }
             for (int i = 0; i < 4; i++)
             {
-                if (!Hit(new Vector2(_cfg.boosterX[i], _cfg.boosterY), _cfg.boosterSize, nx, ny)) continue;
+                if (!Hit(Bottom(new Vector2(_cfg.boosterX[i], _cfg.boosterY)), _cfg.boosterSize, nx, ny)) continue;
                 if (!IsUnlocked(i)) { if (Vibrate != null) Vibrate(); Log?.Invoke("Booster " + i + " chưa mở"); return true; }
                 if (BoosterCount[i] <= 0) { ShowBuyBooster(i); return true; }
                 if (i == MagicWand) { CancelMode(); UseMagicWand(-1); return true; }   // B5: dùng ngay, không chọn mục tiêu
@@ -659,7 +659,7 @@ namespace Buzzy.Game
                 if (plane.Raycast(ray, out d))
                 {
                     var w = _root.InverseTransformPoint(ray.GetPoint(d));
-                    double gx = (w.x - _cellX0) / _cfg.cellPitchX, gy = (w.z - _boardZ0) / _cfg.cellPitch;
+                    double gx = (w.x - _cellX0) / CellX, gy = (w.z - _boardZ0) / CellZ;   // M7b bước 2
                     if (gx >= -1 && gy >= -1 && gx <= _lv.width + 1 && gy <= _lv.height + 1) { UseSkyGrabAt(gx, gy); return; }
                 }
                 CancelMode(); return;
@@ -672,7 +672,7 @@ namespace Buzzy.Game
         public bool DebugBoosterMode(int i)
         {
             if (i < 0 || i > 3) return false;
-            UiTap(_cfg.boosterX[i], _cfg.boosterY);
+            var p = Bottom(new Vector2(_cfg.boosterX[i], _cfg.boosterY)); UiTap(p.x, p.y);
             return _mode == i || i == MagicWand;
         }
 

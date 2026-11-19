@@ -9,8 +9,18 @@ namespace Buzzy.Game
     [CreateAssetMenu(menuName = "Buzzy Bus/Layout Config", fileName = "BuzzyLayoutConfig")]
     public class BuzzyLayoutConfig : ScriptableObject
     {
-        [Header("Khung ảnh chụp (V1, V2)")]
-        [Tooltip("V2: tỉ lệ khung game 9:20")] public Vector2Int captureSize = new Vector2Int(1080, 2400);
+        [Header("Khung ảnh chụp (V1, V2) — M7b: chuẩn 9:16 (góp ý 15)")]
+        [Tooltip("V2 (M7b): tỉ lệ khung chuẩn 9:16; trường cũ trong asset → đổi qua Sync Config Defaults")] public Vector2Int captureSize = new Vector2Int(1080, 1920);
+        [Tooltip("V1/V2 (M7b, góp ý 15): camera bám BỀ NGANG: nửa bề ngang nhìn thấy cố định viewHalfWidth (= 13,8 × 0,45: bảng 24 cột × 0,466 = 90 % bề ngang ở mọi tỉ lệ); ortho = viewHalfWidth / aspect. false = giữ chiều cao (orthographicSize) như M1–M7")] public bool cameraFitWidth = true;
+        public float viewHalfWidth = 6.21f;
+        [Tooltip("V1/V2 (M7b): dải đất nhìn thấy ở khung chuẩn 9:16 (z thế giới, đỉnh / đáy): đỉnh 23,6 = ĐÚNG đỉnh golden 9:20 (xe cột chờ lộ dưới tunnel như 9:20, 3c đo lượt 1: 22,5 che 60–70 % xe); đáy −1,9 (= 23,6 − 25,5); bảng dời lên boardShift916 để đáy bảng ≥ mép trên thanh booster (−1,9 + 3,5 = 1,6) + 1 ô. Máy dài hơn: phần dư chia extraTopShare lên đỉnh, còn lại xuống đáy; 0 = dồn hết xuống đáy = đúng golden 9:20 (đáy −8,3) → 9:16 = golden cắt 20 % đáy. Trường đã vào asset → đổi qua Sync")] public float viewTopZ = 23.6f;
+        public float viewBottomZ = -1.9f;
+        public float extraTopShare = 0f;
+        [Tooltip("V33 (M7b): bảng cao: đáy nhìn thấy hạ xuống ≤ đáy bảng − boosterClearZ (thanh booster 8 % khung ≈ 2,0 đv đất ở 9:16 + lề) để không đè bảng; đỉnh cột chờ bị cắt bớt tương ứng")] public float boosterClearZ = 3.8f;   // thanh booster 24,4 % bề ngang = 13,7 % khung 9:16 = 3,0 đv màn = 3,5 đv đất (÷ sin 60°) + lề 0,3
+        [Tooltip("V19/V33 (M7b bước 2): ở 9:16 dồn bố cục dọc: ĐÁY bảng đặt cách mép trên thanh booster (viewBottomZ + boosterBarZ) đúng boardGapCells ô; đỉnh bảng (kể cả cụm rời) cách mép lề ≥ waitMinGapZ; bảng không vừa (≥ ~26 hàng) thì THU cỡ ô (_cellScale) tới tối thiểu cellScaleMin916. 9:20 = bố cục gốc; tỉ lệ trung gian nội suy theo aspect")] public float boosterBarZ = 3.5f;   // thanh booster 24,4 % W = 13,7 % khung 9:16 = 3,0 đv màn ÷ sin 60°
+        public float boardGapCells = 1f;
+        public float waitMinGapZ = 1.5f;
+        public float cellScaleMin916 = 0.6f;   // Lv.77 cần 0,67 khi tính cả nhấp nhô
 
         [Header("Camera (V1)")]
         [Tooltip("V1: nhìn gần thẳng từ trên (góp ý 01); vị trí chỉ cần cao hơn cảnh, ortho không phụ thuộc khoảng cách")] public Vector3 cameraPosition = new Vector3(0f, 30f, -9.64f);
@@ -20,11 +30,29 @@ namespace Buzzy.Game
         [Tooltip("V1: chỉ dùng khi không orthographic")] public float fieldOfView = 64.4f;
 
         /// <summary>Đặt camera theo config (3 nơi dựng cảnh dùng chung: Bootstrap, StaticBuilder, MotionCapture).</summary>
-        public void ApplyCamera(Camera cam, float aspect)
+        public void ApplyCamera(Camera cam, float aspect, float boardBottomZ = float.NaN)
         {
             cam.transform.position = cameraPosition; cam.transform.eulerAngles = cameraEuler;
             cam.orthographic = cameraOrthographic; cam.orthographicSize = orthographicSize; cam.fieldOfView = fieldOfView;
             cam.nearClipPlane = 0.3f; cam.farClipPlane = 200f; cam.aspect = aspect;
+            if (!cameraOrthographic || !cameraFitWidth) return;
+            // M7b (góp ý 15): bám bề ngang; tâm nhìn chạm đất đặt theo dải [viewBottomZ, viewTopZ] của 9:16, phần dư chia extraTopShare lên đỉnh
+            float ortho = viewHalfWidth / Mathf.Max(0.1f, aspect); cam.orthographicSize = ortho;
+            float pitch = cameraEuler.x * Mathf.Deg2Rad;
+            float halfGround = ortho / Mathf.Max(0.1f, Mathf.Sin(pitch));                        // nửa dải đất nhìn thấy (z)
+            float baseHalf = (viewTopZ - viewBottomZ) * 0.5f, baseCenter = (viewTopZ + viewBottomZ) * 0.5f;
+            float extra = Mathf.Max(0f, halfGround - baseHalf);
+            float centerZ = baseCenter + extra * (2f * extraTopShare - 1f);
+            // V33: khung tính xong mà đáy nhìn còn cao hơn (đáy bảng − boosterClearZ) → kéo cả khung xuống vừa đủ (bảng cao ở 9:16); 9:20 bình thường không bị đụng
+            if (!float.IsNaN(boardBottomZ)) { float need = boardBottomZ - boosterClearZ; if (centerZ - halfGround > need) centerZ = need + halfGround; }
+            cam.transform.position = new Vector3(cameraPosition.x, cameraPosition.y, centerZ - cameraPosition.y / Mathf.Tan(pitch));
+        }
+
+        /// <summary>Dải đất nhìn thấy [đáy, đỉnh] (z) của camera hiện tại — để tool / log kiểm.</summary>
+        public Vector2 GroundRange(Camera cam)
+        {
+            float pitch = cameraEuler.x * Mathf.Deg2Rad; float c = cam.transform.position.z + cam.transform.position.y / Mathf.Tan(pitch);
+            float h = cam.orthographicSize / Mathf.Sin(pitch); return new Vector2(c - h, c + h);
         }
 
         /// <summary>Cỡ (rộng, cao) quad nền phủ hết khung nhìn ở khoảng cách dist trước camera.</summary>
@@ -42,6 +70,18 @@ namespace Buzzy.Game
         [Tooltip("V19, V33: z tâm bảng pixel (mẫu: bảng cao hay thấp đều có tâm ở y ~58.5 %; Lv.2 20 hàng y 43–74 %, Lv.77 31 hàng y 36–82 %)")] public float boardCenterZ = 4.358f;
         /// <summary>z của hàng y=0 (thấp nhất, gần camera) cho bảng cao h hàng: tâm bảng cố định ở boardCenterZ.</summary>
         public float BoardZ0(int height) { return boardCenterZ - (height - 1) * 0.5f * cellPitch; }
+        /// <summary>M7b bước 2: bố cục bảng theo tỉ lệ khung: trả về (tỉ lệ ô, z tâm hàng 0). 9:20 = gốc (1, BoardZ0); 9:16 = đáy bảng trên booster boardGapCells ô, thu ô nếu đỉnh (topRow = hàng pixel cao nhất, kể cả cụm rời) vượt mép lề − waitMinGapZ; giữa = nội suy.</summary>
+        public Vector2 BoardLayout(int height, int topRow, float aspect)
+        {
+            float t = Mathf.Clamp01((aspect - 0.45f) / (0.5625f - 0.45f));
+            float z0Base = BoardZ0(height);
+            float bottomTarget = viewBottomZ + boosterBarZ + boardGapCells * cellPitch;          // đáy bảng (mép dưới hàng 0) ở 9:16
+            float room = roadNearZ - waitMinGapZ - looseBob - bottomTarget;                     // chỗ dọc cho bảng ở 9:16 (trừ cả biên độ nhấp nhô cụm rời: 3c đo cụm 137 Lv.77 hụt 0,3)
+            float need = (topRow + 1) * cellPitch;
+            float s916 = Mathf.Clamp(room / Mathf.Max(0.01f, need), cellScaleMin916, 1f);
+            float z0916 = bottomTarget + cellPitch * s916 * 0.5f;
+            return new Vector2(Mathf.Lerp(1f, s916, t), Mathf.Lerp(z0Base, z0916, t));
+        }
 
         [Header("Làn đường + bến (V8, V9, V13, V14)")]
         [Tooltip("V8: z gần camera của đường")] public float roadNearZ = 14.03f;
@@ -64,8 +104,8 @@ namespace Buzzy.Game
 
 
         [Header("UI theo % khung game (V3-V4, V24-V27, U*)")]
-        [Tooltip("V5: tâm badge Lv (x %, y % từ trên)")] public Vector2 badgeCenter = new Vector2(0.12f, 0.067f);
-        [Tooltip("V5: bề ngang badge (% bề ngang khung)")] public float badgeWidth = 0.245f;
+        [Tooltip("V5: tâm badge Lv (x %, y % từ trên khung tham chiếu 9:20; M7b neo mép trên theo bề ngang). 3c đo 9:16 lần 1: phần nhìn thấy cao hơn mẫu 3,7 % bề ngang (sprite có lề trong suốt dưới) → 0,067 → 0,082")] public Vector2 badgeCenter = new Vector2(0.12f, 0.082f);
+        [Tooltip("V5: bề ngang badge (% bề ngang khung); 3c đo: 20,4 % vs mẫu 16,4 % → 0,245 × 0,8")] public float badgeWidth = 0.196f;
         [Tooltip("V3: tray trên cùng: cao % phần nhìn thấy")] public float trayVisibleHeight = 0.115f;
         [Tooltip("V4: dịch khay xuống (% chiều cao) để che mép trên xe hàng chờ")] public float trayShift = 0.025f;
         [Tooltip("V24: y thanh đáy (% từ trên)")] public float bottomBarTop = 0.89f;
@@ -141,8 +181,8 @@ namespace Buzzy.Game
         public float leaveReverseDuration = 0.22f;
         public float leaveBrakePause = 0.08f;
         [Tooltip("V23: cụm rời (không dính ảnh chính) bay lơ lửng: dịch xa camera (z), dịch vào tâm (số ô), biên độ + tốc độ nhấp nhô [thiết kế]")] public float looseLift = 0f;
-        public float looseInward = 0.7f;
-        public float looseBob = 0.9f;
+        public float looseInward = 0f;   // V23 (M7b, 3c đo lưới): golden tâm cụm xanh ngọc cột 21,8 / game 21,1 → không dịch vào tâm (trước 0,7 ô); trường cũ → Sync
+        public float looseBob = 0.15f;   // V23 (3c đo lưới): golden cụm rời đứng yên (±0 hàng), game ±0,9 hàng → ≤ 0,3 hàng; trường cũ → Sync
         public float looseBobSpeed = 1.6f;
 
         [Header("Mechanic + booster - M3 (V27-V30, C23-C24, U7, [thiết kế] mục 4-12)")]
@@ -442,6 +482,12 @@ namespace Buzzy.Game
         {
             return new Buzzy.Core.BoosterRules { SkyGrabRadius = skyRadius, SkyGrabVanishUnmatched = skyVanishUnmatched, SkyGrabTakesFrozen = skyTakesFrozen, WandPick = wandPickRule, FillPick = fillPickRule };
         }
+
+        [Header("M7b HUD 9:16 (góp ý 15 mục 1; U12–U14)")]
+        [Tooltip("U12: khung tham chiếu của mọi số % y cũ (ảnh mẫu 9:20 = 2400/1080). HUD neo mép: khoảng cách mép = y% cũ × tỉ lệ này × bề ngang; popup / loading: tâm giữ, lệch so với tâm cũng nhân như vậy. Đổi khung 9:16 hay 9:20 đều không giãn nội dung")] public float hudRefAspect = 2400f / 1080f;
+        [Tooltip("U12: đẩy nhóm trên / dưới vào trong theo Screen.safeArea (tai thỏ, thanh home)")] public bool hudUseSafeArea = true;
+        [Tooltip("U12: lề an toàn thêm tối thiểu (trên, dưới) tính % bề ngang, áp cả khi safeArea = cả màn (0 = không)")] public Vector2 hudSafeExtra = Vector2.zero;
+        [Tooltip("U13: thanh đáy kéo dài xuống hết lề an toàn dưới (true) hay dừng ở mép lề (false)")] public bool bottomBarFillSafe = true;
 
         [Header("Màu nền (V3, V4, V8)")]
         public Color backgroundTop = new Color32(0xA7, 0xAC, 0xE6, 255);

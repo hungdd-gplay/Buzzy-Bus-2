@@ -210,7 +210,7 @@ namespace Buzzy.Game
             string[] names = { "<", "Lv " + (DisplayLevel > 0 ? DisplayLevel : _lv.index), ">", "R" };
             for (int i = 0; i < 4; i++)
             {
-                var c = new Vector2(_cfg.devPanelX[i], _cfg.devPanelY);
+                var c = Bottom(new Vector2(_cfg.devPanelX[i], _cfg.devPanelY));   // U13 (M7b): neo mép dưới
                 bool lbl = i == 1;
                 var b = Img("Dev" + i, _a.whiteFrame, lbl ? new Color(0.15f, 0.15f, 0.25f, 0.7f) : new Color(0.95f, 0.55f, 0.2f, 0.9f), ct, c, lbl ? _cfg.devButtonSize * 1.7f : _cfg.devButtonSize, lbl ? 0.55f : 1f);
                 Label(names[i], b, new Vector2(b.sizeDelta.x * 0.5f, -b.sizeDelta.y * 0.5f), (int)((lbl ? 34 : 50) * _canvasSize.x / 1080f), Color.white);
@@ -226,7 +226,7 @@ namespace Buzzy.Game
             int cur = DisplayLevel > 0 ? DisplayLevel : _lv.index;
             for (int i = 0; i < 4; i++)
             {
-                if (i == 1 || !Hit(new Vector2(_cfg.devPanelX[i], _cfg.devPanelY), _cfg.devButtonSize, nx, ny)) continue;
+                if (i == 1 || !Hit(Bottom(new Vector2(_cfg.devPanelX[i], _cfg.devPanelY)), _cfg.devButtonSize, nx, ny)) continue;
                 Sfx(_a.sfxButton);
                 if (i == 3) { FeelLog("DEV: chơi lại"); DevRestartRequested?.Invoke(); }
                 else

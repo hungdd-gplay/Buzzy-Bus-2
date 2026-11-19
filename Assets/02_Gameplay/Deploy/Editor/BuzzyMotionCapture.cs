@@ -103,6 +103,7 @@ namespace Buzzy.Game.EditorTools
         {
             var cfg = BuzzyStaticBuilder.LoadOrCreateConfig(); var def = ScriptableObject.CreateInstance<BuzzyLayoutConfig>();
             var only = Environment.GetEnvironmentVariable("BUZZY_FIELDS"); var set = string.IsNullOrEmpty(only) ? null : new HashSet<string>(only.Split(','));
+            bool dry = Environment.GetEnvironmentVariable("BUZZY_DRY") == "1";   // chỉ liệt kê trường lệch, không ghi (bước xem trước khi sync theo AGENTS)
             int n = 0;
             foreach (var f in typeof(BuzzyLayoutConfig).GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance))
             {
@@ -110,8 +111,9 @@ namespace Buzzy.Game.EditorTools
                 var a = f.GetValue(cfg); var b = f.GetValue(def);
                 if (a == null ? b == null : a.Equals(b)) continue;
                 if (f.FieldType.IsArray) continue;   // mảng: không tự đồng bộ (so tay)
-                Debug.Log("[SyncConfig] " + f.Name + ": " + a + " -> " + b); f.SetValue(cfg, b); n++;
+                Debug.Log("[SyncConfig] " + f.Name + ": " + a + " -> " + b); if (!dry) f.SetValue(cfg, b); n++;
             }
+            if (dry) { Debug.Log("[SyncConfig] (chỉ xem) " + n + " trường lệch, KHÔNG ghi"); UnityEngine.Object.DestroyImmediate(def); return; }
             EditorUtility.SetDirty(cfg); AssetDatabase.SaveAssets();
             Debug.Log("[SyncConfig] đã đổi " + n + " trường");
             UnityEngine.Object.DestroyImmediate(def);
@@ -165,7 +167,7 @@ namespace Buzzy.Game.EditorTools
                 view.Tick(dt);
                 if (!probed && view.Time >= cfg.inputDelay + 0.1f) { probed = true; view.TapColor((int)Env("BUZZY_PROBE", 20f)); }   // chạm sai thử: màu không có xe đỗ (mặc định 20 = không level nào dùng; BUZZY_PROBE=<màu có pixel> để thấy cụm rung): phải rung
                 float devTap = Env("BUZZY_DEVTAP", -1f);
-                if (devTap >= 0f && view.Time >= devTap && view.DevPanel) { bool hit = view.DebugUiTap(cfg.devPanelX[2], cfg.devPanelY); log.Add("DEV bấm '>' tại (" + cfg.devPanelX[2] + ", " + cfg.devPanelY + ") -> " + hit); Environment.SetEnvironmentVariable("BUZZY_DEVTAP", "-1"); }
+                if (devTap >= 0f && view.Time >= devTap && view.DevPanel) { var hp = view.HudBottom(cfg.devPanelX[2], cfg.devPanelY); bool hit = view.DebugUiTap(hp.x, hp.y); /* M7b: bảng thử neo đáy theo HUD 1f */ log.Add("DEV bấm '>' tại (" + cfg.devPanelX[2] + ", " + cfg.devPanelY + ") -> " + hit); Environment.SetEnvironmentVariable("BUZZY_DEVTAP", "-1"); }
                 while (si < script.Count && view.Time >= float.Parse(script[si][0], System.Globalization.CultureInfo.InvariantCulture))
                 {
                     var a = script[si++]; string name = a[1]; int p1 = a.Length > 2 ? int.Parse(a[2]) : 0, p2 = a.Length > 3 ? int.Parse(a[3]) : 0;

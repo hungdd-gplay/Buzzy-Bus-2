@@ -57,18 +57,29 @@ namespace Buzzy.Game
 
         public Vector3 SlotPos(int i) { return new Vector3(_cfg.slotX[i], 0f, _cfg.slotZ); }
         Vector3 QueuePos(int col, int k) { return new Vector3(_cfg.queueX[col], 0f, _cfg.queueZ + (k == 0 ? 0f : 6f + (k - 1) * 4.5f)); }
-        Vector3 PixelPos(PixelData d) { return new Vector3(_cellX0 + d.X * _cfg.cellPitchX, 0f, _boardZ0 + d.Y * _cfg.cellPitch); }
+        /// <summary>M7b bước 2: bước ô thật (config × _cellScale; _cellScale < 1 chỉ khi bảng cao ở khung ngắn 9:16). Mọi code View dùng CellX / CellZ, không dùng _cfg.cellPitch* trực tiếp.</summary>
+        float _cellScale = 1f;
+        public float CellX { get { return _cfg.cellPitchX * _cellScale; } }
+        public float CellZ { get { return _cfg.cellPitch * _cellScale; } }
+        public float CellScale { get { return _cellScale; } }
+        Vector3 PixelPos(PixelData d) { return new Vector3(_cellX0 + d.X * CellX, 0f, _boardZ0 + d.Y * CellZ); }
         Quaternion SlotRot { get { return Quaternion.Euler(0f, _cfg.slotYaw, 0f); } }
 
         public void Init(BuzzyLevel lv, BuzzyLayoutConfig cfg, BuzzyAssets assets, Camera cam, Vector2Int renderSize)
         {
             _lv = lv; _cfg = cfg; _a = assets; _cam = cam; _canvasSize = new Vector2(renderSize.x, renderSize.y);
             _root = new GameObject("BuzzyWorld").transform; _root.SetParent(transform, false);
-            _cellX0 = cfg.boardCenterX - (lv.width * 0.5f) * cfg.cellPitchX; _boardZ0 = cfg.BoardZ0(lv.height);
+            float aspect = (float)renderSize.x / Mathf.Max(1, renderSize.y);
+            int topRow = lv.height - 1; foreach (var px in lv.pixels) if (px.y > topRow) topRow = px.y;   // cụm rời có thể nằm trên đỉnh lưới
+            var bl = cfg.BoardLayout(lv.height, topRow, aspect); _cellScale = bl.x;   // M7b bước 2: 9:16 dồn bảng lên + thu ô nếu bảng cao
+            _cellX0 = cfg.boardCenterX - (lv.width * 0.5f) * CellX; _boardZ0 = bl.y;
+            // M7b (góp ý 15): camera bám bề ngang + dải đất 9:16; bảng cao thì hạ đáy nhìn (V33) — áp lại ở đây vì cần đáy bảng của level
+            cfg.ApplyCamera(cam, aspect, _boardZ0 - CellZ * 0.5f);
+            var gr = cfg.GroundRange(cam); Log?.Invoke("KHUNG " + renderSize.x + "x" + renderSize.y + " ortho " + cam.orthographicSize.ToString("0.00") + " đất z " + gr.x.ToString("0.0") + ".." + gr.y.ToString("0.0") + " đáy bảng " + (_boardZ0 - CellZ * 0.5f).ToString("0.0") + " tỉ lệ ô " + _cellScale.ToString("0.00") + " hàng đỉnh " + topRow);
             BuildEnvironment();
             // luật lõi: tọa độ ô bến theo lưới để tính "gần xe nhất"
             var slotGrid = new double[3][];
-            for (int i = 0; i < 3; i++) slotGrid[i] = new double[] { (cfg.slotX[i] - _cellX0) / cfg.cellPitchX, (cfg.slotZ - _boardZ0) / cfg.cellPitch };
+            for (int i = 0; i < 3; i++) slotGrid[i] = new double[] { (cfg.slotX[i] - _cellX0) / CellX, (cfg.slotZ - _boardZ0) / CellZ };
             Game = new BusGame(lv.ToCore(), slotGrid, cfg.ToMechanicRules());
             SubscribeMechanics();
             Game.PixelArrived += OnPixelArrived;
@@ -214,7 +225,7 @@ namespace Buzzy.Game
                 var p = kv.Value; int c = comp[p.d.X, p.d.Y];
                 if (c == main || b.IsFrozen(p.d.X, p.d.Y)) continue;
                 float dir = p.home.x < cx0 ? 1f : -1f;
-                p.home += new Vector3(dir * _cfg.looseInward * _cfg.cellPitchX, 0f, _cfg.looseLift);
+                p.home += new Vector3(dir * _cfg.looseInward * CellX, 0f, _cfg.looseLift);
                 p.loose = true; p.phase = c * 1.7f;
             }
         }
@@ -239,7 +250,7 @@ namespace Buzzy.Game
             return ps;
         }
 
-        Vector3 BlockScale { get { return new Vector3(_cfg.blockScale * _cfg.blockWidthScale, _cfg.blockScale * _cfg.blockHeightScale, _cfg.blockScale); } }
+        Vector3 BlockScale { get { return new Vector3(_cfg.blockScale * _cfg.blockWidthScale, _cfg.blockScale * _cfg.blockHeightScale, _cfg.blockScale) * _cellScale; } }   // M7b: khối theo cỡ ô
 
         void SetPassScale(Pass p, float s)
         {
@@ -400,17 +411,19 @@ namespace Buzzy.Game
             var ur = new GameObject("UiRoot", typeof(RectTransform)); ur.transform.SetParent(cv.transform, false);
             _uiRoot = ur.GetComponent<RectTransform>(); _uiRoot.anchorMin = Vector2.zero; _uiRoot.anchorMax = Vector2.one; _uiRoot.offsetMin = _uiRoot.offsetMax = Vector2.zero;
             var ct = _uiRoot;
-            Img("Tray", _a.tunnel, Color.white, ct, new Vector2(0.5f, _cfg.trayVisibleHeight * 0.5f - 0.11f + _cfg.trayShift), 1.06f);
+            Img("Tray", _a.tunnel, Color.white, ct, new Vector2(0.5f, RefDy(_cfg.trayVisibleHeight * 0.5f - 0.11f + _cfg.trayShift)), 1.06f);   // U12 (M7b): vật đỉnh cảnh, bám mép trên theo bề ngang (không lùi theo safe area)
             float barTop = _lv.tag > 0 ? _cfg.hardBottomBarTop : _cfg.bottomBarTop;
-            Img("BottomBar", null, _lv.tag > 0 ? _cfg.hardBottomBarColor : _cfg.bottomBarColor, ct, new Vector2(0.5f, (1f + barTop) * 0.5f), 1f, (1f - barTop) * _canvasSize.y / _canvasSize.x);
+            // U13 (M7b): thanh đáy cao theo bề ngang, neo đáy; kéo dài hết lề an toàn dưới nếu bottomBarFillSafe
+            float barH = (1f - barTop) * _cfg.hudRefAspect * _canvasSize.x + (_cfg.bottomBarFillSafe ? SafeBottomPx : 0f);
+            Img("BottomBar", null, _lv.tag > 0 ? _cfg.hardBottomBarColor : _cfg.bottomBarColor, ct, new Vector2(0.5f, 1f - ((_cfg.bottomBarFillSafe ? 0f : SafeBottomPx) + barH * 0.5f) / _canvasSize.y), 1f, barH / _canvasSize.x);
             // U8: level khó / siêu khó dùng badge đầu lâu + thanh đáy đỏ
             var badgeSprite = _lv.tag == 1 ? _a.levelBarHard : _lv.tag == 2 ? _a.levelBarSuper : _a.levelBar;
-            var badge = Img("LvBadge", badgeSprite, Color.white, ct, _lv.tag > 0 ? _cfg.badgeCenter + new Vector2(0f, _cfg.hardBadgeDropY) : _cfg.badgeCenter, _lv.tag > 0 ? _cfg.badgeWidth * _cfg.hardBadgeScale : _cfg.badgeWidth);
+            var badge = Img("LvBadge", badgeSprite, Color.white, ct, Top(_lv.tag > 0 ? _cfg.badgeCenter + new Vector2(0f, _cfg.hardBadgeDropY) : _cfg.badgeCenter), _lv.tag > 0 ? _cfg.badgeWidth * _cfg.hardBadgeScale : _cfg.badgeWidth);   // U12 (M7b): neo mép trên + safe area
             Label("Lv." + (DisplayLevel > 0 ? DisplayLevel : _lv.index), badge, new Vector2(badge.sizeDelta.x * 0.5f, -badge.sizeDelta.y * (_lv.tag > 0 ? 0.6f : 0.38f)), (int)(52 * _canvasSize.x / 1080f), _lv.tag > 0 ? _cfg.hardBadgeTextColor : new Color32(0x4A, 0x45, 0x9A, 255));
             BuildBoosterBar(ct);
             BuildSpeedButton(ct);
             BuildDevPanel(ct);   // T1 (M7): chỉ khi DevPanel
-            Img("Settings", _a.settings, Color.white, ct, _cfg.settingsCenter, _cfg.settingsSize);
+            Img("Settings", _a.settings, Color.white, ct, Bottom(_cfg.settingsCenter), _cfg.settingsSize);   // U13 (M7b): neo mép dưới
             for (int i = 0; i < 3; i++)
             {
                 var b = Img("Full" + i, _a.knob, new Color(0.72f, 0.75f, 0.95f, 1f), ct, _cfg.fullBubbleCenter, _cfg.fullBubbleWidth, 1f);

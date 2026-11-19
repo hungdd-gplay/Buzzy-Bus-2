@@ -12,7 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc336a5fc3630b42b804f573d5a5163, type: 3}
   m_Name: BuzzyLayoutConfig
   m_EditorClassIdentifier: Assembly-CSharp::Buzzy.Game.BuzzyLayoutConfig
-  captureSize: {x: 1080, y: 2400}
+  captureSize: {x: 1080, y: 1920}
+  cameraFitWidth: 1
+  viewHalfWidth: 6.21
+  viewTopZ: 23.6
+  viewBottomZ: -1.9
+  extraTopShare: 0
+  boosterClearZ: 3.8
+  boosterBarZ: 3.5
+  boardGapCells: 1
+  waitMinGapZ: 1.5
+  cellScaleMin916: 0.6
   cameraPosition: {x: 0, y: 30, z: -9.64}
   cameraEuler: {x: 60, y: 0, z: 0}
   cameraOrthographic: 1
@@ -44,8 +54,8 @@ MonoBehaviour:
   - 0
   - 2.24
   queueBusScale: 0.95
-  badgeCenter: {x: 0.12, y: 0.067}
-  badgeWidth: 0.245
+  badgeCenter: {x: 0.12, y: 0.082}
+  badgeWidth: 0.196
   trayVisibleHeight: 0.115
   trayShift: 0.025
   bottomBarTop: 0.89
@@ -120,8 +130,8 @@ MonoBehaviour:
   leaveReverseDuration: 0.22
   leaveBrakePause: 0.08
   looseLift: 0
-  looseInward: 0.7
-  looseBob: 0.9
+  looseInward: 0
+  looseBob: 0.15
   looseBobSpeed: 1.6
   iceColor: {r: 0.62, g: 0.9, b: 1, a: 0.8}
   hardBottomBarColor: {r: 0.78431374, g: 0.16862746, b: 0.16862746, a: 1}
@@ -392,6 +402,10 @@ MonoBehaviour:
   tooltipAspect: 0.19
   tooltipFontSize: 30
   vipDimAlpha: 0.55
+  hudRefAspect: 2.2222223
+  hudUseSafeArea: 1
+  hudSafeExtra: {x: 0, y: 0}
+  bottomBarFillSafe: 1
   backgroundTop: {r: 0.654902, g: 0.6745098, b: 0.9019608, a: 1}
   backgroundBottom: {r: 0.5294118, g: 0.54901963, b: 0.7764706, a: 1}
   roadColor: {r: 0.26666668, g: 0.2901961, b: 0.41960785, a: 1}

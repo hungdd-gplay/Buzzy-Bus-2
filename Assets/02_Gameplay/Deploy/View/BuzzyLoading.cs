@@ -44,6 +44,11 @@ namespace Buzzy.Game
             var canvas = cv.GetComponent<Canvas>(); canvas.renderMode = RenderMode.ScreenSpaceCamera; canvas.worldCamera = cam; canvas.planeDistance = 1f;
             var sc = cv.GetComponent<CanvasScaler>(); sc.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize; sc.referenceResolution = size;
             var ct = cv.transform;
+            // M7b (U14): % y cũ đo trên khung tham chiếu hudRefAspect → giữ tâm theo bề ngang; "Version" neo mép dưới + safe area
+            float R = cfg.hudRefAspect, safeBottom = cfg.hudSafeExtra.y * size.x;
+            if (cfg.hudUseSafeArea) safeBottom = Mathf.Max(safeBottom, Screen.safeArea.y * size.y / Mathf.Max(1f, Screen.height));
+            System.Func<float, float> C = y => 0.5f + (y - 0.5f) * R * size.x / size.y;
+            System.Func<float, float> B = y => 1f - (safeBottom + (1f - y) * R * size.x) / size.y;
             // nền: texture vuông 2340, cắt theo khung (phủ hết chiều cao)
             if (a.loadingBackground != null)
             {
@@ -53,19 +58,19 @@ namespace Buzzy.Game
                 var bg = Img("BG", sp, Color.white, ct, size, new Vector2(0.5f, 0.5f), w / size.x, h / w);
             }
             // logo (chưa có art logo: chữ trên tấm nền, chủ ý chờ art)
-            Img("LogoPlate", a.logoPlate, cfg.logoPlateColor, ct, size, new Vector2(0.5f, cfg.loadingLogoY), cfg.loadingLogoWidth, cfg.logoPlateAspect);
-            Txt("BUZZY", ct, a.font, size, new Vector2(0.5f, cfg.loadingLogoY - cfg.logoLineGap), cfg.loadingLogoWidth, 0.08f, Px(cfg.logoFontPx, size), cfg.logoTopColor, cfg.textOutlineColor);
-            Txt("BUS", ct, a.font, size, new Vector2(0.5f, cfg.loadingLogoY + cfg.logoLineGap), cfg.loadingLogoWidth, 0.08f, Px(cfg.logoFontPx, size), cfg.logoBottomColor, cfg.textOutlineColor);
+            Img("LogoPlate", a.logoPlate, cfg.logoPlateColor, ct, size, new Vector2(0.5f, C(cfg.loadingLogoY)), cfg.loadingLogoWidth, cfg.logoPlateAspect);
+            Txt("BUZZY", ct, a.font, size, new Vector2(0.5f, C(cfg.loadingLogoY - cfg.logoLineGap)), cfg.loadingLogoWidth, 0.08f, Px(cfg.logoFontPx, size), cfg.logoTopColor, cfg.textOutlineColor);
+            Txt("BUS", ct, a.font, size, new Vector2(0.5f, C(cfg.loadingLogoY + cfg.logoLineGap)), cfg.loadingLogoWidth, 0.08f, Px(cfg.logoFontPx, size), cfg.logoBottomColor, cfg.textOutlineColor);
             // thanh loading: nền tím, phần đầy xanh lá, xe chạy theo
-            Txt("Loading...", ct, a.font, size, new Vector2(0.5f, cfg.loadingBarY - 0.045f), 0.6f, 0.05f, Px(40, size), Color.white, cfg.textOutlineColor);
+            Txt("Loading...", ct, a.font, size, new Vector2(0.5f, C(cfg.loadingBarY - 0.045f)), 0.6f, 0.05f, Px(40, size), Color.white, cfg.textOutlineColor);
             barW = cfg.loadingBarWidth * size.x;
-            var track = Img("Track", a.featureTrack, new Color32(0x5B, 0x3F, 0x9E, 255), ct, size, new Vector2(0.5f, cfg.loadingBarY), cfg.loadingBarWidth, cfg.loadingBarAspect);
-            fill = Img("Fill", a.featureTrack, new Color32(0x7C, 0xD6, 0x2E, 255), ct, size, new Vector2(0.5f - cfg.loadingBarWidth * 0.5f, cfg.loadingBarY), cfg.loadingBarWidth * 0.96f, cfg.loadingBarAspect * 0.7f);
-            fill.pivot = new Vector2(0f, 0.5f); fill.anchoredPosition = new Vector2((0.5f - cfg.loadingBarWidth * 0.48f) * size.x, -cfg.loadingBarY * size.y);
+            var track = Img("Track", a.featureTrack, new Color32(0x5B, 0x3F, 0x9E, 255), ct, size, new Vector2(0.5f, C(cfg.loadingBarY)), cfg.loadingBarWidth, cfg.loadingBarAspect);
+            fill = Img("Fill", a.featureTrack, new Color32(0x7C, 0xD6, 0x2E, 255), ct, size, new Vector2(0.5f - cfg.loadingBarWidth * 0.5f, C(cfg.loadingBarY)), cfg.loadingBarWidth * 0.96f, cfg.loadingBarAspect * 0.7f);
+            fill.pivot = new Vector2(0f, 0.5f); fill.anchoredPosition = new Vector2((0.5f - cfg.loadingBarWidth * 0.48f) * size.x, -C(cfg.loadingBarY) * size.y);
             barW = cfg.loadingBarWidth * 0.96f * size.x;
-            bus = Img("Bus", a.busLoading, Color.white, ct, size, new Vector2(0.5f - cfg.loadingBarWidth * 0.5f, cfg.loadingBarY - 0.01f), 0.17f, null);
+            bus = Img("Bus", a.busLoading, Color.white, ct, size, new Vector2(0.5f - cfg.loadingBarWidth * 0.5f, C(cfg.loadingBarY - 0.01f)), 0.17f, null);
             SetProgress(fill, bus, barW, progress);
-            Txt("Version " + Application.version, ct, a.font, size, new Vector2(0.5f, 0.965f), 0.6f, 0.04f, Px(30, size), Color.white, cfg.textOutlineColor);
+            Txt("Version " + Application.version, ct, a.font, size, new Vector2(0.5f, B(0.965f)), 0.6f, 0.04f, Px(30, size), Color.white, cfg.textOutlineColor);
             Canvas.ForceUpdateCanvases();
             return canvas;
         }

@@ -30,7 +30,7 @@ namespace Buzzy.Game
         static readonly string[] BoosterNames = { "VIP Bus", "Sky Grab", "Magic Wand", "Bus Claw" };
         static readonly string[] BoosterDesc = { "Clear a bus instantly!", "Lift pixels from the sky!", "Recolor a parked bus!", "Pick up a bus from the queue!" };
 
-        class PBtn { public Vector2 c, size; public Action act; public string name; }
+        class PBtn { public Vector2 c, size; public Action act; public string name; public HudAnchor a; }
         class Spark { public RectTransform rt; public Image im; public Vector2 o, dir; public float at, size; }
 
         RectTransform _popupRoot; float _popupAt; readonly List<PBtn> _btns = new List<PBtn>();
@@ -54,7 +54,31 @@ namespace Buzzy.Game
             _popupRoot = go.GetComponent<RectTransform>(); _popupRoot.anchorMin = Vector2.zero; _popupRoot.anchorMax = Vector2.one; _popupRoot.offsetMin = _popupRoot.offsetMax = Vector2.zero;
             return _popupRoot;
         }
-        RectTransform PImg(string n, Sprite s, Color c, Vector2 pct, float w, float? asp = null) { return Img(n, s, c, Root(), pct, w, asp); }
+        RectTransform PImg(string n, Sprite s, Color c, Vector2 pct, float w, float? asp = null) { return Img(n, s, c, Root(), new Vector2(pct.x, AnchorY(_pAnchor, pct.y)), w, asp); }
+
+        // ---------------------------------------------------------------- M7b HUD 9:16 (U12–U14): neo mép + safe area
+        /// <summary>Cách neo một nhóm UI: Center = giữ tâm màn (popup, loading); Top / Bottom = cách mép trên / dưới (HUD).</summary>
+        public enum HudAnchor { Center, Top, Bottom }
+        HudAnchor _pAnchor = HudAnchor.Center;   // neo đang dùng cho PImg / PText / nút popup
+        /// <summary>Lề an toàn trên (px canvas; canvas = px màn hình vì referenceResolution = kích thước khung).</summary>
+        float SafeTopPx { get { float extra = _cfg.hudSafeExtra.x * _canvasSize.x; if (!_cfg.hudUseSafeArea) return extra; var r = Screen.safeArea; float top = Screen.height - (r.y + r.height); return Mathf.Max(extra, top * _canvasSize.y / Mathf.Max(1f, Screen.height)); } }
+        float SafeBottomPx { get { float extra = _cfg.hudSafeExtra.y * _canvasSize.x; if (!_cfg.hudUseSafeArea) return extra; var r = Screen.safeArea; return Mathf.Max(extra, r.y * _canvasSize.y / Mathf.Max(1f, Screen.height)); } }
+        /// <summary>% y cũ (đo trên khung tham chiếu hudRefAspect) → % chiều cao khung thật, neo mép trên: khoảng cách mép tính theo bề ngang.</summary>
+        float TopY(float yRef) { return (SafeTopPx + yRef * _cfg.hudRefAspect * _canvasSize.x) / _canvasSize.y; }
+        float BottomY(float yRef) { return 1f - (SafeBottomPx + (1f - yRef) * _cfg.hudRefAspect * _canvasSize.x) / _canvasSize.y; }
+        float CenterY(float yRef) { return 0.5f + (yRef - 0.5f) * _cfg.hudRefAspect * _canvasSize.x / _canvasSize.y; }
+        /// <summary>Khoảng lệch dọc % cũ → % chiều cao thật (giữ cỡ theo bề ngang).</summary>
+        float RefDy(float d) { return d * _cfg.hudRefAspect * _canvasSize.x / _canvasSize.y; }
+        /// <summary>Chiều cao px → % chiều cao KHUNG THAM CHIẾU (đơn vị của mọi toạ độ popup trước khi qua CenterY); WRef: % bề ngang → cùng đơn vị.</summary>
+        float RefH(float px) { return px / (_cfg.hudRefAspect * _canvasSize.x); }
+        float WRef(float wPct) { return wPct / _cfg.hudRefAspect; }
+        float AnchorY(HudAnchor a, float yRef) { return a == HudAnchor.Top ? TopY(yRef) : a == HudAnchor.Bottom ? BottomY(yRef) : CenterY(yRef); }
+        Vector2 Top(Vector2 p) { return new Vector2(p.x, TopY(p.y)); }
+        Vector2 Bottom(Vector2 p) { return new Vector2(p.x, BottomY(p.y)); }
+        /// <summary>Bộ chụp / tool: toạ độ chạm thật (% khung) của một điểm HUD neo đáy / đỉnh ghi bằng % cũ (vd devPanelX[i], devPanelY).</summary>
+        public Vector2 HudBottom(float x, float yRef) { return new Vector2(x, BottomY(yRef)); }
+        public Vector2 HudTop(float x, float yRef) { return new Vector2(x, TopY(yRef)); }
+
         int Px(float f) { return Mathf.RoundToInt(f * _canvasSize.x / 1080f); }
         /// <summary>Tỉ lệ cao / rộng của khung hình (đổi % bề ngang sang % chiều cao).</summary>
         float WH { get { return _canvasSize.x / _canvasSize.y; } }
@@ -65,7 +89,7 @@ namespace Buzzy.Game
             var t = go.GetComponent<Text>(); t.text = s; t.font = _a.font; t.fontSize = px; t.color = c; t.alignment = TextAnchor.MiddleCenter; t.raycastTarget = false;
             t.horizontalOverflow = HorizontalWrapMode.Overflow; t.verticalOverflow = VerticalWrapMode.Overflow;
             var rt = go.GetComponent<RectTransform>(); rt.anchorMin = rt.anchorMax = new Vector2(0f, 1f); rt.pivot = new Vector2(0.5f, 0.5f);
-            rt.sizeDelta = new Vector2(wPct * _canvasSize.x, hPct * _canvasSize.y); rt.anchoredPosition = new Vector2(pct.x * _canvasSize.x, -pct.y * _canvasSize.y);
+            rt.sizeDelta = new Vector2(wPct * _canvasSize.x, hPct * _cfg.hudRefAspect * _canvasSize.x); rt.anchoredPosition = new Vector2(pct.x * _canvasSize.x, -AnchorY(_pAnchor, pct.y) * _canvasSize.y);   // hPct = % cao khung tham chiếu (theo bề ngang)
             if (outline) { var o = go.AddComponent<Outline>(); o.effectColor = _cfg.textOutlineColor; o.effectDistance = new Vector2(px * 0.05f, -px * 0.05f); }
             return t;
         }
@@ -73,15 +97,24 @@ namespace Buzzy.Game
         RectTransform Btn(string n, Sprite s, Vector2 c, float w, string label, Sprite icon, Action act, int px = 48)
         {
             var r = PImg(n, s, Color.white, c, w, _cfg.popupButtonAspect);
-            float hPct = r.sizeDelta.y / _canvasSize.y;
+            float hPct = r.sizeDelta.y / _canvasSize.y;   // % chiều cao THẬT: vùng chạm
             float tx = c.x;
             if (icon != null) { PImg(n + "Icon", icon, Color.white, new Vector2(c.x - w * 0.28f, c.y), w * 0.3f); tx = c.x + w * 0.1f; }
-            PText(label, new Vector2(tx, c.y), w, hPct, Px(px), Color.white, true);
-            _btns.Add(new PBtn { c = c, size = new Vector2(w, hPct), act = act, name = n });
+            PText(label, new Vector2(tx, c.y), w, RefH(r.sizeDelta.y), Px(px), Color.white, true);
+            _btns.Add(new PBtn { c = c, size = new Vector2(w, hPct), act = act, name = n, a = _pAnchor });
             return r;
         }
 
-        void Overlay() { _overlayImg = PImg("Overlay", null, new Color(_cfg.overlayColor.r, _cfg.overlayColor.g, _cfg.overlayColor.b, _cfg.overlayAlpha), new Vector2(0.5f, 0.5f), 1f, 1f / WH).GetComponent<Image>(); }
+        readonly List<GameObject> _hiddenWorldTexts = new List<GameObject>();
+        /// <summary>U15 (M7b): chữ thế giới (số nóc xe, "?"…) là TextMesh với shader chữ ZTest Always nên vẽ ĐÈ lên màn tối popup → ẩn tạm những chữ đang hiện khi mở popup có màn tối, hiện lại đúng các chữ đó khi đóng (chữ bị khoá / win ẩn hẳn không đụng).</summary>
+        void HideWorldTextsTemp()
+        {
+            if (_hiddenWorldTexts.Count > 0 || _root == null) return;
+            foreach (var t in _root.GetComponentsInChildren<TextMesh>(false)) { t.gameObject.SetActive(false); _hiddenWorldTexts.Add(t.gameObject); }
+        }
+        void RestoreWorldTexts() { foreach (var g in _hiddenWorldTexts) if (g != null) g.SetActive(true); _hiddenWorldTexts.Clear(); }
+
+        void Overlay() { HideWorldTextsTemp(); _overlayImg = PImg("Overlay", null, new Color(_cfg.overlayColor.r, _cfg.overlayColor.g, _cfg.overlayColor.b, _cfg.overlayAlpha), new Vector2(0.5f, 0.5f), 1f, 1f / WH).GetComponent<Image>(); }
 
         /// <summary>
         /// Khung popup theo mẫu U2 / U5: khung tím ngoài (tab_menu) + tấm tiêu đề màu + bảng kem bên trong (frame_popup).
@@ -90,38 +123,42 @@ namespace Buzzy.Game
         void Frame(Sprite titleSprite, string title, string sub, float innerFrac, out float top, out float bottom)
         {
             var fr = PImg("Frame", _a.frameOuter, Color.white, new Vector2(0.5f, _cfg.popupCenterY), _cfg.popupWidth, _cfg.popupAspect);
-            float h = fr.sizeDelta.y / _canvasSize.y; top = _cfg.popupCenterY - h * 0.5f; bottom = _cfg.popupCenterY + h * 0.5f;
+            // U14 (M7b): top / bottom / h tính theo % cao KHUNG THAM CHIẾU (RefH) để mọi hàng bên trong đi qua CenterY đúng một lần (lần 1 ở 9:16 dùng % H thật → giãn 1,25×, nút rơi ngoài khung)
+            float h = RefH(fr.sizeDelta.y); top = _cfg.popupCenterY - h * 0.5f; bottom = _cfg.popupCenterY + h * 0.5f;
             float iy = top + h * (_cfg.popupInnerTop + innerFrac * 0.5f);
-            PImg("Inner", _a.framePopup, Color.white, new Vector2(0.5f, iy), _cfg.popupInnerWidth, innerFrac * h * _canvasSize.y / (_cfg.popupInnerWidth * _canvasSize.x));
+            PImg("Inner", _a.framePopup, Color.white, new Vector2(0.5f, iy), _cfg.popupInnerWidth, innerFrac * h * _cfg.hudRefAspect / _cfg.popupInnerWidth);
             var tp = PImg("Title", titleSprite, Color.white, new Vector2(0.5f, top + _cfg.popupTitleDrop), _cfg.popupTitleWidth, _cfg.popupTitleAspect);
-            float th = tp.sizeDelta.y / _canvasSize.y;
+            float th = RefH(tp.sizeDelta.y);
             PText(title, new Vector2(0.5f, top + _cfg.popupTitleDrop - (sub != null ? th * 0.16f : 0f)), _cfg.popupTitleWidth, th * 0.5f, Px(sub != null ? 52 : 56), Color.white, true);
             if (sub != null) PText(sub, new Vector2(0.5f, top + _cfg.popupTitleDrop + th * 0.22f), _cfg.popupTitleWidth, th * 0.35f, Px(34), Color.white, true);
         }
 
         void CloseButton(float top, Action act)
         {
-            float x = 0.5f + _cfg.popupWidth * 0.5f - _cfg.closeButtonSize * 0.45f, y = top + _cfg.closeButtonSize * WH * 0.35f;
+            float x = 0.5f + _cfg.popupWidth * 0.5f - _cfg.closeButtonSize * 0.45f, y = top + WRef(_cfg.closeButtonSize) * 0.35f;
             var r = PImg("Close", _a.closeButton, Color.white, new Vector2(x, y), _cfg.closeButtonSize);
-            _btns.Add(new PBtn { c = new Vector2(x, y), size = new Vector2(_cfg.closeButtonSize, r.sizeDelta.y / _canvasSize.y), act = act, name = "Close" });
+            _btns.Add(new PBtn { c = new Vector2(x, y), size = new Vector2(_cfg.closeButtonSize, r.sizeDelta.y / _canvasSize.y), act = act, name = "Close", a = _pAnchor });
         }
 
         void CurrencyBar()
         {
+            _pAnchor = HudAnchor.Top;   // U4 / U12: thanh xu + tim neo mép trên
             var bar = PImg("Coins", _a.currencyBar, Color.white, _cfg.currencyBarCenter, _cfg.currencyBarWidth);
-            float h = bar.sizeDelta.y / _canvasSize.y;
+            float h = bar.sizeDelta.y / _canvasSize.y;   // % H thật (vùng chạm); chữ dùng RefH
             PImg("CoinIcon", _a.coinIcon, Color.white, new Vector2(_cfg.currencyBarCenter.x - _cfg.currencyBarWidth * 0.45f, _cfg.currencyBarCenter.y), _cfg.currencyBarWidth * 0.36f);
-            PText(Meta.Coins.ToString(), new Vector2(_cfg.currencyBarCenter.x + _cfg.currencyBarWidth * 0.1f, _cfg.currencyBarCenter.y), _cfg.currencyBarWidth, h, Px(40), Color.white, true);
-            _btns.Add(new PBtn { c = _cfg.currencyBarCenter, size = new Vector2(_cfg.currencyBarWidth, h), act = OpenShop, name = "Shop" });
+            PText(Meta.Coins.ToString(), new Vector2(_cfg.currencyBarCenter.x + _cfg.currencyBarWidth * 0.1f, _cfg.currencyBarCenter.y), _cfg.currencyBarWidth, RefH(bar.sizeDelta.y), Px(40), Color.white, true);
+            _btns.Add(new PBtn { c = _cfg.currencyBarCenter, size = new Vector2(_cfg.currencyBarWidth, h), act = OpenShop, name = "Shop", a = _pAnchor });
             // tim: bản đầu không giới hạn (U4: biểu tượng "Full")
             PImg("Heart", _a.heartInfinity, Color.white, _cfg.heartCenter, _cfg.heartWidth);
             var pill = PImg("HeartPill", _a.currencyBar, Color.white, new Vector2(_cfg.heartCenter.x + _cfg.heartWidth * 0.75f, _cfg.heartCenter.y), _cfg.heartWidth * 1.1f);
-            PText("Full", new Vector2(_cfg.heartCenter.x + _cfg.heartWidth * 0.85f, _cfg.heartCenter.y), _cfg.heartWidth, pill.sizeDelta.y / _canvasSize.y, Px(34), Color.white, true);
+            PText("Full", new Vector2(_cfg.heartCenter.x + _cfg.heartWidth * 0.85f, _cfg.heartCenter.y), _cfg.heartWidth, RefH(pill.sizeDelta.y), Px(34), Color.white, true);
+            _pAnchor = HudAnchor.Center;
         }
 
         public void ClosePopup()
         {
             if (_popupRoot != null) Kill(_popupRoot.gameObject);
+            RestoreWorldTexts();   // U15
             _popupRoot = null; _btns.Clear(); _sparks.Clear(); _overlayImg = null; _sliderMark = null; _adText = null;
             Popup = PopupKind.None;
         }
@@ -130,7 +167,7 @@ namespace Buzzy.Game
         {
             if (Popup == PopupKind.None) return false;
             foreach (var b in _btns)
-                if (Mathf.Abs(nx - b.c.x) <= b.size.x * 0.5f && Mathf.Abs(ny - b.c.y) <= b.size.y * 0.5f) { Log?.Invoke("t=" + Time.ToString("0.00") + " nút " + b.name); Sfx(_a.sfxButton); b.act(); return true; }
+                if (Mathf.Abs(nx - b.c.x) <= b.size.x * 0.5f && Mathf.Abs(ny - AnchorY(b.a, b.c.y)) <= b.size.y * 0.5f) { Log?.Invoke("t=" + Time.ToString("0.00") + " nút " + b.name); Sfx(_a.sfxButton); b.act(); return true; }
             return true;   // popup mở: nuốt mọi chạm khác
         }
 
@@ -146,17 +183,21 @@ namespace Buzzy.Game
             Overlay(); _overlayImg.color = new Color(_cfg.overlayColor.r, _cfg.overlayColor.g, _cfg.overlayColor.b, 0f);
             float rw = _cfg.ribbonTopWidth; var ru = PImg("RibbonU", _a.ribbonTop, Color.white, new Vector2(0.5f, 0f), rw);
             ru.anchoredPosition = new Vector2(0.5f * _canvasSize.x, -ru.sizeDelta.y * _cfg.ribbonTopVisible);
+            _pAnchor = HudAnchor.Top;   // U12: ruy băng hai bên bám mép trên
             PopIn(PImg("RibbonL", _a.ribbonSide, Color.white, new Vector2(_cfg.ribbonSideX, _cfg.ribbonSideY), _cfg.ribbonSideWidth), 0.05f);
             var rr = PImg("RibbonR", _a.ribbonSide, Color.white, new Vector2(1f - _cfg.ribbonSideX, _cfg.ribbonSideY), _cfg.ribbonSideWidth); rr.localScale = new Vector3(-1, 1, 1); PopIn(rr, 0.05f, true);
+            _pAnchor = HudAnchor.Center;
             // logo: chưa có art logo "BUZZY BUS" (sprite trong APK là bản reskin) → chữ trên tấm nền, chủ ý chờ art
             var plate = PImg("LogoPlate", _a.logoPlate, _cfg.logoPlateColor, new Vector2(0.5f, _cfg.winLogoY), _cfg.winLogoWidth, _cfg.logoPlateAspect); PopIn(plate, 0.15f);
             var t1 = PText("BUZZY", new Vector2(0.5f, _cfg.winLogoY - _cfg.logoLineGap), _cfg.winLogoWidth, 0.08f, Px(_cfg.logoFontPx), _cfg.logoTopColor, true); PopIn(t1.rectTransform, 0.2f);
             var t2 = PText("BUS", new Vector2(0.5f, _cfg.winLogoY + _cfg.logoLineGap), _cfg.winLogoWidth, 0.08f, Px(_cfg.logoFontPx), _cfg.logoBottomColor, true); PopIn(t2.rectTransform, 0.25f);
-            // 4 loa tím hai góc dưới (V31)
+            // 4 loa tím hai góc dưới (V31): neo mép dưới (U13)
+            _pAnchor = HudAnchor.Bottom;
             PopIn(PImg("TrumpetL1", _a.trumpetLeft, Color.white, _cfg.trumpetLeft, _cfg.trumpetWidth), 0.3f);
             PopIn(PImg("TrumpetL2", _a.trumpetLeft, Color.white, _cfg.trumpetLeft + _cfg.trumpetOffset, _cfg.trumpetWidth), 0.38f);
             PopIn(PImg("TrumpetR1", _a.trumpetRight, Color.white, new Vector2(1f - _cfg.trumpetLeft.x, _cfg.trumpetLeft.y), _cfg.trumpetWidth), 0.3f);
             PopIn(PImg("TrumpetR2", _a.trumpetRight, Color.white, new Vector2(1f - _cfg.trumpetLeft.x - _cfg.trumpetOffset.x, _cfg.trumpetLeft.y + _cfg.trumpetOffset.y), _cfg.trumpetWidth), 0.38f);
+            _pAnchor = HudAnchor.Center;
         }
 
         void PopIn(RectTransform rt, float delay, bool mirror = false)
@@ -174,7 +215,7 @@ namespace Buzzy.Game
             {
                 float a = (i + (float)_fxRnd.NextDouble() * 0.5f) / _cfg.fireworkSparks * Mathf.PI * 2f;
                 var rt = PImg("Spark", _a.spark, tint, o, _cfg.sparkWidth);
-                _sparks.Add(new Spark { rt = rt, im = rt.GetComponent<Image>(), o = o, dir = new Vector2(Mathf.Cos(a), Mathf.Sin(a) * WH), at = Time, size = _cfg.sparkWidth });
+                _sparks.Add(new Spark { rt = rt, im = rt.GetComponent<Image>(), o = o, dir = new Vector2(Mathf.Cos(a), Mathf.Sin(a) / _cfg.hudRefAspect), at = Time, size = _cfg.sparkWidth });   // y theo đơn vị khung tham chiếu (CenterY đổi ra thật)
             }
         }
 
@@ -191,7 +232,7 @@ namespace Buzzy.Game
                     if (v >= 1f || s.rt == null) { if (s.rt != null) Kill(s.rt.gameObject); _sparks.RemoveAt(i); continue; }
                     float e = 1f - (1f - v) * (1f - v);
                     var p = s.o + s.dir * (_cfg.fireworkRadius * e);
-                    s.rt.anchoredPosition = new Vector2(p.x * _canvasSize.x, -p.y * _canvasSize.y);
+                    s.rt.anchoredPosition = new Vector2(p.x * _canvasSize.x, -CenterY(p.y) * _canvasSize.y);
                     s.rt.localScale = Vector3.one * (1f - 0.6f * v);
                     var c = s.im.color; c.a = 1f - v; s.im.color = c;
                 }
@@ -225,8 +266,8 @@ namespace Buzzy.Game
                 float pr = (float)Meta.FeatureProgress(_lv.index), th = track.sizeDelta.y;
                 var fill = PImg("FeatureFill", _a.featureTrack, _cfg.featureFillColor, new Vector2(tx, y), _cfg.featureBarWidth, 1f);
                 fill.pivot = new Vector2(0f, 0.5f); fill.sizeDelta = new Vector2(Mathf.Max(th * 0.6f, _cfg.featureBarWidth * 0.95f * pr * _canvasSize.x), th * 0.72f);
-                fill.anchoredPosition = new Vector2((tx - _cfg.featureBarWidth * 0.475f) * _canvasSize.x, -y * _canvasSize.y);
-                PText(Mathf.RoundToInt(pr * 100f) + "%", new Vector2(0.5f - _cfg.featureBarWidth * 0.08f, y), _cfg.featureBarWidth, th / _canvasSize.y, Px(30), Color.white, true);
+                fill.anchoredPosition = new Vector2((tx - _cfg.featureBarWidth * 0.475f) * _canvasSize.x, -CenterY(y) * _canvasSize.y);
+                PText(Mathf.RoundToInt(pr * 100f) + "%", new Vector2(0.5f - _cfg.featureBarWidth * 0.08f, y), _cfg.featureBarWidth, RefH(th), Px(30), Color.white, true);
                 var ico = fi < _a.featureIcons.Length ? _a.featureIcons[fi] : null;
                 PImg("FeatureIcon", ico, Color.white, new Vector2(0.5f + _cfg.featureBarWidth * 0.5f, y), _cfg.featureBarWidth * 0.2f);
             }
@@ -238,7 +279,7 @@ namespace Buzzy.Game
             _sliderRt = PImg("Slider", _a.rewardSlider, Color.white, new Vector2(0.5f, sy), _cfg.sliderWidth);
             float sh = _sliderRt.sizeDelta.y; int n = Meta.Cfg.AdMultipliers.Length; float cw = _cfg.sliderWidth / n, left = 0.5f - _cfg.sliderWidth * 0.5f;
             _sliderMark = PImg("SliderMark", _a.whiteFrame, _cfg.sliderMarkColor, new Vector2(left + 0.5f * cw, sy), cw * 0.9f, sh * 0.8f / (cw * 0.9f * _canvasSize.x));
-            for (int i = 0; i < n; i++) PText("x" + Meta.Cfg.AdMultipliers[i], new Vector2(left + (i + 0.5f) * cw, sy), cw, sh / _canvasSize.y, Px(30), Color.white, true);
+            for (int i = 0; i < n; i++) PText("x" + Meta.Cfg.AdMultipliers[i], new Vector2(left + (i + 0.5f) * cw, sy), cw, RefH(sh), Px(30), Color.white, true);
             // nút xu / AD (U3)
             float by = bottom - h * _cfg.buttonRowUp;
             Btn("Coin", _a.buttonGreen, new Vector2(0.5f - _cfg.popupButtonGap, by), _cfg.popupButtonWidth, Meta.CoinReward.ToString(), _a.coinIcon, () => ClaimWin(false));

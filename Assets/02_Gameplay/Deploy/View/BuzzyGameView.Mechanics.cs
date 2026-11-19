@@ -45,7 +45,7 @@ namespace Buzzy.Game
         // ---------------------------------------------------------------- dựng
         Vector3 RectCenter(RectData r, float y = 0f)
         {
-            return new Vector3(_cellX0 + (r.X + (r.W - 1) * 0.5f) * _cfg.cellPitchX, y, _boardZ0 + (r.Y + (r.H - 1) * 0.5f) * _cfg.cellPitch);
+            return new Vector3(_cellX0 + (r.X + (r.W - 1) * 0.5f) * CellX, y, _boardZ0 + (r.Y + (r.H - 1) * 0.5f) * CellZ);
         }
 
         GameObject Cube(string name, Color c, Vector3 center, Vector3 size)
@@ -69,12 +69,12 @@ namespace Buzzy.Game
             }
             // Walls: khối tường dọc theo ô (kể cả y = -1 quanh khay)
             foreach (var w in b.WallList)
-                Cube("Wall", _cfg.wallColor, RectCenter(w), new Vector3(w.W * _cfg.cellPitchX, _cfg.wallHeight, w.H * _cfg.cellPitch));
+                Cube("Wall", _cfg.wallColor, RectCenter(w), new Vector3(w.W * CellX, _cfg.wallHeight * _cellScale, w.H * CellZ));   // M7b: cao theo tỉ lệ ô
             // Spawner: thân máy + số đợt còn lại
             for (int i = 0; i < b.SpawnerList.Count; i++)
             {
                 var sp = b.SpawnerList[i];
-                var m = Cube("Spawner" + i, _cfg.spawnerColor, RectCenter(sp.Machine), new Vector3(sp.Machine.W * _cfg.cellPitchX, _cfg.spawnerHeight, sp.Machine.H * _cfg.cellPitch));
+                var m = Cube("Spawner" + i, _cfg.spawnerColor, RectCenter(sp.Machine), new Vector3(sp.Machine.W * CellX, _cfg.spawnerHeight * _cellScale, sp.Machine.H * CellZ));
                 var tx = AddRoofNumber(m.transform, 0);
                 var root = m.transform.Find("Seats"); root.localPosition = new Vector3(0f, 0.55f, 0f);
                 root.localScale = new Vector3(1f / m.transform.localScale.x, 1f / m.transform.localScale.y, 1f / m.transform.localScale.z) * 2f;
@@ -91,7 +91,7 @@ namespace Buzzy.Game
                 var mat = Mat("Custom/BuzzyEnvironment", _cfg.iceColor);
                 mat.SetFloat("_SrcBlend", 5f); mat.SetFloat("_DstBlend", 10f); mat.SetFloat("_ZWrite", 0f); mat.renderQueue = 3000;
                 mesh.AddComponent<MeshRenderer>().sharedMaterial = mat;
-                mesh.transform.localScale = new Vector3(r.W * _cfg.cellPitchX / 1.93f, _cfg.iceYScale, r.H * _cfg.cellPitch / 1.73f);
+                mesh.transform.localScale = new Vector3(r.W * CellX / 1.93f, _cfg.iceYScale * _cellScale, r.H * CellZ / 1.73f);
                 var tx = AddRoofNumber(root.transform, 0);
                 var nr = root.transform.Find("Seats"); nr.localPosition = new Vector3(0f, 1.5f, 0f); nr.localScale = Vector3.one * (_cfg.iceNumberSize / _cfg.roofNumberSize);
                 _ice[i] = new IceV { tr = root.transform, texts = tx };
@@ -100,10 +100,10 @@ namespace Buzzy.Game
             for (int i = 0; i < b.KeyList.Count; i++)
             {
                 var go = new GameObject("Key" + i); go.transform.SetParent(_root, false);
-                go.transform.localPosition = RectCenter(b.KeyList[i].Rect, 0.4f);
+                go.transform.localPosition = RectCenter(b.KeyList[i].Rect, 0.4f * _cellScale);
                 go.AddComponent<MeshFilter>().sharedMesh = _a.keyMesh;
                 go.AddComponent<MeshRenderer>().sharedMaterial = Mat("Custom/BuzzyEnvironment", _cfg.keyColor);
-                go.transform.localScale = Vector3.one * _cfg.keyScale; go.transform.localEulerAngles = new Vector3(70f, 0f, 0f);
+                go.transform.localScale = Vector3.one * _cfg.keyScale * _cellScale; go.transform.localEulerAngles = new Vector3(70f, 0f, 0f);   // M7b: chìa theo tỉ lệ ô
                 _keys[i] = go.transform;
             }
         }

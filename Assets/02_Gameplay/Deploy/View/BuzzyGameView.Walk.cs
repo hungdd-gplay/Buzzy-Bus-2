@@ -35,8 +35,8 @@ namespace Buzzy.Game
             if (gx < 0 || gy < 0 || gx >= b.W || gy >= b.H) return false;
             return b.ColorAt(gx, gy) != Board.Empty || b.IsWall(gx, gy) || _pendingCells.Contains(gx * 1000 + gy);
         }
-        Vector3 CellWorld(float gx, float gy) { return new Vector3(_cellX0 + gx * _cfg.cellPitchX, 0f, _boardZ0 + gy * _cfg.cellPitch); }
-        Vector2Int WorldCell(Vector3 w) { return new Vector2Int(Mathf.RoundToInt((w.x - _cellX0) / _cfg.cellPitchX), Mathf.RoundToInt((w.z - _boardZ0) / _cfg.cellPitch)); }
+        Vector3 CellWorld(float gx, float gy) { return new Vector3(_cellX0 + gx * CellX, 0f, _boardZ0 + gy * CellZ); }
+        Vector2Int WorldCell(Vector3 w) { return new Vector2Int(Mathf.RoundToInt((w.x - _cellX0) / CellX), Mathf.RoundToInt((w.z - _boardZ0) / CellZ)); }
 
         /// <summary>Trường khoảng cách từ ô đích qua ô trống (8 hướng, không cắt góc). Chỉ số [gx+M, gy+M], -1 = không tới được.</summary>
         float[,] DistField(Vector2Int goal, int gyMax, out int ox, out int oy)
@@ -178,10 +178,10 @@ namespace Buzzy.Game
         Vector3 WaitGoal(Walk w)
         {
             float step = _cfg.walkMinDist * 1.05f;
-            int maxCols = Mathf.Max(1, Mathf.FloorToInt(_cfg.waitSpread * _cfg.cellPitchX / step));
+            int maxCols = Mathf.Max(1, Mathf.FloorToInt(_cfg.waitSpread * CellX / step));
             int cols = Mathf.Clamp(Mathf.CeilToInt(w.groupN / (float)Mathf.Max(1, _cfg.waitRows)), 1, maxCols);
             int row = w.order / cols, c = w.order % cols; int col = (c % 2 == 0 ? 1 : -1) * ((c + 1) / 2);   // 0, +1, -1, +2, -2...
-            float z = _cfg.waitLineZ - _cfg.waitLineOffset * _cfg.cellPitch - row * step;
+            float z = _cfg.waitLineZ - _cfg.waitLineOffset * CellZ - row * step;
             return new Vector3(w.car.slotPos.x + col * step, 0f, z);
         }
         /// <summary>Điểm nhảy vào xe: hông xe lộ ra, thấp (cửa), hơi về phía mũi.</summary>
@@ -268,7 +268,7 @@ namespace Buzzy.Game
         /// <summary>Lệch làn chỉ áp dụng ngoài vùng bảng (trong bảng đi theo hành lang 1 ô, lệch sẽ đè lên khối đứng); 0 trong bảng → 1 cách mép 1,5 ô.</summary>
         float LaneFactor(Vector3 p)
         {
-            var b = Game.Board; float gx = (p.x - _cellX0) / _cfg.cellPitchX, gy = (p.z - _boardZ0) / _cfg.cellPitch;
+            var b = Game.Board; float gx = (p.x - _cellX0) / CellX, gy = (p.z - _boardZ0) / CellZ;
             float dx = Mathf.Max(-gx, gx - (b.W - 1), 0f), dy = Mathf.Max(-gy, gy - (b.H - 1), 0f);
             return Mathf.Clamp01(Mathf.Max(dx, dy) / 1.5f);
         }
@@ -276,7 +276,7 @@ namespace Buzzy.Game
         /// <summary>Góp ý 07/08: không lấn vào ô có khối đứng im: coi mỗi ô bị chiếm là hộp, đẩy tâm người ra xa mép hộp ít nhất walkObstacleRadius (2 vòng, 3x3 ô quanh).</summary>
         void KeepOffBlocks(Walk w)
         {
-            float r = _cfg.walkObstacleRadius, hx = _cfg.cellPitchX * 0.5f, hz = _cfg.cellPitch * 0.5f;
+            float r = _cfg.walkObstacleRadius, hx = CellX * 0.5f, hz = CellZ * 0.5f;
             for (int it = 0; it < 2; it++)
             {
                 var p = WPos(w); var c = WorldCell(p); bool moved = false;

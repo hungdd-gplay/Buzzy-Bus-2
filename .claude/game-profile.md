@@ -15,7 +15,7 @@ Skill `gplay-game` đọc file này trước.
 
 ## Cơ chế
 - Luật lõi (tóm tắt từ `.game/research/teardown.md`, M7 luật 1c): chạm vào pixel → pixel cùng màu CÓ ĐƯỜNG RA ngoài lan từ điểm chạm (BFS, đào hầm) đi bộ tới xe cùng màu ở ô bến, tới hết số chỗ; pixel bị màu khác bao kín ở lại; xe đủ lùi vòng rồi phóng, xe kế xuống; cột hết xe → rào; hết pixel thắng; bế tắc thua. Cờ `exposedOnly` / `orderFromTapPoint` trong BuzzyLayoutConfig (tắt = luật cũ).
-- Hình + luồng màn: `.game/research/visual-spec.md` · ảnh chuẩn: `...\scratchpad\ref\golden\game_start.png` (Lv.2, 324x720)
+- Hình + luồng màn: `.game/research/visual-spec.md` · ảnh chuẩn: `...\scratchpad\ref\golden\game_start.png` (Lv.2, 324x720 = 9:20) · chuẩn khung từ M7b: 9:16 (mẫu 9:16 = golden crop 324x576, xem visual-spec)
 
 | Cơ chế | Runtime | Importer | File dữ liệu |
 |---|---|---|---|
